@@ -17,10 +17,23 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>归档 ~ Veen</title>
+  <title>Install TensorFlow Object Detection API ~ Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -43,7 +56,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -137,7 +150,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/family.jpg') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -145,6 +158,43 @@
             <span class="h2" id="subtitle">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-09 17:52" pubdate>
+        2020年11月9日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      151 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -157,37 +207,111 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 26 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/2019/11/27/Git%20bash/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Git Bash</span>
-      <time style="float: right;">11-27</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Install TensorFlow Object Detection API</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>This Blog is writing for TensorFlow Object Detection API Installation on Win10.</p>
+<a id="more"></a>
 
+<h2 id="1-Install-TensorFlow"><a href="#1-Install-TensorFlow" class="headerlink" title="1. Install TensorFlow"></a>1. Install TensorFlow</h2><blockquote>
+<p>Before install TF. Make sure CUDA and cdDNN has been installed successfully. Check the system environment has been set  correctly.</p>
+<p> <strong>Verify the installation</strong></p>
+<pre><code class="hljs bash">python -c <span class="hljs-string">"import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"</span></code></pre>
+</blockquote>
+<blockquote>
+<p>If warning <code>Could not load dynamic library &#39;cudnn64_7.dll&#39;</code> copy the file to CUDA\bin.</p>
+</blockquote>
+<h3 id="2-Install-Object-Detection-API"><a href="#2-Install-Object-Detection-API" class="headerlink" title="2. Install Object Detection API"></a>2. Install Object Detection API</h3><blockquote>
+<p>Clone the TensorFlow Models repository and proceed to one of the installation options.</p>
+</blockquote>
+<pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/tensorflow/models.git</code></pre>
 
-              </div>
+<blockquote>
+<p>Get the Proto Tool. Find the win64.zip in GitHub release packages.</p>
+</blockquote>
+<p><a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a></p>
+<blockquote>
+<p>Unzip the files to Tool folder, and add the Tool/protoc***/bin to the system environment path.</p>
+</blockquote>
+<blockquote>
+<p>Install API</p>
+</blockquote>
+<pre><code class="hljs bash"><span class="hljs-comment"># From within TensorFlow/models/research/</span>
+Get-ChildItem object_detection/protos/*.proto | foreach &#123;protoc <span class="hljs-string">"object_detection/protos/<span class="hljs-variable">$($_.Name)</span>"</span> --python_out=.&#125;</code></pre>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Tips/">Tips</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ML/">ML</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/25/Install%20CUDA%2011.1%20&amp;%20cuDNN/">
+                        <span class="hidden-mobile">Install CUDA 11.1 & cuDNN</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -313,6 +437,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -320,7 +469,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "Install TensorFlow Object Detection API&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -335,6 +484,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -348,6 +512,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 

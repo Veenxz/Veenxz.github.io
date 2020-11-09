@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Install TensorFlow Object Detection API</title>
+    <link href="/2020/11/09/Install-TensorFlow-Object-Detection-API/"/>
+    <url>/2020/11/09/Install-TensorFlow-Object-Detection-API/</url>
+    
+    <content type="html"><![CDATA[<p>This Blog is writing for TensorFlow Object Detection API Installation on Win10.</p><a id="more"></a><h2 id="1-Install-TensorFlow"><a href="#1-Install-TensorFlow" class="headerlink" title="1. Install TensorFlow"></a>1. Install TensorFlow</h2><blockquote><p>Before install TF. Make sure CUDA and cdDNN has been installed successfully. Check the system environment has been set  correctly.</p><p> <strong>Verify the installation</strong></p><pre><code class="hljs bash">python -c <span class="hljs-string">"import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"</span></code></pre></blockquote><blockquote><p>If warning <code>Could not load dynamic library &#39;cudnn64_7.dll&#39;</code> copy the file to CUDA\bin.</p></blockquote><h3 id="2-Install-Object-Detection-API"><a href="#2-Install-Object-Detection-API" class="headerlink" title="2. Install Object Detection API"></a>2. Install Object Detection API</h3><blockquote><p>Clone the TensorFlow Models repository and proceed to one of the installation options.</p></blockquote><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/tensorflow/models.git</code></pre><blockquote><p>Get the Proto Tool. Find the win64.zip in GitHub release packages.</p></blockquote><p><a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">https://github.com/protocolbuffers/protobuf/releases</a></p><blockquote><p>Unzip the files to Tool folder, and add the Tool/protoc***/bin to the system environment path.</p></blockquote><blockquote><p>Install API</p></blockquote><pre><code class="hljs bash"><span class="hljs-comment"># From within TensorFlow/models/research/</span>Get-ChildItem object_detection/protos/*.proto | foreach &#123;protoc <span class="hljs-string">"object_detection/protos/<span class="hljs-variable">$($_.Name)</span>"</span> --python_out=.&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tips</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ML</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Install CUDA 11.1 &amp; cuDNN</title>
     <link href="/2020/10/25/Install%20CUDA%2011.1%20&amp;%20cuDNN/"/>
     <url>/2020/10/25/Install%20CUDA%2011.1%20&amp;%20cuDNN/</url>
