@@ -17,9 +17,9 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>NOTE ~ Veen</title>
+  <title>Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -29,11 +29,14 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -50,9 +53,13 @@
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -60,7 +67,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -150,12 +157,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -177,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      445 字
+      459 字
     </span>
   
 
@@ -187,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      7
        分钟
     </span>
   
@@ -215,11 +222,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">NOTE</h1>
+            <h1 style="display: none"></h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <h1 id="elbow"><a href="#elbow" class="headerlink" title="elbow"></a>elbow</h1><blockquote>
 <p>terminal</p>
 </blockquote>
@@ -252,7 +259,7 @@ touch case.foam</code></pre>
 <p>constant    /boundary    /nu    /laminar<br>0    /p    /U</p>
 </blockquote>
 <pre><code class="hljs irpf90">blockMesh
-<span class="hljs-keyword">touch</span> <span class="hljs-keyword">case</span>.foam
+<span class="hljs-keyword">touch</span> <span class="hljs-keyword">case</span><span class="hljs-number">.</span>foam
 simpleFoam</code></pre>
 
 <h1 id="arota-transient"><a href="#arota-transient" class="headerlink" title="arota_transient"></a>arota_transient</h1><pre><code class="hljs css"><span class="hljs-selector-tag">fluent3DMeshToFoam</span> <span class="hljs-selector-tag">fluent</span><span class="hljs-selector-class">.msh</span></code></pre>
@@ -267,23 +274,23 @@ simpleFoam</code></pre>
 foamListTimes -rm  <span class="hljs-regexp">//</span><span class="hljs-keyword">delete</span> previous solution data</code></pre>
 <p>postProcessing residuals data</p>
 <p>foamMonitor -l postProcessing/residuals/0/residuals.dat</p>
-<h1 id="sylinder-TEST"><a href="#sylinder-TEST" class="headerlink" title="_sylinder_TEST"></a>_sylinder_TEST</h1><pre><code class="hljs lsl">inGroups        List&lt;word&gt; <span class="hljs-number">1</span>(mywall);
+<h1 id="sylinder-TEST"><a href="#sylinder-TEST" class="headerlink" title="_sylinder_TEST"></a>_sylinder_TEST</h1><pre><code class="hljs apache"><span class="hljs-attribute">inGroups</span>        List&lt;word&gt; <span class="hljs-number">1</span>(mywall);
 
-empty cyclic cyclicAMI wedge symmetry &gt; #includeEtc <span class="hljs-string">"caseDicts/setConstraintTypes"</span>
+<span class="hljs-attribute">empty</span> cyclic cyclicAMI wedge symmetry &gt; #includeEtc <span class="hljs-string">&quot;caseDicts/setConstraintTypes&quot;</span>
 
-internalField   uniform (<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);
+<span class="hljs-attribute">internalField</span>   uniform (<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);
 
-pimpleFoam &amp;&gt; log
+<span class="hljs-attribute">pimpleFoam</span> &amp;&gt; log
 
-nOuterCorrectors    <span class="hljs-number">15</span>&gt;&gt;<span class="hljs-number">1</span>; pimple to piso
+<span class="hljs-attribute">nOuterCorrectors</span>    <span class="hljs-number">15</span>&gt;&gt;<span class="hljs-number">1</span>; pimple to piso
 
-foamMonitor yrange <span class="hljs-string">"[0 1]"</span></code></pre>
+<span class="hljs-attribute">foamMonitor</span> yrange <span class="hljs-string">&quot;[0 1]&quot;</span></code></pre>
 
 <p>#_TaylorCouettte_steadyState</p>
-<pre><code class="hljs routeros"><span class="hljs-string">".*"</span>
+<pre><code class="hljs ada"><span class="hljs-string">&quot;.*&quot;</span>
 &#123;
-<span class="hljs-built_in">	type </span>zeroGradient;
-&#125;</code></pre>
+	<span class="hljs-keyword">type</span> <span class="hljs-type">zeroGradient;</span>
+<span class="hljs-type">&#125;</span></code></pre>
 
 <pre><code class="hljs bash">&gt; foamGet residuals
 <span class="hljs-built_in">functions</span>
@@ -291,9 +298,11 @@ foamMonitor yrange <span class="hljs-string">"[0 1]"</span></code></pre>
 	<span class="hljs-comment">#includeFunc residuals</span>
 &#125;</code></pre>
 
-<pre><code class="hljs properties"><span class="hljs-attr">decomposePar</span> <span class="hljs-string"></span>
+<pre><code class="hljs apache"><span class="hljs-attribute">decomposePar</span> 
 
-<span class="hljs-attr">mpirun</span> <span class="hljs-string">-np 4 simpleFoam -parallel</span></code></pre>
+<span class="hljs-attribute">mpirun</span> -np <span class="hljs-number">4</span> simpleFoam -parallel
+
+</code></pre>
 
 
 <h1 id="cyclic-RANS"><a href="#cyclic-RANS" class="headerlink" title="cyclic_RANS"></a>cyclic_RANS</h1><p>👉<br>wall function<br>    type    kqRWallFunction;<br>    value    $internalField;</p>
@@ -306,7 +315,8 @@ foamMonitor yrange <span class="hljs-string">"[0 1]"</span></code></pre>
     type            fixedFluxPressure;
     value           uniform 0;
 
-equationOfState perfectGas;</code></pre><p>buoyantSimpleFoam</p>
+equationOfState perfectGas;</code></pre>
+<p>buoyantSimpleFoam</p>
 <h1 id="BernardCells"><a href="#BernardCells" class="headerlink" title="_BernardCells"></a>_BernardCells</h1><p>buoyantPimpleFoam</p>
 <p>–&gt; FOAM FATAL ERROR:<br>LHS and RHS of - have different dimensions<br>     dimensions : [0 2 -2 0 0 0 0] - [1 -1 -2 0 0 0 0]</p>
 <h1 id="rhiCentralFoam"><a href="#rhiCentralFoam" class="headerlink" title="rhiCentralFoam"></a>rhiCentralFoam</h1><h1 id="rhoSimpleFoam"><a href="#rhoSimpleFoam" class="headerlink" title="rhoSimpleFoam"></a>rhoSimpleFoam</h1><pre><code class="hljs scala">mu          <span class="hljs-number">0</span>;
@@ -321,23 +331,25 @@ internalField   uniform $pOut;
 
 <h1 id="VOF"><a href="#VOF" class="headerlink" title="VOF"></a>VOF</h1><p>type           constantAlphaContactAngle;<br>interFoam</p>
 <pre><code>pRefCell    0;
-pRefValue           0;</code></pre><h1 id="Mixture"><a href="#Mixture" class="headerlink" title="Mixture"></a>Mixture</h1><p>driftFluxFoam</p>
+pRefValue           0;</code></pre>
+<h1 id="Mixture"><a href="#Mixture" class="headerlink" title="Mixture"></a>Mixture</h1><p>driftFluxFoam</p>
 <p>relativeVelocityModel simple; //relative Velocity</p>
 <h1 id="find-solvers"><a href="#find-solvers" class="headerlink" title="find solvers"></a>find solvers</h1><p>OpenFOAM/OpenFOAM-7/applications/solvers/xx/xx.c &gt; discriptions</p>
 <p>OKSS2</p>
 <p>laplacianFoam.c</p>
-<pre><code class="hljs routeros">Application
+<pre><code class="hljs gams">Application
     laplacianFoam
 
 Description
-    Solves a<span class="hljs-built_in"> simple </span>Laplace equation, e.g. <span class="hljs-keyword">for</span> thermal diffusion <span class="hljs-keyword">in</span> a solid.
+    Solves a simple Laplace <span class="hljs-keyword">equation</span>, e.g. for <span class="hljs-comment">thermal diffusion in a solid.</span>
 
-            fvScalarMatrix TEqn
+            fvScalarMatrix <span class="hljs-comment">TEqn</span>
             (
-                fvm::ddt(T) - fvm::laplacian(DT, T)
+                fvm::ddt(T) <span class="hljs-comment">- fvm::laplacian(DT, T)</span>
              ==
                 fvOptions(T)
-            );</code></pre>
+            );
+</code></pre>
 
 <p>scalarTransportFoam</p>
 <pre><code class="hljs excel">Application
@@ -353,7 +365,8 @@ Description
               - f<span class="hljs-symbol">vm:</span><span class="hljs-symbol">:la</span>placian(DT, <span class="hljs-built_in">T</span>)
              ==
                 fvOptions(<span class="hljs-built_in">T</span>)
-            );</code></pre>
+            );
+</code></pre>
 
 
 <h1 id="Energe-equation"><a href="#Energe-equation" class="headerlink" title="Energe equation"></a>Energe equation</h1><p>name.c&gt;Make&gt;flies&gt;name.C name</p>
@@ -365,7 +378,7 @@ Description
    &#123;
 IOobject
 &#123;
-    <span class="hljs-string">"T"</span>,
+    <span class="hljs-string">&quot;T&quot;</span>,
            runTime.timeName(),
 <span class="hljs-built_in">           mesh,</span>
 <span class="hljs-title">           IOobject::</span>MUST_READ,
@@ -376,7 +389,7 @@ IOobject
 
    dimensionedScalar DT
    &#123;
-       <span class="hljs-string">"DT"</span>,
+       <span class="hljs-string">&quot;DT&quot;</span>,
        dimensionSet(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),
        <span class="hljs-number">0.0001</span>
    &#125;<span class="hljs-comment">;</span>
@@ -387,14 +400,15 @@ IOobject
 <span class="hljs-title">       fvm::</span>ddt(T)
 <span class="hljs-title">     + fvc::</span>div(phi, T)
 <span class="hljs-title">     - fvc::</span>laplacian(DT, T)
-   &#125;<span class="hljs-comment">;</span></code></pre>
+   &#125;<span class="hljs-comment">;</span>
+</code></pre>
 
 <h1 id="projectionFoam"><a href="#projectionFoam" class="headerlink" title="projectionFoam"></a>projectionFoam</h1><p>projectionFoam.C</p>
 <p>EXE = $(FOAM_USER_APPBIN)/projectionFoam</p>
 <p>phi = fvc::interpolate(U) &amp; mesh.Sf(); volume to surface</p>
 <h1 id="dym"><a href="#dym" class="headerlink" title="dym"></a>dym</h1><pre><code class="hljs autoit">&gt;pisoDyMFoam.C
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">"dynamicFvMesh.H"</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">"createDynamicFvMesh.H"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;dynamicFvMesh.H&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;createDynamicFvMesh.H&quot;</span></span>
 mesh.update()<span class="hljs-comment">;</span>
 &gt;UEqn
 phi = phi - mesh.phi()<span class="hljs-comment">;</span>
@@ -414,16 +428,16 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/17/CFD-Note/">
+                      <a href="/2020/10/25/Install%20CUDA%2011.1%20&amp;%20cuDNN/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CFD-Note</span>
+                        <span class="hidden-mobile">Install CUDA 11.1 & cuDNN</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -431,8 +445,8 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/03/08/Veen-2019-to-2020/">
-                        <span class="hidden-mobile">Veen 2019 to 2020</span>
+                      <a href="/2020/03/08/%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E5%99%A8/">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -451,7 +465,7 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -463,16 +477,15 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -493,75 +506,44 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
     </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
 
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-
-    <font size="3" face="" color="#2f4154">
-      <p class="copyright text-muted">
-        Copyright © Veen 2020
-        <br>
-        Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> |
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
-      <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons">
-      </a>
-      </p>
-      </font>
-
-    
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
-    
-
-    
-  </div>
-
-  <footer class="mt-5">
-    <div class="text-center py-3">  
-    
-    
-    </div>
-
-
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -576,107 +558,47 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "NOTE&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "§"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -691,6 +613,10 @@ phi = phi - mesh.phi()<span class="hljs-comment">;</span>
 
 
 
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

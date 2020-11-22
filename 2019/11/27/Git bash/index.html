@@ -17,9 +17,9 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>Git Bash ~ Veen</title>
+  <title>Git Bash - Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -29,11 +29,14 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -50,9 +53,13 @@
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -60,7 +67,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -150,12 +157,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git Bash">
               
             </span>
 
@@ -187,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      39
+      33
        分钟
     </span>
   
@@ -215,11 +222,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Git Bash</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>本文用于记录Git常用语法。</p>
 <a id="more"></a>
 
@@ -239,7 +246,7 @@ $ git config --global user.email “email@example.com”</code></pre>
 
 $ git add README	 <span class="hljs-comment">#将目录下以README文件提交到仓库中</span>
 
-$ git commit -m <span class="hljs-string">'初始化项目版本'</span>	<span class="hljs-comment">#备注功能</span>
+$ git commit -m <span class="hljs-string">&#x27;初始化项目版本&#x27;</span>	<span class="hljs-comment">#备注功能</span>
 
 $ git <span class="hljs-built_in">clone</span> &lt;repo<span class="hljs-comment">###  &lt;directory###  	#repo:Git 仓库 directory:本地目录。</span>
 
@@ -252,9 +259,9 @@ $ git status
 <span class="hljs-comment"># 将工作区的文件提交到暂存区</span>
 $ git add .  
 <span class="hljs-comment"># 提交到本地仓库</span>
-$ git commit -m <span class="hljs-string">"本次提交说明"</span>
+$ git commit -m <span class="hljs-string">&quot;本次提交说明&quot;</span>
 <span class="hljs-comment"># add和commit的合并，便捷写法（未追踪的文件无法直接提交到暂存区/本地仓库）</span>
-$ git commit -am <span class="hljs-string">"本次提交说明"</span>  
+$ git commit -am <span class="hljs-string">&quot;本次提交说明&quot;</span>  
 <span class="hljs-comment"># 将本地分支和远程分支进行关联</span>
 $ git push -u origin branchName 
 <span class="hljs-comment"># 将本地仓库的文件推送到远程分支</span>
@@ -292,7 +299,7 @@ git add -A 	<span class="hljs-comment">#提交所有文件改动</span>
 
 git status 	<span class="hljs-comment">#查看状态</span>
 
-git commit -m <span class="hljs-string">"xx"</span> 	<span class="hljs-comment">#备注功能</span>
+git commit -m <span class="hljs-string">&quot;xx&quot;</span> 	<span class="hljs-comment">#备注功能</span>
 
 git status 	<span class="hljs-comment">#查看状态</span>
 
@@ -312,7 +319,7 @@ git pull origin master 	<span class="hljs-comment">#拉最新代码 （下载）
 
 git add -A 	<span class="hljs-comment">#提交所有文件改动</span>
 
-git commit -m <span class="hljs-string">"xx"</span> 	<span class="hljs-comment">#备注功能</span>
+git commit -m <span class="hljs-string">&quot;xx&quot;</span> 	<span class="hljs-comment">#备注功能</span>
 
 git push origin master 	<span class="hljs-comment">#推送到远程 （上传）</span></code></pre>
 
@@ -350,11 +357,11 @@ $ git add . 等价于 $ git add -A</code></pre>
 
 
 <h3 id="Git-Commit"><a href="#Git-Commit" class="headerlink" title="Git Commit"></a>Git Commit</h3><pre><code class="hljs bash"><span class="hljs-comment"># 将暂存区的文件提交到本地仓库并添加提交说明</span>
-$ git commit -m <span class="hljs-string">"本次提交的说明"</span>   
+$ git commit -m <span class="hljs-string">&quot;本次提交的说明&quot;</span>   
 
 <span class="hljs-comment"># add 和 commit 的合并，便捷写法</span>
 <span class="hljs-comment"># 和 git add -u 命令一样，未跟踪的文件是无法提交上去的</span>
-$ git commit -am <span class="hljs-string">"本次提交的说明"</span>  
+$ git commit -am <span class="hljs-string">&quot;本次提交的说明&quot;</span>  
 
 <span class="hljs-comment"># 跳过验证继续提交</span>
 $ git commit --no-verify
@@ -363,9 +370,10 @@ $ git commit -n
 <span class="hljs-comment"># 编辑器会弹出上一次提交的信息，可以在这里修改提交信息</span>
 $ git commit --amend
 <span class="hljs-comment"># 修复提交，同时修改提交信息</span>
-$ git commit --amend -m <span class="hljs-string">"本次提交的说明"</span>
+$ git commit --amend -m <span class="hljs-string">&quot;本次提交的说明&quot;</span>
 <span class="hljs-comment"># 加入 --no-edit 标记会修复提交但不修改提交信息，编辑器不会弹出上一次提交的信息</span>
-$ git commit --amend --no-edit</code></pre>
+$ git commit --amend --no-edit
+</code></pre>
 
 
 
@@ -483,7 +491,7 @@ $ git tag v1.0
 <span class="hljs-comment"># 指定一个 commit id 创建一个标签 </span>
 $ git tag v0.9 f52c633
 <span class="hljs-comment"># 创建带有说明的标签，用 -a 指定标签名，-m 指定说明文字</span>
-$ git tag -a v0.1 -m <span class="hljs-string">"version 0.1 released"</span> 
+$ git tag -a v0.1 -m <span class="hljs-string">&quot;version 0.1 released&quot;</span> 
 
 <span class="hljs-comment"># 查看所有标签</span>
 <span class="hljs-comment"># 注意：标签不是按时间顺序列出，而是按字母排序的。</span>
@@ -510,7 +518,7 @@ $ git push origin :refs/tags/&lt;tagname&gt;</code></pre>
 <pre><code class="hljs bash">git rm --cached -r .
 git add .</code></pre>
 
-<p>更详细的答案，可参见: <a href="https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository" target="_blank" rel="noopener">ignore-files</a>。</p>
+<p>更详细的答案，可参见: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository">ignore-files</a>。</p>
 <h3 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h3><pre><code class="hljs bash">git push origin --delete branch-name
 // eg:
 git push origin --delete develop</code></pre>
@@ -536,31 +544,32 @@ $ cat .git/HEAD
 <span class="hljs-comment"># git 中 D 向下翻一行  F 向下翻页  B 向上翻页  Q 退出</span>
 <span class="hljs-comment"># 查看提交历史</span>
 $ git <span class="hljs-built_in">log</span> --oneline  
-          --grep=<span class="hljs-string">"关键字"</span>
+          --grep=<span class="hljs-string">&quot;关键字&quot;</span>
           --graph 
           --all      
-          --author <span class="hljs-string">"username"</span>     
+          --author <span class="hljs-string">&quot;username&quot;</span>     
           --reverse 
           -num
           -p
-          --before=  1  day/1  week/1  <span class="hljs-string">"2019-06-06"</span> 
-          --after= <span class="hljs-string">"2019-06-06"</span>
+          --before=  1  day/1  week/1  <span class="hljs-string">&quot;2019-06-06&quot;</span> 
+          --after= <span class="hljs-string">&quot;2019-06-06&quot;</span>
           --<span class="hljs-built_in">stat</span> 
           --abbrev-commit 
-          --pretty=format:<span class="hljs-string">"xxx"</span>
+          --pretty=format:<span class="hljs-string">&quot;xxx&quot;</span>
           
 <span class="hljs-comment"># oneline -###  将日志记录一行一行的显示</span>
-<span class="hljs-comment"># grep="关键字" -###  查找日志记录中(commit提交时的注释)与关键字有关的记录</span>
+<span class="hljs-comment"># grep=&quot;关键字&quot; -###  查找日志记录中(commit提交时的注释)与关键字有关的记录</span>
 <span class="hljs-comment"># graph -###  记录图形化显示 ！！！    </span>
 <span class="hljs-comment"># all -###  将所有记录都详细的显示出来</span>
-<span class="hljs-comment"># author "username" -###  查找这个作者提交的记录</span>
+<span class="hljs-comment"># author &quot;username&quot; -###  查找这个作者提交的记录</span>
 <span class="hljs-comment"># reverse -###  commit 提交记录顺序翻转      </span>
 <span class="hljs-comment"># before -###  查找规定的时间(如:1天/1周)之前的记录   </span>
 <span class="hljs-comment"># num -###  git log -10 显示最近10次提交 ！！！    </span>
 <span class="hljs-comment"># stat -###  显示每次更新的文件修改统计信息，会列出具体文件列表 ！！！</span>
 <span class="hljs-comment"># abbrev-commit -###  仅显示 SHA-1 的前几个字符，而非所有的 40 个字符 ！！！</span>
-<span class="hljs-comment"># pretty=format:"xxx" -###   可以定制要显示的记录格式 ！！！</span>
-<span class="hljs-comment"># p -###  显示每次提交所引入的差异（按 补丁 的格式输出）！！！</span></code></pre>
+<span class="hljs-comment"># pretty=format:&quot;xxx&quot; -###   可以定制要显示的记录格式 ！！！</span>
+<span class="hljs-comment"># p -###  显示每次提交所引入的差异（按 补丁 的格式输出）！！！</span>
+</code></pre>
 
 
 
@@ -585,7 +594,8 @@ $ git checkout &lt;当前你正在使用的分支&gt;
 <span class="hljs-comment"># 切换到某个指定的 commit 版本</span>
 $ git checkout &lt;commit_id&gt;
 <span class="hljs-comment"># 切换指定 tag </span>
-$ git checkout &lt;tag&gt;</code></pre>
+$ git checkout &lt;tag&gt;
+</code></pre>
 
 
 
@@ -608,7 +618,8 @@ $ git reset --mixed  &lt;commit&gt;
 <span class="hljs-comment"># 将当前分支的指针指向为指定 commit（该提交之后的提交都会被移除），但保持暂存区和工作区不变</span>
 $ git reset --soft  &lt;commit&gt;
 <span class="hljs-comment"># 将当前分支的指针指向为指定 commit（该提交之后的提交都会被移除），同时重置暂存区、工作区</span>
-$ git reset --hard  &lt;commit&gt;</code></pre>
+$ git reset --hard  &lt;commit&gt;
+</code></pre>
 
 
 
@@ -624,7 +635,8 @@ $ git revert HEAD~num
 <span class="hljs-comment"># 生成一个撤销指定提交版本的新提交</span>
 $ git revert &lt;commit_id&gt;
 <span class="hljs-comment"># 生成一个撤销指定提交版本的新提交，执行时不打开默认编辑器，直接使用 Git 自动生成的提交信息</span>
-$ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code></pre>
+$ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span>
+</code></pre>
 
 
             </div>
@@ -635,7 +647,7 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -672,7 +684,7 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -684,16 +696,15 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -714,75 +725,44 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
     </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
   
 
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-
-    <font size="3" face="" color="#2f4154">
-      <p class="copyright text-muted">
-        Copyright © Veen 2020
-        <br>
-        Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> |
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
-      <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons">
-      </a>
-      </p>
-      </font>
-
-    
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
-    
-
-    
-  </div>
-
-  <footer class="mt-5">
-    <div class="text-center py-3">  
-    
-    
-    </div>
-
-
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -797,107 +777,47 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Git Bash&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "§"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -912,6 +832,10 @@ $ git revert &lt;commit_id<span class="hljs-comment">###  --no-edit</span></code
 
 
 
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
