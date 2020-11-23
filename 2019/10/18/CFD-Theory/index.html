@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      416 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -227,7 +227,63 @@
             <h1 style="display: none">CFD Theory</h1>
             
             <div class="markdown-body">
-              
+              <p>Basic CFD Theory</p>
+<a id="more"></a>
+<h3 id="CFD-Equations"><a href="#CFD-Equations" class="headerlink" title="CFD-Equations"></a>CFD-Equations</h3><h4 id="Navier-Stokes-N-S-Equation"><a href="#Navier-Stokes-N-S-Equation" class="headerlink" title="Navier-Stokes (N-S) Equation"></a>Navier-Stokes (N-S) Equation</h4><script type="math/tex; mode=display">
+\begin{align}
+& \frac{\partial u_{i}}{\partial t}+ u_{j}\frac{\partial u_{i}}{\partial x_{j}}=
+-\frac{1}{\rho}\frac{\partial p}{\partial x_{i}}+\nu \frac{\partial^2 u_{i}}{\partial x_{j}\partial x_{j}}+g_{i}
+\tag{1.1}\\
+& \frac{\partial u_{i}}{\partial x_{i}}=0
+\tag{1.2}
+
+\end{align}</script><script type="math/tex; mode=display">
+\begin{align}
+& \frac{\partial u_{i}}{\partial t}+ u_{j}\frac{\partial u_{i}}{\partial x_{j}}=
+-\frac{1}{\rho}\frac{\partial p}{\partial x_{i}}+\nu \frac{\partial^2 u_{i}}{\partial x_{j}\partial x_{j}}+g_{i}
+\\
+& \frac{\partial u_{i}}{\partial x_{i}}=0
+
+\end{align}</script><p>where  $u_i$ represents the air velocity, p is the pressure, $g_i$ is the gravitational acceleration.</p>
+<h4 id="Energy-Equation"><a href="#Energy-Equation" class="headerlink" title="Energy Equation"></a>Energy Equation</h4><script type="math/tex; mode=display">
+\begin{aligned}
+&\rho \frac{\partial\left(c_{p} T\right)}{\partial t}+\rho \frac{\partial\left(c_{p} u_{j} T\right)}{\partial x_{j}}=\frac{\partial}{\partial x_{j}}\left[k \frac{\partial T}{\partial x_{j}}\right]+\Phi+S_{T}\\
+&\Phi = \mu\left(\frac{\partial u_{i}}{\partial x_{j}}+\frac{\partial u_{j}}{\partial x_{i}}\right) \frac{\partial u_{i}}{\partial x_{j}}
+
+\end{aligned}</script><h4 id="DEM"><a href="#DEM" class="headerlink" title="DEM"></a>DEM</h4><script type="math/tex; mode=display">
+\begin{aligned}
+& m_{p} \frac{d u_{i}^{p}}{d t}=\sum F_{i}+\left(m_{p}-m_{f}\right) g_{i}\\
+& F_{i}^{D}=\frac{\pi}{8} \rho_{f} d_{p}^{2} C_{D}\left(u_{i}^{f}-u_{i}^{p}\right)\left|u_{i}^{f}-u_{i}^{p}\right|\\
+& C_{D}=\frac{24}{\operatorname{Re}_{p}}+3.6 \operatorname{Re}_{p}^{-0.313}
+
+\end{aligned}</script><script type="math/tex; mode=display">
+C_{D}=\left\{\begin{array}
+{c}
+\frac{24\left(1+0.15 R e^{0.687}\right)}{\operatorname{Re}} 
+\text {Re} \leq 1000 \\
+0.44 \mathrm{Re}>1000
+\end{array}\right.</script><script type="math/tex; mode=display">
+\begin{aligned}
+C_{\mathrm{D}}=\left\{
+
+\begin{array}{cc}
+\frac{24}{\operatorname{Re}_{\mathrm{p}}} & \text { if } \operatorname{Re}_{\mathrm{p}} \leq 10^{3} \\
+\frac{24}{\mathrm{Re}_{\mathrm{p}}}\left(1+0.15 \mathrm{Re}_{\mathrm{p}}^{0.678}\right) & \text { if } \quad \operatorname{Re}_{\mathrm{p}}>10^{3}
+\end{array}\right.
+\end{aligned}</script><script type="math/tex; mode=display">
+m_{p} \frac{d u_{i}^{p}}{d t}=\sum F_{i}+\left(m_{p}-m_{f}\right) g_{i}\\</script><script type="math/tex; mode=display">
+F_{p} = \frac{C_D Re_{p}}{24}\\</script><script type="math/tex; mode=display">
+C_D = 
+\left\{ 
+
+\begin{array}
+{**lr**}  
+\frac{24(1+0.15Re_{p}^{0.687})}{Re_{p}} \qquad &Re_{p}\leq 10^{3} \\
+0.44Re_{p}\qquad &Re_{p}<10^{3}
+\end{array}
+
+\right.</script><script type="math/tex; mode=display">
+Re_{p}=\frac{\rho\left|\vec{u}-\vec{u}_{p}\right| d_{p}}{\mu_{p}}</script>
             </div>
             <hr>
             <div>
@@ -257,9 +313,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/10/18/C-Summary/">
+                      <a href="/2019/10/18/NOTE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C Summary</span>
+                        <span class="hidden-mobile">OpenFOAM Note</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,6 +334,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
+          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
             
           </article>
         </div>
@@ -335,9 +423,34 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -396,6 +509,8 @@
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -427,11 +542,74 @@
 
 
 
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
 
 
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 

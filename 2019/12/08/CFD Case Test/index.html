@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55
+      56
        分钟
     </span>
   
@@ -227,7 +227,8 @@
             <h1 style="display: none">CFD Case Test</h1>
             
             <div class="markdown-body">
-              <h1 id="网格无关性检验"><a href="#网格无关性检验" class="headerlink" title="网格无关性检验"></a>网格无关性检验</h1><p><a target="_blank" rel="noopener" href="https://www.grc.nasa.gov/www/wind/valid/tutorial/spatconv.html">Reprinted From NASA V&amp;A</a> </p>
+              <h1 id="网格无关性检验"><a href="#网格无关性检验" class="headerlink" title="网格无关性检验"></a>网格无关性检验</h1><a id="more"></a>
+<p><a target="_blank" rel="noopener" href="https://www.grc.nasa.gov/www/wind/valid/tutorial/spatconv.html">Reprinted From NASA V&amp;A</a> </p>
 <h2 align="center" class="style3">Examining Spatial (Grid) Convergence</h2>
 
 <!------------------------------------------------------------------------->
@@ -716,19 +717,38 @@ results of Appendix A are:</p>
 <blockquote><pre>
  --- VERIFY: Performs verification calculations ---
 
-<p> Number of data sets read =  3</p>
-<pre><code>  Grid Size     Quantity
+ Number of data sets read =  3
 
-  1.000000      0.970500
-  2.000000      0.968540
-  4.000000      0.961780</code></pre>
-<p> Order of convergence using first three finest grid<br> and assuming constant grid refinement (Eqn. 5.10.6.1)<br> Order of Convergence, p =  1.78618479</p>
-<p> Richardson Extrapolation: Use above order of convergence<br> and first and second finest grids (Eqn. 5.4.1)<br> Estimate to zero grid value, f_exact =  0.971300304</p>
-<p> Grid Convergence Index on fine grids. Uses p from above.<br> Factor of Safety =  1.25</p>
-<p>   Grid     Refinement<br>   Step      Ratio, r       GCI(%)<br>   1  2      2.000000      0.103080<br>   2  3      2.000000      0.356244</p>
-<p> Checking for asymptotic range using Eqn. 5.10.5.2.<br> A ratio of 1.0 indicates asymptotic range.</p>
-<p>  Grid Range    Ratio<br>  12 23      0.997980</p>
-<p> — End of VERIFY —<br></pre></p>
+      Grid Size     Quantity
+
+      1.000000      0.970500
+      2.000000      0.968540
+      4.000000      0.961780
+
+ Order of convergence using first three finest grid 
+ and assuming constant grid refinement (Eqn. 5.10.6.1) 
+ Order of Convergence, p =  1.78618479
+
+ Richardson Extrapolation: Use above order of convergence
+ and first and second finest grids (Eqn. 5.4.1) 
+ Estimate to zero grid value, f_exact =  0.971300304
+
+ Grid Convergence Index on fine grids. Uses p from above.
+ Factor of Safety =  1.25
+
+   Grid     Refinement            
+   Step      Ratio, r       GCI(%)
+   1  2      2.000000      0.103080
+   2  3      2.000000      0.356244
+
+ Checking for asymptotic range using Eqn. 5.10.5.2.
+ A ratio of 1.0 indicates asymptotic range.
+
+  Grid Range    Ratio
+  12 23      0.997980
+
+ --- End of VERIFY ---
+</pre>
 </blockquote>
 
 <!------------------------------------------------------------------------->
@@ -756,8 +776,7 @@ from a grid convergence study.</p>
 
 
 <!------------------------------------------------------------------------->
-<hr>
-<span style="font-weight: bold;">Last Updated:</span> Thursday, 17-Jul-2008 09:46:07 EDT<br>
+<p><hr><br><span style="font-weight: bold;">Last Updated:</span> Thursday, 17-Jul-2008 09:46:07 EDT<br></p>
 <div id="footer">
 
 <!-- <img src="images/nasa_logo.gif" srcset="/img/loading.gif" class="right"
@@ -769,22 +788,13 @@ from a grid convergence study.</p>
       <a href="mailto:john.w.slater@nasa.gov">John W. Slater</a>
 </div>
 
-<p><span><span style="font-weight: bold;">Web Policies: </span><br>      <a target="_blank" rel="noopener" href="http://www.grc.nasa.gov/Doc/grcwebpolicies.html">Web Privacy Policy and Important Notices</a></span><br /><br>        <span style="font-weight: bold;">Adobe Reader Download: </span><br>        <a target="_blank" rel="noopener" href="http://www.adobe.com/products/acrobat/readstep2.html" title="Go to Adobe Web Site"><br>        Adobe Reader</a></p>
-<!-- <span class="notprinted"><span style="font-weight: bold;">Adobe Reader Download: </span>  
+<p><span><span style="font-weight: bold;">Web Policies: </span><br>      <a target="_blank" rel="noopener" href="http://www.grc.nasa.gov/Doc/grcwebpolicies.html">Web Privacy Policy and Important Notices</a>&lt;/span&gt;<br /><br>        <span style="font-weight: bold;">Adobe Reader Download: </span><br>        <a target="_blank" rel="noopener" href="http://www.adobe.com/products/acrobat/readstep2.html" title="Go to Adobe Web Site"><br>        Adobe Reader</a><br><!-- <span class="notprinted"><span style="font-weight: bold;">Adobe Reader Download: </span>  
         <a target="_blank" rel="noopener" href="http://www.adobe.com/products/acrobat/readstep2.html" title="Go to Adobe Web Site">
         Adobe Reader</a>
-</span> -->
-
-
-
-
-</div>
-
-
-</td></tr></table>
-
-</body>
-</html>
+</span> --></p>
+<p>&lt;/div&gt;</p>
+<p>&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</p>
+<p>&lt;/body&gt;<br>&lt;/html&gt;</p>
 
             </div>
             <hr>
@@ -829,6 +839,38 @@ from a grid convergence study.</p>
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
+          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
             
           </article>
         </div>
@@ -886,9 +928,34 @@ from a grid convergence study.</p>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -947,6 +1014,8 @@ from a grid convergence study.</p>
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -978,11 +1047,74 @@ from a grid convergence study.</p>
 
 
 
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
 
 
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 

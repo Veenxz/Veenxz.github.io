@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -227,7 +227,8 @@
             <h1 style="display: none">learnmarkdown-cn</h1>
             
             <div class="markdown-body">
-               <p>Markdown 由 John Gruber 于 2004年创立. 它旨在成为一门容易读写的语法结构，并可以便利地转换成 HTML（以及其他很多）格式。</p>
+              <a id="more"></a>
+<p>Markdown 由 John Gruber 于 2004年创立. 它旨在成为一门容易读写的语法结构，并可以便利地转换成 HTML（以及其他很多）格式。</p>
 <p>在不同的解析器中，Markdown 的实现方法有所不同。
 此教程会指出哪些特征是通用，哪一些只对某一解析器有效。</p>
 
@@ -244,7 +245,7 @@
 <li><a href="#杂项">杂项</a></li>
 </ul>
 
-<h2>HTML标签</h2>
+<p><h2>HTML标签</h2></p>
 <p>Markdown 是 HTML 的父集，所以任何 HTML 文件都是有效的 Markdown。</p>
 <div class="highlight"><pre><span></span>&lt;!--这意味着我们可以在 Markdown 里使用任何 HTML 元素，比如注释元素，
 且不会被 Markdown 解析器所影响。不过如果你在 Markdown 文件内创建了 HTML 元素，
@@ -270,14 +271,21 @@
 <div class="highlight"><pre><span></span>这是一个 h1
 =============
 
-<h2 id="这是一个-h2"><a href="#这是一个-h2" class="headerlink" title="这是一个 h2"></a>这是一个 h2</h2><p></pre></div></p>
+这是一个 h2
+-------------
+</pre></div>
 <h2>文本样式</h2>
 <p>文本的<em>斜体</em>，<strong>粗体</strong>在 Markdown 中可以轻易实现。</p>
 <div class="highlight"><pre><span></span>*此文本为斜体。*
 <span class="ge">_此文本也是。_</span>
 
-<p><span class="gs"><strong>此文本为粗体。</strong></span><br><span class="gs"><strong>此文本也是</strong></span></p>
-<p><span class="gs"><strong><em>此文本是斜体加粗体。</em></strong></span><br><span class="gs"><strong><em>或者这样。</em></strong></span><br><em><strong>这个也是！</strong></em><br></pre></div></p>
+<span class="gs">**此文本为粗体。**</span>
+<span class="gs">__此文本也是__</span>
+
+<span class="gs">***此文本是斜体加粗体。***</span>
+<span class="gs">**_或者这样。_**</span>
+*__这个也是！__*
+</pre></div>
 <p>GitHub 也支持 Markdown，在 GitHub 的 Markdown 解析器中，我们可以使用~~删除线~~：</p>
 <div class="highlight"><pre><span></span>~~此文本为删除线效果。~~
 </pre></div>
@@ -286,15 +294,20 @@
 （注：部分解析器有无需空行就能换行的设置，这个主要看个人喜好）</p>
 <div class="highlight"><pre><span></span>这是第一段落. 这句话在同一个段落里，好玩么？
 
-<p>现在我是第二段落。<br>这句话也在第二段落！</p>
-<p>这句话在第三段落！<br></pre></div></p>
+现在我是第二段落。
+这句话也在第二段落！
+
+
+这句话在第三段落！
+</pre></div>
 <p>如果你想插入一个 <code>&lt;br /&gt;</code> 标签，你可以在段末加入两个以上的空格，然后另起一
 段。</p>
 
 <p>(译者注：试了一下，很多解析器，并不需要空两个空格，直接换行就会添加一个<code>&lt;br /&gt;</code>)</p>
 <div class="highlight"><pre><span></span>此段落结尾有两个空格（选中以显示）。  
 
-<p>上文有一个 &lt;br /&gt; ！<br></pre></div></p>
+上文有一个 &lt;br /&gt; ！
+</pre></div>
 <p>段落引用可由 <code>&gt;</code> 字符轻松实现。</p>
 <blockquote>
 <p>对的很轻松</p>
@@ -303,7 +316,10 @@
 <span class="k">&gt; </span><span class="ge">手动断开你的句子，然后在每句句子前面添加 `&gt;` 字符。或者让你的句子变得很长，以至于他们自动得换行。</span>
 <span class="k">&gt; </span><span class="ge">只要你的文字以 `&gt;` 字符开头，两种方式无异。</span>
 
-<p><span class="k">&gt; </span><span class="ge">你也可以对文本进行</span><br>&gt;&gt; 多层引用<br><span class="k">&gt; </span><span class="ge">这多机智啊！</span><br></pre></div></p>
+<span class="k">&gt; </span><span class="ge">你也可以对文本进行</span>
+&gt;&gt; 多层引用
+<span class="k">&gt; </span><span class="ge">这多机智啊！</span>
+</pre></div>
 <h2>列表</h2>
 <ul>
 <li>无序列表可由星号，加号或者减号来创建</li>
@@ -312,14 +328,18 @@
 <span class="k">*</span> 项目
 <span class="k">*</span> 另一个项目
 
-<p>或者</p>
-<ul>
-<li>项目</li>
-<li>项目</li>
-<li>另一个项目</li>
-</ul>
-<p>或者 </p>
-<p><span class="k">-</span> 项目<br><span class="k">-</span> 项目<br><span class="k">-</span> 最后一个项目<br></pre></div></p>
+或者
+
++ 项目
++ 项目
++ 另一个项目
+
+或者 
+
+<span class="k">-</span> 项目
+<span class="k">-</span> 项目
+<span class="k">-</span> 最后一个项目
+</pre></div>
 <p>有序序列可由数字加上点 <code>.</code> 来实现</p>
 <div class="highlight"><pre><span></span><span class="k">1.</span> 项目一
 <span class="k">2.</span> 项目二
@@ -381,7 +401,8 @@ end
 <span class="k">-</span> - - 
 ****************
 
-<p>下面这个就是示例<br></pre></div></p>
+下面这个就是示例
+</pre></div>
 <hr>
 
 <h2>链接</h2>
@@ -501,6 +522,38 @@ end
             </div>
 
             
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
+          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
           </article>
         </div>
       </div>
@@ -557,9 +610,34 @@ end
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -618,6 +696,8 @@ end
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -649,11 +729,74 @@ end
 
 
 
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 
 
 
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
