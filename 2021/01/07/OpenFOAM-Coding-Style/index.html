@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <title>OpenFOAM Coding Style - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OpenFOAM Coding Style">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-07 16:45" pubdate>
+        2021年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      768 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenFOAM Coding Style</h1>
+            
+            <div class="markdown-body">
+              <h1 id="OpenFOAM-Coding-Style-Guide"><a href="#OpenFOAM-Coding-Style-Guide" class="headerlink" title="OpenFOAM Coding Style Guide"></a>OpenFOAM Coding Style Guide</h1><a id="more"></a>
+<h2 id="1-Code"><a href="#1-Code" class="headerlink" title="1 Code"></a>1 Code</h2><h3 id="1-1-General"><a href="#1-1-General" class="headerlink" title="1.1 General"></a>1.1 General</h3><ul>
+<li><p>80 character lines max</p>
+</li>
+<li><p>The normal indentation is 4 spaces per logical level.</p>
+</li>
+<li><p>Use spaces for indentation, not tab characters.</p>
+</li>
+<li><p>Avoid trailing whitespace.</p>
+</li>
+<li><p>The body of control statements (eg, <code>if</code>, <code>else</code>, <code>while</code>, <em>etc.</em>). is always delineated with braces. A possible exception can be<br>made in conjunction with <code>break</code> or <code>continue</code> as part of a control structure.</p>
+</li>
+<li><p>The body of <code>case</code> statements is usually delineated with braces.</p>
+</li>
+<li><p>Stream output</p>
+<ul>
+<li><p>&lt;&lt;   is always four characters after the start of the stream, so that the &lt;&lt; symbols align, i.e.</p>
+<pre><code class="hljs erlang">Info&lt;&lt; ...
+os  &lt;&lt; ...</code></pre>
+<p>so</p>
+<pre><code class="hljs">WarningInFunction
+    &lt;&lt; &quot;Warning message&quot;</code></pre>
+<p><strong>not</strong></p>
+<pre><code class="hljs">WarningInFunction
+&lt;&lt; &quot;Warning message&quot;</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Remove unnecessary class section headers, i.e. remove</p>
+</li>
+</ul>
+<pre><code class="hljs markdown">// <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* Private Member Functions  *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span> //
+
+<span class="hljs-code">    // Check</span>
+<span class="hljs-code"></span>
+<span class="hljs-code">    // Edit</span>
+<span class="hljs-code"></span>
+<span class="hljs-code">    // Write</span></code></pre>
+<p>if they contain nothing, even if planned for ‘future use’</p>
+<ul>
+<li>Class titles should be centred</li>
+</ul>
+<pre><code class="hljs ada">/*<span class="hljs-comment">---------------------------------------------------------------------------*\</span>
+                        Class exampleClass Declaration
+\*<span class="hljs-comment">---------------------------------------------------------------------------*/</span></code></pre>
+<p><strong>not</strong></p>
+<pre><code class="hljs ada">/*<span class="hljs-comment">---------------------------------------------------------------------------*\</span>
+                Class exampleClass Declaration
+\*<span class="hljs-comment">---------------------------------------------------------------------------*/</span></code></pre>
+<h3 id="1-2-The-H-Header-Files"><a href="#1-2-The-H-Header-Files" class="headerlink" title="1.2 The .H Header Files"></a>1.2 The <em>.H</em> Header Files</h3><ul>
+<li><p>Header file spacing</p>
+<ul>
+<li>Leave two empty lines between sections (as per functions in the <em>.C</em> file <em>etc.</em>)</li>
+</ul>
+</li>
+<li><p>Use</p>
+</li>
+</ul>
+  <pre><code class="hljs awk"><span class="hljs-regexp">//</span>- Comment</code></pre>
+<p>  comments in header file to add descriptions to class data and functions do be included in the Doxygen documentation:</p>
+<ul>
+<li><p>Text on the line starting with <code>//-</code> becomes the Doxygen brief description;</p>
+</li>
+<li><p>Text on subsequent lines becomes the Doxygen detailed description</p>
+<p>e.g.</p>
+<pre><code class="hljs delphi"><span class="hljs-comment">//- A function which returns a thing</span>
+<span class="hljs-comment">//  This is a detailed description of the function</span>
+<span class="hljs-comment">//  which processes stuff and returns other stuff</span>
+<span class="hljs-comment">//  depending on things.</span>
+thing <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(stuff1, stuff2)</span>;</span></code></pre>
+</li>
+<li><p>List entries start with - or -# for numbered lists but cannot start on the line immediately below the brief description so</p>
+<pre><code class="hljs cpp"><span class="hljs-comment">//- Compare triFaces</span>
+<span class="hljs-comment">//  Returns:</span>
+<span class="hljs-comment">//  -  0: different</span>
+<span class="hljs-comment">//  - +1: identical</span>
+<span class="hljs-comment">//  - -1: same face, but different orientation</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(<span class="hljs-keyword">const</span> triFace&amp;, <span class="hljs-keyword">const</span> triFace&amp;)</span></span>;</code></pre>
+<p>or</p>
+<pre><code class="hljs cpp"><span class="hljs-comment">//- Compare triFaces returning 0, +1 or -1</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//  -  0: different</span>
+<span class="hljs-comment">//  - +1: identical</span>
+<span class="hljs-comment">//  - -1: same face, but different orientation</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(<span class="hljs-keyword">const</span> triFace&amp;, <span class="hljs-keyword">const</span> triFace&amp;)</span></span>;</code></pre>
+<p><strong>not</strong></p>
+<pre><code class="hljs cpp"><span class="hljs-comment">//- Compare triFaces returning 0, +1 or -1</span>
+<span class="hljs-comment">//  -  0: different</span>
+<span class="hljs-comment">//  - +1: identical</span>
+<span class="hljs-comment">//  - -1: same face, but different orientation</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(<span class="hljs-keyword">const</span> triFace&amp;, <span class="hljs-keyword">const</span> triFace&amp;)</span></span>;</code></pre>
+</li>
+<li><p>List can be nested for example</p>
+<pre><code class="hljs awk"><span class="hljs-regexp">//</span>- Search <span class="hljs-keyword">for</span> \em name
+<span class="hljs-regexp">//</span>  <span class="hljs-keyword">in</span> the following hierarchy:
+<span class="hljs-regexp">//</span>  -<span class="hljs-comment"># personal settings:</span>
+<span class="hljs-regexp">//</span>    - ~<span class="hljs-regexp">/.OpenFOAM/</span>\&lt;VERSION\&gt;/
+<span class="hljs-regexp">//</span>      &lt;em&gt;<span class="hljs-keyword">for</span> version-specific files&lt;/em&gt;
+<span class="hljs-regexp">//</span>    - ~<span class="hljs-regexp">/.OpenFOAM/</span>
+<span class="hljs-regexp">//</span>      &lt;em&gt;<span class="hljs-keyword">for</span> version-independent files&lt;/em&gt;
+<span class="hljs-regexp">//</span>  -<span class="hljs-comment"># site-wide settings:</span>
+<span class="hljs-regexp">//</span>    - <span class="hljs-variable">$WM_PROJECT_INST_DIR</span><span class="hljs-regexp">/site/</span>\&lt;VERSION\&gt;
+<span class="hljs-regexp">//</span>      &lt;em&gt;<span class="hljs-keyword">for</span> version-specific files&lt;/em&gt;
+<span class="hljs-regexp">//</span>    - <span class="hljs-variable">$WM_PROJECT_INST_DIR</span><span class="hljs-regexp">/site/</span>
+<span class="hljs-regexp">//</span>      &lt;em&gt;<span class="hljs-keyword">for</span> version-independent files&lt;/em&gt;
+<span class="hljs-regexp">//</span>  -<span class="hljs-comment"># shipped settings:</span>
+<span class="hljs-regexp">//</span>    - <span class="hljs-variable">$WM_PROJECT_DIR</span><span class="hljs-regexp">/etc/</span>
+<span class="hljs-regexp">//</span>
+<span class="hljs-regexp">//</span>  \return the full path name or fileName() <span class="hljs-keyword">if</span> the name cannot be found
+<span class="hljs-regexp">//</span>  Optionally abort <span class="hljs-keyword">if</span> the file cannot be found
+fileName findEtcFile(const fileName&amp;, bool mandatory=false);</code></pre>
+</li>
+<li><p>For more details see the Doxygen documentation.</p>
+</li>
+</ul>
+<ul>
+<li><p>Destructor</p>
+<ul>
+<li><p>When adding a comment to the destructor use //- and code as a normal function:</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//- Destructor</span>
+~<span class="hljs-keyword">class</span><span class="hljs-constructor">Name()</span>;</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Inline functions</p>
+<ul>
+<li>Use inline functions where appropriate in a separate <em>classNameI.H</em> file. Avoid cluttering the header file with function bodies.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-The-C-Source-Files"><a href="#1-3-The-C-Source-Files" class="headerlink" title="1.3 The .C Source Files"></a>1.3 The <em>.C</em> Source Files</h3><ul>
+<li><p>Do not open/close namespaces in a .C file</p>
+<ul>
+<li><p>Fully scope the function name, i.e.</p>
+<pre><code class="hljs elixir">Foam::returnType Foam::className::functionName()</code></pre>
+<p><strong>not</strong></p>
+<pre><code class="hljs lasso">namespace Foam
+&#123;
+    <span class="hljs-params">...</span>
+    returnType className<span class="hljs-type">::functionName</span>()
+  <span class="hljs-params">...</span>
+&#125;</code></pre>
+</li>
+</ul>
+<pre><code class="hljs vim">**Exception**
+When there are multiple levels of namespace, they may <span class="hljs-keyword">be</span> used in the *.C* <span class="hljs-keyword">file</span> <span class="hljs-keyword">to</span> avoid excessive clutter, i.<span class="hljs-keyword">e</span>.</code></pre>
+<p>  namespace Foam<br>  {<br>  namespace compressible<br>{<br>  namespace RASModels<br>  {</p>
+<pre><code>...
+</code></pre><p>  } // End namespace RASModels<br>  } // End namespace compressible<br>  } // End namespace Foam</p>
+  <pre><code class="hljs plain"></code></pre>
+</li>
+<li><p>Use two empty lines between functions</p>
+</li>
+</ul>
+<h3 id="1-4-Coding-Practice"><a href="#1-4-Coding-Practice" class="headerlink" title="1.4 Coding Practice"></a>1.4 Coding Practice</h3><ul>
+<li><p>Passing data as arguments or return values:</p>
+<ul>
+<li>Pass bool, label, scalar and other primitive types as copy, anything larger by reference.</li>
+</ul>
+</li>
+<li><p>```<br>const</p>
+<pre><code class="hljs sql">
+  - <span class="hljs-keyword">Use</span> everywhere it <span class="hljs-keyword">is</span> applicable.
+
+- <span class="hljs-keyword">Variable</span> initialisation <span class="hljs-keyword">using</span>
+</code></pre>
+<p>const className&amp; variableName = otherClass.data();</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*not*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>const className&amp; variableName(otherClass.data());</p>
+<pre><code class="hljs delphi">
+- <span class="hljs-keyword">Virtual</span> functions
+
+  - <span class="hljs-keyword">If</span> a <span class="hljs-keyword">class</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">virtual</span>, make all derived classes <span class="hljs-keyword">virtual</span>.
+
+### <span class="hljs-number">1.5</span> Conditional Statements
+</code></pre>
+<p>if (condition)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs ebnf">
+<span class="hljs-attribute">OR</span>
+</code></pre>
+<p>if<br>(<br> long condition<br>)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs autohotkey">
+**<span class="hljs-literal">not</span>** (no space between `if` <span class="hljs-literal">and</span> `(` used)
+</code></pre>
+<p>if(condition)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs autohotkey">
+### <span class="hljs-number">1.6</span> `f<span class="hljs-literal">or</span>` <span class="hljs-literal">and</span> `while` Loops
+</code></pre>
+<p>for (i = 0; i &lt; maxI; i++)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs ebnf">
+<span class="hljs-attribute">OR</span>
+</code></pre>
+<p>for<br>(<br>  i = 0;<br>  i &lt; maxI;<br>  i++<br>)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs autohotkey">
+**<span class="hljs-literal">not</span>** this (no space between `f<span class="hljs-literal">or</span>` <span class="hljs-literal">and</span> `(` used)
+</code></pre>
+<p>for(i = 0; i &lt; maxI; i++)<br>{<br>  code;<br>}</p>
+<pre><code class="hljs autohotkey">
+Note that when indexing through iterators, it is often slightly more efficient to use the pre-increment form. Eg, `++iter` instead of `iter++`
+
+### <span class="hljs-number">1.7</span> `forAll`, `forAllIter`, `forAllConstIter`, *etc.* loops
+
+Like `f<span class="hljs-literal">or</span>` loops, but
+</code></pre>
+<p>forAll(</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*not*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>forAll (</p>
+<pre><code class="hljs pgsql">
+<span class="hljs-keyword">Using</span> the `forAllIter` <span class="hljs-keyword">and</span> `forAllConstIter` macros <span class="hljs-keyword">is</span> generally advantageous – less typing, easier <span class="hljs-keyword">to</span> find later. However, since
+they are macros, they will fail <span class="hljs-keyword">if</span> the iterated <span class="hljs-keyword">object</span> contains <span class="hljs-keyword">any</span> commas *e.g.* <span class="hljs-keyword">following</span> will FAIL!:
+</code></pre>
+<p>forAllIter(HashTable<labelPair, edge, Hash<edge>&gt;, foo, iter)</p>
+<pre><code class="hljs pgsql">
+These convenience macros are <span class="hljs-keyword">also</span> generally avoided <span class="hljs-keyword">in</span> other container classes <span class="hljs-keyword">and</span> OpenFOAM primitive classes.
+
+### <span class="hljs-number">1.8</span> Splitting <span class="hljs-keyword">Over</span> Multiple Lines
+
+#### <span class="hljs-number">1.8</span><span class="hljs-number">.1</span> Splitting <span class="hljs-keyword">return</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">function</span> <span class="hljs-type">name</span>
+
+- Split <span class="hljs-keyword">initially</span> <span class="hljs-keyword">after</span> the <span class="hljs-keyword">function</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">and</span> left align
+
+- <span class="hljs-keyword">Do</span> <span class="hljs-keyword">not</span> put const onto its own <span class="hljs-type">line</span> – use a split <span class="hljs-keyword">to</span> keep it <span class="hljs-keyword">with</span> the <span class="hljs-keyword">function</span> <span class="hljs-type">name</span> <span class="hljs-keyword">and</span> arguments.
+</code></pre>
+<p>const Foam::longReturnTypeName&amp;<br>Foam::longClassName::longFunctionName const</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*not*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>const Foam::longReturnTypeName&amp;</p>
+<pre><code>Foam::longClassName::longFunctionName const
+</code></pre><pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*nor*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>const Foam::longReturnTypeName&amp; Foam::longClassName::longFunctionName<br>const</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*nor*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>const Foam::longReturnTypeName&amp; Foam::longClassName::<br>longFunctionName const</p>
+<pre><code class="hljs livecodeserver">
+- If <span class="hljs-keyword">it</span> needs <span class="hljs-built_in">to</span> be <span class="hljs-built_in">split</span> again, <span class="hljs-built_in">split</span> <span class="hljs-keyword">at</span> <span class="hljs-keyword">the</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">name</span> (<span class="hljs-title">leaving</span> <span class="hljs-title">behind</span> <span class="hljs-title">the</span> <span class="hljs-title">preceding</span> <span class="hljs-title">scoping</span> =::=<span class="hljs-title">s</span>), <span class="hljs-title">and</span> <span class="hljs-title">again</span>, <span class="hljs-title">left</span> <span class="hljs-title">align</span>, <span class="hljs-title">i</span>.<span class="hljs-title">e</span>.</span>
+</code></pre>
+<p>const Foam::longReturnTypeName&amp;<br>Foam::veryveryveryverylongClassName::<br>veryveryveryverylongFunctionName const</p>
+<pre><code class="hljs livecodeserver">
+<span class="hljs-comment">#### 1.8.2 Splitting long lines at an “=”</span>
+
+Indent <span class="hljs-keyword">after</span> <span class="hljs-built_in">split</span>
+</code></pre>
+<p>variableName =<br>  longClassName.longFunctionName(longArgument);</p>
+<pre><code class="hljs gauss">
+<span class="hljs-keyword">OR</span> (<span class="hljs-built_in">where</span> necessary)
+</code></pre>
+<p>variableName =<br>  longClassName.longFunctionName<br>  (</p>
+<pre><code>  longArgument1,
+  longArgument2
+</code></pre><p>  );</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*not*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>variableName =<br>longClassName.longFunctionName(longArgument);</p>
+<pre><code class="hljs asciidoc">
+*<span class="hljs-strong">*nor*</span><span class="hljs-strong">*</span>
+<span class="hljs-strong"></span></code></pre>
+<p>variableName = longClassName.longFunctionName<br>(<br>  longArgument1,<br>  longArgument2<br>);</p>
+<pre><code class="hljs clean">
+### <span class="hljs-number">1.9</span> Maths and Logic
+
+- Operator spacing
+</code></pre>
+<p>a + b, a - b<br>a*b, a/b<br>a &amp; b, a ^ b<br>a = b, a != b<br>a &lt; b, a &gt; b, a &gt;= b, a &lt;= b<br>a || b, a &amp;&amp; b</p>
+<pre><code class="hljs livecodeserver">
+- Splitting formulae over several <span class="hljs-keyword">lines</span>: <span class="hljs-built_in">split</span> <span class="hljs-keyword">and</span> indent <span class="hljs-keyword">as</span> per “splitting <span class="hljs-keyword">long</span> <span class="hljs-keyword">lines</span> <span class="hljs-keyword">at</span> <span class="hljs-keyword">an</span> =” <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> operator <span class="hljs-keyword">on</span> <span class="hljs-title">the</span> <span class="hljs-title">lower</span> <span class="hljs-title">line</span>. <span class="hljs-title">Align</span> <span class="hljs-title">operator</span> <span class="hljs-title">so</span> <span class="hljs-title">that</span> <span class="hljs-title">first</span> <span class="hljs-title">variable</span>, <span class="hljs-title">function</span> <span class="hljs-title">or</span> <span class="hljs-title">bracket</span> <span class="hljs-title">on</span> <span class="hljs-title">the</span> <span class="hljs-title">next</span> <span class="hljs-title">line</span> <span class="hljs-title">is</span> <span class="hljs-title">4</span> <span class="hljs-title">spaces</span> <span class="hljs-title">indented</span> <span class="hljs-title">i</span>.<span class="hljs-title">e</span>.
+</code></pre>
+<p>variableName =</p>
+<pre><code>a*(a + b)
+</code></pre><p>   <em>exp(c/d)
+   </em>(k + t);</p>
+<pre><code class="hljs livescript">
+This <span class="hljs-keyword">is</span> sometimes more legible <span class="hljs-keyword">when</span> surrounded <span class="hljs-keyword">by</span> extra parentheses:
+</code></pre>
+<p>variableName =<br>(</p>
+<pre><code>a*(a + b)
+</code></pre><p>   <em>exp(c/d)
+   </em>(k + t)<br>);</p>
+<pre><code class="hljs livecodeserver">
+- Splitting logical tests over several <span class="hljs-keyword">lines</span>: outdent <span class="hljs-keyword">the</span> operator so that <span class="hljs-keyword">the</span> next <span class="hljs-built_in">variable</span> <span class="hljs-built_in">to</span> test is aligned <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> <span class="hljs-literal">four</span> <span class="hljs-literal">space</span> indentation, i.e.
+</code></pre>
+<p>if<br>(</p>
+<pre><code>a == true
+</code></pre><p> &amp;&amp; b == c<br>)</p>
+<pre><code class="hljs sql">
+<span class="hljs-comment">## 2 Documentation</span>
+
+<span class="hljs-comment">### 2.1 General</span>
+
+- For readability in the <span class="hljs-keyword">comment</span> blocks, certain tags <span class="hljs-keyword">are</span> used that <span class="hljs-keyword">are</span> translated <span class="hljs-keyword">by</span> pre-filtering the <span class="hljs-keyword">file</span> <span class="hljs-keyword">before</span> sending it <span class="hljs-keyword">to</span> Doxygen.
+
+- The tags <span class="hljs-keyword">start</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">column</span> <span class="hljs-number">1</span>, the <span class="hljs-keyword">contents</span> follow <span class="hljs-keyword">on</span> the <span class="hljs-keyword">next</span> <span class="hljs-keyword">lines</span> <span class="hljs-keyword">and</span> indented <span class="hljs-keyword">by</span> <span class="hljs-number">4</span> spaces. The filter removes the <span class="hljs-keyword">leading</span> <span class="hljs-number">4</span> spaces <span class="hljs-keyword">from</span> the <span class="hljs-keyword">following</span> <span class="hljs-keyword">lines</span> <span class="hljs-keyword">until</span> the <span class="hljs-keyword">next</span> tag that starts <span class="hljs-keyword">in</span> <span class="hljs-keyword">column</span> <span class="hljs-number">1.</span>
+
+- The ‘<span class="hljs-keyword">Class</span>’ <span class="hljs-keyword">and</span> ‘Description’ tags <span class="hljs-keyword">are</span> the most important ones.
+
+- The <span class="hljs-keyword">first</span> paragraph <span class="hljs-keyword">following</span> the ‘Description’ will be used <span class="hljs-keyword">for</span> the brief description, the remaining paragraphs become the detailed description. <span class="hljs-keyword">For</span> example,
+</code></pre>
+<p>Class</p>
+<pre><code>Foam::myClass
+</code></pre><p>Description</p>
+<pre><code>A class for specifying the documentation style.
+
+The class is implemented as a set of recommendations that may
+sometimes be useful.
+</code></pre><pre><code class="hljs scala">
+- <span class="hljs-type">The</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">name</span> <span class="hljs-title">must</span> <span class="hljs-title">be</span> <span class="hljs-title">qualified</span> <span class="hljs-title">by</span> <span class="hljs-title">its</span> <span class="hljs-title">namespace</span>, <span class="hljs-title">otherwise</span> <span class="hljs-title">Doxygen</span> <span class="hljs-title">will</span> <span class="hljs-title">think</span> <span class="hljs-title">you</span> <span class="hljs-title">are</span> <span class="hljs-title">documenting</span> <span class="hljs-title">some</span> <span class="hljs-title">other</span> <span class="hljs-title">class</span>.</span>
+<span class="hljs-class"></span>
+<span class="hljs-class"><span class="hljs-title">-</span> <span class="hljs-title">If</span> <span class="hljs-title">you</span> <span class="hljs-title">don’t</span> <span class="hljs-title">have</span> <span class="hljs-title">anything</span> <span class="hljs-title">to</span> <span class="hljs-title">say</span> <span class="hljs-title">about</span> <span class="hljs-title">the</span> <span class="hljs-title">class</span> (<span class="hljs-params">at the moment</span>), <span class="hljs-title">use</span> <span class="hljs-title">the</span> <span class="hljs-title">namespace-qualified</span> <span class="hljs-title">class</span> <span class="hljs-title">name</span> <span class="hljs-title">for</span> <span class="hljs-title">the</span> <span class="hljs-title">description</span>. <span class="hljs-title">This</span> <span class="hljs-title">aids</span> <span class="hljs-keyword">with</span> <span class="hljs-title">finding</span> <span class="hljs-title">these</span> <span class="hljs-title">under-documented</span> <span class="hljs-title">classes</span> <span class="hljs-title">later</span>.</span>
+<span class="hljs-class"></span></code></pre>
+<p>Class</p>
+<pre><code>Foam::myUnderDocumentedClass
+</code></pre><p>Description</p>
+<pre><code>Foam::myUnderDocumentedClass
+</code></pre><pre><code class="hljs livecodeserver">
+- Use ‘Class’ <span class="hljs-keyword">and</span> ‘Namespace’ tags <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> header <span class="hljs-built_in">files</span>. The Description block <span class="hljs-keyword">then</span> applies <span class="hljs-built_in">to</span> documenting <span class="hljs-keyword">the</span> class.
+
+- Use ‘InClass’ <span class="hljs-keyword">and</span> ‘InNamespace’ <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> source <span class="hljs-built_in">files</span>. The Description block <span class="hljs-keyword">then</span> applies <span class="hljs-built_in">to</span> documenting <span class="hljs-keyword">the</span> <span class="hljs-built_in">file</span> itself.
+</code></pre>
+<p>InClass</p>
+<pre><code>Foam::myClass
+</code></pre><p>Description</p>
+<pre><code>Implements the read and writing of files.
+</code></pre><pre><code class="hljs livecodeserver">
+<span class="hljs-comment">### 2.2 Doxygen Special Commands</span>
+
+Doxygen has <span class="hljs-keyword">a</span> large <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> special commands <span class="hljs-keyword">with</span> <span class="hljs-keyword">a</span> `\` prefix.
+
+Since <span class="hljs-keyword">the</span> filtering removes <span class="hljs-keyword">the</span> leading spaces <span class="hljs-keyword">within</span> <span class="hljs-keyword">the</span> blocks, <span class="hljs-keyword">the</span> Doxygen commands can be inserted <span class="hljs-keyword">within</span> <span class="hljs-keyword">the</span> block <span class="hljs-keyword">without</span> problems.
+</code></pre>
+<p>InClass<br>  Foam::myClass</p>
+</li>
+</ul>
+<p>Description<br>    Implements the read and writing of files.</p>
+<pre><code>An example input file:
+\verbatim
+    patchName
+    &#123;
+        type        myPatchType;
+        refValue    100;
+        value       uniform 1;
+    &#125;
+\endverbatim
+
+Within the implementation, a loop over all patches is done:
+\code
+    forAll(patches, patchI)
+    &#123;
+        ...  // some operation
+    &#125;
+\endcode
+</code></pre><pre><code class="hljs pgsql">
+### <span class="hljs-number">2.3</span> HTML Special Commands
+
+Since Doxygen <span class="hljs-keyword">also</span> handles HTML tags <span class="hljs-keyword">to</span> a certain extent, the angle brackets need quoting <span class="hljs-keyword">in</span> the documentation blocks. Non-HTML tags cause Doxygen <span class="hljs-keyword">to</span> complain, but seem <span class="hljs-keyword">to</span> <span class="hljs-keyword">work</span> anyhow. *e.g.*,
+
+- The <span class="hljs-keyword">template</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">type</span> `&lt;HR&gt;` <span class="hljs-keyword">is</span> a bad example.
+- The <span class="hljs-keyword">template</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">type</span> `\&lt;HR\&gt;` <span class="hljs-keyword">is</span> a better example.
+- The <span class="hljs-keyword">template</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">type</span> `&lt;<span class="hljs-keyword">Type</span>&gt;` causes Doxygen <span class="hljs-keyword">to</span> complain about an
+  <span class="hljs-type">unknown</span> html <span class="hljs-keyword">type</span>, but it seems <span class="hljs-keyword">to</span> <span class="hljs-keyword">work</span> okay anyhow.
+
+### <span class="hljs-number">2.4</span> Documenting Namespaces
+
+- <span class="hljs-keyword">If</span> namespaces are explicitly declared <span class="hljs-keyword">with</span> the `Namespace()` macro, they should be documented there.
+
+- <span class="hljs-keyword">If</span> the namespaces <span class="hljs-keyword">is</span> used <span class="hljs-keyword">to</span> hold sub-models, the namespace can be documented <span class="hljs-keyword">in</span> the same file <span class="hljs-keyword">as</span> the <span class="hljs-keyword">class</span> <span class="hljs-keyword">with</span> the model selector.
+
+  e.g.
+</code></pre>
+<p>  documented namespace ‘Foam::functionEntries’ within the<br>  class ‘Foam::functionEntry’<br>  <pre><code class="hljs routeros">
+- <span class="hljs-keyword">If</span> <span class="hljs-literal">nothing</span> <span class="hljs-keyword">else</span> helps, <span class="hljs-builtin-name">find</span> some sensible header.
+
+  e.g.
+</code></pre><br>  namespace ‘Foam’ is documented in the foamVersion.H file<br>  <pre><code class="hljs applescript">
+<span class="hljs-comment">### 2.5 Documenting Applications</span>
+
+Any <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> classes might be defined <span class="hljs-keyword">by</span> a particular <span class="hljs-built_in">application</span>, <span class="hljs-keyword">but</span> these classes will <span class="hljs-keyword">not</span>, however, be available <span class="hljs-keyword">to</span> other parts <span class="hljs-keyword">of</span> OpenFOAM. At <span class="hljs-keyword">the</span> moment, <span class="hljs-keyword">the</span> sole purpose <span class="hljs-keyword">for</span> <span class="hljs-built_in">running</span> Doxygen <span class="hljs-keyword">on</span> <span class="hljs-keyword">the</span> applications <span class="hljs-keyword">is</span> <span class="hljs-keyword">to</span> extract program usage information <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> ‘-doc’ option.
+
+The documentation <span class="hljs-keyword">for</span> a particular <span class="hljs-built_in">application</span> <span class="hljs-keyword">is</span> normally contained within <span class="hljs-keyword">the</span> <span class="hljs-keyword">first</span> comment block <span class="hljs-keyword">in</span> a *.C* source <span class="hljs-built_in">file</span>. The solution <span class="hljs-keyword">is</span> this <span class="hljs-keyword">to</span> invoke a special filter <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> “*applications/&#123;solver,utilities&#125;*” directories <span class="hljs-keyword">that</span> only allows <span class="hljs-keyword">the</span> initial comment block <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> *.C* files <span class="hljs-keyword">through</span>.
+
+The layout <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">application</span> documentation has <span class="hljs-keyword">not</span> yet been finalized, <span class="hljs-keyword">but</span> foamToVTK shows an initial attempt.
+
+<span class="hljs-comment">### 2.6 Orthography</span>
+
+Given <span class="hljs-keyword">the</span> origins <span class="hljs-keyword">of</span> OpenFOAM, <span class="hljs-keyword">the</span> British spellings <span class="hljs-comment">(*e.g.*, neighbour and not neighbor) are generally favoured.</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">Both ‘-ize’ and the ‘-ise’ variant are found in the code comments. If used as a variable or class method name, it is probably better to use ‘-ize’, which is considered the main form by the Oxford University Press. *e.g.*,</span>
+<span class="hljs-comment"></span></code></pre><br>myClass.initialize()<br><pre><code class="hljs livecodeserver">
+<span class="hljs-comment">### 2.7 References</span>
+
+References provided <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> `Description` section <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> class header <span class="hljs-built_in">files</span> should be formatted <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> [APA (American Psychological Association)](<span class="hljs-keyword">http</span>://www.apastyle.org/) style *e.g.* <span class="hljs-built_in">from</span> `kEpsilon.H`
+</code></pre><br>Description<br>    Standard k-epsilon turbulence model for incompressible and compressible<br>    flows including rapid distortion theory (RDT) based compression term.</p>
+<pre><code>Reference:
+\verbatim
+    Standard model:
+        Launder, B. E., &amp; Spalding, D. B. (1972).
+        Lectures in mathematical models of turbulence.
+
+        Launder, B. E., &amp; Spalding, D. B. (1974).
+        The numerical computation of turbulent flows.
+        Computer methods in applied mechanics and engineering,
+        3(2), 269-289.
+
+    For the RDT-based compression term:
+        El Tahry, S. H. (1983).
+        k-epsilon equation for compressible reciprocating engine flows.
+        Journal of Energy, 7(4), 345-353.
+\endverbatim
+</code></pre><p>```</p>
+<p>The APA style is a commonly used standard and references are available in this format from many sources including <a target="_blank" rel="noopener" href="http://www.citationmachine.net/mla/cite-a-book">Citation Machine</a> and <a target="_blank" rel="noopener" href="http://scholar.google.com/">Google Scholar</a>.</p>
+<p>Date: 2011-2016</p>
+<p>Created: 2016-04-20 Wed 10:24</p>
+<p>From : <a target="_blank" rel="noopener" href="https://openfoam.org/dev/coding-style-guide/">https://openfoam.org/dev/coding-style-guide/</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenFOAM/">OpenFOAM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/07/semiImplicitSource%20in%20fvOptions/">
+                        <span class="hidden-mobile">SemiImplicitSource in fvOptions</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
+          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
