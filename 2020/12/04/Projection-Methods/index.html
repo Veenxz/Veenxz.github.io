@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      453 字
+      841 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      14
        分钟
     </span>
   
@@ -280,7 +280,7 @@
             <span class="hljs-comment">// Pressure corrector</span>
 
             fvScalarMatrix pEqn
-                (
+            (
                 fvm::laplacian(rAU, p) == fvc::div(phiHbyA)
             );
 
@@ -303,6 +303,166 @@
     &#125;
 &#125;
 </code></pre>
+<h2 id="PIMPLE-Algorithm"><a href="#PIMPLE-Algorithm" class="headerlink" title="PIMPLE Algorithm"></a>PIMPLE Algorithm</h2><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (pimple.run(runTime))
+&#123;
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;readDyMControls.H&quot;</span></span>
+
+    <span class="hljs-keyword">if</span> (LTS)
+    &#123;
+        <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;setRDeltaT.H&quot;</span></span>
+    &#125;
+    <span class="hljs-keyword">else</span>
+    &#123;
+        <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;CourantNo.H&quot;</span></span>
+        <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;setDeltaT.H&quot;</span></span>
+    &#125;
+
+    runTime++;
+
+    Info&lt;&lt; <span class="hljs-string">&quot;Time = &quot;</span> &lt;&lt; runTime.timeName() &lt;&lt; nl &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-comment">// --- Pressure-velocity PIMPLE corrector loop</span>
+    <span class="hljs-keyword">while</span> (pimple.loop())
+    &#123;
+        <span class="hljs-keyword">if</span> (pimple.firstPimpleIter() || moveMeshOuterCorrectors)
+        &#123;
+            mesh.update();
+
+            <span class="hljs-keyword">if</span> (mesh.changing())
+            &#123;
+                MRF.update();
+
+                <span class="hljs-keyword">if</span> (correctPhi)
+                &#123;
+                    <span class="hljs-comment">// Calculate absolute flux</span>
+                    <span class="hljs-comment">// from the mapped surface velocity</span>
+                    phi = mesh.Sf() &amp; Uf();
+
+                    CorrectPhi
+                    (
+                        U,
+                        phi,
+                        p,
+                        dimensionedScalar(<span class="hljs-string">&quot;rAUf&quot;</span>, dimTime, <span class="hljs-number">1</span>),
+                        geometricZeroField(),
+                        pimple,
+                        <span class="hljs-literal">true</span>
+                    );
+
+                    <span class="hljs-comment">// Make the flux relative to the mesh motion</span>
+                    fvc::makeRelative(phi, U);
+                &#125;
+
+                <span class="hljs-keyword">if</span> (checkMeshCourantNo)
+                &#123;
+                    <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;meshCourantNo.H&quot;</span></span>
+                &#125;
+            &#125;
+        &#125;
+
+        MRF.correctBoundaryVelocity(U);
+
+        tmp&lt;fvVectorMatrix&gt; tUEqn
+        (
+            fvm::ddt(U) + fvm::div(phi, U)
+          + MRF.DDt(U)
+          + turbulence-&gt;divDevSigma(U)
+         ==
+            fvOptions(U)
+        );
+        fvVectorMatrix&amp; UEqn = tUEqn.ref();
+
+        UEqn.relax();
+
+        fvOptions.constrain(UEqn);
+
+        <span class="hljs-keyword">if</span> (pimple.momentumPredictor())
+        &#123;
+            solve(UEqn == -fvc::grad(p));
+
+            fvOptions.correct(U);
+        &#125;
+
+        <span class="hljs-comment">// --- Pressure corrector loop</span>
+        <span class="hljs-keyword">while</span> (pimple.correct())
+        &#123;
+            <span class="hljs-function">volScalarField <span class="hljs-title">rAU</span><span class="hljs-params">(<span class="hljs-number">1.0</span>/UEqn.A())</span></span>;
+            <span class="hljs-function">volVectorField <span class="hljs-title">HbyA</span><span class="hljs-params">(constrainHbyA(rAU*UEqn.H(), U, p))</span></span>;
+            surfaceScalarField phiHbyA
+            (
+                <span class="hljs-string">&quot;phiHbyA&quot;</span>,
+                fvc::flux(HbyA)
+              + MRF.zeroFilter(fvc::interpolate(rAU)*fvc::ddtCorr(U, phi, Uf))
+            );
+
+            MRF.makeRelative(phiHbyA);
+
+            <span class="hljs-keyword">if</span> (p.needReference())
+            &#123;
+                fvc::makeRelative(phiHbyA, U);
+                adjustPhi(phiHbyA, U, p);
+                fvc::makeAbsolute(phiHbyA, U);
+            &#125;
+
+            <span class="hljs-function">tmp&lt;volScalarField&gt; <span class="hljs-title">rAtU</span><span class="hljs-params">(rAU)</span></span>;
+
+            <span class="hljs-keyword">if</span> (pimple.consistent())
+            &#123;
+                rAtU = <span class="hljs-number">1.0</span>/max(<span class="hljs-number">1.0</span>/rAU - UEqn.H1(), <span class="hljs-number">0.1</span>/rAU);
+                phiHbyA +=
+                    fvc::interpolate(rAtU() - rAU)*fvc::snGrad(p)*mesh.magSf();
+                HbyA -= (rAU - rAtU())*fvc::grad(p);
+            &#125;
+
+            <span class="hljs-keyword">if</span> (pimple.nCorrPiso() &lt;= <span class="hljs-number">1</span>)
+            &#123;
+                tUEqn.clear();
+            &#125;
+
+            <span class="hljs-comment">// Update the pressure BCs to ensure flux consistency</span>
+            constrainPressure(p, U, phiHbyA, rAtU(), MRF);
+
+            <span class="hljs-comment">// Non-orthogonal pressure corrector loop</span>
+            <span class="hljs-keyword">while</span> (pimple.correctNonOrthogonal())
+            &#123;
+                fvScalarMatrix pEqn
+                (
+                    fvm::laplacian(rAtU(), p) == fvc::div(phiHbyA)
+                );
+
+                pEqn.setReference(pRefCell, pRefValue);
+
+                pEqn.solve();
+
+                <span class="hljs-keyword">if</span> (pimple.finalNonOrthogonalIter())
+                &#123;
+                    phi = phiHbyA - pEqn.flux();
+                &#125;
+            &#125;
+
+            <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;continuityErrs.H&quot;</span></span>
+
+            <span class="hljs-comment">// Explicitly relax pressure for momentum corrector</span>
+            p.relax();
+
+            U = HbyA - rAtU*fvc::grad(p);
+            U.correctBoundaryConditions();
+            fvOptions.correct(U);
+
+            <span class="hljs-comment">// Correct Uf if the mesh is moving</span>
+            fvc::correctUf(Uf, U, phi);
+
+            <span class="hljs-comment">// Make the fluxes relative to the mesh motion</span>
+            fvc::makeRelative(phi, U);
+        &#125;
+
+        <span class="hljs-keyword">if</span> (pimple.turbCorr())
+        &#123;
+            laminarTransport.correct();
+            turbulence-&gt;correct();
+        &#125;
+    &#125;
+&#125;</code></pre>
 <h3 id="Runge-kutta-Algorithm"><a href="#Runge-kutta-Algorithm" class="headerlink" title="Runge kutta Algorithm"></a>Runge kutta Algorithm</h3><blockquote>
 <p>U 4th order p 2nd order</p>
 </blockquote>
