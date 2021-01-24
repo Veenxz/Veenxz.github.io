@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8 字
+      41 字
     </span>
   
 
@@ -227,7 +227,19 @@
             <h1 style="display: none">OpenFOAM Tips</h1>
             
             <div class="markdown-body">
-              <pre><code class="hljs c++">mass            <span class="hljs-meta">#calc <span class="hljs-meta-string">&quot;$rhoSolid*$Lx*$Ly*$Lz&quot;</span>;</span></code></pre>
+              <h2 id="OpenFOAM"><a href="#OpenFOAM" class="headerlink" title="OpenFOAM"></a>OpenFOAM</h2><pre><code class="hljs c++"># Calculation in files
+mass            <span class="hljs-meta">#calc <span class="hljs-meta-string">&quot;$rhoSolid*$Lx*$Ly*$Lz&quot;</span>;</span></code></pre>
+<pre><code class="hljs bash"><span class="hljs-comment"># Generate UserGuide</span>
+ls -A1 <span class="hljs-variable">$WM_PROJECT_DIR</span>/doc/Guides*/*UserGuide*.pdf
+
+<span class="hljs-comment"># Calculate Reynolds stress</span>
+simpleFoam -postProcess -func R -latestTime</code></pre>
+<h2 id="Paraview"><a href="#Paraview" class="headerlink" title="Paraview"></a>Paraview</h2><blockquote>
+<p>Extract Ux</p>
+<p><code>Ctrl+Space</code>  using Extract Component</p>
+<p>Stream line</p>
+<p>Add <code>Tube</code></p>
+</blockquote>
 
             </div>
             <hr>
@@ -250,6 +262,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/01/23/ffmpeg_denoise/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ffmpeg Denoise</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

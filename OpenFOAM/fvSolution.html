@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>Download - Veen</title>
+  <title>fvSolution - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -33,8 +33,6 @@
     
   
 
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
 
@@ -162,46 +160,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Download">
+            <span class="h2" id="subtitle" title="fvSolution">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-10-18 01:32" pubdate>
-        2019年10月18日 凌晨
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      9 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      1
-       分钟
-    </span>
-  
-
-  
-  
-</div>
 
             
           </div>
@@ -214,110 +175,176 @@
 
   <main>
     
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Download</h1>
-            
-            <div class="markdown-body">
-              <a id="more"></a>
-<p>油猴网盘万能助手+XDown</p>
-
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
                 
-                
+
+<div class="page-content">
+  <h1 id="1-实例"><a href="#1-实例" class="headerlink" title="1. 实例"></a>1. 实例</h1><p>下面是<code>fvSolution</code> 文件的一个典型例子（应用于<code>icoFoam</code>求解器），其内容（略去文件头部注释）：</p>
+<pre><code class="hljs c++"><span class="hljs-comment">//文件说明</span>
+FoamFile
+&#123;
+    version     <span class="hljs-number">2.0</span>;                <span class="hljs-comment">//版本号</span>
+    format      ascii;              <span class="hljs-comment">//文本格式</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span>       <span class="hljs-title">dictionary</span>;</span>         <span class="hljs-comment">//类型为字典文件</span>
+    location    <span class="hljs-string">&quot;system&quot;</span>;           <span class="hljs-comment">//所在目录</span>
+    object      fvSolution;         <span class="hljs-comment">//对象名</span>
+&#125;
+<span class="hljs-comment">//代数方程组求解设置</span>
+solvers
+&#123;
+    <span class="hljs-comment">//压力场p</span>
+    p
+    &#123;
+        solver          PCG;        <span class="hljs-comment">//求解器</span>
+        preconditioner  DIC;        <span class="hljs-comment">//预处理器</span>
+        tolerance       <span class="hljs-number">1e-06</span>;      <span class="hljs-comment">//预定残值</span>
+        relTol          <span class="hljs-number">0</span>;          <span class="hljs-comment">//预定相对残值</span>
+    &#125;
+    <span class="hljs-comment">//速度场U</span>
+    U
+    &#123;
+        solver          smoothSolver;       <span class="hljs-comment">//光滑求解器</span>
+        smoother        symGaussSeidel;     <span class="hljs-comment">//光滑器</span>
+        tolerance       <span class="hljs-number">1e-05</span>;              <span class="hljs-comment">//预定残值</span>
+        relTol          <span class="hljs-number">0</span>;                  <span class="hljs-comment">//预定相对残值</span>
+    &#125;
+&#125;
+<span class="hljs-comment">//PISO算法设置</span>
+PISO
+&#123;
+    nCorrectors     <span class="hljs-number">2</span>;                  <span class="hljs-comment">//PISO修正次数</span>
+    nNonOrthogonalCorrectors <span class="hljs-number">0</span>;         <span class="hljs-comment">//非正交修正次数</span>
+    pRefCell        <span class="hljs-number">0</span>;                  <span class="hljs-comment">//压力参考单元</span>
+    pRefValue       <span class="hljs-number">0</span>;                  <span class="hljs-comment">//压力参考值</span>
+&#125;</code></pre>
+<hr>
+<h1 id="2-fvSolution-文件分析"><a href="#2-fvSolution-文件分析" class="headerlink" title="2. fvSolution 文件分析"></a>2. fvSolution 文件分析</h1><p><code>system</code>目录下的<code>fvSolution</code>文件用来设置涉及代数方程组求解和速度-压力耦合相关算法的参数，主要包括 <strong>代数方程组求解</strong>，<strong>耦合算法</strong> 和 <strong>欠松弛处理</strong> 三个部分，分别通过<code>solvers</code>，<code>PISO</code>或<code>SIMPLE</code>和<code>relaxationFactors</code>等子字典设置。</p>
+<hr>
+<h1 id="3-代数方程组求解"><a href="#3-代数方程组求解" class="headerlink" title="3. 代数方程组求解"></a>3. 代数方程组求解</h1><p>在子字典<code>solvers</code>中，每个求解变量均要独立在以变量名命名的子字典（<code>p</code>，<code>U</code>）中设置求解相关信息。这些信息包括代数方程组求解器<code>solver</code>，预处理器<code>preconditioner</code>，光滑器<code>smoother</code>，残值<code>tolerance</code>和相对残值<code>relTol</code>。</p>
+<h2 id="3-1-solver-代数方程组求解器"><a href="#3-1-solver-代数方程组求解器" class="headerlink" title="3.1 solver 代数方程组求解器"></a>3.1 solver 代数方程组求解器</h2><p><code>OpenFOAM</code>中的代数方程组求解器均为迭代求解器：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">solver</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>PCG/PBiCG</code></td>
+<td style="text-align:center">预处理共轭梯度（对称）/稳定双共轭梯度（非对称）求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>smoothSolver</code></td>
+<td style="text-align:center">光滑求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>GAMG</code></td>
+<td style="text-align:center">几何-代数多重网格求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>diagonal</code></td>
+<td style="text-align:center">对角求解器（显式离散）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-2-preconditioner-预处理器"><a href="#3-2-preconditioner-预处理器" class="headerlink" title="3.2 preconditioner 预处理器"></a>3.2 preconditioner 预处理器</h2><p>预处理器本质上为一个改变原先系数矩阵条件数的左乘矩阵，<code>PCG/PBiCG</code>求解器可以使用的预处理器有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">preconditioner</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>DIC</code></td>
+<td style="text-align:center">不完全的对角Cholesky预处理器（对称矩阵）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>FDIC</code></td>
+<td style="text-align:center">不完全的快速对角Cholesky预处理器（带缓存的<code>DIC</code>）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DILU</code></td>
+<td style="text-align:center">对角不完全LU预处理器（非对称）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>diagonal</code></td>
+<td style="text-align:center">对角预处理器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>GAMG</code></td>
+<td style="text-align:center">几何-代数多重网格预处理器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>none</code></td>
+<td style="text-align:center">不进行预处理</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-3-smoothSolver-光滑求解器"><a href="#3-3-smoothSolver-光滑求解器" class="headerlink" title="3.3 smoothSolver 光滑求解器"></a>3.3 smoothSolver 光滑求解器</h2><p>使用光滑求解器<code>smoothSolver</code>需要指定所使用的光滑器<code>smoother</code>，可用的<code>smoother</code>有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">preconditioner</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>GaussSeidel</code></td>
+<td style="text-align:center">高斯赛德尔光顺器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DIC</code></td>
+<td style="text-align:center">不完全的对角Cholesky光顺器（对称矩阵）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DICGaussSeidel</code></td>
+<td style="text-align:center">不完全的对角Cholesky-高斯赛德尔光顺器（对称矩阵）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>一般情况下<code>GaussSeidel</code>是最可靠的选择，但对于有些条件数不好的矩阵，<code>DIC</code>的收敛性可能更好。另外，在某些情况下，使用<code>GaussSeidel</code>进行光顺强化是非常有效的，例如<code>DICGaussSeidel</code>。此外，在重新计算残值之前需要通过为关键字<code>nSweeps</code>来指定<code>sweep</code>数。</p>
+<h2 id="3-4-收敛准则"><a href="#3-4-收敛准则" class="headerlink" title="3.4 收敛准则"></a>3.4 收敛准则</h2><p><code>OpenFOAM</code>中的代数方程组求解器在达到下列三个条件中的 <strong>任何</strong> 一个后即停止迭代：</p>
+<ul>
+<li>残值达到预定值<code>tolerance</code>；</li>
+<li>相对残值（当前残值与初始残值之比）达到预定值<code>relTol</code>；</li>
+<li>迭代次数达到最大迭代次数<code>maxIter</code>。</li>
+</ul>
+<hr>
+<h1 id="4-耦合算法"><a href="#4-耦合算法" class="headerlink" title="4. 耦合算法"></a>4. 耦合算法</h1><p>耦合算法用于处理<code>速度-压力</code>的耦合问题。大多数<code>OpenFOAM</code>的CFD求解器使用<code>PISO</code>或者<code>SIMPLE</code>算法。这些算法采用迭代技术来求解速度和压力场。<code>PISO</code>算法用来处理非稳态问题，<code>SIMPLE</code>算法用来处理稳态问题。</p>
+<hr>
+<h1 id="5-欠松弛处理"><a href="#5-欠松弛处理" class="headerlink" title="5. 欠松弛处理"></a>5. 欠松弛处理</h1><p>欠松弛处理主要有两种不同的使用方式：</p>
+<ul>
+<li>在迭代之前提高系数矩阵主对角元素数值，并且降低源项来保证系数矩阵对角占优，比如速度场<code>U</code>；</li>
+<li>限制变量在迭代后改变的大小，比如压力场<code>p</code>。</li>
+</ul>
+<p>欠松弛因子介于<code>0</code>和<code>1</code>之间，越接近<code>0</code>求解越稳定，但同时也会降低求解效率；提高的数值会提高求解效率，但同时也会降低稳定性。</p>
+<p>欠松弛因子在子字典<code>relaxationFactors</code>下指定，通过子字典名<code>equations</code>和<code>fields</code>来设置不同的欠松弛方式，例如：</p>
+<pre><code class="hljs apache"><span class="hljs-attribute">relaxationFactors</span>&#123;    fields    &#123;        p <span class="hljs-number">0</span>.<span class="hljs-number">3</span>;    &#125;    equations    &#123;        U <span class="hljs-number">0</span>.<span class="hljs-number">7</span>;    &#125;&#125;</code></pre>
+<hr>
+
+</div>
+
               </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2019/10/18/NOTE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenFOAM Note</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2019/10/18/C-Summary/">
-                        <span class="hidden-mobile">C Summary</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
-          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: false,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -425,11 +452,7 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
 
 
@@ -473,45 +496,6 @@
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
-
-  
 
 
 

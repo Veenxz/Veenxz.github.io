@@ -17,9 +17,23 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>归档 - Veen</title>
+  <title>OpenFOAM Notes - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
 
 
 
@@ -47,7 +61,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -141,12 +155,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/tree.jpg') no-repeat center center;
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="OpenFOAM Notes">
               
             </span>
 
@@ -170,67 +184,163 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 30 篇文章</p>
-  <hr>
-  
-  
-    
-      
-      <p class="h5">2019</p>
-    
-    <a href="/2019/12/25/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%88%AA%E5%B1%8F/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Chrome浏览器截屏</span>
-      <time style="float: right;">12-25</time>
-    </a>
-  
-    
-    <a href="/2019/12/23/learnmarkdown-cn/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">learnmarkdown-cn</span>
-      <time style="float: right;">12-23</time>
-    </a>
-  
-    
-    <a href="/2019/12/19/Mark/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Mark</span>
-      <time style="float: right;">12-19</time>
-    </a>
-  
-    
-    <a href="/2019/12/14/Win10%E4%B8%93%E4%B8%9A%E7%89%88%E7%A0%B4%E8%A7%A3%E5%8F%8A%E5%8D%93%E8%B6%8A%E6%80%A7%E8%83%BD%E5%BC%80%E5%90%AF/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Win10专业版激活及卓越性能开启</span>
-      <time style="float: right;">12-14</time>
-    </a>
-  
-    
-    <a href="/2019/12/13/Win10%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Win10装机指南</span>
-      <time style="float: right;">12-13</time>
-    </a>
-  
-    
-    <a href="/2019/12/08/CFD%20Case%20Test/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">CFD Case Test</span>
-      <time style="float: right;">12-08</time>
-    </a>
-  
-    
-    <a href="/2019/12/06/Research/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Research</span>
-      <time style="float: right;">12-06</time>
-    </a>
-  
-    
-    <a href="/2019/12/06/Linux/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux</span>
-      <time style="float: right;">12-06</time>
-    </a>
-  
+<div class="page-content">
+  <h1 id="fvSchemes"><a href="#fvSchemes" class="headerlink" title="fvSchemes"></a>fvSchemes</h1><pre><code class="hljs bash">foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes ddtSchemes.default
+foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes gradSchemes
+foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes <span class="hljs-string">&quot;divSchemes.div(phi,U)&quot;</span>
+foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes laplacianSchemes.default
+foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes interpolationSchemes.default
+foamSearch <span class="hljs-variable">$FOAM_TUTORIALS</span> fvSchemes snGradSchemes
+
+tree <span class="hljs-variable">$FOAM_SRC</span>/finiteVolume/finiteVolume/ddtSchemes -L 1
+tree <span class="hljs-variable">$FOAM_SRC</span>/finiteVolume/finiteVolume/gradSchemes -L 1
+tree <span class="hljs-variable">$FOAM_SRC</span>/finiteVolume/finiteVolume/divSchemes -L 1
+tree <span class="hljs-variable">$FOAM_SRC</span>/finiteVolume/finiteVolume/laplacianSchemes -L 1
+tree <span class="hljs-variable">$FOAM_SRC</span>/finiteVolume/finiteVolume/snGradSchemes -L 1
+</code></pre>
+<blockquote>
+<h2 id="Time-schemes-example"><a href="#Time-schemes-example" class="headerlink" title="Time schemes example"></a>Time schemes <a target="_blank" rel="noopener" href="https://www.openfoam.com/documentation/guides/latest/doc/guide-schemes-time-example.html">example</a></h2></blockquote>
+<p>Time schemes define how a property is integrated as a function of time</p>
+<script type="math/tex; mode=display">
+\frac{\part}{\part t}(\phi)</script><pre><code class="hljs c++">ddtSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         backward;
+    <span class="hljs-keyword">default</span>         Crank-Nicolson <span class="hljs-number">0.9</span>; <span class="hljs-comment">//for most condition [0 ~ 1]</span>
+    <span class="hljs-keyword">default</span>         Euler;
+    <span class="hljs-keyword">default</span>         CoEuler phi rho <span class="hljs-number">0.5</span>;;
+    <span class="hljs-keyword">default</span>         SLTS phi rho <span class="hljs-number">0.5</span>;;
+    <span class="hljs-keyword">default</span>         Local Euler;
+    <span class="hljs-keyword">default</span>         steadyState;
+    ddt(phi)        &lt;time scheme&gt;;
+&#125;
+<span class="hljs-comment">// if divSchemes using &quot;bounded&quot;</span>
+<span class="hljs-comment">// ddtSchemes should define &quot;bounded&quot;</span>
+<span class="hljs-comment">// default         bounded Euler;</span></code></pre>
+<blockquote>
+<p>Backward time scheme</p>
+</blockquote>
+<ul>
+<li>Implicit</li>
+<li>Second order</li>
+<li>Transient</li>
+<li>Boundedness not guaranteed</li>
+<li>Conditionally stable</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial t}(\phi)=\frac{1}{\Delta t}\left(\frac{3}{2} \phi-2 \phi^{o}+\frac{1}{2} \phi^{o o}\right)</script><blockquote>
+<p>Crank-Nicolson time scheme</p>
+</blockquote>
+<ul>
+<li>Second order</li>
+<li>Transient</li>
+<li>Bounded</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial t}(\phi)=\frac{\phi-\phi^{o o}}{2 \Delta t}</script><pre><code class="hljs c++">ddtSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         CrankNicolson &lt;coeff&gt;
+    ddt(phi)        CrankNicolson &lt;coeff&gt;;
+&#125;
+<span class="hljs-comment">// 0: Euler</span>
+<span class="hljs-comment">// 1: Crank-Nicolson</span>
+<span class="hljs-comment">// A value of 0.9 is a good compromise between accuracy and robustness</span>
+<span class="hljs-comment">// CrankNicolson ocCoeff &#123; type scale ; scale linearRamp ; duration 1 ; value 0.9 ; &#125;;</span></code></pre>
+<blockquote>
+<p>Euler implicit time scheme</p>
+</blockquote>
+<ul>
+<li>Implicit</li>
+<li>First order</li>
+<li>Transient</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial t}(\phi)=\frac{\phi-\phi^{o}}{\Delta t}</script><blockquote>
+<p>Local Euler implicit/explicit time scheme</p>
+</blockquote>
+<ul>
+<li>First order</li>
+<li>Pseudo transient, designed for steady cases</li>
+<li>Spatially varying, cell-based time scale set by specific Local Time Stepping (LTS) solvers</li>
+</ul>
+<blockquote>
+<p>Steady state time scheme</p>
+</blockquote>
+<ul>
+<li>Steady state</li>
+<li>Sets temporal derivative contributions to zero</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{\part}{\part t}(\phi)=0</script><blockquote>
+<h2 id="Interpolation-schemes"><a href="#Interpolation-schemes" class="headerlink" title="Interpolation schemes"></a>Interpolation schemes</h2></blockquote>
+<p>Interpolation schemes are used to transform cell-centre quantities to face centres. The operation is used in many of the finite volume calculations, e.g. for the calculation of gradient, divergence, and Laplacian terms.</p>
+<pre><code class="hljs c++">interpolationSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         none;
+    &lt;equation term&gt; &lt;interpolation scheme&gt;;
+&#125;</code></pre>
+<blockquote>
+<p><strong>Linear divergence scheme</strong></p>
+</blockquote>
+<ul>
+<li>Second order</li>
+<li>Unbounded</li>
+<li>Good choice for LES calculations due to low dissipation</li>
+<li>For isotropic meshes</li>
+</ul>
+<script type="math/tex; mode=display">
+ϕ_f=0.5(ϕ_c+ϕ_d)</script><p><img src="https://www.openfoam.com/documentation/guides/latest/doc/nvd-linear.png" srcset="/img/loading.gif" alt=""></p>
+<pre><code class="hljs c++">divSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         none;
+    div(phi,U)      Gauss linear;
+    div(phi,U)      cubic;    <span class="hljs-comment">// DNS case</span>
+&#125;</code></pre>
+<blockquote>
+<h2 id="Gradient-schemes-example"><a href="#Gradient-schemes-example" class="headerlink" title="Gradient schemes example"></a>Gradient schemes <a target="_blank" rel="noopener" href="https://www.openfoam.com/documentation/guides/latest/doc/guide-schemes-gradient-example.html">example</a></h2></blockquote>
+<p>The gradient of a scalar property <script type="math/tex">\phi</script> is represented using the notation:</p>
+<script type="math/tex; mode=display">
+\nabla \phi=\mathbf{e}_{1} \frac{\partial}{\partial x_{1}} \phi+\mathbf{e}_{2} \frac{\partial}{\partial x_{2}} \phi+\mathbf{e}_{3} \frac{\partial}{\partial x_{3}} \phi</script><pre><code class="hljs c++">gradSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         none;
+    grad(p)         &lt;optional limiter&gt; &lt;gradient scheme&gt; &lt;interpolation scheme&gt;;
+&#125;
+<span class="hljs-comment">// &lt;limiters&gt; cellLimited cellMDLimited faceLimited faceMDLimited clippedLinear</span>
+<span class="hljs-comment">// &lt;gradient scheme&gt; fourth gauss leastSquares </span>
+<span class="hljs-comment">// &lt;interpolation scheme&gt; linear pointLinear leastSquares</span></code></pre>
+<blockquote>
+<h2 id="Laplacian-schemes"><a href="#Laplacian-schemes" class="headerlink" title="Laplacian schemes"></a>Laplacian schemes</h2></blockquote>
+<p>Taking the Laplacian of a property <script type="math/tex">ϕ</script> is represented using the notation:</p>
+<script type="math/tex; mode=display">
+\nabla^2 \phi= \frac{\partial ^2}{\partial x_{1}^2} \phi+ \frac{\partial ^2}{\partial x_{2}^2} \phi+ \frac{\partial ^2}{\partial x_{3}^2} \phi</script><p>or as a combination of divergence and gradient operators</p>
+<script type="math/tex; mode=display">
+\nabla \cdot(\Gamma \nabla \phi)</script><p>where <script type="math/tex">Γ</script> is a diffusion coefficient.</p>
+<pre><code class="hljs c++">laplacianSchemes
+&#123;
+    <span class="hljs-keyword">default</span>         none;
+    <span class="hljs-keyword">default</span>         Gauss linear;
+    <span class="hljs-keyword">default</span>         Gauss linear corrected;
+    <span class="hljs-keyword">default</span>         Gauss linear corrected;
+    <span class="hljs-keyword">default</span>         Gauss linear corrected;
+    laplacian(gamma,phi) Gauss &lt;interpolation scheme&gt; &lt;snGrad scheme&gt;
+&#125;</code></pre>
+<blockquote>
+<h2 id="Divergence-schemes-example"><a href="#Divergence-schemes-example" class="headerlink" title="Divergence schemes example"></a><strong>Divergence schemes</strong> <a target="_blank" rel="noopener" href="https://www.openfoam.com/documentation/guides/latest/doc/guide-schemes-divergence-example.html">example</a></h2></blockquote>
+<p>The divergence of a property Q describes the net rate at which it changes as a function of space, represented using the notation:</p>
+<script type="math/tex; mode=display">
+\nabla \cdot Q</script><pre><code class="hljs c++">wallDist
+&#123;
+    method meshWave;
+
+    <span class="hljs-comment">// Optional entry enabling the calculation</span>
+    <span class="hljs-comment">// of the normal-to-wall field</span>
+    nRequired <span class="hljs-literal">false</span>;
+
+    <span class="hljs-comment">// Optional entry delaying wall distance update to every n steps</span>
+    <span class="hljs-comment">// Default is 1 (update every step)</span>
+    updateInterval <span class="hljs-number">5</span>;
+&#125;</code></pre>
+
 </div>
-
-
-
-
 
               </div>
             </div>
@@ -347,6 +457,8 @@
 
 
 
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
 
 
 
