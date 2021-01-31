@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>Download - Veen</title>
+  <title>Salome tut 01 - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Download">
+            <span class="h2" id="subtitle" title="Salome tut 01">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-10-18 01:32" pubdate>
-        2019年10月18日 凌晨
+      <time datetime="2021-02-01 00:06" pubdate>
+        2021年2月1日 凌晨
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      9 字
+      738 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      12
        分钟
     </span>
   
@@ -224,11 +224,187 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Download</h1>
+            <h1 style="display: none">Salome tut 01</h1>
             
             <div class="markdown-body">
-              <a id="more"></a>
-<p>油猴网盘万能助手+XDown</p>
+              <h2 id="Primitives-partition-and-meshing-example"><a href="#Primitives-partition-and-meshing-example" class="headerlink" title="Primitives, partition and meshing example"></a>Primitives, partition and meshing example</h2><p><em>This sample is known to work on the latest SALOME release.<br>The compatibility with previous versions of SALOME is not guaranteed, though the sample can work on old versions also.</em></p>
+<h3 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h3><p>Geometric Primitives, tetrahedral and hexahedral 3D meshing, Partitions.</p>
+<p><strong><em>Copyright\</em> ©</strong> <strong>*EDF R&amp;D 2014.</strong><br>This tutorial is a part of the EDF internal training course; it does not describe a real use case.</p>
+<h3 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a>Geometry</h3><ul>
+<li>Launch SALOME.</li>
+<li>Create a new study.</li>
+<li>Launch GEOMmodule.</li>
+</ul>
+<h3 id="Modeling-of-2D-object-–-Usage-of-primitives"><a href="#Modeling-of-2D-object-–-Usage-of-primitives" class="headerlink" title="Modeling of 2D object – Usage of primitives"></a>Modeling of 2D object – Usage of primitives</h3><ul>
+<li><p>Modification of  preferences: <em>(</em>menu <em>File/Preferences).
+</em>Geometry: Origin and base vectors - check <em>Auto create</em>.  Default display mode - <em>Wireframe</em></p>
+</li>
+<li><p>Creation of Sketch_1 : (menu New Entity/Basic/2D Sketch). </p>
+<p>Click Apply after each consecutive line except for the last one:</p>
+<p>First Point (Absolute): (150 ; 0) </p>
+<p>Arc (Direction; Perpendicular): (50 ; 115)</p>
+<p>Arc (Direction; Tangent): (-100 ; 15)</p>
+<p>Segment (Direction ; Tangent ; Length) : 150</p>
+<p>Segment (Direction ; VX-VY ; Y) : (0 ; -1 ;0)</p>
+<p>Close dialog</p>
+</li>
+<li><p>Creation of <strong>Mirror_1</strong>: <em>(</em>menu <em>Operations/Transformation/Mirror image)</em><br>(2nd Constructor)</p>
+<p><strong>Objects</strong>: Sketch_1</p>
+<p><strong>Axis Mirror</strong>: OX</p>
+<p>Leave <em>“Create a copy”</em> checked.</p>
+</li>
+<li><p>Check the wires: (menu Measures/What is)</p>
+<p>=&gt; 1 Wire, 4 Edges, 5 vertices.</p>
+</li>
+<li><p>Explode into basic elements: <em>(</em>menu <em>New Entity/Explode)</em></p>
+</li>
+<li><p><strong>Explode</strong> Sketch_1 into Edges.</p>
+</li>
+<li><p><strong>Explode</strong> Mirror_1 into Edges.</p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen_2.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
+</li>
+<li><p>Creation of Wire_1: (menu New Entity/Build/Wire)</p>
+<p>Select the group of Edges (previously extracted).</p>
+<p><em>Multiple selection is carried out by holding ctrl in the study tree and shift in the viewer.</em></p>
+</li>
+<li><p>Creation of <strong>Face_1</strong> : <em>(menu New Entity/Build/Face)</em><br>Face with Wire_1.</p>
+</li>
+<li><p>Display the result in <strong>Shading</strong> (popup menu <em>Display Mode/Shading</em>).</p>
+</li>
+<li><p>Save the study (menu <em>File/Save</em>)</p>
+</li>
+</ul>
+<h3 id="Usage-of-curves"><a href="#Usage-of-curves" class="headerlink" title="Usage of curves"></a>Usage of curves</h3><p>Explode into sub-elements: <em>(menu New Entity/Explode)</em></p>
+<ul>
+<li><p>Explode 2 vertices from <strong>Face_1</strong> by selection (<em>Select Sub Shapes</em>)</p>
+<p><em>Selection of a sub-shape is possible only in the OCC Viewer.</em></p>
+</li>
+<li><p>Rename the 2 vertices in PB and PA.</p>
+</li>
+</ul>
+<p>Creation of Vertices for the curve : ( <em>New Entity/Basic/Point )</em></p>
+<ul>
+<li><em>Vertex_1 (-150, 0, 0),   Vertex_2 (-140, 20, 0),</em></li>
+<li><em>Vertex_3 (-150, 30, 0),  Vertex_4 (-140, 40, 0)</em></li>
+<li><em>Vertex_5 (-140, -20, 0), Vertex_6 (-150, -30, 0),</em></li>
+<li><em>Vertex_7 (-140, -40, 0)</em></li>
+</ul>
+<p>Creation of <strong>Curve_1</strong>: <em>(</em>menu <em>New Entity/Basic/Curve)</em></p>
+<ul>
+<li>Interpolation with the selection of previously created vertexes (3rd Constructor).</li>
+<li>Select just created vertexes in the next order: Vertex_4, Vertex_3, Vertex_2, Vertex_1, Vertex_5, Vertex_6, Vertex_7</li>
+</ul>
+<p>Creation of vectors:<em>(</em>menu <em>New Entity/Basic/Vector)</em></p>
+<ul>
+<li>Vector by 2 vertices (PA and Vertex_4) and (PB and Vertex_7).</li>
+</ul>
+<p>Creation of Face_2: (menu New Entity/Build/Face)</p>
+<ul>
+<li>from Curve_1, Vector_1, Vector_2, Edge_1 and Edge_5.</li>
+</ul>
+<p>Extrusion: <em>(</em>menu <em>New Entity/Generation/Extrusion)</em></p>
+<ul>
+<li><p><strong>Extrusion_1</strong> with Face_1 along OZ (Height: 10).</p>
+</li>
+<li><p><strong>Extrusion _2</strong> with Face_2 along OZ (Height: 10).</p>
+</li>
+</ul>
+<p>Boolean Operation: <em>(</em>menu <em>Operations/Boolean/Fuse)</em></p>
+<ul>
+<li><strong>Fuse_1</strong> with Extrusion_1 and Extrusion_2.</li>
+</ul>
+<p>Creation of 3D Fillet on Fuse_1 : <em>(menu Operations/ Fillet 3D)</em></p>
+<ul>
+<li>(2nd Constructor)</li>
+<li>Fillet by selection of edges.</li>
+<li><p>Radius = 25.</p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen3.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen7.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen6">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen5.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
+</li>
+</ul>
+<h3 id="Mesh"><a href="#Mesh" class="headerlink" title="Mesh"></a>Mesh</h3><ul>
+<li>Launch module SMESH</li>
+</ul>
+<h3 id="Creation-of-a-simple-Tetrahedral-mesh"><a href="#Creation-of-a-simple-Tetrahedral-mesh" class="headerlink" title="Creation of a simple Tetrahedral mesh"></a>Creation of a simple Tetrahedral mesh</h3><ul>
+<li>Creation of <strong>Mesh_Fillet_1</strong> : <em>(</em>menu <em>Mesh/Create Mesh)</em></li>
+<li><p>Geometry: Fillet_1</p>
+</li>
+<li><p><em>Assign a set of hypotheses</em> -&gt; Automatic Tetrahedralization</p>
+</li>
+<li><p>Max. Length hypothesis opened, click “Cancel”.</p>
+</li>
+<li><p>Click 1D Tab, Add “Automatic Length” hypothesis with</p>
+</li>
+<li><p>Fitness: 0.2</p>
+</li>
+<li><p>Click OK for validation.</p>
+</li>
+<li><p>Compute (<em>right-click on</em> Mesh_Fillet_1)</p>
+</li>
+</ul>
+<h3 id="Geometry-Partition"><a href="#Geometry-Partition" class="headerlink" title="Geometry (Partition)"></a><strong>Geometry (Partition)</strong></h3><p>Launch GEOM module</p>
+<h3 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h3><p>Explode <strong>Fillet_1</strong> into reference elements: <em>(</em>menu <em>New Entity/Explode)</em></p>
+<ul>
+<li>Explode into 5 Vertices by selection.</li>
+</ul>
+<p>Create 5 <strong>Planes</strong>: <em>(</em>menu <em>New Entity/Basic/Plane)</em> (1st constructor)</p>
+<ul>
+<li><p>4 planes along vector OX passing through each of 4 first left vertices.</p>
+</li>
+<li><p>1 plane along vector OY passing through the right vertex.</p>
+</li>
+</ul>
+<p>Creation of the <strong>Partition_1</strong>:<em>(</em>menu <em>Operation/Partition)</em> (1st constructor)</p>
+<p>Partition of Fillet_1 (<em>Objects</em>) with 5 Planes (<em>Tool Object</em>).</p>
+<p>Visualize the result in <strong>Shading</strong> mode with 40% <strong>transparency</strong> (<em>popup menu</em>).</p>
+<h3 id="Meshing-Partition"><a href="#Meshing-Partition" class="headerlink" title="Meshing (Partition)"></a><strong>Meshing (Partition)</strong></h3><p>Launch SMESH module</p>
+<h3 id="Creation-of-a-Tetrahedral-mesh-from-a-partition"><a href="#Creation-of-a-Tetrahedral-mesh-from-a-partition" class="headerlink" title="Creation of a Tetrahedral mesh from a partition"></a>Creation of a Tetrahedral mesh from a partition</h3><p>Creation of <strong>Mesh_Partition_Tetra</strong>: <em>(</em>menu <em>Mesh/Create Mesh)</em></p>
+<ul>
+<li><p>Geometry: Partition_1</p>
+</li>
+<li><p>Automatic Tetrahedralization (<em>Assign a set of hypotheses</em>)</p>
+</li>
+<li><p>“Max Length” opened, click Cancel</p>
+</li>
+<li><p>1D, hypothesis “Automatic Length”, Finesse: 0,2</p>
+</li>
+<li><p>Compute.</p>
+</li>
+</ul>
+<p><strong>Creation of Hexahedral mesh</strong></p>
+<p>Creation of <strong>Mesh_Partition_Hexa</strong>: <em>(</em>menu <em>Mesh/Create Mesh)</em></p>
+<ul>
+<li><p>Automatic Hexadralization (Assign a set of hypotheses)</p>
+</li>
+<li><p>Geometry: Partition_1</p>
+</li>
+<li><p>Number of Segments: 10, Type: Equidistant distribution.</p>
+</li>
+<li><p>Apply &amp; Close.</p>
+</li>
+</ul>
+<p><strong>Exploding the Edge of Thickness</strong></p>
+<p>Activate Geom Module.</p>
+<p>Explode one Edge of Thickness</p>
+<p>New Entity -&gt; Explode -&gt; Main Object : Partition_1 -&gt; Shape Type : Edge</p>
+<p>Activate “Select Subshape” check box and select sub-shape from the viewer.</p>
+<p>return to the Mesh Module.</p>
+<p><strong>Creation of</strong> <strong>SubMesh</strong>: <em>(</em>menu <em>Mesh/Create Sub-Mesh)</em></p>
+<ul>
+<li><p>Mesh: Mesh_Partion_Hexa</p>
+</li>
+<li><p>Geometry : The edge of thickness.</p>
+</li>
+<li><p>Algo: Wire Discretisation</p>
+</li>
+<li><p>Hypothesis: Nb Segment (1, Equidistant distribution)</p>
+</li>
+<li><p>Add Hyp.: Propagation of 1D Hyp. on opposite edges</p>
+</li>
+<li><p>Compute.</p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen8">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen6.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen8.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen7"><br><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/copy_of_EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/thickness.png/image_preview" srcset="/img/loading.gif" alt="EDF1_thickness">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen10.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9"> </p>
+</li>
+</ul>
+<p>​                                                                                                                            </p>
 
             </div>
             <hr>
@@ -245,18 +421,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/10/18/NOTE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenFOAM Note</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/10/18/C-Summary/">
-                        <span class="hidden-mobile">C Summary</span>
+                      <a href="/2021/01/23/ffmpeg_denoise/">
+                        <span class="hidden-mobile">ffmpeg Denoise</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

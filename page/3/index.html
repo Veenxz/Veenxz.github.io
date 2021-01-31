@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>归档 - Veen</title>
+  <title>Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -47,7 +47,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -141,12 +141,12 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/tree.jpg') no-repeat center center;
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="Cleverness is a gift, kindness is a choice.">
               
             </span>
 
@@ -170,47 +170,69 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 31 篇文章</p>
-  <hr>
-  
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2021</p>
     
-    <a href="/2021/02/01/Salome-tut-01/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Salome tut 01</span>
-      <time style="float: right;">02-01</time>
-    </a>
-  
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2019/10/16/My%20first%20post/" target="_self">
+          <img src="/img/people-2591928_1280.jpg" srcset="/img/loading.gif" alt="My first post">
+        </a>
+      </div>
     
-    <a href="/2021/01/23/ffmpeg_denoise/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ffmpeg Denoise</span>
-      <time style="float: right;">01-23</time>
-    </a>
-  
-    
-    <a href="/2021/01/14/OpenFOAM-Tips/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">OpenFOAM Tips</span>
-      <time style="float: right;">01-14</time>
-    </a>
-  
-    
-    <a href="/2021/01/07/semiImplicitSource%20in%20fvOptions/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SemiImplicitSource in fvOptions</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-    
-    <a href="/2021/01/07/OpenFOAM-Coding-Style/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">OpenFOAM Coding Style</span>
-      <time style="float: right;">01-07</time>
-    </a>
-  
-</div>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/10/16/My%20first%20post/">My first post</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/10/16/My%20first%20post/">
+          
+          
+            
+          
+          关于本博客使用Github与Hexo搭建，使用hexo-theme-fluid。
+支持valine评论。
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-10-16 00:45" pubdate>
+              2019-10-16
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Others/">Others</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
