@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>Salome tut 01 - Veen</title>
+  <title>Slurm_note - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Salome tut 01">
+            <span class="h2" id="subtitle" title="Slurm_note">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-01 00:06" pubdate>
-        2021年2月1日 凌晨
+      <time datetime="2021-03-30 14:34" pubdate>
+        2021年3月30日 下午
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      748 字
+      1.5k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      16
        分钟
     </span>
   
@@ -224,189 +224,174 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Salome tut 01</h1>
+            <h1 style="display: none">Slurm_note</h1>
             
             <div class="markdown-body">
-              <h2 id="Primitives-partition-and-meshing-example"><a href="#Primitives-partition-and-meshing-example" class="headerlink" title="Primitives, partition and meshing example"></a>Primitives, partition and meshing example</h2><p>This sample is known to work on the latest SALOME release.<br>The compatibility with previous versions of SALOME is not guaranteed, though the sample can work on old versions also.</p>
-<h3 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h3><p>Geometric Primitives, tetrahedral and hexahedral 3D meshing, Partitions.</p>
-<p><strong>Copyright ©</strong> <strong>EDF R&amp;D 2014.</strong><br>This tutorial is a part of the EDF internal training course; it does not describe a real use case.</p>
-<h3 id="Geometry"><a href="#Geometry" class="headerlink" title="Geometry"></a>Geometry</h3><ul>
-<li>Launch SALOME.</li>
-<li>Create a new study.</li>
-<li>Launch GEOMmodule.</li>
-</ul>
-<h3 id="Modeling-of-2D-object-–-Usage-of-primitives"><a href="#Modeling-of-2D-object-–-Usage-of-primitives" class="headerlink" title="Modeling of 2D object – Usage of primitives"></a>Modeling of 2D object – Usage of primitives</h3><ul>
-<li><p>Modification of  preferences: <em>(</em>menu <em>File/Preferences).
-</em>Geometry: Origin and base vectors - check <em>Auto create</em>.  Default display mode - <em>Wireframe</em></p>
-</li>
-<li><p>Creation of Sketch_1 : (menu New Entity/Basic/2D Sketch). </p>
-<p>Click Apply after each consecutive line except for the last one:</p>
-<p>Arc First Point (Absolute): (150 ; 0) </p>
-<p>Arc (Direction; Perpendicular): (50 ; 115)</p>
-<p>Arc (Direction; Tangent): (-100 ; 15)</p>
-<p>Line Segment (Direction ; Tangent ; Length) : 150</p>
-<p>Line Segment (Direction ; VX-VY ; Y) : (0 ; -1 ;0)</p>
-<p>Close dialog</p>
-</li>
-<li><p>Creation of <strong>Mirror_1</strong>: <em>(</em>menu <em>Operations/Transformation/Mirror image)</em><br>(2nd Constructor)</p>
-<p><strong>Objects</strong>: Sketch_1</p>
-<p><strong>Axis Mirror</strong>: OX</p>
-<p>Leave <em>“Create a copy”</em> checked.</p>
-</li>
-<li><p>Check the wires: (menu Measures/What is)</p>
-<p>=&gt; 1 Wire, 4 Edges, 5 vertices.</p>
-</li>
-<li><p>Explode into basic elements: <em>(</em>menu <em>New Entity/Explode)</em></p>
-</li>
-<li><p><strong>Explode</strong> Sketch_1 into Edges.</p>
-</li>
-<li><p><strong>Explode</strong> Mirror_1 into Edges.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen_2.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
-</li>
-<li><p>Creation of Wire_1: (menu New Entity/Build/Wire)</p>
-<p>Select the group of Edges (previously extracted).</p>
-<p><em>Multiple selection is carried out by holding ctrl in the study tree and shift in the viewer.</em></p>
-</li>
-<li><p>Creation of <strong>Face_1</strong> : <em>(menu New Entity/Build/Face)</em><br>Face with Wire_1.</p>
-</li>
-<li><p>Display the result in <strong>Shading</strong> (popup menu <em>Display Mode/Shading</em>).</p>
-</li>
-<li><p>Save the study (menu <em>File/Save</em>)</p>
-</li>
-</ul>
-<h3 id="Usage-of-curves"><a href="#Usage-of-curves" class="headerlink" title="Usage of curves"></a>Usage of curves</h3><p>Explode into sub-elements: <em>(menu New Entity/Explode)</em></p>
-<ul>
-<li><p>Explode 2 vertices from <strong>Face_1</strong> by selection (<em>Select Sub Shapes</em> Vertex)</p>
-<p><em>Selection of a sub-shape is possible only in the OCC Viewer.</em></p>
-</li>
-<li><p>Rename the 2 vertices in PB and PA.</p>
-</li>
-</ul>
-<p>Creation of Vertices for the curve : ( <em>New Entity/Basic/Point )</em></p>
-<ul>
-<li><em>Vertex_1 (-150, 0, 0),   Vertex_2 (-140, 20, 0),</em></li>
-<li><em>Vertex_3 (-150, 30, 0),  Vertex_4 (-140, 40, 0)</em></li>
-<li><em>Vertex_5 (-140, -20, 0), Vertex_6 (-150, -30, 0),</em></li>
-<li><em>Vertex_7 (-140, -40, 0)</em></li>
-</ul>
-<p>Creation of <strong>Curve_1</strong>: <em>(</em>menu <em>New Entity/Basic/Curve)</em></p>
-<ul>
-<li>Interpolation with the selection of previously created vertexes (3rd Constructor).</li>
-<li>Select just created vertexes in the next order: Vertex_4, Vertex_3, Vertex_2, Vertex_1, Vertex_5, Vertex_6, Vertex_7</li>
-</ul>
-<p>Creation of vectors:<em>(</em>menu <em>New Entity/Basic/Vector)</em></p>
-<ul>
-<li>Vector by 2 vertices (PA and Vertex_4) and (PB and Vertex_7).</li>
-</ul>
-<p>Creation of Face_2: (menu New Entity/Build/Face)</p>
-<ul>
-<li>from Curve_1, Vector_1, Vector_2, Edge_1 and Edge_5.</li>
-</ul>
-<p>Extrusion: <em>(</em>menu <em>New Entity/Generation/Extrusion)</em></p>
-<ul>
-<li><p><strong>Extrusion_1</strong> with Face_1 along OZ (Height: 10).</p>
-</li>
-<li><p><strong>Extrusion _2</strong> with Face_2 along OZ (Height: 10).</p>
-</li>
-</ul>
-<p>Boolean Operation: <em>(</em>menu <em>Operations/Boolean/Fuse)</em></p>
-<ul>
-<li><strong>Fuse_1</strong> with Extrusion_1 and Extrusion_2.</li>
-</ul>
-<p>Creation of 3D Fillet on Fuse_1 : <em>(menu Operations/ Fillet 3D)</em></p>
-<ul>
-<li>(2nd Constructor) (Just two edges)</li>
-<li>Fillet by selection of edges.</li>
-<li><p>Radius = 25.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen3.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen7.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen6">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen5.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
-</li>
-</ul>
-<h3 id="Mesh"><a href="#Mesh" class="headerlink" title="Mesh"></a>Mesh</h3><ul>
-<li>Launch module SMESH</li>
-</ul>
-<h3 id="Creation-of-a-simple-Tetrahedral-mesh"><a href="#Creation-of-a-simple-Tetrahedral-mesh" class="headerlink" title="Creation of a simple Tetrahedral mesh"></a>Creation of a simple Tetrahedral mesh</h3><ul>
-<li>Creation of <strong>Mesh_Fillet_1</strong> : <em>(</em>menu <em>Mesh/Create Mesh)</em></li>
-<li><p>Geometry: Fillet_1</p>
-</li>
-<li><p><em>Assign a set of hypotheses</em> -&gt; Automatic Tetrahedralization</p>
-</li>
-<li><p>Max. Length hypothesis opened, click “Cancel”.</p>
-</li>
-<li><p>Click 1D Tab, Add “Automatic Length” hypothesis with</p>
-</li>
-<li><p>Fitness: 0.2</p>
-</li>
-<li><p>Click OK for validation.</p>
-</li>
-<li><p>Compute (<em>right-click on</em> Mesh_Fillet_1)</p>
-</li>
-</ul>
-<h3 id="Geometry-Partition"><a href="#Geometry-Partition" class="headerlink" title="Geometry (Partition)"></a><strong>Geometry (Partition)</strong></h3><p>Launch GEOM module</p>
-<h3 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h3><p>Explode <strong>Fillet_1</strong> into reference elements: <em>(</em>menu <em>New Entity/Explode)</em></p>
-<ul>
-<li>Explode into 5 Vertices by selection.</li>
-</ul>
-<p>Create 5 <strong>Planes</strong>: <em>(</em>menu <em>New Entity/Basic/Plane)</em> (1st constructor)</p>
-<ul>
-<li><p>4 planes along vector OX passing through each of 4 first left vertices.</p>
-</li>
-<li><p>1 plane along vector OY passing through the right vertex.</p>
-</li>
-</ul>
-<p>Creation of the <strong>Partition_1</strong>:<em>(</em>menu <em>Operation/Partition)</em> (1st constructor)</p>
-<p>Partition of Fillet_1 (<em>Objects</em>) with 5 Planes (<em>Tool Object</em>).</p>
-<p>Visualize the result in <strong>Shading</strong> mode with 40% <strong>transparency</strong> (<em>popup menu</em>).</p>
-<h3 id="Meshing-Partition"><a href="#Meshing-Partition" class="headerlink" title="Meshing (Partition)"></a><strong>Meshing (Partition)</strong></h3><p>Launch SMESH module</p>
-<h3 id="Creation-of-a-Tetrahedral-mesh-from-a-partition"><a href="#Creation-of-a-Tetrahedral-mesh-from-a-partition" class="headerlink" title="Creation of a Tetrahedral mesh from a partition"></a>Creation of a Tetrahedral mesh from a partition</h3><p>Creation of <strong>Mesh_Partition_Tetra</strong>: <em>(</em>menu <em>Mesh/Create Mesh)</em></p>
-<ul>
-<li><p>Geometry: Partition_1</p>
-</li>
-<li><p>Automatic Tetrahedralization (<em>Assign a set of hypotheses</em>)</p>
-</li>
-<li><p>“Max Length” opened, click Cancel</p>
-</li>
-<li><p>1D, hypothesis “Automatic Length”, Finesse: 0,2</p>
-</li>
-<li><p>Compute.</p>
-</li>
-</ul>
-<p><strong>Creation of Hexahedral mesh</strong></p>
-<p>Creation of <strong>Mesh_Partition_Hexa</strong>: <em>(</em>menu <em>Mesh/Create Mesh)</em></p>
-<ul>
-<li><p>Automatic Hexadralization (Assign a set of hypotheses)</p>
-</li>
-<li><p>Geometry: Partition_1</p>
-</li>
-<li><p>Number of Segments: 10, Type: Equidistant distribution.</p>
-</li>
-<li><p>Apply &amp; Close.</p>
-</li>
-</ul>
-<p><strong>Exploding the Edge of Thickness</strong></p>
-<p>Activate Geom Module.</p>
-<p>Explode one Edge of Thickness</p>
-<p>New Entity -&gt; Explode -&gt; Main Object : Partition_1 -&gt; Shape Type : Edge</p>
-<p>Activate “Select Subshape” check box and select sub-shape from the viewer.</p>
-<p>return to the Mesh Module.</p>
-<p><strong>Creation of</strong> <strong>SubMesh</strong>: <em>(</em>menu <em>Mesh/Create Sub-Mesh)</em></p>
-<ul>
-<li><p>Mesh: Mesh_Partion_Hexa</p>
-</li>
-<li><p>Geometry : The edge of thickness.</p>
-</li>
-<li><p>Algo: Wire Discretisation</p>
-</li>
-<li><p>Hypothesis: Nb Segment (1, Equidistant distribution)</p>
-</li>
-<li><p>Add Hyp.: Propagation of 1D Hyp. on opposite edges</p>
-</li>
-<li><p>Compute.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen8">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen6.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen8.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen7">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/copy_of_EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/thickness.png/image_preview" srcset="/img/loading.gif" alt="EDF1_thickness">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen10.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9"> </p>
-</li>
-</ul>
-<p>​                                                                                                                            </p>
-<p>My final mesh</p>
-<p><img src="..\img\mesh01.png" srcset="/img/loading.gif" alt="mesh01"></p>
+              <p>Slurm使用帮助</p>
+<a id="more"></a>
+<p>From <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356415669">https://zhuanlan.zhihu.com/p/356415669</a></p>
+<h2 id="1-Slurm-命令"><a href="#1-Slurm-命令" class="headerlink" title="1. Slurm 命令"></a>1. Slurm 命令</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Slurm命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sinfo</td>
+<td>查看集群分区状态</td>
+</tr>
+<tr>
+<td>squeue</td>
+<td>查看作业队列</td>
+</tr>
+<tr>
+<td>srun, salloc</td>
+<td>交互式运行作业</td>
+</tr>
+<tr>
+<td>sbatch</td>
+<td>提交作业</td>
+</tr>
+<tr>
+<td>scancel</td>
+<td>取消作业</td>
+</tr>
+<tr>
+<td>scontrol</td>
+<td>查看和修改作业参数</td>
+</tr>
+<tr>
+<td>sacct</td>
+<td>查看已完成作业</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-Sinfo"><a href="#2-Sinfo" class="headerlink" title="2. Sinfo"></a>2. Sinfo</h2><pre><code class="hljs bash">sinfo               <span class="hljs-comment">#查看所有分区状态</span>
+sinfo -a            <span class="hljs-comment">#查看所有分区状态</span>
+sinfo -N            <span class="hljs-comment">#查看节点状态</span>
+sinfo -n node-name  <span class="hljs-comment">#查看指定节点状态</span>
+sinfo --<span class="hljs-built_in">help</span>        <span class="hljs-comment">#查看sinfo的说明</span></code></pre>
+<h3 id="2-1-节点状态"><a href="#2-1-节点状态" class="headerlink" title="2.1 节点状态"></a>2.1 节点状态</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>alloc</th>
+<th>idle</th>
+<th>mix</th>
+<th>down</th>
+<th>drain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>节点在用</td>
+<td>节点可用</td>
+<td>部分占用</td>
+<td>节点下线</td>
+<td>节点故障</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-Squeue"><a href="#3-Squeue" class="headerlink" title="3. Squeue"></a>3. Squeue</h2><pre><code class="hljs bash">squeue              <span class="hljs-comment">#查看运行中的作业列表</span>
+squeue -l           <span class="hljs-comment">#查看列表细节信息</span>
+squene -j job-id    <span class="hljs-comment">#查看运行中作业信息</span>
+squeue -u username  <span class="hljs-comment">#查看user所有运行中的作业</span></code></pre>
+<h3 id="3-1-作业状态"><a href="#3-1-作业状态" class="headerlink" title="3.1 作业状态"></a>3.1 作业状态</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>R</th>
+<th>PD</th>
+<th>CG</th>
+<th>CD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正在运行</td>
+<td>正在排队</td>
+<td>即将完成</td>
+<td>已完成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-提交作业"><a href="#4-提交作业" class="headerlink" title="4. 提交作业"></a>4. 提交作业</h2><p>Slurm提交作业有3种模式，分别为交互模式，批处理模式，分配模式，这三种方式只是用户使用方式的区别，在管理，调度，记账时同等对待。</p>
+<h3 id="4-1-参数说明"><a href="#4-1-参数说明" class="headerlink" title="4.1 参数说明"></a>4.1 参数说明</h3><p>以下所有参数在 <code>srun, sbatch, salloc</code> 中均可以使用。更多参数见<code>srun --help</code>, <code>sbatch --help</code>, <code>salloc --help</code>。</p>
+<pre><code class="hljs bash">-c, --cpu-per-task=NCPUs        <span class="hljs-comment">#指定每个进程使用核数，不指定默认为1</span>
+-e, --error=error_filename      <span class="hljs-comment">#指定错误文件输出</span>
+-J, --job-name=JOBNAME          <span class="hljs-comment">#指定作业名称</span>
+--mail-type=END/FAIL/ALL        <span class="hljs-comment">#邮件提醒，可选:END,FAIL,ALL</span>
+--mail-user=mail_address        <span class="hljs-comment">#通知邮箱地址</span>
+-n, --ntask=NTASKs <span class="hljs-comment">#指定总进程数；不使用cpus-per-task，可理解为进程数即为核数 </span>
+--ntask-per-node=N <span class="hljs-comment">#指定每个节点进程数/核数，使用-n参数后变为每个节点最多运行的进程数</span>
+-N, --nodes=N                   <span class="hljs-comment">#指定节点数量</span>
+-o, --output=out_filename       <span class="hljs-comment">#指定输出文件输出</span>
+-p, --partion=debug             <span class="hljs-comment">#指定分区</span>
+-t, --time=dd-hh:mm:ss          <span class="hljs-comment">#作业最大运行时间</span>
+-w, --nodelist=node[1,2]        <span class="hljs-comment">#指定优先使用节点，不可与避免节点冲突</span>
+-x, --exclude=node[3,5-6]       <span class="hljs-comment">#指定避免使用节点，不可与优先节点冲突</span>
+--mem-per-cpu=MB                <span class="hljs-comment">#指定计算cpu最大占用内存大小</span></code></pre>
+<h3 id="4-2-交互模式-Srun"><a href="#4-2-交互模式-Srun" class="headerlink" title="4.2 交互模式 Srun"></a>4.2 交互模式 Srun</h3><p>交互式作业提交，提交命令后，等待作业执行完成之后返回命令行窗口。</p>
+<h3 id="Demo-of-srun"><a href="#Demo-of-srun" class="headerlink" title="Demo of srun"></a>Demo of srun</h3><pre><code class="hljs bash">srun -J JOBNAME -p debug -N 2 -c 1 -n 32 --ntasks-per-node=16 -w node[3,4] -x node[1,5-6] --time=dd-hh:mm:ss --output=file_name --error=file_name --mail-user=address --mail-type=ALL mpirun -n 64 ./iPic3D ./inputfile/test.inp</code></pre>
+<p>同 <strong>Demo of sbatch</strong></p>
+<h3 id="4-3-批处理模式-Sbatch"><a href="#4-3-批处理模式-Sbatch" class="headerlink" title="4.3 批处理模式 Sbatch"></a>4.3 批处理模式 Sbatch</h3><p>批处理作业是指用户编写作业脚本，指定资源需求约束，提交后台执行作业。提交批处理作业的命令为 sbatch，用户提交命令即返回命令行窗口，但此时作业在进入调度状态，在资源满足要求时，分配完计算结点之后，系统将在所分配的第一个计算结点（而不是登录结点）上加载执行用户的作业脚本。批处理作业的脚本为一个文本文件，脚本第一行以 “#!” 字符开头，并制定脚本文件的解释程序，如 sh，bash。</p>
+<p>运行 <code>sbatch filename</code> 来提交任务；计算开始后，工作目录中会生成以 slurm 开头的.out 文件为输出文件（不指定输出的话）。</p>
+<h3 id="Demo-of-sbatch"><a href="#Demo-of-sbatch" class="headerlink" title="Demo of sbatch"></a>Demo of sbatch</h3><p>保存在运行程序目录下即可，文件名随意（可以无后缀，内容文本格式即可）；作业提交命令<code>sbatch filename</code></p>
+<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash </span>
+<span class="hljs-comment">#提交单个作业</span>
+<span class="hljs-comment">#SBATCH --job-name=JOBNAME      %指定作业名称</span>
+<span class="hljs-comment">#SBATCH --partition=debug       %指定分区</span>
+<span class="hljs-comment">#SBATCH --nodes=2               %指定节点数量</span>
+<span class="hljs-comment">#SBATCH --cpus-per-task=1       %指定每个进程使用核数，不指定默认为1</span>
+<span class="hljs-comment">#SBATCH -n 32       %指定总进程数；不使用cpus-per-task，可理解为进程数即为核数</span>
+<span class="hljs-comment">#SBATCH --ntasks-per-node=16    %指定每个节点进程数/核数,使用-n参数（优先级更高），变为每个节点最多运行的任务数</span>
+<span class="hljs-comment">#SBATCH --nodelist=node[3,4]    %指定优先使用节点</span>
+<span class="hljs-comment">#SBATCH --exclude=node[1,5-6]   %指定避免使用节点</span>
+<span class="hljs-comment">#SBATCH --time=dd-hh:mm:ss      %作业最大运行时长，参考格式填写</span>
+<span class="hljs-comment">#SBATCH --output=file_name      %指定输出文件输出</span>
+<span class="hljs-comment">#SBATCH --error=file_name       %指定错误文件输出</span>
+<span class="hljs-comment">#SBATCH --mail-type=ALL         %邮件提醒,可选:END,FAIL,ALL</span>
+<span class="hljs-comment">#SBATCH --mail-user=address     %通知邮箱地址</span>
+
+<span class="hljs-built_in">source</span> /public/home/user/.bashrc   <span class="hljs-comment">#导入环境变量文件</span>
+
+mpirun -n 32 ./iPic3D ./inputfiles/test.inp <span class="hljs-comment">#运行命令</span></code></pre>
+<p>同 <strong>Demo of srun</strong></p>
+<h3 id="4-4-分配模式-Salloc"><a href="#4-4-分配模式-Salloc" class="headerlink" title="4.4 分配模式 Salloc"></a>4.4 分配模式 Salloc</h3><p>结点资源抢占命令。该命令支持用户在提交作业前，抢占所需计算资源（此时开始计算所用机时）。需请求资源，然后在获取节点后登录到计算节点。目前作者使用设备可直接登录计算节点，暂未使用。 <code>sacct</code> 命令也未启用，暂无说明，有需要可在文末参考网页查看。</p>
+<h2 id="5-Scontrol"><a href="#5-Scontrol" class="headerlink" title="5. Scontrol"></a>5. Scontrol</h2><h3 id="5-1-信息查看"><a href="#5-1-信息查看" class="headerlink" title="5.1 信息查看"></a>5.1 信息查看</h3><pre><code class="hljs bash">scontrol show job JOBID         <span class="hljs-comment">#查看作业的详细信息</span>
+scontrol show node              <span class="hljs-comment">#查看所有节点详细信息</span>
+scontrol show node node-name    <span class="hljs-comment">#查看指定节点详细信息</span>
+scontrol show node | grep CPU   <span class="hljs-comment">#查看各节点cpu状态</span>
+scontrol show node node-name | grep CPU <span class="hljs-comment">#查看指定节点cpu状态</span></code></pre>
+<h3 id="5-2-更新作业"><a href="#5-2-更新作业" class="headerlink" title="5.2 更新作业"></a>5.2 更新作业</h3><p>在任务开始前却发现作业的属性写错了（例如提交错了分区，修改名字），取消了重新排队似乎很不划算。如果作业恰好 <strong>没在运行</strong>，我们是可以通过 <code>scontrol</code> 命令来更新作业的属性</p>
+<pre><code class="hljs bash">scontrol update jobid=JOBID ... <span class="hljs-comment">#...为下面参数</span>
+reqnodelist=&lt;nodes&gt;
+reqcores=&lt;count&gt;
+name=&lt;name&gt;
+nodelist=&lt;nodes&gt;
+excnodelist=&lt;nodes&gt;
+numcpus=&lt;min_count-max_count&gt;
+numnodes=&lt;min_count-max_count&gt;
+numtasks=&lt;count&gt;
+starttime=yyyy-mm-dd
+partition=&lt;name&gt;
+timelimit=d-h:m:s
+mincpusnode=&lt;count&gt;
+minmemorycpu=&lt;megabytes&gt;
+minmemorynode=&lt;megabytes&gt;</code></pre>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://link.zhihu.com/?target=https%3A//hpc.pku.edu.cn/_book/guide/slurm/slurm.html">作业调度系统 · 北京大学高性能计算使用指南</a></li>
+<li><a href="https://link.zhihu.com/?target=http%3A//bicmr.pku.edu.cn/~wenzw/pages/slurm.html">SLURM 使用参考</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//docs.hpc.sjtu.edu.cn/job/slurm.html">Slurm 作业调度系统 — 上海交大超算平台用户手册 文档</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B">SLURM使用基础教程 - 曙光先进计算</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//arc.umich.edu/greatlakes/slurm-user-guide/">Slurm User Guide for Great Lakes | ITS Advanced Research Computing</a></li>
+</ol>
 
             </div>
             <hr>
@@ -423,9 +408,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/30/Slurm-note/">
+                      <a href="/2021/04/09/The-Missing-Semester-of-Your-CS-Education/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Slurm_note</span>
+                        <span class="hidden-mobile">The Missing Semester of Your CS Education</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -433,8 +418,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/23/ffmpeg_denoise/">
-                        <span class="hidden-mobile">ffmpeg Denoise</span>
+                      <a href="/2021/02/01/Salome-tut-01/">
+                        <span class="hidden-mobile">Salome tut 01</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

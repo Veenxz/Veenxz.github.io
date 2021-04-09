@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <title>Slurm_note.md - Veen</title>
+  <title>The Missing Semester of Your CS Education - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Slurm_note.md">
+            <span class="h2" id="subtitle" title="The Missing Semester of Your CS Education">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-30 14:34" pubdate>
-        2021年3月30日 下午
+      <time datetime="2021-04-09 20:19" pubdate>
+        2021年4月9日 晚上
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      520 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      5
        分钟
     </span>
   
@@ -224,174 +224,49 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Slurm_note.md</h1>
+            <h1 style="display: none">The Missing Semester of Your CS Education</h1>
             
             <div class="markdown-body">
-              <p>Slurm使用帮助</p>
-<a id="more"></a>
-<p>From <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356415669">https://zhuanlan.zhihu.com/p/356415669</a></p>
-<h2 id="1-Slurm-命令"><a href="#1-Slurm-命令" class="headerlink" title="1. Slurm 命令"></a>1. Slurm 命令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Slurm命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sinfo</td>
-<td>查看集群分区状态</td>
-</tr>
-<tr>
-<td>squeue</td>
-<td>查看作业队列</td>
-</tr>
-<tr>
-<td>srun, salloc</td>
-<td>交互式运行作业</td>
-</tr>
-<tr>
-<td>sbatch</td>
-<td>提交作业</td>
-</tr>
-<tr>
-<td>scancel</td>
-<td>取消作业</td>
-</tr>
-<tr>
-<td>scontrol</td>
-<td>查看和修改作业参数</td>
-</tr>
-<tr>
-<td>sacct</td>
-<td>查看已完成作业</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="2-Sinfo"><a href="#2-Sinfo" class="headerlink" title="2. Sinfo"></a>2. Sinfo</h2><pre><code class="hljs bash">sinfo               <span class="hljs-comment">#查看所有分区状态</span>
-sinfo -a            <span class="hljs-comment">#查看所有分区状态</span>
-sinfo -N            <span class="hljs-comment">#查看节点状态</span>
-sinfo -n node-name  <span class="hljs-comment">#查看指定节点状态</span>
-sinfo --<span class="hljs-built_in">help</span>        <span class="hljs-comment">#查看sinfo的说明</span></code></pre>
-<h3 id="2-1-节点状态"><a href="#2-1-节点状态" class="headerlink" title="2.1 节点状态"></a>2.1 节点状态</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>alloc</th>
-<th>idle</th>
-<th>mix</th>
-<th>down</th>
-<th>drain</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>节点在用</td>
-<td>节点可用</td>
-<td>部分占用</td>
-<td>节点下线</td>
-<td>节点故障</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="3-Squeue"><a href="#3-Squeue" class="headerlink" title="3. Squeue"></a>3. Squeue</h2><pre><code class="hljs bash">squeue              <span class="hljs-comment">#查看运行中的作业列表</span>
-squeue -l           <span class="hljs-comment">#查看列表细节信息</span>
-squene -j job-id    <span class="hljs-comment">#查看运行中作业信息</span>
-squeue -u username  <span class="hljs-comment">#查看user所有运行中的作业</span></code></pre>
-<h3 id="3-1-作业状态"><a href="#3-1-作业状态" class="headerlink" title="3.1 作业状态"></a>3.1 作业状态</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>R</th>
-<th>PD</th>
-<th>CG</th>
-<th>CD</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>正在运行</td>
-<td>正在排队</td>
-<td>即将完成</td>
-<td>已完成</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="4-提交作业"><a href="#4-提交作业" class="headerlink" title="4. 提交作业"></a>4. 提交作业</h2><p>Slurm提交作业有3种模式，分别为交互模式，批处理模式，分配模式，这三种方式只是用户使用方式的区别，在管理，调度，记账时同等对待。</p>
-<h3 id="4-1-参数说明"><a href="#4-1-参数说明" class="headerlink" title="4.1 参数说明"></a>4.1 参数说明</h3><p>以下所有参数在 <code>srun, sbatch, salloc</code> 中均可以使用。更多参数见<code>srun --help</code>, <code>sbatch --help</code>, <code>salloc --help</code>。</p>
-<pre><code class="hljs bash">-c, --cpu-per-task=NCPUs        <span class="hljs-comment">#指定每个进程使用核数，不指定默认为1</span>
--e, --error=error_filename      <span class="hljs-comment">#指定错误文件输出</span>
--J, --job-name=JOBNAME          <span class="hljs-comment">#指定作业名称</span>
---mail-type=END/FAIL/ALL        <span class="hljs-comment">#邮件提醒，可选:END,FAIL,ALL</span>
---mail-user=mail_address        <span class="hljs-comment">#通知邮箱地址</span>
--n, --ntask=NTASKs <span class="hljs-comment">#指定总进程数；不使用cpus-per-task，可理解为进程数即为核数 </span>
---ntask-per-node=N <span class="hljs-comment">#指定每个节点进程数/核数，使用-n参数后变为每个节点最多运行的进程数</span>
--N, --nodes=N                   <span class="hljs-comment">#指定节点数量</span>
--o, --output=out_filename       <span class="hljs-comment">#指定输出文件输出</span>
--p, --partion=debug             <span class="hljs-comment">#指定分区</span>
--t, --time=dd-hh:mm:ss          <span class="hljs-comment">#作业最大运行时间</span>
--w, --nodelist=node[1,2]        <span class="hljs-comment">#指定优先使用节点，不可与避免节点冲突</span>
--x, --exclude=node[3,5-6]       <span class="hljs-comment">#指定避免使用节点，不可与优先节点冲突</span>
---mem-per-cpu=MB                <span class="hljs-comment">#指定计算cpu最大占用内存大小</span></code></pre>
-<h3 id="4-2-交互模式-Srun"><a href="#4-2-交互模式-Srun" class="headerlink" title="4.2 交互模式 Srun"></a>4.2 交互模式 Srun</h3><p>交互式作业提交，提交命令后，等待作业执行完成之后返回命令行窗口。</p>
-<h3 id="Demo-of-srun"><a href="#Demo-of-srun" class="headerlink" title="Demo of srun"></a>Demo of srun</h3><pre><code class="hljs bash">srun -J JOBNAME -p debug -N 2 -c 1 -n 32 --ntasks-per-node=16 -w node[3,4] -x node[1,5-6] --time=dd-hh:mm:ss --output=file_name --error=file_name --mail-user=address --mail-type=ALL mpirun -n 64 ./iPic3D ./inputfile/test.inp</code></pre>
-<p>同 <strong>Demo of sbatch</strong></p>
-<h3 id="4-3-批处理模式-Sbatch"><a href="#4-3-批处理模式-Sbatch" class="headerlink" title="4.3 批处理模式 Sbatch"></a>4.3 批处理模式 Sbatch</h3><p>批处理作业是指用户编写作业脚本，指定资源需求约束，提交后台执行作业。提交批处理作业的命令为 sbatch，用户提交命令即返回命令行窗口，但此时作业在进入调度状态，在资源满足要求时，分配完计算结点之后，系统将在所分配的第一个计算结点（而不是登录结点）上加载执行用户的作业脚本。批处理作业的脚本为一个文本文件，脚本第一行以 “#!” 字符开头，并制定脚本文件的解释程序，如 sh，bash。</p>
-<p>运行 <code>sbatch filename</code> 来提交任务；计算开始后，工作目录中会生成以 slurm 开头的.out 文件为输出文件（不指定输出的话）。</p>
-<h3 id="Demo-of-sbatch"><a href="#Demo-of-sbatch" class="headerlink" title="Demo of sbatch"></a>Demo of sbatch</h3><p>保存在运行程序目录下即可，文件名随意（可以无后缀，内容文本格式即可）；作业提交命令<code>sbatch filename</code></p>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash </span>
-<span class="hljs-comment">#提交单个作业</span>
-<span class="hljs-comment">#SBATCH --job-name=JOBNAME      %指定作业名称</span>
-<span class="hljs-comment">#SBATCH --partition=debug       %指定分区</span>
-<span class="hljs-comment">#SBATCH --nodes=2               %指定节点数量</span>
-<span class="hljs-comment">#SBATCH --cpus-per-task=1       %指定每个进程使用核数，不指定默认为1</span>
-<span class="hljs-comment">#SBATCH -n 32       %指定总进程数；不使用cpus-per-task，可理解为进程数即为核数</span>
-<span class="hljs-comment">#SBATCH --ntasks-per-node=16    %指定每个节点进程数/核数,使用-n参数（优先级更高），变为每个节点最多运行的任务数</span>
-<span class="hljs-comment">#SBATCH --nodelist=node[3,4]    %指定优先使用节点</span>
-<span class="hljs-comment">#SBATCH --exclude=node[1,5-6]   %指定避免使用节点</span>
-<span class="hljs-comment">#SBATCH --time=dd-hh:mm:ss      %作业最大运行时长，参考格式填写</span>
-<span class="hljs-comment">#SBATCH --output=file_name      %指定输出文件输出</span>
-<span class="hljs-comment">#SBATCH --error=file_name       %指定错误文件输出</span>
-<span class="hljs-comment">#SBATCH --mail-type=ALL         %邮件提醒,可选:END,FAIL,ALL</span>
-<span class="hljs-comment">#SBATCH --mail-user=address     %通知邮箱地址</span>
-
-<span class="hljs-built_in">source</span> /public/home/user/.bashrc   <span class="hljs-comment">#导入环境变量文件</span>
-
-mpirun -n 32 ./iPic3D ./inputfiles/test.inp <span class="hljs-comment">#运行命令</span></code></pre>
-<p>同 <strong>Demo of srun</strong></p>
-<h3 id="4-4-分配模式-Salloc"><a href="#4-4-分配模式-Salloc" class="headerlink" title="4.4 分配模式 Salloc"></a>4.4 分配模式 Salloc</h3><p>结点资源抢占命令。该命令支持用户在提交作业前，抢占所需计算资源（此时开始计算所用机时）。需请求资源，然后在获取节点后登录到计算节点。目前作者使用设备可直接登录计算节点，暂未使用。 <code>sacct</code> 命令也未启用，暂无说明，有需要可在文末参考网页查看。</p>
-<h2 id="5-Scontrol"><a href="#5-Scontrol" class="headerlink" title="5. Scontrol"></a>5. Scontrol</h2><h3 id="5-1-信息查看"><a href="#5-1-信息查看" class="headerlink" title="5.1 信息查看"></a>5.1 信息查看</h3><pre><code class="hljs bash">scontrol show job JOBID         <span class="hljs-comment">#查看作业的详细信息</span>
-scontrol show node              <span class="hljs-comment">#查看所有节点详细信息</span>
-scontrol show node node-name    <span class="hljs-comment">#查看指定节点详细信息</span>
-scontrol show node | grep CPU   <span class="hljs-comment">#查看各节点cpu状态</span>
-scontrol show node node-name | grep CPU <span class="hljs-comment">#查看指定节点cpu状态</span></code></pre>
-<h3 id="5-2-更新作业"><a href="#5-2-更新作业" class="headerlink" title="5.2 更新作业"></a>5.2 更新作业</h3><p>在任务开始前却发现作业的属性写错了（例如提交错了分区，修改名字），取消了重新排队似乎很不划算。如果作业恰好 <strong>没在运行</strong>，我们是可以通过 <code>scontrol</code> 命令来更新作业的属性</p>
-<pre><code class="hljs bash">scontrol update jobid=JOBID ... <span class="hljs-comment">#...为下面参数</span>
-reqnodelist=&lt;nodes&gt;
-reqcores=&lt;count&gt;
-name=&lt;name&gt;
-nodelist=&lt;nodes&gt;
-excnodelist=&lt;nodes&gt;
-numcpus=&lt;min_count-max_count&gt;
-numnodes=&lt;min_count-max_count&gt;
-numtasks=&lt;count&gt;
-starttime=yyyy-mm-dd
-partition=&lt;name&gt;
-timelimit=d-h:m:s
-mincpusnode=&lt;count&gt;
-minmemorycpu=&lt;megabytes&gt;
-minmemorynode=&lt;megabytes&gt;</code></pre>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a href="https://link.zhihu.com/?target=https%3A//hpc.pku.edu.cn/_book/guide/slurm/slurm.html">作业调度系统 · 北京大学高性能计算使用指南</a></li>
-<li><a href="https://link.zhihu.com/?target=http%3A//bicmr.pku.edu.cn/~wenzw/pages/slurm.html">SLURM 使用参考</a></li>
-<li><a href="https://link.zhihu.com/?target=https%3A//docs.hpc.sjtu.edu.cn/job/slurm.html">Slurm 作业调度系统 — 上海交大超算平台用户手册 文档</a></li>
-<li><a href="https://link.zhihu.com/?target=https%3A//www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B">SLURM使用基础教程 - 曙光先进计算</a></li>
-<li><a href="https://link.zhihu.com/?target=https%3A//arc.umich.edu/greatlakes/slurm-user-guide/">Slurm User Guide for Great Lakes | ITS Advanced Research Computing</a></li>
-</ol>
+              <h1 id="计算机教育中缺失的一课"><a href="#计算机教育中缺失的一课" class="headerlink" title="计算机教育中缺失的一课"></a>计算机教育中缺失的一课</h1><h1 id="The-Missing-Semester-of-Your-CS-Education-中文版"><a href="#The-Missing-Semester-of-Your-CS-Education-中文版" class="headerlink" title="The Missing Semester of Your CS Education 中文版"></a>The Missing Semester of Your CS Education 中文版</h1><a id="more"></a>
+<p>From <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/">https://missing-semester-cn.github.io/</a></p>
+<p>大学里的计算机课程通常专注于讲授从操作系统到机器学习这些学院派的课程或主题，而对于如何精通工具这一主题则往往会留给学生自行探索。在这个系列课程中，我们讲授命令行、强大的文本编辑器的使用、使用版本控制系统提供的多种特性等等。学生在他们受教育阶段就会和这些工具朝夕相处（在他们的职业生涯中更是这样）。 因此，花时间打磨使用这些工具的能力并能够最终熟练地、流畅地使用它们是非常有必要的。</p>
+<p>精通这些工具不仅可以帮助您更快的使用工具完成任务，并且可以帮助您解决在之前看来似乎无比复杂的问题。</p>
+<p>关于<a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/about/">开设此课程的动机</a>.</p>
+<h1 id="日程"><a href="#日程" class="headerlink" title="日程"></a>日程</h1><ul>
+<li><strong>1/13</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/course-shell/">课程概览与 shell</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/14</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/shell-tools/">Shell 工具和脚本</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/15</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/editors/">编辑器 (Vim)</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/16</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/data-wrangling/">数据整理</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/21</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/command-line/">命令行环境</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/22</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/version-control/">版本控制(Git)</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/23</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/debugging-profiling/">调试及性能分析</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/27</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/metaprogramming/">元编程</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/28</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/security/">安全和密码学</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/29</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/potpourri/">大杂烩</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+<li><strong>1/30</strong>: <a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/qa/">提问&amp;回答</a><img src="https://img.shields.io/badge/Chinese-%E2%9C%94-green" srcset="/img/loading.gif" alt="img"></li>
+</ul>
+<p>讲座视频可以在 <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J">YouTube</a>上找到。</p>
+<h1 id="关于本课程"><a href="#关于本课程" class="headerlink" title="关于本课程"></a>关于本课程</h1><p><strong>教员</strong>: 本课程由 <a target="_blank" rel="noopener" href="https://www.anishathalye.com/">Anish</a>、 <a target="_blank" rel="noopener" href="https://thesquareplanet.com/">Jon</a> 和 <a target="_blank" rel="noopener" href="http://josejg.com/">Jose</a> 讲授。</p>
+<p><strong>问题</strong>: 请通过 <a href="mailto:missing-semester@mit.edu">missing-semester@mit.edu</a>联系我们。</p>
+<h1 id="在-MIT-之外"><a href="#在-MIT-之外" class="headerlink" title="在 MIT 之外"></a>在 MIT 之外</h1><p>我们也将本课程分享到了 MIT 之外，希望其他人也能受益于这些资源。您可以在下面这些地方找到相关文章和讨论。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=22226380">Hacker News</a></li>
+<li><a target="_blank" rel="noopener" href="https://lobste.rs/s/ti1k98/missing_semester_your_cs_education_mit">Lobsters</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.reddit.com/r/learnprogramming/comments/eyagda/the_missing_semester_of_your_cs_education_mit/">/r/learnprogramming</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.reddit.com/r/programming/comments/eyagcd/the_missing_semester_of_your_cs_education_mit/">/r/programming</a></li>
+<li><a target="_blank" rel="noopener" href="https://twitter.com/jonhoo/status/1224383452591509507">Twitter</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J">YouTube</a></li>
+</ul>
+<h1 id="译文"><a href="#译文" class="headerlink" title="译文"></a>译文</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://missing-semester-zh-hant.github.io/">繁体中文</a></li>
+<li><a target="_blank" rel="noopener" href="https://missing-semester-kr.github.io/">Korean</a></li>
+<li><a target="_blank" rel="noopener" href="https://missing-semester-esp.github.io/">Spanish</a></li>
+<li><a target="_blank" rel="noopener" href="https://missing-semester-tr.github.io/">Turkish</a></li>
+</ul>
+<p>注意: 上述连接为社区翻译，我们并未验证其内容</p>
+<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>感谢 Elaine Mello, Jim Cain 以及 <a target="_blank" rel="noopener" href="https://openlearning.mit.edu/">MIT Open Learning</a> 帮助我们录制讲座视频。</p>
+<p>感谢 Anthony Zolnik 和 <a target="_blank" rel="noopener" href="https://aeroastro.mit.edu/">MIT AeroAstro</a> 提供 A/V 设备。</p>
+<p>感谢 Brandi Adams 和 <a target="_blank" rel="noopener" href="https://www.eecs.mit.edu/">MIT EECS</a> 对本课程的支持。</p>
 
             </div>
             <hr>
@@ -412,8 +287,8 @@ minmemorynode=&lt;megabytes&gt;</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/01/Salome-tut-01/">
-                        <span class="hidden-mobile">Salome tut 01</span>
+                      <a href="/2021/03/30/Slurm-note/">
+                        <span class="hidden-mobile">Slurm_note</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
