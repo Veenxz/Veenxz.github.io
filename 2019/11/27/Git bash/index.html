@@ -597,6 +597,11 @@ git rebase -i commitId
 <span class="hljs-comment"># 保存后退出编辑提交的信息</span>
 <span class="hljs-comment"># 继续保存后退出提示：</span>
 <span class="hljs-comment"># Successfully rebased and updated refs/heads/master.</span></code></pre>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><pre><code class="hljs bash">$ git push origin
+fatal: unable to access <span class="hljs-string">&#x27;xxx&#x27;</span>: Failed to connect to github.com port 443: Timed out
+
+$ git config --global http.sslVerify <span class="hljs-string">&quot;false&quot;</span>
+</code></pre>
 
             </div>
             <hr>
