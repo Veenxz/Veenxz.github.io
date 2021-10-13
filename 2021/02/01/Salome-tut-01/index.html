@@ -1,42 +1,65 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
+  <meta name="description" content="Primitives, partition and meshing exampleThis sample is known to work on the latest SALOME release.The compatibility with previous versions of SALOME is not guaranteed, though the sample can work on o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Salome tut 01">
+<meta property="og:url" content="http://yoursite.com/2021/02/01/Salome-tut-01/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="Primitives, partition and meshing exampleThis sample is known to work on the latest SALOME release.The compatibility with previous versions of SALOME is not guaranteed, though the sample can work on o">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen_2.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen3.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen7.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen5.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen9.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen6.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen8.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/copy_of_EDF1_screen9.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/thickness.png/image_preview">
+<meta property="og:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen10.png/image_preview">
+<meta property="og:image" content="http://yoursite.com/2021/02/01/img/mesh01.png">
+<meta property="article:published_time" content="2021-01-31T16:06:40.000Z">
+<meta property="article:modified_time" content="2021-02-01T04:05:35.474Z">
+<meta property="article:author" content="Veen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview">
+  
   <title>Salome tut 01 - Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
-
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -55,7 +78,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -66,8 +89,9 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -141,13 +165,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -156,7 +181,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -181,21 +206,18 @@
 
 <div class="mt-1">
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      748 字
+      4.3k 字
     </span>
   
 
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
-       分钟
+      14 分钟
     </span>
   
 
@@ -216,15 +238,21 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Salome tut 01</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月1日 中午
+                
+              </p>
             
             <div class="markdown-body">
               <h2 id="Primitives-partition-and-meshing-example"><a href="#Primitives-partition-and-meshing-example" class="headerlink" title="Primitives, partition and meshing example"></a>Primitives, partition and meshing example</h2><p>This sample is known to work on the latest SALOME release.<br>The compatibility with previous versions of SALOME is not guaranteed, though the sample can work on old versions also.</p>
@@ -261,7 +289,7 @@
 <li><p><strong>Explode</strong> Sketch_1 into Edges.</p>
 </li>
 <li><p><strong>Explode</strong> Mirror_1 into Edges.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen_2.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/screen_1.png/image_preview" srcset="/img/loading.gif" lazyload alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen_2.png/image_preview" srcset="/img/loading.gif" lazyload alt="img"> </p>
 </li>
 <li><p>Creation of Wire_1: (menu New Entity/Build/Wire)</p>
 <p>Select the group of Edges (previously extracted).</p>
@@ -318,7 +346,7 @@
 <li>(2nd Constructor) (Just two edges)</li>
 <li>Fillet by selection of edges.</li>
 <li><p>Radius = 25.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen3.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen7.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen6">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen5.png/image_preview" srcset="/img/loading.gif" alt="img"> </p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen3.png/image_preview" srcset="/img/loading.gif" lazyload alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen7.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_screen6">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen5.png/image_preview" srcset="/img/loading.gif" lazyload alt="img"> </p>
 </li>
 </ul>
 <h3 id="Mesh"><a href="#Mesh" class="headerlink" title="Mesh"></a>Mesh</h3><ul>
@@ -401,12 +429,12 @@
 <li><p>Add Hyp.: Propagation of 1D Hyp. on opposite edges</p>
 </li>
 <li><p>Compute.</p>
-<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen8">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen6.png/image_preview" srcset="/img/loading.gif" alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen8.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen7">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/copy_of_EDF1_screen9.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/thickness.png/image_preview" srcset="/img/loading.gif" alt="EDF1_thickness">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen10.png/image_preview" srcset="/img/loading.gif" alt="EDF1_screen9"> </p>
+<p><img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen9.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_screen8">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen6.png/image_preview" srcset="/img/loading.gif" lazyload alt="img">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen8.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_screen7">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/copy_of_EDF1_screen9.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_screen9">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/thickness.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_thickness">  <img src="https://www.salome-platform.org/user-section/salome-tutorials/edf-exercise-1/EDF1_screen10.png/image_preview" srcset="/img/loading.gif" lazyload alt="EDF1_screen9"> </p>
 </li>
 </ul>
 <p>​                                                                                                                            </p>
 <p>My final mesh</p>
-<p><img src="..\img\mesh01.png" srcset="/img/loading.gif" alt="mesh01"></p>
+<p><img src="..\img\mesh01.png" srcset="/img/loading.gif" lazyload alt="mesh01"></p>
 
             </div>
             <hr>
@@ -416,10 +444,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -446,33 +478,30 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
-          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: false,
-          recordIP: false,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -499,7 +528,7 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -533,8 +562,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
-
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
   </div>
   
   <div class="statistics">
@@ -567,55 +595,55 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
@@ -623,7 +651,8 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -632,20 +661,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -660,6 +675,9 @@
       MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
         },
         options: {
           renderActions: {
@@ -687,7 +705,7 @@
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
 
   
 
@@ -696,30 +714,6 @@
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -727,7 +721,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

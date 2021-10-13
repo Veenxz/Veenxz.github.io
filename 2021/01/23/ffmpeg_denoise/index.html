@@ -1,42 +1,52 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="ffmpeg+sox 音频降噪处理">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
+  <meta name="description" content="ffmpeg+sox 音频降噪处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ffmpeg Denoise">
+<meta property="og:url" content="http://yoursite.com/2021/01/23/ffmpeg_denoise/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="ffmpeg+sox 音频降噪处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-23T05:08:46.000Z">
+<meta property="article:modified_time" content="2021-01-23T11:07:57.660Z">
+<meta property="article:author" content="Veen">
+<meta name="twitter:card" content="summary_large_image">
+  
   <title>ffmpeg Denoise - Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
-
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -55,7 +65,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -66,8 +76,9 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -141,13 +152,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -156,7 +168,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -181,21 +193,18 @@
 
 <div class="mt-1">
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      7.9k 字
     </span>
   
 
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-clock-fill"></i>
       
       
-      40
-       分钟
+      25 分钟
     </span>
   
 
@@ -216,111 +225,41 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">ffmpeg Denoise</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月23日 晚上
+                
+              </p>
+            
             <div class="markdown-body">
               <p>ffmpeg+sox 音频降噪处理</p>
 <a id="more"></a>
-<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span>
-
-s=<span class="hljs-string">&#x27;source.mp4&#x27;</span>
-n=<span class="hljs-string">&#x27;new.mp4&#x27;</span>
-d=<span class="hljs-string">&#x27;db.mp4&#x27;</span>
-
-<span class="hljs-comment"># 音频视频分离</span>
-ffmpeg -i <span class="hljs-variable">$s</span> -vcodec copy -an ts.mp4
-ffmpeg -i <span class="hljs-variable">$s</span> -acodec pcm_s16le -ar 128k -vn tm.wav 
-
-<span class="hljs-comment"># 噪音特征提取</span>
-ffmpeg -i tm.mp4 -vn -ss 00:00:00 -t 00:00:01 noise.wav
-sox noise.wav -n noiseprof noise.prof
-
-<span class="hljs-comment"># 噪音去除 最后取值在0.2～0.3 一般来说0.21即可</span>
-sox tm.wav newtm.wav noisered noise.prof 0.21
-
-<span class="hljs-comment"># 合并音频视频</span>
-ffmpeg -i newtm.wav -i ts.mp4 <span class="hljs-variable">$n</span>
-
-<span class="hljs-comment"># 声音调整</span>
-<span class="hljs-comment"># ffmpeg -i $n -vcodec copy -af &quot;volume=50dB&quot; $d</span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>s=<span class="hljs-string">&#x27;source.mp4&#x27;</span><br>n=<span class="hljs-string">&#x27;new.mp4&#x27;</span><br>d=<span class="hljs-string">&#x27;db.mp4&#x27;</span><br><br><span class="hljs-comment"># 音频视频分离</span><br>ffmpeg -i <span class="hljs-variable">$s</span> -vcodec copy -an ts.mp4<br>ffmpeg -i <span class="hljs-variable">$s</span> -acodec pcm_s16le -ar 128k -vn tm.wav <br><br><span class="hljs-comment"># 噪音特征提取</span><br>ffmpeg -i tm.mp4 -vn -ss 00:00:00 -t 00:00:01 noise.wav<br>sox noise.wav -n noiseprof noise.prof<br><br><span class="hljs-comment"># 噪音去除 最后取值在0.2～0.3 一般来说0.21即可</span><br>sox tm.wav newtm.wav noisered noise.prof 0.21<br><br><span class="hljs-comment"># 合并音频视频</span><br>ffmpeg -i newtm.wav -i ts.mp4 <span class="hljs-variable">$n</span><br><br><span class="hljs-comment"># 声音调整</span><br><span class="hljs-comment"># ffmpeg -i $n -vcodec copy -af &quot;volume=50dB&quot; $d</span><br></code></pre></td></tr></table></figure>
 <h1 id="SoX-音频处理工具使用方法"><a href="#SoX-音频处理工具使用方法" class="headerlink" title="SoX 音频处理工具使用方法"></a>SoX 音频处理工具使用方法</h1><h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>SoX 可以<strong>读取</strong>和<strong>写入</strong>常见格式的音频文件，并在此过程中选择性的加入一些声音效果。它可以组合多个输入源及合成音效，在许多系统上也可以作为<strong>音频播放器</strong>或<strong>多轨录音机使用。</strong></p>
 <p>SoX 工具在大部分 Linux 系统上都可以直接通过软件包管理器安装（如<code>sudo apt-get install sox</code>），Mac 系统上则可以使用 <code>brew install sox</code>命令。</p>
 <p>SoX 处理音频的基本流程如下：<br><code>Input(s) -&gt; Combiner -&gt; Effects -&gt; Output(s)</code></p>
 <p>SoX 工具的所有功能都可以通过一个简单的<code>sox</code>命令及相应的选项实现。但它同时提供了<code>play</code>命令用于播放音频文件，<code>rec</code>命令用于录制音频，以及 <code>soxi</code>命令用于获取音频的文件头中包含的信息。</p>
 <p>上述几个命令的基本格式如下：</p>
-<pre><code class="hljs prolog"><span class="hljs-symbol">SYNOPSIS</span>
-       sox [global-options] [format-options] infile1
-            [[format-options] infile2] ... [format-options] outfile
-            [effect [effect-options]] ...
-            
-       play [global-options] [format-options] infile1
-            [[format-options] infile2] ... [format-options]
-            [effect [effect-options]] ...
-
-       rec [global-options] [format-options] outfile
-            [effect [effect-options]] ...
-       
-       soxi [-<span class="hljs-symbol">V</span>[level]] [-<span class="hljs-symbol">T</span>] [-t|-r|-c|-s|-d|-<span class="hljs-symbol">D</span>|-b|-<span class="hljs-symbol">B</span>|-p|-e|-a] infile1 ...</code></pre>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-symbol">SYNOPSIS</span><br>       sox [global-options] [format-options] infile1<br>            [[format-options] infile2] ... [format-options] outfile<br>            [effect [effect-options]] ...<br>            <br>       play [global-options] [format-options] infile1<br>            [[format-options] infile2] ... [format-options]<br>            [effect [effect-options]] ...<br><br>       rec [global-options] [format-options] outfile<br>            [effect [effect-options]] ...<br>       <br>       soxi [-<span class="hljs-symbol">V</span>[level]] [-<span class="hljs-symbol">T</span>] [-t|-r|-c|-s|-d|-<span class="hljs-symbol">D</span>|-b|-<span class="hljs-symbol">B</span>|-p|-e|-a] infile1 ...<br></code></pre></td></tr></table></figure>
 <h2 id="二、基本使用"><a href="#二、基本使用" class="headerlink" title="二、基本使用"></a>二、基本使用</h2><h4 id="1-获取音频文件的元数据"><a href="#1-获取音频文件的元数据" class="headerlink" title="1. 获取音频文件的元数据"></a>1. 获取音频文件的元数据</h4><p><code>soxi</code>或 <code>sox --i</code>命令可以通过分析音频文件的文件头，获取其元数据（如<strong>通道数、采样率、编码</strong>等）。</p>
-<pre><code class="hljs groovy">$ soxi Faded.wav
-
-Input <span class="hljs-attr">File     :</span> <span class="hljs-string">&#x27;Faded.wav&#x27;</span>
-<span class="hljs-attr">Channels       :</span> <span class="hljs-number">2</span>
-Sample <span class="hljs-attr">Rate    :</span> <span class="hljs-number">44100</span>
-<span class="hljs-attr">Precision      :</span> <span class="hljs-number">16</span>-bit
-<span class="hljs-attr">Duration       :</span> <span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">32.63</span> = <span class="hljs-number">9376836</span> samples = <span class="hljs-number">15947</span> CDDA sectors
-File <span class="hljs-attr">Size      :</span> <span class="hljs-number">37.5</span>M
-Bit <span class="hljs-attr">Rate       :</span> <span class="hljs-number">1.41</span>M
-Sample <span class="hljs-attr">Encoding:</span> <span class="hljs-number">16</span>-bit Signed Integer PCM</code></pre>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs groovy">$ soxi Faded.wav<br><br>Input <span class="hljs-attr">File     :</span> <span class="hljs-string">&#x27;Faded.wav&#x27;</span><br><span class="hljs-attr">Channels       :</span> <span class="hljs-number">2</span><br>Sample <span class="hljs-attr">Rate    :</span> <span class="hljs-number">44100</span><br><span class="hljs-attr">Precision      :</span> <span class="hljs-number">16</span>-bit<br><span class="hljs-attr">Duration       :</span> <span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">32.63</span> = <span class="hljs-number">9376836</span> samples = <span class="hljs-number">15947</span> CDDA sectors<br>File <span class="hljs-attr">Size      :</span> <span class="hljs-number">37.5</span>M<br>Bit <span class="hljs-attr">Rate       :</span> <span class="hljs-number">1.41</span>M<br>Sample <span class="hljs-attr">Encoding:</span> <span class="hljs-number">16</span>-bit Signed Integer PCM <br></code></pre></td></tr></table></figure>
 <p>soxi 命令跟上某个特定的选项可以只获取该选项对应的信息，如只显示某音频文件 <code>Faded.wav</code>的<strong>比特率</strong>（Bit Rate）：</p>
-<pre><code class="hljs reasonml">$ soxi -B <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Faded</span>.</span></span>wav
-<span class="hljs-number">1.41</span>M</code></pre>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">$ soxi -B <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Faded</span>.</span></span>wav<br><span class="hljs-number">1.41</span>M<br></code></pre></td></tr></table></figure>
 <p>soxi 命令支持的所有选项及其含义如下：</p>
-<pre><code class="hljs sql">$ soxi
-Usage: soxi [-V[level]] [-T] [-t|-r|-c|-s|-d|-D|-b|-B|-p|-e|-a] infile1 ...
-
--t  <span class="hljs-keyword">Show</span> detected <span class="hljs-keyword">file</span>-<span class="hljs-keyword">type</span>
--r  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">sample</span>-rate
--c  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> channels
--s  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> samples (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)
--d  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">duration</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">hours</span>, <span class="hljs-keyword">minutes</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">seconds</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)
--D  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">duration</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">seconds</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)
--b  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> bits per <span class="hljs-keyword">sample</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> applicable)
--B  <span class="hljs-keyword">Show</span> the bitrate averaged <span class="hljs-keyword">over</span> the whole <span class="hljs-keyword">file</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)
--p  <span class="hljs-keyword">Show</span> estimated <span class="hljs-keyword">sample</span> <span class="hljs-keyword">precision</span> <span class="hljs-keyword">in</span> bits
--e  <span class="hljs-keyword">Show</span> the <span class="hljs-keyword">name</span> <span class="hljs-keyword">of</span> the audio <span class="hljs-keyword">encoding</span>
--a  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">file</span> comments (annotations) <span class="hljs-keyword">if</span> available
-
-<span class="hljs-keyword">With</span> <span class="hljs-keyword">no</span> options, <span class="hljs-keyword">as</span> much information <span class="hljs-keyword">as</span> <span class="hljs-keyword">is</span> available <span class="hljs-keyword">is</span> shown <span class="hljs-keyword">for</span>
-<span class="hljs-keyword">each</span> given file.</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ soxi<br>Usage: soxi [-V[level]] [-T] [-t|-r|-c|-s|-d|-D|-b|-B|-p|-e|-a] infile1 ...<br><br>-t  <span class="hljs-keyword">Show</span> detected <span class="hljs-keyword">file</span>-<span class="hljs-keyword">type</span><br>-r  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">sample</span>-rate<br>-c  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> channels<br>-s  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> samples (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)<br>-d  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">duration</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">hours</span>, <span class="hljs-keyword">minutes</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">seconds</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)<br>-D  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">duration</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">seconds</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)<br>-b  <span class="hljs-keyword">Show</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> bits per <span class="hljs-keyword">sample</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> applicable)<br>-B  <span class="hljs-keyword">Show</span> the bitrate averaged <span class="hljs-keyword">over</span> the whole <span class="hljs-keyword">file</span> (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> unavailable)<br>-p  <span class="hljs-keyword">Show</span> estimated <span class="hljs-keyword">sample</span> <span class="hljs-keyword">precision</span> <span class="hljs-keyword">in</span> bits<br>-e  <span class="hljs-keyword">Show</span> the <span class="hljs-keyword">name</span> <span class="hljs-keyword">of</span> the audio <span class="hljs-keyword">encoding</span><br>-a  <span class="hljs-keyword">Show</span> <span class="hljs-keyword">file</span> comments (annotations) <span class="hljs-keyword">if</span> available<br><br><span class="hljs-keyword">With</span> <span class="hljs-keyword">no</span> options, <span class="hljs-keyword">as</span> much information <span class="hljs-keyword">as</span> <span class="hljs-keyword">is</span> available <span class="hljs-keyword">is</span> shown <span class="hljs-keyword">for</span><br><span class="hljs-keyword">each</span> given file.<br></code></pre></td></tr></table></figure>
 <h4 id="2-获取音频的统计信息"><a href="#2-获取音频的统计信息" class="headerlink" title="2. 获取音频的统计信息"></a>2. 获取音频的统计信息</h4><p>可以使用 <code>sox &lt;inputfile&gt; -n stat</code>命令获取某音频文件的统计信息。示例如下：</p>
-<pre><code class="hljs ldif">$  sox Faded.wav -n stat
-<span class="hljs-attribute">Samples read</span>:          18753672
-<span class="hljs-attribute">Length (seconds)</span>:    212.626667
-<span class="hljs-attribute">Scaled by</span>:         2147483647.0
-<span class="hljs-attribute">Maximum amplitude</span>:     0.977417
-<span class="hljs-attribute">Minimum amplitude</span>:    -0.977478
-<span class="hljs-attribute">Midline amplitude</span>:    -0.000031
-<span class="hljs-attribute">Mean    norm</span>:          0.229415
-<span class="hljs-attribute">Mean    amplitude</span>:    -0.000006
-<span class="hljs-attribute">RMS     amplitude</span>:     0.302594
-<span class="hljs-attribute">Maximum delta</span>:         1.765564
-<span class="hljs-attribute">Minimum delta</span>:         0.000000
-<span class="hljs-attribute">Mean    delta</span>:         0.202369
-<span class="hljs-attribute">RMS     delta</span>:         0.273320
-<span class="hljs-attribute">Rough   frequency</span>:         6339
-<span class="hljs-attribute">Volume adjustment</span>:        1.023</code></pre>
-<h4 id="3-播放与录制"><a href="#3-播放与录制" class="headerlink" title="3. 播放与录制"></a>3. 播放与录制</h4><pre><code class="hljs autohotkey">play` 和`rec` 命令提供了最基本的播放和录制功能。
-播放：`$ play existing-file.wav`
-录制：`$ rec <span class="hljs-keyword">new</span>-file.wav</code></pre>
+<figure class="highlight ldif"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs ldif">$  sox Faded.wav -n stat<br><span class="hljs-attribute">Samples read</span>:          18753672<br><span class="hljs-attribute">Length (seconds)</span>:    212.626667<br><span class="hljs-attribute">Scaled by</span>:         2147483647.0<br><span class="hljs-attribute">Maximum amplitude</span>:     0.977417<br><span class="hljs-attribute">Minimum amplitude</span>:    -0.977478<br><span class="hljs-attribute">Midline amplitude</span>:    -0.000031<br><span class="hljs-attribute">Mean    norm</span>:          0.229415<br><span class="hljs-attribute">Mean    amplitude</span>:    -0.000006<br><span class="hljs-attribute">RMS     amplitude</span>:     0.302594<br><span class="hljs-attribute">Maximum delta</span>:         1.765564<br><span class="hljs-attribute">Minimum delta</span>:         0.000000<br><span class="hljs-attribute">Mean    delta</span>:         0.202369<br><span class="hljs-attribute">RMS     delta</span>:         0.273320<br><span class="hljs-attribute">Rough   frequency</span>:         6339<br><span class="hljs-attribute">Volume adjustment</span>:        1.023 <br></code></pre></td></tr></table></figure>
+<h4 id="3-播放与录制"><a href="#3-播放与录制" class="headerlink" title="3. 播放与录制"></a>3. 播放与录制</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">play` 和`rec` 命令提供了最基本的播放和录制功能。<br>播放：`$ play existing-file.wav`<br>录制：`$ rec <span class="hljs-keyword">new</span>-file.wav<br></code></pre></td></tr></table></figure>
 <p>上述命令等同于 sox 命令的如下形式：<br><code>$ sox existing-file.wav −d</code>（播放）和<code>sox −d new-file.wav</code>（录制）<br>其中<code>-d</code> 选项用于指定播放或录制时使用的音频设备，不指定时则表示使用默认设备。</p>
 <p><strong>可以这样理解：</strong></p>
 <ul>
@@ -332,18 +271,7 @@ Usage: soxi [-V[level]] [-T] [-t|-r|-c|-s|-d|-D|-b|-B|-p|-e|-a] infile1 ...
 <p>如 <code>trim</code>效果可以从音频文件中裁剪提取指定的片段到输出文件。<code>play</code>命令通过该效果可以直接播放指定片段：</p>
 <p><script type="math/tex">play foo.wav trim 10.0 5.0`或</script>play foo.wav trim 10.0 =15.0<code>播放</code>foo.wav` 文件中 10-15s 之间的音频片段</p>
 <p>使用 <code>echo</code> 效果播放 <code>Faded.wav</code>文件：</p>
-<pre><code class="hljs groovy">$ play Faded.wav echo <span class="hljs-number">0.8</span> <span class="hljs-number">0.88</span> <span class="hljs-number">200.0</span> <span class="hljs-number">0.4</span>
-
-Faded.<span class="hljs-attr">wav:</span>
-
- File <span class="hljs-attr">Size:</span> <span class="hljs-number">37.5</span>M     Bit <span class="hljs-attr">Rate:</span> <span class="hljs-number">1.41</span>M
-  <span class="hljs-symbol">Encoding:</span> Signed PCM
-  <span class="hljs-symbol">Channels:</span> <span class="hljs-number">2</span> @ <span class="hljs-number">16</span>-bit
-<span class="hljs-attr">Samplerate:</span> <span class="hljs-number">44100</span>Hz
-<span class="hljs-attr">Replaygain:</span> off
-  <span class="hljs-symbol">Duration:</span> <span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">32.63</span>
-
-<span class="hljs-attr">In:</span><span class="hljs-number">12.1</span>% <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">25.82</span> [<span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">06.81</span>] <span class="hljs-attr">Out:</span><span class="hljs-number">1.14</span>M [-=====|=====-] <span class="hljs-attr">Hd:</span><span class="hljs-number">2.7</span> <span class="hljs-attr">Clip:</span><span class="hljs-number">0</span></code></pre>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs groovy">$ play Faded.wav echo <span class="hljs-number">0.8</span> <span class="hljs-number">0.88</span> <span class="hljs-number">200.0</span> <span class="hljs-number">0.4</span><br><br>Faded.<span class="hljs-attr">wav:</span><br><br> File <span class="hljs-attr">Size:</span> <span class="hljs-number">37.5</span>M     Bit <span class="hljs-attr">Rate:</span> <span class="hljs-number">1.41</span>M<br>  <span class="hljs-symbol">Encoding:</span> Signed PCM<br>  <span class="hljs-symbol">Channels:</span> <span class="hljs-number">2</span> @ <span class="hljs-number">16</span>-bit<br><span class="hljs-attr">Samplerate:</span> <span class="hljs-number">44100</span>Hz<br><span class="hljs-attr">Replaygain:</span> off<br>  <span class="hljs-symbol">Duration:</span> <span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">32.63</span><br><br><span class="hljs-attr">In:</span><span class="hljs-number">12.1</span>% <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">25.82</span> [<span class="hljs-number">00</span>:<span class="hljs-number">03</span>:<span class="hljs-number">06.81</span>] <span class="hljs-attr">Out:</span><span class="hljs-number">1.14</span>M [-=====|=====-] <span class="hljs-attr">Hd:</span><span class="hljs-number">2.7</span> <span class="hljs-attr">Clip:</span><span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
 <h4 id="4-音频格式转换"><a href="#4-音频格式转换" class="headerlink" title="4. 音频格式转换"></a>4. 音频格式转换</h4><p><strong>文件格式类型</strong></p>
 <p>对于音频数据格式的描述，主要通过以下 4 种属性：</p>
 <ul>
@@ -396,36 +324,9 @@ Faded.<span class="hljs-attr">wav:</span>
 <p><code>$ play -r 44800 -b 16 -e signed-integer -c 2 Faded.raw</code><br>播放 raw 格式的音频文件</p>
 <p><code>$ sox Faded.wav -c 1 Faded-mono.wav</code><br>将 Faded.wav 文件转换成单声道（-c 1）后输出</p>
 <h2 id="三、音频效果"><a href="#三、音频效果" class="headerlink" title="三、音频效果"></a>三、音频效果</h2><p>SoX 工具可以在音频处理的过程中，对输入的音频数据应用众多的效果。<br>可以使用如下命令查看所有效果的帮助信息：</p>
-<pre><code class="hljs perl">$ sox --help-effect all | less
-sox:      SoX v
-
-Effect usage:
-
-allpass frequency width[h|k|<span class="hljs-string">q|o]</span>
-<span class="hljs-string"></span>
-<span class="hljs-string"></span>
-<span class="hljs-string">band [-n] center [width[h|</span>k|<span class="hljs-string">q|o]]</span>
-<span class="hljs-string"></span>
-<span class="hljs-string"></span>
-<span class="hljs-string">bandpass [-c] frequency width[h|</span>k|<span class="hljs-string">q|o]</span>
-<span class="hljs-string"></span>
-<span class="hljs-string"></span>
-<span class="hljs-string">bandreject frequency width[h|</span>k|<span class="hljs-string">q|o]</span>
-<span class="hljs-string"></span>
-<span class="hljs-string"></span>
-<span class="hljs-string">bass gain [frequency(100) [width[s|</span>h|k|<span class="hljs-string">q|o]](0.5s)]</span>
-<span class="hljs-string"></span>
-<span class="hljs-string"></span>
-<span class="hljs-string">bend [-f frame-rate(25)] [-o over-sample(16)] &#123;start,cents,end&#125;</span>
-<span class="hljs-string"></span>
-<span class="hljs-string">:</span></code></pre>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs perl">$ sox --help-effect all | less<br>sox:      SoX v<br><br>Effect usage:<br><br>allpass frequency width[h|k|<span class="hljs-string">q|o]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">band [-n] center [width[h|</span>k|<span class="hljs-string">q|o]]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">bandpass [-c] frequency width[h|</span>k|<span class="hljs-string">q|o]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">bandreject frequency width[h|</span>k|<span class="hljs-string">q|o]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">bass gain [frequency(100) [width[s|</span>h|k|<span class="hljs-string">q|o]](0.5s)]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">bend [-f frame-rate(25)] [-o over-sample(16)] &#123;start,cents,end&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">:</span><br></code></pre></td></tr></table></figure>
 <p>也可以直接查看具体某个音频效果的使用方法：</p>
-<pre><code class="hljs ada">$  sox <span class="hljs-comment">--help-effect echo</span>
-sox:      SoX v
-
-Effect usage:
-
-echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">out</span> <span class="hljs-keyword">delay</span> decay [ <span class="hljs-keyword">delay</span> decay ... ]</code></pre>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ada">$  sox <span class="hljs-comment">--help-effect echo</span><br>sox:      SoX v<br><br>Effect usage:<br><br>echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">out</span> <span class="hljs-keyword">delay</span> decay [ <span class="hljs-keyword">delay</span> decay ... ]<br></code></pre></td></tr></table></figure>
 <p>以下是一些简单的应用场景。</p>
 <h4 id="1-更改声道数"><a href="#1-更改声道数" class="headerlink" title="1. 更改声道数"></a>1. 更改声道数</h4><p>sox 命令可以更改音频文件中声道的数目，如将单声道音频转换成双声道：<br><code>$ sox foo.wav foostereo.wav channels 2</code> 或 <code>$ sox foo.wav -c 2 foostereo.wav</code></p>
 <p>但是上述命令并没有创建一个“真实”的双声道音频，而是将单声道音频复制成完全一致的两个声道再合并到输出文件中。</p>
@@ -437,8 +338,7 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 <p>此外，<code>remix</code> 还可以将输入文件中的多个声道数据分别进行融合。<br>如使用 <code>-M</code>选项将两个双声道音频合并，再通过 <code>remix</code> 将合并得到的四个声道两两融合，生成一个只包含两个声道的输出文件。<br><code>$ sox -M stereo1.wav stereo2.wav output.wav remix 1,3 2,4</code></p>
 <h4 id="2-改变音量"><a href="#2-改变音量" class="headerlink" title="2. 改变音量"></a>2. 改变音量</h4><p><code>sox</code>命令的<code>-v</code>选项可以用来（成倍地）改变音量的大小：<br><code>$ sox -v 0.5 foo.wav bar.wav</code><br>上述命令将<code>foo.wav</code>音频放大 0.5 倍音量后输出至<code>bar.wav</code>文件</p>
 <p>可以将音量放大功能与 <code>stat</code>效果结合。<br>以 <code>sox foo.wav -n stat -v</code>命令返回的数字作为放大倍数，将最大化 <code>foo.wav</code>的音量而不至于出现<strong>削波</strong>：</p>
-<pre><code class="hljs ruby"><span class="hljs-variable">$ </span>sox foo.wav -n stat -v <span class="hljs-number">2</span>&gt; vc
-<span class="hljs-variable">$ </span>sox -v <span class="hljs-string">`cat vc`</span> foo.wav foo-maxed.wav</code></pre>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$ </span>sox foo.wav -n stat -v <span class="hljs-number">2</span>&gt; vc<br><span class="hljs-variable">$ </span>sox -v <span class="hljs-string">`cat vc`</span> foo.wav foo-maxed.wav<br></code></pre></td></tr></table></figure>
 <p>此外，还有一个选项 <code>--norm</code> 用来<strong>归一化</strong>音频响度。为了最大化音频的声音强度，可以在处理输入音频时将该选项设置为 -1：<br><code>sox --norm=-1 &lt;inputfile&gt; &lt;outputfile&gt;</code></p>
 <h4 id="3-提取文件的某个部分"><a href="#3-提取文件的某个部分" class="headerlink" title="3. 提取文件的某个部分"></a>3. 提取文件的某个部分</h4><p>sox 命令的 <code>trim</code>效果可以将输入音频的某一段裁剪出来并提取到输出文件中。</p>
 <p><code>trim</code> 接收两个参数，一个作为裁剪片段的起始位置，另一个作为该片段持续的时间。<br>可以使用整数<code>+s</code>格式的参数以样本个数作为计量单位，也可以直接使用 <code>((hh:)mm:)ss(.fs)</code>形式的时间参数。当参数为纯整数时，单位为秒。</p>
@@ -453,7 +353,7 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 <h4 id="7-混合音频"><a href="#7-混合音频" class="headerlink" title="7. 混合音频"></a>7. 混合音频</h4><p>sox 命令的 <code>-m</code>选项可以将两个音频文件混合以后生成输出文件。</p>
 <p><code>$ sox -m sine100.wav sine250.wav sine100-250.wav</code><br>将<code>sine100.wav</code> 和 <code>sine250.wav</code> 两个音频文件融合以后作为<code>sine100-250.wav</code>文件的音频数据。</p>
 <p><code>$ sox -m -v0.5 music.mp3 -v2 speech.wav presentation.wav</code><br>将背景音乐（<code>music.mp3</code>）音量降低一半后与放大 2 倍音量的人声数据（<code>speech.wav</code>）融合。<br>如果不确定融合效果，可以先通过 play 命令使用相同的参数对结果进行“预览”：</p>
-<pre><code class="hljs smali">$ play -m -v0.5 music.mp3 -v2 speech.wav</code></pre>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">$ play -m -v0.5 music.mp3 -v2 speech.wav<br></code></pre></td></tr></table></figure>
 <p><strong>PS：</strong></p>
 <p>与前面的<code>-M</code> 选项不同，<code>-m</code>选项倾向于对<strong>声道数据</strong>的混合，即两个单声道文件通过 <code>-m</code>混合以后输出仍是单声道数据。输出文件中的单个声道包含了输入的两个声道的特征。</p>
 <p>而 <code>-M</code> 选项更倾向于对音频文件的合并，默认不对声道数据进行混合。所以两个单声道文件通过 <code>-M</code> 合并以后默认输出双声道音频。输出文件中的两个声道分别对应于输入的两个声道（数据没有混合）。除非通过<code>-c</code>选项手动指定输出文件的声道数量。</p>
@@ -472,10 +372,14 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -489,8 +393,8 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/19/fvSolution/">
-                        <span class="hidden-mobile">fvSolution</span>
+                      <a href="/2021/01/19/fvSchemes/">
+                        <span class="hidden-mobile">fvSchemes</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -502,33 +406,30 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
-          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: false,
-          recordIP: false,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -555,7 +456,7 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -589,8 +490,7 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
-
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
   </div>
   
   <div class="statistics">
@@ -623,55 +523,55 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
   
 </footer>
 
-<!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
@@ -679,7 +579,8 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -688,20 +589,6 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -716,6 +603,9 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
       MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
         },
         options: {
           renderActions: {
@@ -743,7 +633,7 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
 
   
 
@@ -752,30 +642,6 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -783,7 +649,6 @@ echo gain-<span class="hljs-keyword">in</span> gain-<span class="hljs-keyword">o
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

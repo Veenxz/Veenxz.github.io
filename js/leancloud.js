@@ -123,7 +123,8 @@
     // 如果有页面浏览数节点，则请求浏览数并自增
     var viewCtn = document.querySelector('#leancloud-page-views-container');
     if (viewCtn) {
-      var target = decodeURI(window.location.pathname);
+      var path = eval(CONFIG.web_analytics.leancloud.path || 'window.location.pathname');
+      var target = decodeURI(path.replace(/\/*(index.html)?$/, '/'));
       var viewGetter = getRecord(Counter, target).then((record) => {
         enableIncr && incrArr.push(buildIncrement(record.objectId));
         if (viewCtn) {
@@ -172,8 +173,10 @@
   } else {
     fetch('https://app-router.leancloud.cn/2/route?appId=' + appId)
       .then(resp => resp.json())
-      .then(({ api_server }) => {
-        fetchData('https://' + api_server);
+      .then((data) => {
+        if (data.api_server) {
+          fetchData('https://' + data.api_server);
+        }
       });
   }
 })(window, document);

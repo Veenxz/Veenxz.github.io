@@ -1,42 +1,53 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="This Blog is writing for steps of CUDA installing on Ubuntu 20.04.">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
+  <meta name="description" content="This Blog is writing for steps of CUDA installing on Ubuntu 20.04.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install CUDA 11.1 &amp; cuDNN">
+<meta property="og:url" content="http://yoursite.com/2020/10/25/Install%20CUDA%2011.1%20&%20cuDNN/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="This Blog is writing for steps of CUDA installing on Ubuntu 20.04.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-25T05:34:04.000Z">
+<meta property="article:modified_time" content="2020-10-26T08:12:45.753Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="ML">
+<meta name="twitter:card" content="summary_large_image">
+  
   <title>Install CUDA 11.1 &amp; cuDNN - Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
-
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -55,7 +66,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -66,8 +77,9 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -141,13 +153,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -156,13 +169,13 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Install CUDA 11.1 & cuDNN">
+            <span class="h2" id="subtitle" title="Install CUDA 11.1 &amp; cuDNN">
               
             </span>
 
@@ -181,21 +194,18 @@
 
 <div class="mt-1">
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      243 字
+      1.4k 字
     </span>
   
 
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
-       分钟
+      4 分钟
     </span>
   
 
@@ -216,15 +226,21 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Install CUDA 11.1 &amp; cuDNN</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月26日 下午
+                
+              </p>
             
             <div class="markdown-body">
               <p>This Blog is writing for steps of CUDA installing on Ubuntu 20.04.</p>
@@ -232,42 +248,27 @@
 <h2 id="Install-CUDA-11-1"><a href="#Install-CUDA-11-1" class="headerlink" title="Install CUDA 11.1"></a>Install CUDA 11.1</h2><ol>
 <li>Check Updates</li>
 </ol>
-<pre><code class="hljs bash">sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get autoremove</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br>sudo apt-get upgrade<br>sudo apt-get autoremove<br></code></pre></td></tr></table></figure>
 <ol>
 <li>Switch Navida Metapackage Version<blockquote>
 <p>Open Software &amp; Updates and switch Navida metapackage to 455.<br>Apply Changes.</p>
-<pre><code class="hljs bash">reboot</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">reboot<br></code></pre></td></tr></table></figure>
 </blockquote>
 </li>
 </ol>
 <ol>
 <li>Download Installer for Linux Ubuntu 20.04 x86_64 (<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a>) </li>
 </ol>
-<pre><code class="hljs bash">wget https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run
-sudo sh cuda_11.1.0_455.23.05_linux.run</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda_11.1.0_455.23.05_linux.run<br>sudo sh cuda_11.1.0_455.23.05_linux.run<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>On the first prompt choose Continue.<br>On the second prompt press Enter add the first metapackage to blacklist.<br>Choose Install.</p>
 </blockquote>
 <ol>
 <li>Config Environment Variables</li>
 </ol>
-<pre><code class="hljs bash">gedit ~/.bashrc
-<span class="hljs-comment"># Add these lines to bashrc file.</span>
-<span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$LD_LIBRARY_PATH</span>:/usr/<span class="hljs-built_in">local</span>/cuda/lib64
-<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/cuda/bin
-<span class="hljs-built_in">export</span> CUDA_HOME=<span class="hljs-variable">$CUDA_HOME</span>:/usr/<span class="hljs-built_in">local</span>/cuda
-<span class="hljs-comment"># Exit current terminal and open a new terminal.</span>
-<span class="hljs-comment"># Config bashrc.</span>
-<span class="hljs-built_in">source</span> ~/.bashrc
-<span class="hljs-comment"># Do the same with zshrc.</span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">gedit ~/.bashrc<br><span class="hljs-comment"># Add these lines to bashrc file.</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$LD_LIBRARY_PATH</span>:/usr/<span class="hljs-built_in">local</span>/cuda/lib64<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/usr/<span class="hljs-built_in">local</span>/cuda/bin<br><span class="hljs-built_in">export</span> CUDA_HOME=<span class="hljs-variable">$CUDA_HOME</span>:/usr/<span class="hljs-built_in">local</span>/cuda<br><span class="hljs-comment"># Exit current terminal and open a new terminal.</span><br><span class="hljs-comment"># Config bashrc.</span><br><span class="hljs-built_in">source</span> ~/.bashrc<br><span class="hljs-comment"># Do the same with zshrc.</span><br></code></pre></td></tr></table></figure>
 <ol>
-<li>Test CUDA<pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/cuda/samples/1_Utilities/deviceQuery
-make <span class="hljs-comment"># If permission denied type $ sudo make</span>
-./deviceQuery <span class="hljs-comment">#If permission denied type $ sudo ./deviceQuery</span>
-
-<span class="hljs-comment"># Result = PASS indicate CUDA has installed successfully.</span></code></pre>
+<li>Test CUDA<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/cuda/samples/1_Utilities/deviceQuery<br>make <span class="hljs-comment"># If permission denied type $ sudo make</span><br>./deviceQuery <span class="hljs-comment">#If permission denied type $ sudo ./deviceQuery</span><br><br><span class="hljs-comment"># Result = PASS indicate CUDA has installed successfully.</span><br></code></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="Install-cuDNN"><a href="#Install-cuDNN" class="headerlink" title="Install cuDNN"></a>Install cuDNN</h2><ol>
@@ -275,13 +276,10 @@ make <span class="hljs-comment"># If permission denied type $ sudo make</span>
 </ol>
 <ol>
 <li><p>Extract Files</p>
-<pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/Downloads
-tar -xzf cudnn-11.1-linux-x64-v8.0.4.30.tgz</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/Downloads<br>tar -xzf cudnn-11.1-linux-x64-v8.0.4.30.tgz<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Copy Files to Dictionary</p>
-<pre><code class="hljs bash">sudo cp cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/include
-sudo cp cuda/lib64/libcudnn* /usr/<span class="hljs-built_in">local</span>/cuda/lib64
-sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/lib64/libcudnn*</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo cp cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/include<br>sudo cp cuda/lib64/libcudnn* /usr/<span class="hljs-built_in">local</span>/cuda/lib64<br>sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.h /usr/<span class="hljs-built_in">local</span>/cuda/lib64/libcudnn*<br></code></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -307,10 +305,14 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -337,33 +339,30 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
-          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: false,
-          recordIP: false,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -390,7 +389,7 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -424,8 +423,7 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
-
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
   </div>
   
   <div class="statistics">
@@ -458,55 +456,55 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
   
 </footer>
 
-<!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
@@ -514,7 +512,8 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -523,20 +522,6 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -551,6 +536,9 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
       MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
         },
         options: {
           renderActions: {
@@ -578,7 +566,7 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
 
   
 
@@ -587,30 +575,6 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -618,7 +582,6 @@ sudo chmod a+r /usr/<span class="hljs-built_in">local</span>/cuda/include/cudnn.
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

@@ -1,42 +1,52 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="ffmpeg Documentation">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
+  <meta name="description" content="ffmpeg Documentation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ffmpeg Documentation">
+<meta property="og:url" content="http://yoursite.com/2020/11/24/ffmpeg/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="ffmpeg Documentation">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-24T05:08:46.000Z">
+<meta property="article:modified_time" content="2020-12-11T03:25:04.387Z">
+<meta property="article:author" content="Veen">
+<meta name="twitter:card" content="summary_large_image">
+  
   <title>ffmpeg Documentation - Veen</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
-
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -55,7 +65,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"f3e155aa4250c21a7d6810f989a617ce","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -66,8 +76,9 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Veen</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -141,13 +152,14 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -156,7 +168,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('/img/cinque-terre.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -181,21 +193,18 @@
 
 <div class="mt-1">
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      13.9k 字
+      71k 字
     </span>
   
 
   
-    
     <span class="post-meta mr-2">
       <i class="iconfont icon-clock-fill"></i>
       
       
-      231
-       分钟
+      222 分钟
     </span>
   
 
@@ -216,15 +225,21 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">ffmpeg Documentation</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年12月11日 上午
+                
+              </p>
             
             <div class="markdown-body">
               <p>ffmpeg Documentation</p>
@@ -289,79 +304,33 @@
 <p>Do not mix input and output files – first specify all input files, then all output files. Also do not mix options which belong to different files. All options apply ONLY to the next input or output file and are reset between files.</p>
 <ul>
 <li><p>To set the video bitrate of the output file to 64 kbit/s:</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">b</span>:v <span class="hljs-number">64</span>k -bufsize <span class="hljs-number">64</span>k output.avi</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">b</span>:v <span class="hljs-number">64</span>k -bufsize <span class="hljs-number">64</span>k output.avi<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>To force the frame rate of the output file to 24 fps:</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.avi</span> -r <span class="hljs-number">24</span> output.avi</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-class">.avi</span> -r <span class="hljs-number">24</span> output.avi<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>To force the frame rate of the input file (valid for raw formats only) to 1 fps and the frame rate of the output file to 24 fps:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -r <span class="hljs-number">1</span> -i input.m<span class="hljs-number">2</span>v -r <span class="hljs-number">24</span> output.avi</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -r <span class="hljs-number">1</span> -i input.m<span class="hljs-number">2</span>v -r <span class="hljs-number">24</span> output.avi<br></code></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>The format option may be needed for raw input files.</p>
 <h2 id="3-Detailed-description"><a href="#3-Detailed-description" class="headerlink" title="3 Detailed description"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Detailed-description">3 Detailed description</a></h2><p>The transcoding process in <code>ffmpeg</code> for each output can be described by the following diagram:</p>
-<pre><code class="hljs gherkin"> _______              ______________
-|<span class="hljs-string">       </span>|<span class="hljs-string">            </span>|<span class="hljs-string">              </span>|
-|<span class="hljs-string"> input </span>|<span class="hljs-string">  demuxer   </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string">   decoder</span>
-|<span class="hljs-string"> file  </span>|<span class="hljs-string"> ---------&gt; </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string"> -----+</span>
-|<span class="hljs-string">_______</span>|<span class="hljs-string">            </span>|<span class="hljs-string">______________</span>|<span class="hljs-string">      </span>|
-                                           v
-                                       _________
-                                      |<span class="hljs-string">         </span>|
-                                      |<span class="hljs-string"> decoded </span>|
-                                      |<span class="hljs-string"> frames  </span>|
-                                      |<span class="hljs-string">_________</span>|
- ________             ______________       |
-|<span class="hljs-string">        </span>|<span class="hljs-string">           </span>|<span class="hljs-string">              </span>|<span class="hljs-string">      </span>|
-|<span class="hljs-string"> output </span>|<span class="hljs-string"> &lt;-------- </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string"> &lt;----+</span>
-|<span class="hljs-string"> file   </span>|<span class="hljs-string">   muxer   </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string">   encoder</span>
-|<span class="hljs-string">________</span>|<span class="hljs-string">           </span>|<span class="hljs-string">______________</span>|</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"> _______              ______________<br>|<span class="hljs-string">       </span>|<span class="hljs-string">            </span>|<span class="hljs-string">              </span>|<br>|<span class="hljs-string"> input </span>|<span class="hljs-string">  demuxer   </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string">   decoder</span><br>|<span class="hljs-string"> file  </span>|<span class="hljs-string"> ---------&gt; </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string"> -----+</span><br>|<span class="hljs-string">_______</span>|<span class="hljs-string">            </span>|<span class="hljs-string">______________</span>|<span class="hljs-string">      </span>|<br>                                           v<br>                                       _________<br>                                      |<span class="hljs-string">         </span>|<br>                                      |<span class="hljs-string"> decoded </span>|<br>                                      |<span class="hljs-string"> frames  </span>|<br>                                      |<span class="hljs-string">_________</span>|<br> ________             ______________       |<br>|<span class="hljs-string">        </span>|<span class="hljs-string">           </span>|<span class="hljs-string">              </span>|<span class="hljs-string">      </span>|<br>|<span class="hljs-string"> output </span>|<span class="hljs-string"> &lt;-------- </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string"> &lt;----+</span><br>|<span class="hljs-string"> file   </span>|<span class="hljs-string">   muxer   </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string">   encoder</span><br>|<span class="hljs-string">________</span>|<span class="hljs-string">           </span>|<span class="hljs-string">______________</span>|<br></code></pre></td></tr></table></figure>
 <p><code>ffmpeg</code> calls the libavformat library (containing demuxers) to read input files and get packets containing encoded data from them. When there are multiple input files, <code>ffmpeg</code> tries to keep them synchronized by tracking lowest timestamp on any active input stream.</p>
 <p>Encoded packets are then passed to the decoder (unless streamcopy is selected for the stream, see further for a description). The decoder produces uncompressed frames (raw video/PCM audio/…) which can be processed further by filtering (see next section). After filtering, the frames are passed to the encoder, which encodes them and outputs encoded packets. Finally those are passed to the muxer, which writes the encoded packets to the output file.</p>
 <h3 id="3-1-Filtering"><a href="#3-1-Filtering" class="headerlink" title="3.1 Filtering"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Filtering">3.1 Filtering</a></h3><p>Before encoding, <code>ffmpeg</code> can process raw audio and video frames using filters from the libavfilter library. Several chained filters form a filter graph. <code>ffmpeg</code> distinguishes between two types of filtergraphs: simple and complex.</p>
 <h4 id="3-1-1-Simple-filtergraphs"><a href="#3-1-1-Simple-filtergraphs" class="headerlink" title="3.1.1 Simple filtergraphs"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Simple-filtergraphs">3.1.1 Simple filtergraphs</a></h4><p>Simple filtergraphs are those that have exactly one input and output, both of the same type. In the above diagram they can be represented by simply inserting an additional step between decoding and encoding:</p>
-<pre><code class="hljs gherkin"> _________                        ______________
-|<span class="hljs-string">         </span>|<span class="hljs-string">                      </span>|<span class="hljs-string">              </span>|
-|<span class="hljs-string"> decoded </span>|<span class="hljs-string">                      </span>|<span class="hljs-string"> encoded data </span>|
-|<span class="hljs-string"> frames  </span>|<span class="hljs-string">\                   _ </span>|<span class="hljs-string"> packets      </span>|
-|<span class="hljs-string">_________</span>|<span class="hljs-string"> \                  /</span>||<span class="hljs-string">______________</span>|
-             \   __________   /
-  simple     _\||<span class="hljs-string">          </span>|<span class="hljs-string"> /  encoder</span>
-<span class="hljs-string">  filtergraph   </span>|<span class="hljs-string"> filtered </span>|<span class="hljs-string">/</span>
-<span class="hljs-string">                </span>|<span class="hljs-string"> frames   </span>|
-                |<span class="hljs-string">__________</span>|</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"> _________                        ______________<br>|<span class="hljs-string">         </span>|<span class="hljs-string">                      </span>|<span class="hljs-string">              </span>|<br>|<span class="hljs-string"> decoded </span>|<span class="hljs-string">                      </span>|<span class="hljs-string"> encoded data </span>|<br>|<span class="hljs-string"> frames  </span>|<span class="hljs-string">\                   _ </span>|<span class="hljs-string"> packets      </span>|<br>|<span class="hljs-string">_________</span>|<span class="hljs-string"> \                  /</span>||<span class="hljs-string">______________</span>|<br>             \   __________   /<br>  simple     _\||<span class="hljs-string">          </span>|<span class="hljs-string"> /  encoder</span><br><span class="hljs-string">  filtergraph   </span>|<span class="hljs-string"> filtered </span>|<span class="hljs-string">/</span><br><span class="hljs-string">                </span>|<span class="hljs-string"> frames   </span>|<br>                |<span class="hljs-string">__________</span>|<br></code></pre></td></tr></table></figure>
 <p>Simple filtergraphs are configured with the per-stream -filter option (with -vf and -af aliases for video and audio respectively). A simple filtergraph for video can look for example like this:</p>
-<pre><code class="hljs gherkin"> _______        _____________        _______        ________
-|<span class="hljs-string">       </span>|<span class="hljs-string">      </span>|<span class="hljs-string">             </span>|<span class="hljs-string">      </span>|<span class="hljs-string">       </span>|<span class="hljs-string">      </span>|<span class="hljs-string">        </span>|
-|<span class="hljs-string"> input </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> deinterlace </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> scale </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> output </span>|
-|<span class="hljs-string">_______</span>|<span class="hljs-string">      </span>|<span class="hljs-string">_____________</span>|<span class="hljs-string">      </span>|<span class="hljs-string">_______</span>|<span class="hljs-string">      </span>|<span class="hljs-string">________</span>|</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"> _______        _____________        _______        ________<br>|<span class="hljs-string">       </span>|<span class="hljs-string">      </span>|<span class="hljs-string">             </span>|<span class="hljs-string">      </span>|<span class="hljs-string">       </span>|<span class="hljs-string">      </span>|<span class="hljs-string">        </span>|<br>|<span class="hljs-string"> input </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> deinterlace </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> scale </span>|<span class="hljs-string"> ---&gt; </span>|<span class="hljs-string"> output </span>|<br>|<span class="hljs-string">_______</span>|<span class="hljs-string">      </span>|<span class="hljs-string">_____________</span>|<span class="hljs-string">      </span>|<span class="hljs-string">_______</span>|<span class="hljs-string">      </span>|<span class="hljs-string">________</span>|<br></code></pre></td></tr></table></figure>
 <p>Note that some filters change frame properties but not frame contents. E.g. the <code>fps</code> filter in the example above changes number of frames, but does not touch the frame contents. Another example is the <code>setpts</code> filter, which only sets timestamps and otherwise passes the frames unchanged.</p>
 <h4 id="3-1-2-Complex-filtergraphs"><a href="#3-1-2-Complex-filtergraphs" class="headerlink" title="3.1.2 Complex filtergraphs"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Complex-filtergraphs">3.1.2 Complex filtergraphs</a></h4><p>Complex filtergraphs are those which cannot be described as simply a linear processing chain applied to one stream. This is the case, for example, when the graph has more than one input and/or output, or when output stream type is different from input. They can be represented with the following diagram:</p>
-<pre><code class="hljs gherkin"> _________
-|<span class="hljs-string">         </span>|
-|<span class="hljs-string"> input 0 </span>|<span class="hljs-string">\                    __________</span>
-|<span class="hljs-string">_________</span>|<span class="hljs-string"> \                  </span>|<span class="hljs-string">          </span>|
-             \   _________    /|<span class="hljs-string"> output 0 </span>|
-              \ |<span class="hljs-string">         </span>|<span class="hljs-string">  / </span>|<span class="hljs-string">__________</span>|
- _________     \|<span class="hljs-string"> complex </span>|<span class="hljs-string"> /</span>
-|<span class="hljs-string">         </span>|<span class="hljs-string">     </span>|<span class="hljs-string">         </span>|<span class="hljs-string">/</span>
-|<span class="hljs-string"> input 1 </span>|<span class="hljs-string">----&gt;</span>|<span class="hljs-string"> filter  </span>|<span class="hljs-string">\</span>
-|<span class="hljs-string">_________</span>|<span class="hljs-string">     </span>|<span class="hljs-string">         </span>|<span class="hljs-string"> \   __________</span>
-<span class="hljs-string">               /</span>|<span class="hljs-string"> graph   </span>|<span class="hljs-string">  \ </span>|<span class="hljs-string">          </span>|
-              / |<span class="hljs-string">         </span>|<span class="hljs-string">   \</span>|<span class="hljs-string"> output 1 </span>|
- _________   /  |<span class="hljs-string">_________</span>|<span class="hljs-string">    </span>|<span class="hljs-string">__________</span>|
-|<span class="hljs-string">         </span>|<span class="hljs-string"> /</span>
-|<span class="hljs-string"> input 2 </span>|<span class="hljs-string">/</span>
-|<span class="hljs-string">_________</span>|</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"> _________<br>|<span class="hljs-string">         </span>|<br>|<span class="hljs-string"> input 0 </span>|<span class="hljs-string">\                    __________</span><br>|<span class="hljs-string">_________</span>|<span class="hljs-string"> \                  </span>|<span class="hljs-string">          </span>|<br>             \   _________    /|<span class="hljs-string"> output 0 </span>|<br>              \ |<span class="hljs-string">         </span>|<span class="hljs-string">  / </span>|<span class="hljs-string">__________</span>|<br> _________     \|<span class="hljs-string"> complex </span>|<span class="hljs-string"> /</span><br>|<span class="hljs-string">         </span>|<span class="hljs-string">     </span>|<span class="hljs-string">         </span>|<span class="hljs-string">/</span><br>|<span class="hljs-string"> input 1 </span>|<span class="hljs-string">----&gt;</span>|<span class="hljs-string"> filter  </span>|<span class="hljs-string">\</span><br>|<span class="hljs-string">_________</span>|<span class="hljs-string">     </span>|<span class="hljs-string">         </span>|<span class="hljs-string"> \   __________</span><br><span class="hljs-string">               /</span>|<span class="hljs-string"> graph   </span>|<span class="hljs-string">  \ </span>|<span class="hljs-string">          </span>|<br>              / |<span class="hljs-string">         </span>|<span class="hljs-string">   \</span>|<span class="hljs-string"> output 1 </span>|<br> _________   /  |<span class="hljs-string">_________</span>|<span class="hljs-string">    </span>|<span class="hljs-string">__________</span>|<br>|<span class="hljs-string">         </span>|<span class="hljs-string"> /</span><br>|<span class="hljs-string"> input 2 </span>|<span class="hljs-string">/</span><br>|<span class="hljs-string">_________</span>|<br></code></pre></td></tr></table></figure>
 <p>Complex filtergraphs are configured with the -filter_complex option. Note that this option is global, since a complex filtergraph, by its nature, cannot be unambiguously associated with a single stream or file.</p>
 <p>The -lavfi option is equivalent to -filter_complex.</p>
 <p>A trivial example of a complex filtergraph is the <code>overlay</code> filter, which has two video inputs and one video output, containing one video overlaid on top of the other. Its audio counterpart is the <code>amix</code> filter.</p>
 <h3 id="3-2-Stream-copy"><a href="#3-2-Stream-copy" class="headerlink" title="3.2 Stream copy"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Stream-copy">3.2 Stream copy</a></h3><p>Stream copy is a mode selected by supplying the <code>copy</code> parameter to the -codec option. It makes <code>ffmpeg</code> omit the decoding and encoding step for the specified stream, so it does only demuxing and muxing. It is useful for changing the container format or modifying container-level metadata. The diagram above will, in this case, simplify to this:</p>
-<pre><code class="hljs gherkin"> _______              ______________            ________
-|<span class="hljs-string">       </span>|<span class="hljs-string">            </span>|<span class="hljs-string">              </span>|<span class="hljs-string">          </span>|<span class="hljs-string">        </span>|
-|<span class="hljs-string"> input </span>|<span class="hljs-string">  demuxer   </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string">  muxer   </span>|<span class="hljs-string"> output </span>|
-|<span class="hljs-string"> file  </span>|<span class="hljs-string"> ---------&gt; </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string"> -------&gt; </span>|<span class="hljs-string"> file   </span>|
-|<span class="hljs-string">_______</span>|<span class="hljs-string">            </span>|<span class="hljs-string">______________</span>|<span class="hljs-string">          </span>|<span class="hljs-string">________</span>|</code></pre>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"> _______              ______________            ________<br>|<span class="hljs-string">       </span>|<span class="hljs-string">            </span>|<span class="hljs-string">              </span>|<span class="hljs-string">          </span>|<span class="hljs-string">        </span>|<br>|<span class="hljs-string"> input </span>|<span class="hljs-string">  demuxer   </span>|<span class="hljs-string"> encoded data </span>|<span class="hljs-string">  muxer   </span>|<span class="hljs-string"> output </span>|<br>|<span class="hljs-string"> file  </span>|<span class="hljs-string"> ---------&gt; </span>|<span class="hljs-string"> packets      </span>|<span class="hljs-string"> -------&gt; </span>|<span class="hljs-string"> file   </span>|<br>|<span class="hljs-string">_______</span>|<span class="hljs-string">            </span>|<span class="hljs-string">______________</span>|<span class="hljs-string">          </span>|<span class="hljs-string">________</span>|<br></code></pre></td></tr></table></figure>
 <p>Since there is no decoding or encoding, it is very fast and there is no quality loss. However, it might not work in some cases because of many factors. Applying filters is obviously also impossible, since filters work on uncompressed data.</p>
 <h2 id="4-Stream-selection"><a href="#4-Stream-selection" class="headerlink" title="4 Stream selection"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Stream-selection">4 Stream selection</a></h2><p><code>ffmpeg</code> provides the <code>-map</code> option for manual control of stream selection in each output file. Users can skip <code>-map</code> and let ffmpeg perform automatic stream selection as described below. The <code>-vn / -an / -sn / -dn</code> options can be used to skip inclusion of video, audio, subtitle and data streams respectively, whether manually mapped or automatically selected, except for those streams which are outputs of complex filtergraphs.</p>
 <h3 id="4-1-Description"><a href="#4-1-Description" class="headerlink" title="4.1 Description"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Description-1">4.1 Description</a></h3><p>The sub-sections that follow describe the various rules that are involved in stream selection. The examples that follow next show how these rules are applied in practice.</p>
@@ -382,48 +351,25 @@
 <p>An exception exists for subtitles. If a subtitle encoder is specified for an output file, the first subtitle stream found of any type, text or image, will be included. ffmpeg does not validate if the specified encoder can convert the selected stream or if the converted stream is acceptable within the output format. This applies generally as well: when the user sets an encoder manually, the stream selection process cannot check if the encoded stream can be muxed into the output file. If it cannot, ffmpeg will abort and <em>all</em> output files will fail to be processed.</p>
 <h3 id="4-2-Examples"><a href="#4-2-Examples" class="headerlink" title="4.2 Examples"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Examples">4.2 Examples</a></h3><p>The following examples illustrate the behavior, quirks and limitations of ffmpeg’s stream selection methods.</p>
 <p>They assume the following three input files.</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">input</span> file &#x27;A.avi&#x27;
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">640</span>x<span class="hljs-number">360</span>
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels
-
-<span class="hljs-attribute">input</span> file &#x27;B.mp<span class="hljs-number">4</span>&#x27;
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">1920</span>x<span class="hljs-number">1080</span>
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">2</span>: subtitles (text)
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">3</span>: audio <span class="hljs-number">5</span>.<span class="hljs-number">1</span> channels
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">4</span>: subtitles (text)
-
-<span class="hljs-attribute">input</span> file &#x27;C.mkv&#x27;
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">1280</span>x<span class="hljs-number">720</span>
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels
-      <span class="hljs-attribute">stream</span> <span class="hljs-number">2</span>: subtitles (image)</code></pre>
-<h4 id="Example-automatic-stream-selection"><a href="#Example-automatic-stream-selection" class="headerlink" title="Example: automatic stream selection"></a>Example: automatic stream selection</h4><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> out1<span class="hljs-selector-class">.mkv</span> out2<span class="hljs-selector-class">.wav</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span> -c:<span class="hljs-selector-tag">a</span> copy out3.mov</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">input</span> file &#x27;A.avi&#x27;<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">640</span>x<span class="hljs-number">360</span><br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels<br><br><span class="hljs-attribute">input</span> file &#x27;B.mp<span class="hljs-number">4</span>&#x27;<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">1920</span>x<span class="hljs-number">1080</span><br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">2</span>: subtitles (text)<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">3</span>: audio <span class="hljs-number">5</span>.<span class="hljs-number">1</span> channels<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">4</span>: subtitles (text)<br><br><span class="hljs-attribute">input</span> file &#x27;C.mkv&#x27;<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">0</span>: video <span class="hljs-number">1280</span>x<span class="hljs-number">720</span><br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">1</span>: audio <span class="hljs-number">2</span> channels<br>      <span class="hljs-attribute">stream</span> <span class="hljs-number">2</span>: subtitles (image)<br></code></pre></td></tr></table></figure>
+<h4 id="Example-automatic-stream-selection"><a href="#Example-automatic-stream-selection" class="headerlink" title="Example: automatic stream selection"></a>Example: automatic stream selection</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> out1<span class="hljs-selector-class">.mkv</span> out2<span class="hljs-selector-class">.wav</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span> -c:<span class="hljs-selector-tag">a</span> copy out3.mov<br></code></pre></td></tr></table></figure>
 <p>There are three output files specified, and for the first two, no <code>-map</code> options are set, so ffmpeg will select streams for these two files automatically.</p>
 <p>out1.mkv is a Matroska container file and accepts video, audio and subtitle streams, so ffmpeg will try to select one of each type.<br>For video, it will select <code>stream 0</code> from B.mp4, which has the highest resolution among all the input video streams.<br>For audio, it will select <code>stream 3</code> from B.mp4, since it has the greatest number of channels.<br>For subtitles, it will select <code>stream 2</code> from B.mp4, which is the first subtitle stream from among A.avi and B.mp4.</p>
 <p>out2.wav accepts only audio streams, so only <code>stream 3</code> from B.mp4 is selected.</p>
 <p>For out3.mov, since a <code>-map</code> option is set, no automatic stream selection will occur. The <code>-map 1:a</code> option will select all audio streams from the second input B.mp4. No other streams will be included in this output file.</p>
 <p>For the first two outputs, all included streams will be transcoded. The encoders chosen will be the default ones registered by each output format, which may not match the codec of the selected input streams.</p>
 <p>For the third output, codec option for audio streams has been set to <code>copy</code>, so no decoding-filtering-encoding operations will occur, or <em>can</em> occur. Packets of selected streams shall be conveyed from the input file and muxed within the output file.</p>
-<h4 id="Example-automatic-subtitles-selection"><a href="#Example-automatic-subtitles-selection" class="headerlink" title="Example: automatic subtitles selection"></a>Example: automatic subtitles selection</h4><pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">C</span><span class="hljs-selector-class">.mkv</span> <span class="hljs-selector-tag">out1</span><span class="hljs-selector-class">.mkv</span> <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:s</span> <span class="hljs-selector-tag">dvdsub</span> <span class="hljs-selector-tag">-an</span> <span class="hljs-selector-tag">out2</span><span class="hljs-selector-class">.mkv</span></code></pre>
+<h4 id="Example-automatic-subtitles-selection"><a href="#Example-automatic-subtitles-selection" class="headerlink" title="Example: automatic subtitles selection"></a>Example: automatic subtitles selection</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">C</span><span class="hljs-selector-class">.mkv</span> <span class="hljs-selector-tag">out1</span><span class="hljs-selector-class">.mkv</span> <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:s</span> <span class="hljs-selector-tag">dvdsub</span> <span class="hljs-selector-tag">-an</span> <span class="hljs-selector-tag">out2</span><span class="hljs-selector-class">.mkv</span><br></code></pre></td></tr></table></figure>
 <p>Although out1.mkv is a Matroska container file which accepts subtitle streams, only a video and audio stream shall be selected. The subtitle stream of C.mkv is image-based and the default subtitle encoder of the Matroska muxer is text-based, so a transcode operation for the subtitles is expected to fail and hence the stream isn’t selected. However, in out2.mkv, a subtitle encoder is specified in the command and so, the subtitle stream is selected, in addition to the video stream. The presence of <code>-an</code> disables audio stream selection for out2.mkv.</p>
-<h4 id="Example-unlabeled-filtergraph-outputs"><a href="#Example-unlabeled-filtergraph-outputs" class="headerlink" title="Example: unlabeled filtergraph outputs"></a>Example: unlabeled filtergraph outputs</h4><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -filter_complex <span class="hljs-string">&quot;overlay&quot;</span> out1<span class="hljs-selector-class">.mp4</span> out2.srt</code></pre>
+<h4 id="Example-unlabeled-filtergraph-outputs"><a href="#Example-unlabeled-filtergraph-outputs" class="headerlink" title="Example: unlabeled filtergraph outputs"></a>Example: unlabeled filtergraph outputs</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -filter_complex <span class="hljs-string">&quot;overlay&quot;</span> out1<span class="hljs-selector-class">.mp4</span> out2.srt<br></code></pre></td></tr></table></figure>
 <p>A filtergraph is setup here using the <code>-filter_complex</code> option and consists of a single video filter. The <code>overlay</code> filter requires exactly two video inputs, but none are specified, so the first two available video streams are used, those of A.avi and C.mkv. The output pad of the filter has no label and so is sent to the first output file out1.mp4. Due to this, automatic selection of the video stream is skipped, which would have selected the stream in B.mp4. The audio stream with most channels viz. <code>stream 3</code> in B.mp4, is chosen automatically. No subtitle stream is chosen however, since the MP4 format has no default subtitle encoder registered, and the user hasn’t specified a subtitle encoder.</p>
 <p>The 2nd output file, out2.srt, only accepts text-based subtitle streams. So, even though the first subtitle stream available belongs to C.mkv, it is image-based and hence skipped. The selected stream, <code>stream 2</code> in B.mp4, is the first text-based subtitle stream.</p>
-<h4 id="Example-labeled-filtergraph-outputs"><a href="#Example-labeled-filtergraph-outputs" class="headerlink" title="Example: labeled filtergraph outputs"></a>Example: labeled filtergraph outputs</h4><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0[outv];overlay;aresample&quot;</span> \
-       -map <span class="hljs-string">&#x27;[outv]&#x27;</span> -an        out1<span class="hljs-selector-class">.mp4</span> \
-                                out2<span class="hljs-selector-class">.mkv</span> \
-       -map <span class="hljs-string">&#x27;[outv]&#x27;</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv</code></pre>
+<h4 id="Example-labeled-filtergraph-outputs"><a href="#Example-labeled-filtergraph-outputs" class="headerlink" title="Example: labeled filtergraph outputs"></a>Example: labeled filtergraph outputs</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0[outv];overlay;aresample&quot;</span> \<br>       -map <span class="hljs-string">&#x27;[outv]&#x27;</span> -an        out1<span class="hljs-selector-class">.mp4</span> \<br>                                out2<span class="hljs-selector-class">.mkv</span> \<br>       -map <span class="hljs-string">&#x27;[outv]&#x27;</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv<br></code></pre></td></tr></table></figure>
 <p>The above command will fail, as the output pad labelled <code>[outv]</code> has been mapped twice. None of the output files shall be processed.</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0[outv];overlay;aresample&quot;</span> \
-       -an        out1<span class="hljs-selector-class">.mp4</span> \
-                  out2<span class="hljs-selector-class">.mkv</span> \
-       -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0[outv];overlay;aresample&quot;</span> \<br>       -an        out1<span class="hljs-selector-class">.mp4</span> \<br>                  out2<span class="hljs-selector-class">.mkv</span> \<br>       -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv<br></code></pre></td></tr></table></figure>
 <p>This command above will also fail as the hue filter output has a label, <code>[outv]</code>, and hasn’t been mapped anywhere.</p>
 <p>The command should be modified as follows,</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0,split=2[outv1][outv2];overlay;aresample&quot;</span> \
-        -map <span class="hljs-string">&#x27;[outv1]&#x27;</span> -an        out1<span class="hljs-selector-class">.mp4</span> \
-                                  out2<span class="hljs-selector-class">.mkv</span> \
-        -map <span class="hljs-string">&#x27;[outv2]&#x27;</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> A<span class="hljs-selector-class">.avi</span> -<span class="hljs-selector-tag">i</span> B<span class="hljs-selector-class">.mp4</span> -<span class="hljs-selector-tag">i</span> C<span class="hljs-selector-class">.mkv</span> -filter_complex <span class="hljs-string">&quot;[1:v]hue=s=0,split=2[outv1][outv2];overlay;aresample&quot;</span> \<br>        -map <span class="hljs-string">&#x27;[outv1]&#x27;</span> -an        out1<span class="hljs-selector-class">.mp4</span> \<br>                                  out2<span class="hljs-selector-class">.mkv</span> \<br>        -map <span class="hljs-string">&#x27;[outv2]&#x27;</span> -map <span class="hljs-number">1</span>:<span class="hljs-selector-tag">a</span>:<span class="hljs-number">0</span> out3.mkv<br></code></pre></td></tr></table></figure>
 <p>The video stream from B.mp4 is sent to the hue filter, whose output is cloned once using the split filter, and both outputs labelled. Then a copy each is mapped to the first and third output files.</p>
 <p>The overlay filter, requiring two video inputs, uses the first two unused video streams. Those are the streams from A.avi and C.mkv. The overlay output isn’t labelled, so it is sent to the first output file out1.mp4, regardless of the presence of the <code>-map</code> option.</p>
 <p>The aresample filter is sent the first unused audio stream, that of A.avi. Since this filter output is also unlabelled, it too is mapped to the first output file. The presence of <code>-an</code> only suppresses automatic or manual stream selection of audio streams, not outputs sent from filtergraphs. Both these mapped streams shall be ordered before the mapped stream in out1.mp4.</p>
@@ -538,9 +484,9 @@
 </li>
 </ul>
 <p>For example to write an ID3v2.3 header instead of a default ID3v2.4 to an MP3 file, use the id3v2_version private option of the MP3 muxer:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i input.flac -id<span class="hljs-number">3</span>v<span class="hljs-number">2</span>_version <span class="hljs-number">3</span> out.mp<span class="hljs-number">3</span></code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i input.flac -id<span class="hljs-number">3</span>v<span class="hljs-number">2</span>_version <span class="hljs-number">3</span> out.mp<span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
 <p>All codec AVOptions are per-stream, and thus a stream specifier should be attached to them:</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">multichannel</span><span class="hljs-selector-class">.mxf</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:v</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">ac3</span> <span class="hljs-selector-tag">-b</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> 640<span class="hljs-selector-tag">k</span> <span class="hljs-selector-tag">-ac</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:1</span> 2 <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:1</span> <span class="hljs-selector-tag">aac</span> <span class="hljs-selector-tag">-b</span><span class="hljs-selector-pseudo">:2</span> 128<span class="hljs-selector-tag">k</span> <span class="hljs-selector-tag">out</span><span class="hljs-selector-class">.mp4</span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">multichannel</span><span class="hljs-selector-class">.mxf</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:v</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-map</span> 0<span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> <span class="hljs-selector-tag">ac3</span> <span class="hljs-selector-tag">-b</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:0</span> 640<span class="hljs-selector-tag">k</span> <span class="hljs-selector-tag">-ac</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:1</span> 2 <span class="hljs-selector-tag">-c</span><span class="hljs-selector-pseudo">:a</span><span class="hljs-selector-pseudo">:1</span> <span class="hljs-selector-tag">aac</span> <span class="hljs-selector-tag">-b</span><span class="hljs-selector-pseudo">:2</span> 128<span class="hljs-selector-tag">k</span> <span class="hljs-selector-tag">out</span><span class="hljs-selector-class">.mp4</span><br></code></pre></td></tr></table></figure>
 <p>In the above example, a multichannel audio stream is mapped twice for output. The first instance is encoded with codec ac3 and bitrate 640k. The second instance is downmixed to 2 channels and encoded with codec aac. A bitrate of 128k is specified for it using absolute index of the output stream.</p>
 <p>Note: the -nooption syntax cannot be used for boolean AVOptions, use -option 0/-option 1.</p>
 <p>Note: the old undocumented way of specifying per-stream AVOptions by prepending v/a/s to the options name is now obsolete and will be removed soon.</p>
@@ -942,9 +888,7 @@
 </ul>
 <p>As a special exception, you can use a bitmap subtitle stream as input: it will be converted into a video with the same size as the largest video in the file, or 720x576 if no video is present. Note that this is an experimental and temporary solution. It will be removed once libavfilter has proper support for subtitles.</p>
 <p>For example, to hardcode subtitles on top of a DVB-T recording stored in MPEG-TS format, delaying the subtitles by 1 second:</p>
-<pre><code class="hljs vim">ffmpeg -i <span class="hljs-built_in">input</span>.<span class="hljs-keyword">ts</span> -filter_complex \
-  <span class="hljs-string">&#x27;[#0x2ef] setpts=PTS+1/TB [sub] ; [#0x2d0] [sub] overlay&#x27;</span> \
-  -<span class="hljs-keyword">sn</span> -<span class="hljs-keyword">map</span> <span class="hljs-string">&#x27;#0x2dc&#x27;</span> output.<span class="hljs-keyword">mkv</span></code></pre>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">ffmpeg -i <span class="hljs-built_in">input</span>.<span class="hljs-keyword">ts</span> -filter_complex \<br>  <span class="hljs-string">&#x27;[#0x2ef] setpts=PTS+1/TB [sub] ; [#0x2d0] [sub] overlay&#x27;</span> \<br>  -<span class="hljs-keyword">sn</span> -<span class="hljs-keyword">map</span> <span class="hljs-string">&#x27;#0x2dc&#x27;</span> output.<span class="hljs-keyword">mkv</span><br></code></pre></td></tr></table></figure>
 <p>(0x2d0, 0x2dc and 0x2ef are the MPEG-TS PIDs of respectively the video, audio and subtitles streams; 0:0, 0:3 and 0:7 would have worked too)</p>
 <h3 id="5-12-Preset-files"><a href="#5-12-Preset-files" class="headerlink" title="5.12 Preset files"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Preset-files">5.12 Preset files</a></h3><p>A preset file contains a sequence of option=value pairs, one for each line, specifying a sequence of options which would be awkward to specify on the command line. Lines starting with the hash (’#’) character are ignored and are used to provide comments. Check the presets directory in the FFmpeg source tree for examples.</p>
 <p>There are two types of preset files: ffpreset and avpreset files.</p>
@@ -957,70 +901,69 @@
 <p>First ffmpeg searches for a file named codec_name-arg.avpreset in the above-mentioned directories, where codec_name is the name of the codec to which the preset file options will be applied. For example, if you select the video codec with <code>-vcodec libvpx</code> and use <code>-pre 1080p</code>, then it will search for the file libvpx-1080p.avpreset.</p>
 <p>If no such file is found, then ffmpeg will search for a file named arg.avpreset in the same directories.</p>
 <h2 id="6-Examples"><a href="#6-Examples" class="headerlink" title="6 Examples"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Examples-1">6 Examples</a></h2><h3 id="6-1-Video-and-Audio-grabbing"><a href="#6-1-Video-and-Audio-grabbing" class="headerlink" title="6.1 Video and Audio grabbing"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Video-and-Audio-grabbing">6.1 Video and Audio grabbing</a></h3><p>If you specify the input format and device then ffmpeg can grab video and audio directly.</p>
-<pre><code class="hljs awk">ffmpeg -f oss -i <span class="hljs-regexp">/dev/</span>dsp -f video4linux2 -i <span class="hljs-regexp">/dev/</span>video0 <span class="hljs-regexp">/tmp/</span>out.mpg</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ffmpeg -f oss -i <span class="hljs-regexp">/dev/</span>dsp -f video4linux2 -i <span class="hljs-regexp">/dev/</span>video0 <span class="hljs-regexp">/tmp/</span>out.mpg<br></code></pre></td></tr></table></figure>
 <p>Or with an ALSA audio source (mono input, card id 1) instead of OSS:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f alsa -ac <span class="hljs-number">1</span> -i hw:<span class="hljs-number">1</span> -f video<span class="hljs-number">4</span>linux<span class="hljs-number">2</span> -i /dev/video<span class="hljs-number">0</span> /tmp/out.mpg</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f alsa -ac <span class="hljs-number">1</span> -i hw:<span class="hljs-number">1</span> -f video<span class="hljs-number">4</span>linux<span class="hljs-number">2</span> -i /dev/video<span class="hljs-number">0</span> /tmp/out.mpg<br></code></pre></td></tr></table></figure>
 <p>Note that you must activate the right video source and channel before launching ffmpeg with any TV viewer such as <a target="_blank" rel="noopener" href="http://linux.bytesex.org/xawtv/">xawtv</a> by Gerd Knorr. You also have to set the audio recording levels correctly with a standard mixer.</p>
 <h3 id="6-2-X11-grabbing"><a href="#6-2-X11-grabbing" class="headerlink" title="6.2 X11 grabbing"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-X11-grabbing">6.2 X11 grabbing</a></h3><p>Grab the X11 display with ffmpeg via</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f x<span class="hljs-number">11</span>grab -video_size cif -framerate <span class="hljs-number">25</span> -i :<span class="hljs-number">0</span>.<span class="hljs-number">0</span> /tmp/out.mpg</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f x<span class="hljs-number">11</span>grab -video_size cif -framerate <span class="hljs-number">25</span> -i :<span class="hljs-number">0</span>.<span class="hljs-number">0</span> /tmp/out.mpg<br></code></pre></td></tr></table></figure>
 <p>0.0 is display.screen number of your X11 server, same as the DISPLAY environment variable.</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f x<span class="hljs-number">11</span>grab -video_size cif -framerate <span class="hljs-number">25</span> -i :<span class="hljs-number">0</span>.<span class="hljs-number">0</span>+<span class="hljs-number">10</span>,<span class="hljs-number">20</span> /tmp/out.mpg</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f x<span class="hljs-number">11</span>grab -video_size cif -framerate <span class="hljs-number">25</span> -i :<span class="hljs-number">0</span>.<span class="hljs-number">0</span>+<span class="hljs-number">10</span>,<span class="hljs-number">20</span> /tmp/out.mpg<br></code></pre></td></tr></table></figure>
 <p>0.0 is display.screen number of your X11 server, same as the DISPLAY environment variable. 10 is the x-offset and 20 the y-offset for the grabbing.</p>
 <h3 id="6-3-Video-and-Audio-file-format-conversion"><a href="#6-3-Video-and-Audio-file-format-conversion" class="headerlink" title="6.3 Video and Audio file format conversion"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-Video-and-Audio-file-format-conversion">6.3 Video and Audio file format conversion</a></h3><p>Any supported file format and protocol can serve as input to ffmpeg:</p>
 <p>Examples:</p>
 <ul>
 <li><p>You can use YUV files as input:</p>
-<pre><code class="hljs awk">ffmpeg -i <span class="hljs-regexp">/tmp/</span>test%d.Y <span class="hljs-regexp">/tmp/</span>out.mpg</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ffmpeg -i <span class="hljs-regexp">/tmp/</span>test%d.Y <span class="hljs-regexp">/tmp/</span>out.mpg<br></code></pre></td></tr></table></figure>
 <p>It will use the files:</p>
-<pre><code class="hljs gradle"><span class="hljs-regexp">/tmp/</span>test0.Y, <span class="hljs-regexp">/tmp/</span>test0.U, <span class="hljs-regexp">/tmp/</span>test0.V,
-<span class="hljs-regexp">/tmp/</span>test1.Y, <span class="hljs-regexp">/tmp/</span>test1.U, <span class="hljs-regexp">/tmp/</span>test1.V, etc...</code></pre>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-regexp">/tmp/</span>test0.Y, <span class="hljs-regexp">/tmp/</span>test0.U, <span class="hljs-regexp">/tmp/</span>test0.V,<br><span class="hljs-regexp">/tmp/</span>test1.Y, <span class="hljs-regexp">/tmp/</span>test1.U, <span class="hljs-regexp">/tmp/</span>test1.V, etc...<br></code></pre></td></tr></table></figure>
 <p>The Y files use twice the resolution of the U and V files. They are raw files, without header. They can be generated by all decent video decoders. You must specify the size of the image with the -s option if ffmpeg cannot guess it.</p>
 </li>
 <li><p>You can input from a raw YUV420P file:</p>
-<pre><code class="hljs gradle">ffmpeg -i <span class="hljs-regexp">/tmp/</span>test.yuv <span class="hljs-regexp">/tmp/</span>out.avi</code></pre>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">ffmpeg -i <span class="hljs-regexp">/tmp/</span>test.yuv <span class="hljs-regexp">/tmp/</span>out.avi<br></code></pre></td></tr></table></figure>
 <p>test.yuv is a file containing raw YUV planar data. Each frame is composed of the Y plane followed by the U and V planes at half vertical and horizontal resolution.</p>
 </li>
 <li><p>You can output to a raw YUV420P file:</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">mydivx</span><span class="hljs-selector-class">.avi</span> <span class="hljs-selector-tag">hugefile</span><span class="hljs-selector-class">.yuv</span></code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">ffmpeg</span> <span class="hljs-selector-tag">-i</span> <span class="hljs-selector-tag">mydivx</span><span class="hljs-selector-class">.avi</span> <span class="hljs-selector-tag">hugefile</span><span class="hljs-selector-class">.yuv</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>You can set several input files and output files:</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.wav</span> -s <span class="hljs-number">640</span>x480 -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.yuv</span> /tmp/<span class="hljs-selector-tag">a</span>.mpg</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.wav</span> -s <span class="hljs-number">640</span>x480 -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.yuv</span> /tmp/<span class="hljs-selector-tag">a</span>.mpg<br></code></pre></td></tr></table></figure>
 <p>Converts the audio file a.wav and the raw YUV video file a.yuv to MPEG file a.mpg.</p>
 </li>
 <li><p>You can also do audio and video conversions at the same time:</p>
-<pre><code class="hljs awk">ffmpeg -i <span class="hljs-regexp">/tmp/</span>a.wav -ar <span class="hljs-number">22050</span> <span class="hljs-regexp">/tmp/</span>a.mp2</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ffmpeg -i <span class="hljs-regexp">/tmp/</span>a.wav -ar <span class="hljs-number">22050</span> <span class="hljs-regexp">/tmp/</span>a.mp2<br></code></pre></td></tr></table></figure>
 <p>Converts a.wav to MPEG audio at 22050 Hz sample rate.</p>
 </li>
 <li><p>You can encode to several formats at the same time and define a mapping from input stream to output streams:</p>
-<pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.wav</span> -map <span class="hljs-number">0</span>:<span class="hljs-selector-tag">a</span> -<span class="hljs-selector-tag">b</span>:<span class="hljs-selector-tag">a</span> <span class="hljs-number">64</span>k /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.mp2</span> -map <span class="hljs-number">0</span>:<span class="hljs-selector-tag">a</span> -<span class="hljs-selector-tag">b</span>:<span class="hljs-selector-tag">a</span> <span class="hljs-number">128</span>k /tmp/<span class="hljs-selector-tag">b</span>.mp2</code></pre>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ffmpeg -<span class="hljs-selector-tag">i</span> /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.wav</span> -map <span class="hljs-number">0</span>:<span class="hljs-selector-tag">a</span> -<span class="hljs-selector-tag">b</span>:<span class="hljs-selector-tag">a</span> <span class="hljs-number">64</span>k /tmp/<span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.mp2</span> -map <span class="hljs-number">0</span>:<span class="hljs-selector-tag">a</span> -<span class="hljs-selector-tag">b</span>:<span class="hljs-selector-tag">a</span> <span class="hljs-number">128</span>k /tmp/<span class="hljs-selector-tag">b</span>.mp2<br></code></pre></td></tr></table></figure>
 <p>Converts a.wav to a.mp2 at 64 kbits and to b.mp2 at 128 kbits. ’-map file:index’ specifies which input stream is used for each output stream, in the order of the definition of output streams.</p>
 </li>
 <li><p>You can transcode decrypted VOBs:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i snatch_<span class="hljs-number">1</span>.vob -f avi -c:v mpeg<span class="hljs-number">4</span> -b:v <span class="hljs-number">800</span>k -g <span class="hljs-number">300</span> -bf <span class="hljs-number">2</span> -c:a libmp<span class="hljs-number">3</span>lame -b:a <span class="hljs-number">128</span>k snatch.avi</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i snatch_<span class="hljs-number">1</span>.vob -f avi -c:v mpeg<span class="hljs-number">4</span> -b:v <span class="hljs-number">800</span>k -g <span class="hljs-number">300</span> -bf <span class="hljs-number">2</span> -c:a libmp<span class="hljs-number">3</span>lame -b:a <span class="hljs-number">128</span>k snatch.avi<br></code></pre></td></tr></table></figure>
 <p>This is a typical DVD ripping example; the input is a VOB file, the output an AVI file with MPEG-4 video and MP3 audio. Note that in this command we use B-frames so the MPEG-4 stream is DivX5 compatible, and GOP size is 300 which means one intra frame every 10 seconds for 29.97fps input video. Furthermore, the audio stream is MP3-encoded so you need to enable LAME support by passing <code>--enable-libmp3lame</code> to configure. The mapping is particularly useful for DVD transcoding to get the desired audio language.</p>
 <p>NOTE: To see the supported input formats, use <code>ffmpeg -demuxers</code>.</p>
 </li>
 <li><p>You can extract images from a video, or create a video from many images:</p>
 <p>For extracting images from a video:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i foo.avi -r <span class="hljs-number">1</span> -s WxH -f image<span class="hljs-number">2</span> foo-%<span class="hljs-number">03</span>d.jpeg</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i foo.avi -r <span class="hljs-number">1</span> -s WxH -f image<span class="hljs-number">2</span> foo-%<span class="hljs-number">03</span>d.jpeg<br></code></pre></td></tr></table></figure>
 <p>This will extract one video frame per second from the video and will output them in files named foo-001.jpeg, foo-002.jpeg, etc. Images will be rescaled to fit the new WxH values.</p>
 <p>If you want to extract just a limited number of frames, you can use the above command in combination with the <code>-frames:v</code> or <code>-t</code> option, or in combination with -ss to start extracting from a certain point in time.</p>
 <p>For creating a video from many images:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f image<span class="hljs-number">2</span> -framerate <span class="hljs-number">12</span> -i foo-%<span class="hljs-number">03</span>d.jpeg -s WxH foo.avi</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f image<span class="hljs-number">2</span> -framerate <span class="hljs-number">12</span> -i foo-%<span class="hljs-number">03</span>d.jpeg -s WxH foo.avi<br></code></pre></td></tr></table></figure>
 <p>The syntax <code>foo-%03d.jpeg</code> specifies to use a decimal number composed of three digits padded with zeroes to express the sequence number. It is the same syntax supported by the C printf function, but only formats accepting a normal integer are suitable.</p>
 <p>When importing an image sequence, -i also supports expanding shell-like wildcard patterns (globbing) internally, by selecting the image2-specific <code>-pattern_type glob</code> option.</p>
 <p>For example, for creating a video from filenames matching the glob pattern <code>foo-*.jpeg</code>:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f image<span class="hljs-number">2</span> -pattern_type glob -framerate <span class="hljs-number">12</span> -i &#x27;foo-*.jpeg&#x27; -s WxH foo.avi</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -f image<span class="hljs-number">2</span> -pattern_type glob -framerate <span class="hljs-number">12</span> -i &#x27;foo-*.jpeg&#x27; -s WxH foo.avi<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>You can put many streams of the same type in the output:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i test<span class="hljs-number">1</span>.avi -i test<span class="hljs-number">2</span>.avi -map <span class="hljs-number">1</span>:<span class="hljs-number">1</span> -map <span class="hljs-number">1</span>:<span class="hljs-number">0</span> -map <span class="hljs-number">0</span>:<span class="hljs-number">1</span> -map <span class="hljs-number">0</span>:<span class="hljs-number">0</span> -c copy -y test<span class="hljs-number">12</span>.nut</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i test<span class="hljs-number">1</span>.avi -i test<span class="hljs-number">2</span>.avi -map <span class="hljs-number">1</span>:<span class="hljs-number">1</span> -map <span class="hljs-number">1</span>:<span class="hljs-number">0</span> -map <span class="hljs-number">0</span>:<span class="hljs-number">1</span> -map <span class="hljs-number">0</span>:<span class="hljs-number">0</span> -c copy -y test<span class="hljs-number">12</span>.nut<br></code></pre></td></tr></table></figure>
 <p>The resulting output file test12.nut will contain the first four streams from the input files in reverse order.</p>
 </li>
 <li><p>To force CBR video output:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i myfile.avi -b <span class="hljs-number">4000</span>k -minrate <span class="hljs-number">4000</span>k -maxrate <span class="hljs-number">4000</span>k -bufsize <span class="hljs-number">1835</span>k out.m<span class="hljs-number">2</span>v</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i myfile.avi -b <span class="hljs-number">4000</span>k -minrate <span class="hljs-number">4000</span>k -maxrate <span class="hljs-number">4000</span>k -bufsize <span class="hljs-number">1835</span>k out.m<span class="hljs-number">2</span>v<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>The four options lmin, lmax, mblmin and mblmax use ’lambda’ units, but you may use the QP2LAMBDA constant to easily convert from ’q’ units:</p>
-<pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i src.ext -lmax <span class="hljs-number">21</span>*QP<span class="hljs-number">2</span>LAMBDA dst.ext</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffmpeg</span> -i src.ext -lmax <span class="hljs-number">21</span>*QP<span class="hljs-number">2</span>LAMBDA dst.ext<br></code></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="7-See-Also"><a href="#7-See-Also" class="headerlink" title="7 See Also"></a><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg.html#toc-See-Also">7 See Also</a></h2><p><a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-all.html">ffmpeg-all</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffplay.html">ffplay</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffprobe.html">ffprobe</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-utils.html">ffmpeg-utils</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-scaler.html">ffmpeg-scaler</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-resampler.html">ffmpeg-resampler</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-codecs.html">ffmpeg-codecs</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-bitstream-filters.html">ffmpeg-bitstream-filters</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-formats.html">ffmpeg-formats</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-devices.html">ffmpeg-devices</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-protocols.html">ffmpeg-protocols</a>, <a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-filters.html">ffmpeg-filters</a></p>
@@ -1037,10 +980,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -1067,33 +1014,30 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
-  <div id="vcomments"></div>
+  <div id="valine"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('vcomments', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz",
-          app_key: "bB6pIAfcqCjPz7ujeqh5nVut",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: false,
-          recordIP: false,
-          serverURLs: "",
-        });
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
       });
     });
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
@@ -1120,7 +1064,7 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -1154,8 +1098,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2020 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
-
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
   </div>
   
   <div class="statistics">
@@ -1188,55 +1131,55 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
   
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
@@ -1244,7 +1187,8 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -1253,20 +1197,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
   </script>
 
 
@@ -1281,6 +1211,9 @@
       MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
         },
         options: {
           renderActions: {
@@ -1308,7 +1241,7 @@
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
 
   
 
@@ -1317,30 +1250,6 @@
 
 
 
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f3e155aa4250c21a7d6810f989a617ce";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
@@ -1348,7 +1257,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>
