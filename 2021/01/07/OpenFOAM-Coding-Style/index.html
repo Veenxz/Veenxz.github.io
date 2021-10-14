@@ -19,7 +19,7 @@
   <meta name="description" content="OpenFOAM Coding Style Guide">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenFOAM Coding Style">
-<meta property="og:url" content="https://veenxz.github.io/project/2021/01/07/OpenFOAM-Coding-Style/index.html">
+<meta property="og:url" content="https://veenxz.github.io/2021/01/07/OpenFOAM-Coding-Style/index.html">
 <meta property="og:site_name" content="Veen">
 <meta property="og:description" content="OpenFOAM Coding Style Guide">
 <meta property="og:locale" content="zh_CN">
@@ -41,7 +41,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -70,7 +78,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -243,7 +251,7 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="OpenFOAM-Coding-Style-Guide"><a href="#OpenFOAM-Coding-Style-Guide" class="headerlink" title="OpenFOAM Coding Style Guide"></a>OpenFOAM Coding Style Guide</h1><a id="more"></a>
+              <h1 id="OpenFOAM-Coding-Style-Guide"><a href="#OpenFOAM-Coding-Style-Guide" class="headerlink" title="OpenFOAM Coding Style Guide"></a>OpenFOAM Coding Style Guide</h1><span id="more"></span>
 <h2 id="1-Code"><a href="#1-Code" class="headerlink" title="1 Code"></a>1 Code</h2><h3 id="1-1-General"><a href="#1-1-General" class="headerlink" title="1.1 General"></a>1.1 General</h3><ul>
 <li><p>80 character lines max</p>
 </li>
@@ -310,7 +318,7 @@
 <li><p>Destructor</p>
 <ul>
 <li><p>When adding a comment to the destructor use //- and code as a normal function:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//- Destructor</span><br>~className();<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//- Destructor</span><br>~<span class="hljs-built_in">className</span>();<br></code></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>Inline functions</p>
@@ -323,9 +331,9 @@
 <li><p>Do not open/close namespaces in a .C file</p>
 <ul>
 <li><p>Fully scope the function name, i.e.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">Foam::returnType Foam::className::functionName()<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">Foam::returnType Foam::className::<span class="hljs-built_in">functionName</span>()<br></code></pre></td></tr></table></figure>
 <p><strong>not</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> Foam<br>&#123;<br>    ...<br>    <span class="hljs-function">returnType <span class="hljs-title">className::functionName</span><span class="hljs-params">()</span></span><br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> Foam<br>&#123;<br>    ...<br>    <span class="hljs-function">returnType <span class="hljs-title">className::functionName</span><span class="hljs-params">()</span></span><br><span class="hljs-function">  ...</span><br><span class="hljs-function">&#125;</span><br></code></pre></td></tr></table></figure>
 <p><strong>Exception</strong><br>When there are multiple levels of namespace, they may be used in the <em>.C</em> file to avoid excessive clutter, i.e.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> Foam<br>&#123;<br><span class="hljs-keyword">namespace</span> compressible<br>&#123;<br><span class="hljs-keyword">namespace</span> RASModels<br>&#123;<br>    ...<br>&#125; <span class="hljs-comment">// End namespace RASModels</span><br>&#125; <span class="hljs-comment">// End namespace compressible</span><br>&#125; <span class="hljs-comment">// End namespace Foam</span><br></code></pre></td></tr></table></figure></li>
 </ul>
@@ -343,7 +351,7 @@
 <li><p>Use everywhere it is applicable.</p>
 </li>
 <li><p>Variable initialisation using</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> className&amp; variableName = otherClass.data();<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> className&amp; variableName = otherClass.<span class="hljs-built_in">data</span>();<br></code></pre></td></tr></table></figure>
 <p><strong>not</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">const</span> className&amp; <span class="hljs-title">variableName</span><span class="hljs-params">(otherClass.data())</span></span>;<br></code></pre></td></tr></table></figure>
 </li>
@@ -388,13 +396,13 @@
 </li>
 </ul>
 <h4 id="1-8-2-Splitting-long-lines-at-an-“-”"><a href="#1-8-2-Splitting-long-lines-at-an-“-”" class="headerlink" title="1.8.2 Splitting long lines at an “=”"></a>1.8.2 Splitting long lines at an “=”</h4><p>Indent after split</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>    longClassName.longFunctionName(longArgument);<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>    longClassName.<span class="hljs-built_in">longFunctionName</span>(longArgument);<br></code></pre></td></tr></table></figure>
 <p>OR (where necessary)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>    longClassName.longFunctionName<br>    (<br>        longArgument1,<br>        longArgument2<br>    );<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>    longClassName.<span class="hljs-built_in">longFunctionName</span><br>    (<br>        longArgument1,<br>        longArgument2<br>    );<br></code></pre></td></tr></table></figure>
 <p><strong>not</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>longClassName.longFunctionName(longArgument);<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName =<br>longClassName.<span class="hljs-built_in">longFunctionName</span>(longArgument);<br></code></pre></td></tr></table></figure>
 <p><strong>nor</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName = longClassName.longFunctionName<br>(<br>    longArgument1,<br>    longArgument2<br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">variableName = longClassName.<span class="hljs-built_in">longFunctionName</span><br>(<br>    longArgument1,<br>    longArgument2<br>);<br></code></pre></td></tr></table></figure>
 <h3 id="1-9-Maths-and-Logic"><a href="#1-9-Maths-and-Logic" class="headerlink" title="1.9 Maths and Logic"></a>1.9 Maths and Logic</h3><ul>
 <li><p>Operator spacing</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">a + b, a - b<br>a*b, a/b<br>a &amp; b, a ^ b<br>a = b, a != b<br>a &lt; b, a &gt; b, a &gt;= b, a &lt;= b<br>a || b, a &amp;&amp; b<br></code></pre></td></tr></table></figure>
@@ -431,7 +439,7 @@
 </ul>
 <h3 id="2-2-Doxygen-Special-Commands"><a href="#2-2-Doxygen-Special-Commands" class="headerlink" title="2.2 Doxygen Special Commands"></a>2.2 Doxygen Special Commands</h3><p>Doxygen has a large number of special commands with a <code>\</code> prefix.</p>
 <p>Since the filtering removes the leading spaces within the blocks, the Doxygen commands can be inserted within the block without problems.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++">InClass<br>    Foam::myClass<br><br>Description<br>    Implements the read <span class="hljs-keyword">and</span> writing of files.<br><br>    An example input file:<br>    \verbatim<br>        patchName<br>        &#123;<br>            type        myPatchType;<br>            refValue    <span class="hljs-number">100</span>;<br>            value       uniform <span class="hljs-number">1</span>;<br>        &#125;<br>    \endverbatim<br><br>    Within the implementation, a loop over all patches is done:<br>    \code<br>        forAll(patches, patchI)<br>        &#123;<br>            ...  <span class="hljs-comment">// some operation</span><br>        &#125;<br>    \endcode<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++">InClass<br>    Foam::myClass<br><br>Description<br>    Implements the read <span class="hljs-keyword">and</span> writing of files.<br><br>    An example input file:<br>    \verbatim<br>        patchName<br>        &#123;<br>            type        myPatchType;<br>            refValue    <span class="hljs-number">100</span>;<br>            value       uniform <span class="hljs-number">1</span>;<br>        &#125;<br>    \endverbatim<br><br>    Within the implementation, a loop over all patches is done:<br>    \<span class="hljs-function">code</span><br><span class="hljs-function">        <span class="hljs-title">forAll</span><span class="hljs-params">(patches, patchI)</span></span><br><span class="hljs-function">        </span>&#123;<br>            ...  <span class="hljs-comment">// some operation</span><br>        &#125;<br>    \endcode<br></code></pre></td></tr></table></figure>
 <h3 id="2-3-HTML-Special-Commands"><a href="#2-3-HTML-Special-Commands" class="headerlink" title="2.3 HTML Special Commands"></a>2.3 HTML Special Commands</h3><p>Since Doxygen also handles HTML tags to a certain extent, the angle brackets need quoting in the documentation blocks. Non-HTML tags cause Doxygen to complain, but seem to work anyhow. <em>e.g.</em>,</p>
 <ul>
 <li>The template with type <code>&lt;HR&gt;</code> is a bad example.</li>
@@ -443,11 +451,11 @@
 </li>
 <li><p>If the namespaces is used to hold sub-models, the namespace can be documented in the same file as the class with the model selector.</p>
 <p>e.g.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">documented namespace &#x27;Foam::functionEntries&#x27; within the<br><span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">Foam</span>:</span>:functionEntry<span class="hljs-number">&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">documented <span class="hljs-keyword">namespace</span> <span class="hljs-string">&#x27;Foam::functionEntries&#x27;</span> within the<br><span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">Foam</span>:</span>:functionEntry<span class="hljs-number">&#x27;</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>If nothing else helps, find some sensible header.</p>
 <p>e.g.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">namespace &#x27;Foam&#x27; is documented in the foamVersion.H file<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> <span class="hljs-string">&#x27;Foam&#x27;</span> is documented in the foamVersion.H file<br></code></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="2-5-Documenting-Applications"><a href="#2-5-Documenting-Applications" class="headerlink" title="2.5 Documenting Applications"></a>2.5 Documenting Applications</h3><p>Any number of classes might be defined by a particular application, but these classes will not, however, be available to other parts of OpenFOAM. At the moment, the sole purpose for running Doxygen on the applications is to extract program usage information for the ‘-doc’ option.</p>
@@ -455,9 +463,9 @@
 <p>The layout of the application documentation has not yet been finalized, but foamToVTK shows an initial attempt.</p>
 <h3 id="2-6-Orthography"><a href="#2-6-Orthography" class="headerlink" title="2.6 Orthography"></a>2.6 Orthography</h3><p>Given the origins of OpenFOAM, the British spellings (<em>e.g.</em>, neighbour and not neighbor) are generally favoured.</p>
 <p>Both ‘-ize’ and the ‘-ise’ variant are found in the code comments. If used as a variable or class method name, it is probably better to use ‘-ize’, which is considered the main form by the Oxford University Press. <em>e.g.</em>,</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">myClass.initialize()<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">myClass.<span class="hljs-built_in">initialize</span>()<br></code></pre></td></tr></table></figure>
 <h3 id="2-7-References"><a href="#2-7-References" class="headerlink" title="2.7 References"></a>2.7 References</h3><p>References provided in the <code>Description</code> section of the class header files should be formatted in the <a target="_blank" rel="noopener" href="http://www.apastyle.org/">APA (American Psychological Association)</a> style <em>e.g.</em> from <code>kEpsilon.H</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++">Description<br>    Standard k-epsilon turbulence model <span class="hljs-keyword">for</span> incompressible <span class="hljs-keyword">and</span> compressible<br>    flows including rapid distortion theory (RDT) based compression term.<br><br>    Reference:<br>    \verbatim<br>        Standard model:<br>            Launder, B. E., &amp; Spalding, D. B. (<span class="hljs-number">1972</span>).<br>            Lectures in mathematical models of turbulence.<br><br>            Launder, B. E., &amp; Spalding, D. B. (<span class="hljs-number">1974</span>).<br>            The numerical computation of turbulent flows.<br>            Computer methods in applied mechanics <span class="hljs-keyword">and</span> engineering,<br>            <span class="hljs-number">3</span>(<span class="hljs-number">2</span>), <span class="hljs-number">269</span><span class="hljs-number">-289.</span><br><br>        For the RDT-based compression term:<br>            El Tahry, S. H. (<span class="hljs-number">1983</span>).<br>            k-epsilon equation <span class="hljs-keyword">for</span> compressible reciprocating engine flows.<br>            Journal of Energy, <span class="hljs-number">7</span>(<span class="hljs-number">4</span>), <span class="hljs-number">345</span><span class="hljs-number">-353.</span><br>    \endverbatim<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++">Description<br>    Standard k-<span class="hljs-function">epsilon turbulence model <span class="hljs-keyword">for</span> incompressible <span class="hljs-keyword">and</span> compressible</span><br><span class="hljs-function">    flows including rapid distortion <span class="hljs-title">theory</span> <span class="hljs-params">(RDT)</span> based compression term.</span><br><span class="hljs-function"></span><br><span class="hljs-function">    Reference:</span><br><span class="hljs-function">    \verbatim</span><br><span class="hljs-function">        Standard model:</span><br><span class="hljs-function">            Launder, B. E., &amp; Spalding, D. B. (<span class="hljs-number">1972</span>).</span><br><span class="hljs-function">            Lectures in mathematical models of turbulence.</span><br><span class="hljs-function"></span><br><span class="hljs-function">            Launder, B. E., &amp; Spalding, D. B. (<span class="hljs-number">1974</span>).</span><br><span class="hljs-function">            The numerical computation of turbulent flows.</span><br><span class="hljs-function">            Computer methods in applied mechanics and engineering,</span><br><span class="hljs-function">            <span class="hljs-number">3</span>(<span class="hljs-number">2</span>), <span class="hljs-number">269</span><span class="hljs-number">-289.</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">        For the RDT-based compression term:</span><br><span class="hljs-function">            El Tahry, S. H. (<span class="hljs-number">1983</span>).</span><br><span class="hljs-function">            k-epsilon equation for compressible reciprocating engine flows.</span><br><span class="hljs-function">            Journal of Energy, <span class="hljs-number">7</span>(<span class="hljs-number">4</span>), <span class="hljs-number">345</span><span class="hljs-number">-353.</span></span><br><span class="hljs-function">    \endverbatim</span><br></code></pre></td></tr></table></figure>
 <p>The APA style is a commonly used standard and references are available in this format from many sources including <a target="_blank" rel="noopener" href="http://www.citationmachine.net/mla/cite-a-book">Citation Machine</a> and <a target="_blank" rel="noopener" href="http://scholar.google.com/">Google Scholar</a>.</p>
 <p>Date: 2011-2016</p>
 <p>Created: 2016-04-20 Wed 10:24</p>
@@ -662,6 +670,8 @@
 
 
 
+  
+    
   
 
 

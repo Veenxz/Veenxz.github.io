@@ -13,18 +13,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="My OpenFOAM Tips">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <meta name="description" content="OpenFOAM12# Calculation in filesmass            #calc &quot;$rhoSolid*$Lx*$Ly*$Lz&quot;; 12345# Generate UserGuidels -A1 $WM_PROJECT_DIR&#x2F;doc&#x2F;Guides*&#x2F;*UserGuide*.pdf# Calculate Reynolds stresssimpleF">
+  <meta name="description" content="My OpenFOAM Tips">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenFOAM Tips">
-<meta property="og:url" content="https://veenxz.github.io/project/2021/01/14/OpenFOAM-Tips/index.html">
+<meta property="og:url" content="https://veenxz.github.io/2021/01/14/OpenFOAM-Tips/index.html">
 <meta property="og:site_name" content="Veen">
-<meta property="og:description" content="OpenFOAM12# Calculation in filesmass            #calc &quot;$rhoSolid*$Lx*$Ly*$Lz&quot;; 12345# Generate UserGuidels -A1 $WM_PROJECT_DIR&#x2F;doc&#x2F;Guides*&#x2F;*UserGuide*.pdf# Calculate Reynolds stresssimpleF">
+<meta property="og:description" content="My OpenFOAM Tips">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-14T01:51:25.000Z">
-<meta property="article:modified_time" content="2021-04-09T13:09:50.378Z">
+<meta property="article:modified_time" content="2021-10-14T17:31:44.559Z">
 <meta property="article:author" content="Veen">
 <meta property="article:tag" content="OpenFOAM">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,7 +41,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -70,7 +78,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -196,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      271 字
+      356 字
     </span>
   
 
@@ -238,14 +246,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年4月9日 晚上
+                  本文最后更新于：2021年10月15日 凌晨
                 
               </p>
             
             <div class="markdown-body">
-               <a id="more"></a>
-<h2 id="OpenFOAM"><a href="#OpenFOAM" class="headerlink" title="OpenFOAM"></a>OpenFOAM</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"># Calculation in files<br>mass            <span class="hljs-meta">#calc <span class="hljs-meta-string">&quot;$rhoSolid*$Lx*$Ly*$Lz&quot;</span>;</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Generate UserGuide</span><br>ls -A1 <span class="hljs-variable">$WM_PROJECT_DIR</span>/doc/Guides*/*UserGuide*.pdf<br><br><span class="hljs-comment"># Calculate Reynolds stress</span><br>simpleFoam -postProcess -func R -latestTime<br></code></pre></td></tr></table></figure>
+              <p>My OpenFOAM Tips</p>
+ <span id="more"></span>
+<h2 id="OpenFOAM"><a href="#OpenFOAM" class="headerlink" title="OpenFOAM"></a>OpenFOAM</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++"># Calculation in files
+mass            #calc &quot;$rhoSolid*$Lx*$Ly*$Lz&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Generate UserGuide</span>
+<span class="token function">ls</span> -A1 <span class="token variable">$WM_PROJECT_DIR</span>/doc/Guides*/*UserGuide*.pdf
+
+<span class="token comment"># Calculate Reynolds stress</span>
+simpleFoam -postProcess -func R -latestTime<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">foamDictionary -entry <span class="token string">"numberOfSubdomains"</span> -set <span class="token variable">$thread_num</span> system/decomposeParDict<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <h2 id="Paraview"><a href="#Paraview" class="headerlink" title="Paraview"></a>Paraview</h2><blockquote>
 <p>Extract Ux</p>
 <p><code>Ctrl+Space</code>  using Extract Component</p>
@@ -279,9 +294,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/19/fvSolution/">
+                      <a href="/2021/01/19/fvSchemes/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">fvSolution</span>
+                        <span class="hidden-mobile">fvSchemes</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -452,6 +467,8 @@
 
 
 
+  
+    
   
 
 

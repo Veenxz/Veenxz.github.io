@@ -19,7 +19,7 @@
   <meta name="description" content="1. 实例下面是fvSchemes 文件的一个典型例子，其内容（略去文件头部注释）： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&#x2F;&#x2F;文件说明FoamFile&amp;#123;    version     2.0;                &#x2F;&#x2F;版本号    format">
 <meta property="og:type" content="website">
 <meta property="og:title" content="fvSchemes">
-<meta property="og:url" content="https://veenxz.github.io/project/OpenFOAM/fvSchemes.html">
+<meta property="og:url" content="https://veenxz.github.io/OpenFOAM/fvSchemes.html">
 <meta property="og:site_name" content="Veen">
 <meta property="og:description" content="1. 实例下面是fvSchemes 文件的一个典型例子，其内容（略去文件头部注释）： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&#x2F;&#x2F;文件说明FoamFile&amp;#123;    version     2.0;                &#x2F;&#x2F;版本号    format">
 <meta property="og:locale" content="zh_CN">
@@ -41,7 +41,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -70,7 +78,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -201,7 +209,7 @@
 
 <article class="page-content">
   <h1 id="1-实例"><a href="#1-实例" class="headerlink" title="1. 实例"></a>1. 实例</h1><p>下面是<code>fvSchemes</code> 文件的一个典型例子，其内容（略去文件头部注释）：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//文件说明</span><br>FoamFile<br>&#123;<br>    version     <span class="hljs-number">2.0</span>;                <span class="hljs-comment">//版本号</span><br>    format      ascii;              <span class="hljs-comment">//文本格式</span><br>    <span class="hljs-class"><span class="hljs-keyword">class</span>       <span class="hljs-title">dictionary</span>;</span>         <span class="hljs-comment">//类型为字典文件</span><br>    location    <span class="hljs-string">&quot;system&quot;</span>;           <span class="hljs-comment">//所在目录</span><br>    object      fvSchemes;          <span class="hljs-comment">//对象名</span><br>&#125;<br><span class="hljs-comment">//时间一阶导项(非定常项)格式</span><br>ddtSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         Euler;<br>&#125;<br><span class="hljs-comment">//梯度项格式</span><br>gradSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         Gauss linear;<br>    grad(T)         Gauss linear;<br>&#125;<br><span class="hljs-comment">//散度项格式</span><br>divSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         none;<br>&#125;<br><span class="hljs-comment">//拉普拉斯项格式</span><br>laplacianSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         none;<br>    laplacian(DT,T) Gauss linear corrected;<br>&#125;<br><span class="hljs-comment">//插值格式</span><br>interpolationSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         linear;<br>&#125;<br><span class="hljs-comment">//面法向梯度格式</span><br>snGradSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         corrected;<br>&#125;<br><span class="hljs-comment">//需要用来计算通量的场</span><br>fluxRequired<br>&#123;<br>    <span class="hljs-keyword">default</span>         no;<br>    T;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//文件说明</span><br>FoamFile<br>&#123;<br>    version     <span class="hljs-number">2.0</span>;                <span class="hljs-comment">//版本号</span><br>    format      ascii;              <span class="hljs-comment">//文本格式</span><br>    <span class="hljs-class"><span class="hljs-keyword">class</span>       <span class="hljs-title">dictionary</span>;</span>         <span class="hljs-comment">//类型为字典文件</span><br>    location    <span class="hljs-string">&quot;system&quot;</span>;           <span class="hljs-comment">//所在目录</span><br>    object      fvSchemes;          <span class="hljs-comment">//对象名</span><br>&#125;<br><span class="hljs-comment">//时间一阶导项(非定常项)格式</span><br>ddtSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         Euler;<br>&#125;<br><span class="hljs-comment">//梯度项格式</span><br>gradSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         Gauss linear;<br>    <span class="hljs-built_in">grad</span>(T)         Gauss linear;<br>&#125;<br><span class="hljs-comment">//散度项格式</span><br>divSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         none;<br>&#125;<br><span class="hljs-comment">//拉普拉斯项格式</span><br>laplacianSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         none;<br>    <span class="hljs-built_in">laplacian</span>(DT,T) Gauss linear corrected;<br>&#125;<br><span class="hljs-comment">//插值格式</span><br>interpolationSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         linear;<br>&#125;<br><span class="hljs-comment">//面法向梯度格式</span><br>snGradSchemes<br>&#123;<br>    <span class="hljs-keyword">default</span>         corrected;<br>&#125;<br><span class="hljs-comment">//需要用来计算通量的场</span><br>fluxRequired<br>&#123;<br>    <span class="hljs-keyword">default</span>         no;<br>    T;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h1 id="2-fvSchemes-文件简介"><a href="#2-fvSchemes-文件简介" class="headerlink" title="2. fvSchemes 文件简介"></a>2. fvSchemes 文件简介</h1><p><code>system</code>目录下的<code>fvSchemes</code>文件用来设置 <strong>离散格式</strong>， 凡是求解器里面出现的方程，都需要在这里面进行离散格式设置。<code>fvSchemes</code>中需要指定的信息主要分为<code>7</code>类：</p>
 <div class="table-container">
 <table>
@@ -304,7 +312,7 @@
 </table>
 </div>
 <p>中心格式的指定方式为：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">default</span> linear;<br></code></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">default linear<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 <h2 id="3-2-应用于对流项的插值格式"><a href="#3-2-应用于对流项的插值格式" class="headerlink" title="3.2 应用于对流项的插值格式"></a>3.2 应用于对流项的插值格式</h2><p>迎风格式包括：</p>
 <div class="table-container">
 <table>
@@ -385,16 +393,16 @@
 </table>
 </div>
 <p>针对对流项的插值格式需要在通量的基础上计算插值，因此这些格式的指定需要提供通量场的名称。在<code>OpenFOAM</code>标准求解器中，体积通量名称一般为<code>phi</code>，类型<code>surfaceScalarField</code>（面心标量场），因此针对对流项的插值格式指定方式（以<code>upwind</code>格式为例）为：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">default</span> upwind phi;<br></code></pre></td></tr></table></figure>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-keyword">default</span> upwind <span class="hljs-keyword">phi</span><span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 <p>一些基于TVD或NVD的格式需要系数，介于<code>0</code>和<code>1</code>之间，（建议值）对应标准TVD格式，能够达到最快的收敛速度，对应最高精度，例如：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">default</span> limitedLinear phi <span class="hljs-number">1</span>.<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
 <h2 id="3-3-严格有界标量格式"><a href="#3-3-严格有界标量格式" class="headerlink" title="3.3 严格有界标量格式"></a>3.3 严格有界标量格式</h2><p>某些标量场是严格有界的（<strong>有界性</strong>），例如VOF模型中的流体体积分数场（也有文献将其定义为），其值严格介于<code>0</code>和<code>1</code>之间，因此，才会出现一些带有限制器的增强版格式（除<code>SFCD</code>格式外，所有的TVD家族和NVD家族都具有带限制器的增强版本）。用户如果想要指定有界场的上下限，需要在格式名称前加上前缀<code>limited</code>。例如，将<code>vanLeer</code>格式上下限设置为：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">default</span> limitedVanLeer -<span class="hljs-number">2</span>.<span class="hljs-number">0</span> <span class="hljs-number">3</span>.<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
 <p>需要注意的是，<code>OpenFOAM</code>遵循<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/駝峰式大小寫">小驼峰式命名法</a>，<code>limitedVanLeer</code>中的<code>V</code>是大写的，注意与<code>vanLeer</code>的区分。特别地，对类似于流体体积分数场，上下限严格为，可以添加后缀<code>01</code>，如：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">default</span> vanLeer01;<br></code></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">default vanLeer01<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 <p>以下格式具有带限制器的增强版本:<code>limitedLinear</code>，<code>vanLeer</code>，<code>Gamma</code>，<code>limitedCubic</code>，<code>MUSCL</code>和<code>SuperBee</code>。</p>
 <h2 id="3-4-矢量场专用格式"><a href="#3-4-矢量场专用格式" class="headerlink" title="3.4 矢量场专用格式"></a>3.4 矢量场专用格式</h2><p>针对矢量场的 <strong>有向性</strong>，一些带有限制器的格式具有矢量场的专用版本，使用方法为添加后缀<code>V</code>，如：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">default</span> limitedLinearV;<br></code></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">default limitedLinearV<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 <p>以下格式具有矢量场专用版本：<code>limitedLinearV</code>，<code>vanLeerV</code>，<code>GammaV</code>，<code>limitedCubicV</code>和<code>SFCDV</code>。</p>
 <hr>
 <h1 id="4-面法向梯度格式-snGradSchemes"><a href="#4-面法向梯度格式-snGradSchemes" class="headerlink" title="4. 面法向梯度格式 snGradSchemes"></a>4. 面法向梯度格式 snGradSchemes</h1><p>面法向梯度指的是变量场梯度在面处的法向分量，一般需要在单独计算面法向梯度或者指定拉普拉斯项离散格式时指定面法向梯度格式。面法向梯度格式在子字典<code>snGradSchemes</code>下设置，支持的标准格式有：</p>
@@ -738,6 +746,8 @@
 
 
 
+  
+    
   
 
 

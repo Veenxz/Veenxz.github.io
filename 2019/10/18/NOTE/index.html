@@ -13,18 +13,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="OpenFOAM 2019">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <meta name="description" content="elbow terminal123456fluentMeshToFoam elbow.mshsim &#x2F;&#x2F;constant\poluMesh mesh locationfoamCleanTutorials cleanDirtouch case.foam boundary conditiontype            empty; 2D  type            noSlip; type">
+  <meta name="description" content="OpenFOAM 2019">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenFOAM Note">
-<meta property="og:url" content="https://veenxz.github.io/project/2019/10/18/NOTE/index.html">
+<meta property="og:url" content="https://veenxz.github.io/2019/10/18/NOTE/index.html">
 <meta property="og:site_name" content="Veen">
-<meta property="og:description" content="elbow terminal123456fluentMeshToFoam elbow.mshsim &#x2F;&#x2F;constant\poluMesh mesh locationfoamCleanTutorials cleanDirtouch case.foam boundary conditiontype            empty; 2D  type            noSlip; type">
+<meta property="og:description" content="OpenFOAM 2019">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-10-17T17:32:13.000Z">
-<meta property="article:modified_time" content="2020-11-23T03:15:43.484Z">
+<meta property="article:modified_time" content="2021-10-14T17:33:54.922Z">
 <meta property="article:author" content="Veen">
 <meta property="article:tag" content="CFD">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,7 +41,15 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
     
   
 
@@ -70,7 +78,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -238,14 +246,20 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月23日 上午
+                  本文最后更新于：2021年10月15日 凌晨
                 
               </p>
             
             <div class="markdown-body">
-              <a id="more"></a>
+              <p>OpenFOAM 2019</p>
+<span id="more"></span>
 <h1 id="elbow"><a href="#elbow" class="headerlink" title="elbow"></a>elbow</h1><blockquote>
-<p>terminal<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">fluentMeshToFoam elbow.mshsim<br><br> //constant\poluMesh mesh location<br><br>foamCleanTutorials cleanDir<br>touch case.foam<br></code></pre></td></tr></table></figure></p>
+<p>terminal<br><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">fluentMeshToFoam elbow.mshsim
+
+ &#x2F;&#x2F;constant\poluMesh mesh location
+
+foamCleanTutorials cleanDir
+touch case.foam<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></p>
 <p>boundary condition<br>type            empty; 2D</p>
 </blockquote>
 <p>type            noSlip;</p>
@@ -264,8 +278,10 @@
 <h1 id="TShspe-TEST"><a href="#TShspe-TEST" class="headerlink" title="TShspe_TEST"></a>TShspe_TEST</h1><blockquote>
 <p>constant    /boundary    /nu    /laminar<br>0    /p    /U</p>
 </blockquote>
-<figure class="highlight irpf90"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs irpf90">blockMesh<br><span class="hljs-keyword">touch</span> <span class="hljs-keyword">case</span><span class="hljs-number">.</span>foam<br>simpleFoam<br></code></pre></td></tr></table></figure>
-<h1 id="arota-transient"><a href="#arota-transient" class="headerlink" title="arota_transient"></a>arota_transient</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">fluent3DMeshToFoam</span> <span class="hljs-selector-tag">fluent</span><span class="hljs-selector-class">.msh</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">blockMesh
+touch case.foam
+simpleFoam<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+<h1 id="arota-transient"><a href="#arota-transient" class="headerlink" title="arota_transient"></a>arota_transient</h1><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">fluent3DMeshToFoam fluent.msh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
 <blockquote>
 <p>/p<br>type            codedFixedValue;<br>changable pressure with time on boundary</p>
 </blockquote>
@@ -273,47 +289,140 @@
 <blockquote>
 <p>/controlDict<br>important: deltaT<br>writeFormat     binary;</p>
 </blockquote>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">pimpleFoam<br>foamListTimes -rm  <span class="hljs-regexp">//</span><span class="hljs-keyword">delete</span> previous solution data<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">pimpleFoam
+foamListTimes -rm  &#x2F;&#x2F;delete previous solution data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
 <p>postProcessing residuals data</p>
 <p>foamMonitor -l postProcessing/residuals/0/residuals.dat</p>
-<h1 id="sylinder-TEST"><a href="#sylinder-TEST" class="headerlink" title="_sylinder_TEST"></a>_sylinder_TEST</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">inGroups</span>        List&lt;word&gt; <span class="hljs-number">1</span>(mywall);<br><br><span class="hljs-attribute">empty</span> cyclic cyclicAMI wedge symmetry &gt; #includeEtc <span class="hljs-string">&quot;caseDicts/setConstraintTypes&quot;</span><br><br><span class="hljs-attribute">internalField</span>   uniform (<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);<br><br><span class="hljs-attribute">pimpleFoam</span> &amp;&gt; log<br><br><span class="hljs-attribute">nOuterCorrectors</span>    <span class="hljs-number">15</span>&gt;&gt;<span class="hljs-number">1</span>; pimple to piso<br><br><span class="hljs-attribute">foamMonitor</span> yrange <span class="hljs-string">&quot;[0 1]&quot;</span><br></code></pre></td></tr></table></figure>
-<h1 id="TaylorCouettte-steadyState"><a href="#TaylorCouettte-steadyState" class="headerlink" title="_TaylorCouettte_steadyState"></a>_TaylorCouettte_steadyState</h1><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-string">&quot;.*&quot;</span><br>&#123;<br>	<span class="hljs-keyword">type</span> zeroGradient;<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&gt; foamGet residuals<br><span class="hljs-built_in">functions</span><br>&#123;<br>	<span class="hljs-comment">#includeFunc residuals</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">decomposePar</span> <br><br><span class="hljs-attribute">mpirun</span> -np <span class="hljs-number">4</span> simpleFoam -parallel<br><br><br></code></pre></td></tr></table></figure>
+<h1 id="sylinder-TEST"><a href="#sylinder-TEST" class="headerlink" title="_sylinder_TEST"></a>_sylinder_TEST</h1><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">inGroups        List&lt;word&gt; 1(mywall);
+
+empty cyclic cyclicAMI wedge symmetry &gt; #includeEtc &quot;caseDicts&#x2F;setConstraintTypes&quot;
+
+internalField   uniform (1 0 0);
+
+pimpleFoam &amp;&gt; log
+
+nOuterCorrectors    15&gt;&gt;1; pimple to piso
+
+foamMonitor yrange &quot;[0 1]&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h1 id="TaylorCouettte-steadyState"><a href="#TaylorCouettte-steadyState" class="headerlink" title="_TaylorCouettte_steadyState"></a>_TaylorCouettte_steadyState</h1><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&quot;.*&quot;
+&#123;
+	type zeroGradient;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&gt; foamGet residuals
+functions
+&#123;
+	#includeFunc residuals
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">decomposePar 
+
+mpirun -np 4 simpleFoam -parallel
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h1 id="cyclic-RANS"><a href="#cyclic-RANS" class="headerlink" title="cyclic_RANS"></a>cyclic_RANS</h1><p>👉<br>wall function<br>    type    kqRWallFunction;<br>    value    $internalField;</p>
 <p>./Allrun<br>decomposePar -force<br>mpirun -np 4 simpleFoam -parallel<br>reconstructPar</p>
 <h1 id="dynMesh"><a href="#dynMesh" class="headerlink" title="_dynMesh"></a>_dynMesh</h1><p>dynamicMeshDict   movingwall nessary file</p>
 <p>pointDisplacement</p>
 <h1 id="livingRoom"><a href="#livingRoom" class="headerlink" title="_livingRoom"></a>_livingRoom</h1><p>topoSet<br>        name    window;<br>        type    faceSet;<br>        action  new;<br>        source  boxToFace;<br>        sourceInfo<br>        {<br>            box (0.5 1.0 -0.001)(2.5 2.0 0.001);<br>        }</p>
 <p>p_rgh</p>
-<pre><code>type        zerogradient;
+<div class="code-wrapper"><pre><code>type        zerogradient;
     type            fixedFluxPressure;
     value           uniform 0;
 
 equationOfState perfectGas;
-</code></pre><p>buoyantSimpleFoam</p>
+</code></pre></div><p>buoyantSimpleFoam</p>
 <h1 id="BernardCells"><a href="#BernardCells" class="headerlink" title="_BernardCells"></a>_BernardCells</h1><p>buoyantPimpleFoam</p>
 <p>—&gt; FOAM FATAL ERROR:<br>LHS and RHS of - have different dimensions<br>     dimensions : [0 2 -2 0 0 0 0] - [1 -1 -2 0 0 0 0]</p>
-<h1 id="rhiCentralFoam"><a href="#rhiCentralFoam" class="headerlink" title="rhiCentralFoam"></a>rhiCentralFoam</h1><h1 id="rhoSimpleFoam"><a href="#rhoSimpleFoam" class="headerlink" title="rhoSimpleFoam"></a>rhoSimpleFoam</h1><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scala">mu          <span class="hljs-number">0</span>;<br><br>sutherland  mu relacted <span class="hljs-keyword">with</span> <span class="hljs-type">T</span><br>internalField   uniform $<span class="hljs-type">Uinlet</span>;<br>internalField   uniform $pOut;<br><br><span class="hljs-class"><span class="hljs-keyword">type</span>           <span class="hljs-title">fixedMean</span></span>;  <span class="hljs-comment">//face average</span><br><span class="hljs-class"><span class="hljs-keyword">type</span>       <span class="hljs-title">totalTemperature</span></span>;<br><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">turbulentIntensityKineticEnergyInlet</span></span>;<br></code></pre></td></tr></table></figure>
+<h1 id="rhiCentralFoam"><a href="#rhiCentralFoam" class="headerlink" title="rhiCentralFoam"></a>rhiCentralFoam</h1><h1 id="rhoSimpleFoam"><a href="#rhoSimpleFoam" class="headerlink" title="rhoSimpleFoam"></a>rhoSimpleFoam</h1><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">mu          0;
+
+sutherland  mu relacted with T
+internalField   uniform $Uinlet;
+internalField   uniform $pOut;
+
+type           fixedMean;  &#x2F;&#x2F;face average
+type       totalTemperature;
+type turbulentIntensityKineticEnergyInlet;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h1 id="VOF"><a href="#VOF" class="headerlink" title="VOF"></a>VOF</h1><p>type           constantAlphaContactAngle;<br>interFoam</p>
-<pre><code>pRefCell    0;
+<div class="code-wrapper"><pre><code>pRefCell    0;
 pRefValue           0;
-</code></pre><h1 id="Mixture"><a href="#Mixture" class="headerlink" title="Mixture"></a>Mixture</h1><p>driftFluxFoam</p>
+</code></pre></div><h1 id="Mixture"><a href="#Mixture" class="headerlink" title="Mixture"></a>Mixture</h1><p>driftFluxFoam</p>
 <p>relativeVelocityModel simple; //relative Velocity</p>
 <h1 id="find-solvers"><a href="#find-solvers" class="headerlink" title="find solvers"></a>find solvers</h1><p>OpenFOAM/OpenFOAM-7/applications/solvers/xx/xx.c &gt; discriptions</p>
 <p>OKSS2</p>
-<p>laplacianFoam.c<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gams">Application<br>    laplacianFoam<br><br>Description<br>    Solves a simple Laplace <span class="hljs-keyword">equation</span>, e.g. for <span class="hljs-comment">thermal diffusion in a solid.</span><br><br>            fvScalarMatrix <span class="hljs-comment">TEqn</span><br>            (<br>                fvm::ddt(T) <span class="hljs-comment">- fvm::laplacian(DT, T)</span><br>             ==<br>                fvOptions(T)<br>            );<br><br></code></pre></td></tr></table></figure></p>
-<p>scalarTransportFoam<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs excel">Application<br>    scalarTransportFoam<br><br>Description<br>    Solves the steady <span class="hljs-built_in">or</span> transient transport equation for a passive scalar.<br><br>            fvScalarMatrix TEqn<br>            (<br>                f<span class="hljs-symbol">vm:</span><span class="hljs-symbol">:dd</span><span class="hljs-built_in">t</span>(<span class="hljs-built_in">T</span>)<br>              + f<span class="hljs-symbol">vm:</span><span class="hljs-symbol">:di</span>v(<span class="hljs-built_in">phi</span>, <span class="hljs-built_in">T</span>)<br>              - f<span class="hljs-symbol">vm:</span><span class="hljs-symbol">:la</span>placian(DT, <span class="hljs-built_in">T</span>)<br>             ==<br>                fvOptions(<span class="hljs-built_in">T</span>)<br>            );<br><br></code></pre></td></tr></table></figure></p>
+<p>laplacianFoam.c<br><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Application
+    laplacianFoam
+
+Description
+    Solves a simple Laplace equation, e.g. for thermal diffusion in a solid.
+
+            fvScalarMatrix TEqn
+            (
+                fvm::ddt(T) - fvm::laplacian(DT, T)
+             &#x3D;&#x3D;
+                fvOptions(T)
+            );
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></p>
+<p>scalarTransportFoam<br><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">Application
+    scalarTransportFoam
+
+Description
+    Solves the steady or transient transport equation for a passive scalar.
+
+            fvScalarMatrix TEqn
+            (
+                fvm::ddt(T)
+              + fvm::div(phi, T)
+              - fvm::laplacian(DT, T)
+             &#x3D;&#x3D;
+                fvOptions(T)
+            );
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></p>
 <h1 id="Energe-equation"><a href="#Energe-equation" class="headerlink" title="Energe equation"></a>Energe equation</h1><p>name.c&gt;Make&gt;flies&gt;name.C name</p>
 <p>$ wmake</p>
 <blockquote>
 <p>name.c</p>
 </blockquote>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs dts">   volScalarField T<br>   &#123;<br>IOobject<br>&#123;<br>    <span class="hljs-string">&quot;T&quot;</span>,<br>           runTime.timeName(),<br>           mesh,<br><span class="hljs-symbol">           IOobject:</span>:MUST_READ,<br><span class="hljs-symbol">           IOobject:</span>:AUTO_WRITE<br>&#125;,<br>       mesh<br>   &#125;;<br><br>   dimensionedScalar DT<br>   &#123;<br>       <span class="hljs-string">&quot;DT&quot;</span>,<br>       dimensionSet(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>),<br>       <span class="hljs-number">0.0001</span><br>   &#125;;<br><br><br>   fvScalarMatrix TEqn<br>   &#123;<br><span class="hljs-symbol">       fvm:</span>:ddt(T)<br>     + fvc::div(phi, T)<br>     - fvc::laplacian(DT, T)<br>   &#125;;<br><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">   volScalarField T
+   &#123;
+IOobject
+&#123;
+    &quot;T&quot;,
+           runTime.timeName(),
+           mesh,
+           IOobject::MUST_READ,
+           IOobject::AUTO_WRITE
+&#125;,
+       mesh
+   &#125;;
+
+   dimensionedScalar DT
+   &#123;
+       &quot;DT&quot;,
+       dimensionSet(0,2,-1,0,0),
+       0.0001
+   &#125;;
+
+
+   fvScalarMatrix TEqn
+   &#123;
+       fvm::ddt(T)
+     + fvc::div(phi, T)
+     - fvc::laplacian(DT, T)
+   &#125;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <h1 id="projectionFoam"><a href="#projectionFoam" class="headerlink" title="projectionFoam"></a>projectionFoam</h1><p>projectionFoam.C</p>
 <p>EXE = $(FOAM_USER_APPBIN)/projectionFoam</p>
 <p>phi = fvc::interpolate(U) &amp; mesh.Sf(); volume to surface</p>
-<h1 id="dym"><a href="#dym" class="headerlink" title="dym"></a>dym</h1><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dts">&gt;pisoDyMFoam.C<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;dynamicFvMesh.H&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;createDynamicFvMesh.H&quot;</span></span><br>mesh.update();<br>&gt;UEqn<br>phi = phi - mesh.phi();<br><br>&gt;options<br>-ldynamicFvMesh \<br>-ltopoChangerFvMesh \<br>-I$(LIB_SRC)/dynamicFvMesh/lnInclude \<br></code></pre></td></tr></table></figure>
+<h1 id="dym"><a href="#dym" class="headerlink" title="dym"></a>dym</h1><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&gt;pisoDyMFoam.C
+#include &quot;dynamicFvMesh.H&quot;
+#include &quot;createDynamicFvMesh.H&quot;
+mesh.update();
+&gt;UEqn
+phi &#x3D; phi - mesh.phi();
+
+&gt;options
+-ldynamicFvMesh \
+-ltopoChangerFvMesh \
+-I$(LIB_SRC)&#x2F;dynamicFvMesh&#x2F;lnInclude \<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
 <p>missing operator &gt;options environment variables</p>
 <h1 id="EMMS"><a href="#EMMS" class="headerlink" title="EMMS"></a>EMMS</h1><h1 id="BASUOQU"><a href="#BASUOQU" class="headerlink" title="BASUOQU"></a>BASUOQU</h1><p>pimpleFoam -listScalarBCs -listVectorBCs \list boundary type</p>
 
@@ -343,9 +452,9 @@ pRefValue           0;
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/10/18/%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E5%99%A8/">
+                      <a href="/2019/10/18/C-Summary/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Download</span>
+                        <span class="hidden-mobile">C Summary</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -353,8 +462,8 @@ pRefValue           0;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/10/18/CFD-Theory/">
-                        <span class="hidden-mobile">CFD Theory</span>
+                      <a href="/2019/10/18/%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E5%99%A8/">
+                        <span class="hidden-mobile">Download</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -516,6 +625,8 @@ pRefValue           0;
 
 
 
+  
+    
   
 
 
