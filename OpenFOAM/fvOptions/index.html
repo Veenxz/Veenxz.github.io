@@ -1,0 +1,1746 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Openfoam fvOptions">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="Openfoam fvOptions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fvOptions">
+<meta property="og:url" content="https://veenxz.github.io/OpenFOAM/fvOptions/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="Openfoam fvOptions">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-01T12:49:27.000Z">
+<meta property="article:modified_time" content="2020-12-11T03:24:45.929Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="CFD">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>fvOptions - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="fvOptions">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-01 20:49" pubdate>
+        2020年12月1日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      24k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      75 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">fvOptions</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年12月11日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Openfoam fvOptions</p>
+<span id="more"></span>
+<h2 id="Show-fvOptions"><a href="#Show-fvOptions" class="headerlink" title="Show fvOptions"></a>Show fvOptions</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token assign-left variable">COUNT</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token builtin class-name">cd</span> <span class="token variable">$FOAM_SRC</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">OPTION_PATH</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">find</span> fvOptions <span class="token operator">|</span> <span class="token function">sort</span> -f <span class="token operator">|</span> <span class="token function">grep</span> -v lnInclude <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"\.H$"</span> <span class="token operator">|</span> <span class="token function">xargs</span> -I <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token function">dirname</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token operator">|</span> <span class="token function">sed</span> -e <span class="token string">"s%^./%%"</span> <span class="token operator">|</span> <span class="token function">uniq</span><span class="token variable">`</span></span> <span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$OPTION_PATH</span>
+    <span class="token builtin class-name">echo</span>
+    <span class="token function">cat</span> <span class="token variable">$OPTION_PATH</span>/*.H <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'
+        /\\\*/ &#123;exit&#125;
+        /SourceFiles/ &#123;exit&#125;
+        a == 1 &#123;print&#125;
+        /Description/ &#123;a = 1&#125; 
+    '</span>
+    <span class="token builtin class-name">echo</span>
+    <span class="token assign-left variable">COUNT</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $COUNT + <span class="token number">1</span><span class="token variable">`</span></span>
+<span class="token keyword">done</span>
+<span class="token builtin class-name">echo</span> Total <span class="token variable">$COUNT</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<blockquote>
+<p>Results</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">fvOptions&#x2F;cellSetOption
+
+    Cell-set options abstract base class.  Provides a base set of controls,
+    e.g.:
+    \verbatim
+        type            scalarExplicitSource    &#x2F;&#x2F; Source type
+        active          on;                     &#x2F;&#x2F; on&#x2F;off switch
+
+        timeStart       0.0;        &#x2F;&#x2F; Start time
+        duration        1000.0;     &#x2F;&#x2F; Duration
+        selectionMode   cellSet;    &#x2F;&#x2F; cellSet, points, cellZone
+        .
+        .
+        .
+    \endverbatim
+
+Note
+    Source&#x2F;sink options are to be added to the equation R.H.S.
+
+
+fvOptions&#x2F;constraints&#x2F;fixedTemperatureConstraint
+
+    Fixed temperature equation constraint
+
+Usage
+    \verbatim
+    fixedTemperature
+    &#123;
+        type            fixedTemperatureConstraint;
+        active          yes;
+
+        mode            uniform;      &#x2F;&#x2F; uniform or lookup
+
+        &#x2F;&#x2F; For uniform option
+        temperature     constant 500; &#x2F;&#x2F; fixed temperature with time [K]
+
+        &#x2F;&#x2F; For lookup option
+        &#x2F;&#x2F; T            &lt;Tname&gt;;      &#x2F;&#x2F; optional temperature field name
+
+        phase           gas; &#x2F;&#x2F; optional
+    &#125;
+    \endverbatim
+
+Note:
+    The &#39;uniform&#39; option allows the use of a time-varying uniform temperature
+    by means of the Function1 type.
+
+See also
+    Foam::fvOption
+
+
+fvOptions&#x2F;constraints&#x2F;fixedValueConstraint
+
+    Constrain the field values within a specified region.
+
+Usage
+    For example to set the turbulence properties within a porous region:
+    \verbatim
+    porosityTurbulence
+    &#123;
+        type            scalarFixedValueConstraint;
+        active          yes;
+
+        selectionMode   cellZone;
+        cellZone        porosity;
+        fieldValues
+        &#123;
+            k           1;
+            epsilon     150;
+        &#125;
+    &#125;
+    \endverbatim
+
+See also
+    Foam::fvOption
+
+
+fvOptions&#x2F;corrections&#x2F;limitTemperature
+
+    Correction for temperature to apply limits between minimum and maximum
+    values.
+
+Usage
+    Example usage:
+    \verbatim
+    limitT
+    &#123;
+        type            limitTemperature;
+        active          yes;
+
+        selectionMode   all;
+        min             200;
+        max             500;
+        phase           gas; &#x2F;&#x2F; optional
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;corrections&#x2F;limitVelocity
+
+    Limits the maximum velocity magnitude to the specified \c max value.
+
+Usage
+    Example usage:
+    \verbatim
+    limitU
+    &#123;
+        type            limitVelocity;
+        active          yes;
+
+        selectionMode   all;
+        max             100;
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;interRegionOption
+
+    Base class for inter-region exchange.
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;accelerationSource
+
+    This fvOption applies an explicit acceleration force to components of the
+    velocity field.
+
+Usage
+    Example usage:
+    \verbatim
+    accelerationSource
+    &#123;
+        type        accelerationSource;
+        active      on;
+        selectionMode all;
+        U           U;
+        velocity    scale;
+        value       (-2.572 0 0);
+        scale
+        &#123;
+            type        halfCosineRamp;
+            start       0;
+            duration    10;
+        &#125;
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;actuationDiskSource
+
+    Actuation disk source
+
+    Constant values for momentum source for actuation disk
+    \f[
+        T &#x3D; 2 \rho A U_&#123;o&#125;^2 a (1-a)
+    \f]
+    and
+    \f[
+        U_1 &#x3D; (1 - a)U_&#123;o&#125;
+    \f]
+
+    where:
+    \vartable
+        A   | disk area
+        U_o | upstream velocity
+        a   | 1 - Cp&#x2F;Ct
+        U_1 | velocity at the disk
+    \endvartable
+
+Usage
+    Example usage:
+    \verbatim
+    fields          (U);        &#x2F;&#x2F; names of fields to apply source
+    diskDir         (-1 0 0);   &#x2F;&#x2F; disk direction
+    Cp              0.1;        &#x2F;&#x2F; power coefficient
+    Ct              0.5;        &#x2F;&#x2F; thrust coefficient
+    diskArea        5.0;        &#x2F;&#x2F; disk area
+    upstreamPoint   (0 0 0);    &#x2F;&#x2F; upstream point
+    \endverbatim
+
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;buoyancyEnergy
+
+    Calculates and applies the buoyancy energy source rho*(U&amp;g) to the energy
+    equation.
+
+Usage
+    Example usage:
+    \verbatim
+    fields          (h);                    &#x2F;&#x2F; Name of energy field
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;buoyancyForce
+
+    Calculates and applies the buoyancy force rho*g to the momentum equation
+    corresponding to the specified velocity field.
+
+Usage
+    Example usage:
+    \verbatim
+    fields          (U);                    &#x2F;&#x2F; Name of velocity field
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;damping&#x2F;damping
+
+    Base fvOption for damping functions.
+
+See also
+    Foam::fv::isotropicDamping
+    Foam::fv::verticalDamping
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;damping&#x2F;isotropicDamping
+
+
+    This fvOption applies an implicit damping force to all components of the
+    vector field to relax the field towards a specified uniform value.  Its
+    intended purpose is to damp the motions of an interface in the region
+    approaching an outlet so that no reflections are generated.
+
+    The damping force coefficient \f$\lambda\f$ should be set based on the
+    desired level of damping and the residence time of a perturbation through
+    the damping zone.  For example, if waves moving at 2 [m&#x2F;s] are travelling
+    through a damping zone 8 [m] in length, then the residence time is 4 [s]. If
+    it is deemed necessary to damp for 5 time-scales, then \f$\lambda\f$ should
+    be set to equal 5&#x2F;(4 [s]) &#x3D; 1.2 [1&#x2F;s].
+
+Usage
+    Example usage:
+    \verbatim
+    isotropicDamping1
+    &#123;
+        type            isotropicDamping;
+
+        selectionMode   cellZone;
+        cellZone        nearOutlet;
+
+        value           (2 0 0);   &#x2F;&#x2F; Value towards which the field it relaxed
+        lambda          [0 0 -1 0 0 0 0] 1; &#x2F;&#x2F; Damping coefficient
+
+        timeStart       0;
+        duration        1e6;
+    &#125;
+    \endverbatim
+
+    Example usage with graduated onset:
+    \verbatim
+    isotropicDamping1
+    &#123;
+        type            isotropicDamping;
+
+        selectionMode   all;
+
+        &#x2F;&#x2F; Define the line along which to apply the graduation
+        origin          (1200 0 0);
+        direction       (1 0 0);
+
+        &#x2F;&#x2F; Or, define multiple lines
+        &#x2F;&#x2F; origins         ((1200 0 0) (1200 -300 0) (1200 300 0));
+        &#x2F;&#x2F; directions      ((1 0 0) (0 -1 0) (0 1 0));
+
+        scale
+        &#123;
+            type        halfCosineRamp;
+            start       0;
+            duration    600;
+        &#125;
+
+        value           (2 0 0);   &#x2F;&#x2F; Value towards which the field it relaxed
+        lambda          [0 0 -1 0 0 0 0] 1; &#x2F;&#x2F; Damping coefficient
+
+        timeStart       0;
+        duration        1e6;
+    &#125;
+    \endverbatim
+
+See also
+    Foam::fv::damping
+    Foam::fv::verticalDamping
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;damping&#x2F;verticalDamping
+
+    This fvOption applies an explicit damping force to components of the vector
+    field in the direction of gravity. Its intended purpose is to damp the
+    vertical motions of an interface in the region approaching an outlet so that
+    no reflections are generated.
+
+    Damping is achieved by applying a force to the momentum equation
+    proportional to the momentum of the flow in the direction of gravity. The
+    constant of proportionality is given by a coefficient \f$\lambda\f$ which
+    has units of inverse-time. In the absence of any other forces this would
+    generate an exponential decay of the vertical velocity.
+
+        \f[
+            \frac&#123;d (m u_z)&#125;&#123;d t&#125; &#x3D; - \lambda m u_z
+        \f]
+        \f[
+            u_z &#x3D; u_&#123;z0&#125; e^&#123;- \lambda t&#125;
+        \f]
+
+    The coefficient \f$\lambda\f$ should be set based on the desired level of
+    damping and the residence time of a perturbation through the damping zone.
+    For example, if waves moving at 2 [m&#x2F;s] are travelling through a damping
+    zone 8 [m] in length, then the residence time is 4 [s]. If it is deemed
+    necessary to damp for 5 time-scales, then \f$\lambda\f$ should be set to
+    equal 5&#x2F;(4 [s]) &#x3D; 1.2 [1&#x2F;s].
+
+Usage
+    Example usage:
+    \verbatim
+    verticalDamping1
+    &#123;
+        type            verticalDamping;
+
+        selectionMode   cellZone;
+        cellZone        nearOutlet;
+
+        lambda          [0 0 -1 0 0 0 0] 1; &#x2F;&#x2F; Damping coefficient
+
+        timeStart       0;
+        duration        1e6;
+    &#125;
+    \endverbatim
+
+    Example usage with graduated onset:
+    \verbatim
+    verticalDamping1
+    &#123;
+        type            verticalDamping;
+
+        selectionMode   all;
+
+        &#x2F;&#x2F; Define the line along which to apply the graduation
+        origin          (1200 0 0);
+        direction       (1 0 0);
+
+        &#x2F;&#x2F; Or, define multiple lines
+        &#x2F;&#x2F; origins         ((1200 0 0) (1200 -300 0) (1200 300 0));
+        &#x2F;&#x2F; directions      ((1 0 0) (0 -1 0) (0 1 0));
+
+        scale
+        &#123;
+            type        halfCosineRamp;
+            start       0;
+            duration    600;
+        &#125;
+
+        lambda          [0 0 -1 0 0 0 0] 1; &#x2F;&#x2F; Damping coefficient
+
+        timeStart       0;
+        duration        1e6;
+    &#125;
+    \endverbatim
+
+See also
+    Foam::fv::damping
+    Foam::fv::isotropicDamping
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;effectivenessHeatExchangerSource
+
+    Heat exchanger source model, in which the heat exchanger is defined as a
+    selection of cells.
+
+    The total heat exchange source is given by:
+    \f[
+        Q_t &#x3D; e(\phi, \dot&#123;m&#125;_2) (T_2 - T_1) \phi c_p
+    \f]
+
+    where:
+    \vartable
+        Q_t       | total heat source
+        e(\phi,\dot&#123;m&#125;_2) | effectiveness table
+        \phi      | net mass flux entering heat exchanger [kg&#x2F;s]
+        \dot&#123;m&#125;_2 | secondary mass flow rate [kg&#x2F;s]
+        T_1       | primary inlet temperature [K]
+        T_2       | secondary inlet temperature [K]
+        c_p       | specific heat capacity [J&#x2F;kg&#x2F;K]
+    \endvartable
+
+
+    The distribution inside the hear exchanger is given by:
+    \f[
+        Q_c &#x3D; \frac&#123;V_c |U_c| (T_c - T_&#123;ref&#125;)&#125;&#123;\sum(V_c |U_c| (T_c - T_&#123;ref&#125;))&#125;
+    \f]
+
+    where:
+    \vartable
+        Q_c     | source for cell
+        V_c     | volume of the cell [m^3]
+        U_c     | local cell velocity [m&#x2F;s]
+        T_c     | local call temperature [K]
+        T_&#123;ref&#125; | min or max(T) in cell zone depending on the sign of Q_t [K]
+    \endvartable
+
+Usage
+    Example usage:
+    \verbatim
+    effectivenessHeatExchangerSource1
+    &#123;
+        type            effectivenessHeatExchangerSource;
+        active          yes;
+
+        selectionMode   cellZone;
+        cellZone        porosity;
+
+        secondaryMassFlowRate   1.0;
+        secondaryInletT         336;
+        primaryInletT           293;
+        faceZone                facesZoneInletOriented;
+        outOfBounds             clamp;
+        file                    &quot;effTable&quot;;
+    &#125;
+    \endverbatim
+
+    The effectiveness table is described in terms of the primary and secondary
+    mass flow rates.  For example, the table:
+
+                           secondary MFR
+                       |  0.1   0.2   0.3
+                  -----+-----------------
+                  0.02 |   A     B     C
+     primary MFR  0.04 |   D     E     F
+                  0.06 |   G     H     I
+
+
+    Is specified by the following:
+
+        (
+            0.02
+            (
+                (0.1    A)
+                (0.2    B)
+                (0.3    C)
+            ),
+            0.04
+            (
+                (0.1    D)
+                (0.2    E)
+                (0.3    F)
+            ),
+            0.06
+            (
+                (0.1    G)
+                (0.2    H)
+                (0.3    I)
+            )
+        );
+
+Note
+    - the table with name &quot;file&quot; should have the same units as the
+      secondary mass flow rate and kg&#x2F;s for phi
+    - faceZone is the faces at the inlet of the cellzone, it needs to be
+      created with flip map flags. It is used to integrate the net mass flow
+      rate into the heat exchanger
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;explicitPorositySource
+
+    Explicit porosity source
+
+Usage
+    Example usage, here employing the Darcy-Forchheimer model:
+    \verbatim
+    explicitPorositySourceCoeffs
+    &#123;
+        type            DarcyForchheimer;
+
+        DarcyForchheimerCoeffs
+        &#123;
+            d   d [0 -2 0 0 0 0 0] (5e7 -1000 -1000);
+            f   f [0 -1 0 0 0 0 0] (0 0 0);
+
+            coordinateSystem
+            &#123;
+                type    cartesian;
+                origin  (0 0 0);
+                coordinateRotation
+                &#123;
+                    type    axesRotation;
+                    e1  (0.70710678 0.70710678 0);
+                    e2  (0 0 1);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    \endverbatim
+
+Note:
+    The porous region must be selected as a cellZone.
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;meanVelocityForce
+
+    Calculates and applies the force necessary to maintain the specified mean
+    velocity.
+
+    Note: Currently only handles kinematic pressure (incompressible solvers).
+
+Usage
+    Example usage:
+    \verbatim
+    selectionMode   all;                    &#x2F;&#x2F; Apply force to all cells
+    fields          (U);                    &#x2F;&#x2F; Name of velocity field
+    Ubar            (10.0 0 0);             &#x2F;&#x2F; Desired mean velocity
+    relaxation      0.2;                    &#x2F;&#x2F; Optional relaxation factor
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;meanVelocityForce&#x2F;patchMeanVelocityForce
+
+    Calculates and applies the force necessary to maintain the specified mean
+    velocity averaged over the specified patch.
+
+    Note: Currently only handles kinematic pressure (incompressible solvers).
+
+Usage
+    Example usage:
+    \verbatim
+    selectionMode   all;                    &#x2F;&#x2F; Apply force to all cells
+    fields          (U);                    &#x2F;&#x2F; Name of velocity field
+    patch           inlet;                  &#x2F;&#x2F; Name of the patch
+    Ubar            (10.0 0 0);             &#x2F;&#x2F; Desired mean velocity
+    relaxation      0.2;                    &#x2F;&#x2F; Optional relaxation factor
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;phaseLimitStabilization
+
+    Stabilization source for phase transport equations
+
+    Applies an implicit source to the phase transport equation for the specified
+    \c field when the phase volume fraction is below \c residualAlpha.  The
+    stabilization rate is provided by the registered
+    uniformDimensionedScalarField \c rate, which could be extended to also
+    support volScalarField and volScalarField::Internal field types.  The \c
+    field is currently stabilized towards zero in the limit of the phase volume
+    fraction approaching zero but this could be extended to support a
+    specified value or a value or field looked-up from the database.
+
+Usage
+    Example usage:
+    \verbatim
+    stabilization
+    &#123;
+        type            symmTensorPhaseLimitStabilization;
+
+        field           sigma.liquid;
+        rate            rLambda.liquid;
+        residualAlpha   1e-3;
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;radialActuationDiskSource
+
+    Actuation disk source including radial thrust
+
+    Constant values for momentum source for actuation disk
+    \f[
+        T &#x3D; 2 \rho A U_&#123;o&#125;^2 a (1-a)
+    \f]
+    and
+    \f[
+        U_1 &#x3D; (1 - a)U_&#123;o&#125;
+    \f]
+
+    where:
+    \vartable
+        A   | disk area
+        U_o | upstream velocity
+        a   | 1 - Cp&#x2F;Ct
+        U_1 | velocity at the disk
+    \endvartable
+
+
+    The thrust is distributed by a radial function:
+    \f[
+        thrust(r) &#x3D; T (C_0 + C_1 r^2 + C_2 r^4)
+    \f]
+
+Usage
+    Example usage:
+    \verbatim
+    fieldName       U;          &#x2F;&#x2F; name of field to apply source
+    diskDir         (-1 0 0);   &#x2F;&#x2F; disk direction
+    Cp              0.1;        &#x2F;&#x2F; power coefficient
+    Ct              0.5;        &#x2F;&#x2F; thrust coefficient
+    diskArea        5.0;        &#x2F;&#x2F; disk area
+    coeffs          (0.1 0.5 0.01); &#x2F;&#x2F; radial distribution coefficients
+    upstreamPoint   (0 0 0);    &#x2F;&#x2F; upstream point
+    \endverbatim
+
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;bladeModel
+
+    Blade model class calculates:
+        Linear interpolated blade twist and chord based on radial position
+        Interpolation factor (for interpolating profile performance)
+
+    Input in list format:
+
+        data
+        (
+            (profile1 (radius1 twist1 chord1))
+            (profile1 (radius2 twist2 chord2))
+        );
+
+    where:
+        radius [m]
+        twist [deg], converted to [rad] internally
+        chord [m]
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;profileModel&#x2F;lookup
+
+    Look-up based profile data - drag and lift coefficients are linearly
+    interpolated based on the supplied angle of attack
+
+    Input in list format:
+
+        data
+        (
+            (AOA1 Cd1 Cl2)
+            (AOA2 Cd2 Cl2)
+            ...
+            (AOAN CdN CdN)
+        );
+
+    where:
+        AOA &#x3D; angle of attack [deg] converted to [rad] internally
+        Cd  &#x3D; drag coefficient
+        Cl  &#x3D; lift coefficient
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;profileModel
+
+    Base class for profile models
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;profileModel&#x2F;series
+
+    Series-up based profile data - drag and lift coefficients computed as
+    sum of cosine series
+
+        Cd &#x3D; sum_i(CdCoeff)*cos(i*AOA)
+        Cl &#x3D; sum_i(ClCoeff)*sin(i*AOA)
+
+    where:
+        AOA &#x3D; angle of attack [deg] converted to [rad] internally
+        Cd &#x3D; drag coefficient
+        Cl &#x3D; lift coefficient
+
+    Input in two (arbitrary length) lists:
+
+        CdCoeffs (coeff1 coeff2 ... coeffN);
+        ClCoeffs (coeff1 coeff2 ... coeffN);
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource
+
+    Rotor disk source
+
+    Cell based momentum source which approximates the mean effects of
+    rotor forces on a cylindrical region within the domain.
+
+Usage
+    Example usage:
+    \verbatim
+        fields          (U);    &#x2F;&#x2F; names of fields on which to apply source
+        nBlades         3;      &#x2F;&#x2F; number of blades
+        tipEffect       0.96;   &#x2F;&#x2F; normalised radius above which lift &#x3D; 0
+
+        inletFlowType   local;  &#x2F;&#x2F; inlet flow type specification
+
+        geometryMode    auto;   &#x2F;&#x2F; geometry specification
+
+        refDirection    (-1 0 0); &#x2F;&#x2F; reference direction
+                                  &#x2F;&#x2F; - used as reference for psi angle
+
+        trimModel       fixed;  &#x2F;&#x2F; fixed || targetForce
+
+        flapCoeffs
+        &#123;
+            beta0           0;  &#x2F;&#x2F; coning angle [deg]
+            beta1c          0;  &#x2F;&#x2F; lateral flapping coeff (cos coeff)
+            beta2s          0;  &#x2F;&#x2F; longitudinal flapping coeff (sin coeff)
+        &#125;
+
+        blade
+        &#123;
+            &#x2F;&#x2F; see bladeModel.H for documentation
+        &#125;
+
+        profiles
+        &#123;
+            profile1
+            &#123;
+                type    lookup; &#x2F;&#x2F; lookup || series
+                ...
+                &#x2F;&#x2F; see lookupProfile.H or seriesProfile.H for documentation
+            &#125;
+            profile2
+            &#123;
+                ...
+            &#125;
+        &#125;
+    \endverbatim
+
+    Where:
+    Valid options for the \c geometryMode entry include:
+    - auto          : determine rotor co-ord system from cells
+    - specified     : specified co-ord system
+
+    Valid options for the \c inletFlowType entry include:
+    - fixed         : specified velocity
+    - local         : use local flow conditions
+    - surfaceNormal : specified normal velocity (positive towards rotor)
+
+See also
+    Foam::bladeModel
+    Foam::lookupProfile
+    Foam::seriesProfile
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;trimModel&#x2F;fixed
+
+    Fixed trim coefficients
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;trimModel&#x2F;targetCoeff
+
+    Target trim forces&#x2F;coefficients
+
+    Solves:
+
+        c^old + J.d(theta) &#x3D; c^target
+
+    Where:
+
+        n     &#x3D; time level
+        c     &#x3D; coefficient vector (thrust force, roll moment, pitch moment)
+        theta &#x3D; pitch angle vector (collective, roll, pitch)
+        J     &#x3D; Jacobian [3x3] matrix
+
+
+    The trimmed pitch angles are found via solving the above with a
+    Newton-Raphson iterative method.  The solver tolerance can be user-input,
+    using the &#39;tol&#39; entry.
+
+    If coefficients are requested (useCoeffs &#x3D; true), the force and moments
+    are normalised using:
+
+                         force
+        c &#x3D; ---------------------------------
+            alpha*pi*rho*(omega^2)*(radius^4)
+
+    and
+
+                         moment
+        c &#x3D; ---------------------------------
+            alpha*pi*rho*(omega^2)*(radius^5)
+
+    Where:
+
+        alpha &#x3D; user-input conversion coefficient (default &#x3D; 1)
+        rho   &#x3D; density
+        omega &#x3D; rotor angular velocity
+        pi    &#x3D; mathematical pi
+
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;rotorDiskSource&#x2F;trimModel&#x2F;trimModel
+
+    Trim model base class
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;solidEquilibriumEnergySource
+
+    This option adds the thermal inertia of a solid phase into the energy
+    equation. It assumes that the solid is in thermal equilibrium with the
+    surrounding fluid phase.
+
+    The volume fraction of the solid phase is read from constant&#x2F;alpha.&lt;phase&gt;,
+    and the associated thermophysical properties are specified in
+    constant&#x2F;thermophysicalProperties.&lt;phase&gt;.
+
+Usage
+    \table
+        Property    | Description                            | Req&#39;d? | Default
+        phase       | Name of the solid phase                | yes    |
+        field       | Name of the energy field to apply the option to \\
+                                                             | yes    |
+    \endtable
+
+    Example specification:
+    \verbatim
+    &lt;fvOptionName&gt;
+    &#123;
+        type        solidEquilibriumEnergySource;
+        phase       solid;
+        field       e;
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;solidificationMeltingSource
+
+    This source is designed to model the effect of solidification and melting
+    processes, e.g. windshield defrosting.
+
+    The isotherm phase change occurs at the melting temperature, \c Tsol (&#x3D; \c
+    Tliq). The not isotherm phase change occurs between solidus and liquidus
+    temperature, \c Tsol &lt; \c Tliq respectively, as long as the melt fraction is
+    greater than the max eutectic melt fraction, \c alpha1e (0 &#x3D; pure_substance,
+    1 &#x3D; eutectic_mixture is not permitted), where a linear eutectic melt
+    fraction to temperature relation is considered; e.g. given a specific
+    quantity of a binary system, \c alpha1 is its melt fraction and \c alpha0 is
+    its solid fraction, such that \c alpha0 &#x3D; 1 - \c alpha1 therefore, assuming
+    infinite solute diffusion, the quantity of a component in solid phase is
+    (1 - \c alpha1) * \c CS where \c CS is the solid concentration of the
+    considered component and the quantity of a component in liquid phase is \c
+    alpha1 * \c CL where \c CL is the melt concentration of the considered
+    component; considering that the total quantity of a component must be equal
+    to the sum of the quantities of the considered component in the liquid and
+    solid phases, if \c C0 is the initial concentration of the considered
+    component before the phase change, then:
+    \c C0 &#x3D; (1 - \c alpha1) * \c CS + \c alpha1 * \c CL      (lever rule)
+    from which: \c alpha1 &#x3D; (\c C0 - \c CS) &#x2F; (\c CL - \c CS)
+    and thus:
+    - for a miscible binary system \c alpha1e &#x3D; 0;
+    - for a binary system not miscible at solid state
+      \c alpha1e &#x3D; \c C0 &#x2F; \c CLE where \c CLE is eutectic melt concentration;
+    - for a binary system partially-miscible at solid state
+      \c alpha1e &#x3D; (\c C0 - \c CSE) &#x2F; (\c CLE - \c CSE) where \c CSE is eutectic
+      solid concentration of the relative solid solution.
+
+    The presence of the solid phase in the flow field is incorporated into the
+    model as a momentum porosity contribution; the energy associated with the
+    phase change is added as an enthalpy contribution.
+
+    References:
+    \verbatim
+        Voller, V. R., &amp; Prakash, C. (1987).
+        A fixed grid numerical modelling methodology for convection-diffusion
+        mushy region phase-change problems.
+        International Journal of Heat and Mass Transfer, 30(8), 1709-1719.
+
+        Swaminathan, C. R., &amp; Voller, V. R. (1992).
+        A general enthalpy method for modeling solidification processes.
+        Metallurgical transactions B, 23(5), 651-664.
+    \endverbatim
+
+    The model generates the field \c \&lt;name\&gt;:alpha1 which can be visualised to
+    to show the melt distribution as a fraction [0-1].
+
+Usage
+    Example usage:
+    \verbatim
+    solidificationMeltingSource1
+    &#123;
+        type            solidificationMeltingSource;
+        active          yes;
+
+        selectionMode   cellZone;
+        cellZone        iceZone;
+
+        Tsol            273;
+        L               334000;
+        thermoMode      thermo;
+        beta            50e-6;
+        rhoRef          800;
+    &#125;
+    \endverbatim
+
+    Where:
+    \table
+        Property   | Description                     | Required | Default value
+        Tsol       | Solidus temperature [K]             | yes      |
+        Tliq       | Liquidus temperature [K]            | no       | Tsol
+        alpha1e    | Max eutectic melt fraction [0-1[    | no       | 0
+        L          | Latent heat of fusion [J&#x2F;kg]        | yes      |
+        relax      | Relaxation coefficient [0-1]        | no       | 0.9
+        thermoMode | Thermo mode [thermo|lookup]         | yes      |
+        rhoRef     | Reference (solid) density [kg&#x2F;m^3]  | yes      |
+        rho        | Name of density field               | no       | rho
+        T          | Name of temperature field           | no       | T
+        Cp         | Name of specific heat field         | no       | Cp
+        U          | Name of velocity field              | no       | U
+        phi        | Name of flux field                  | no       | phi
+        Cu         | Model coefficient [1&#x2F;s]             | no       | 100000
+        q          | Model coefficient                   | no       | 0.001
+        beta       | Thermal expansion coefficient [1&#x2F;K] | yes      |
+        g          | Accelerartion due to gravity        | no       |
+    \endtable
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;tabulatedAccelerationSource&#x2F;tabulated6DoFAcceleration
+
+    Tabulated 6DoF acceleration.
+
+    Obtained by interpolating tabulated data for linear acceleration,
+    angular velocity and angular acceleration.
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;tabulatedAccelerationSource
+
+    Solid-body 6-DoF acceleration source
+
+Usage
+    Example usage:
+    \verbatim
+    SBM
+    &#123;
+        type            tabulatedAccelerationSource;
+        active          yes;
+
+        timeDataFileName &quot;constant&#x2F;acceleration-terms.dat&quot;;
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;derived&#x2F;volumeFractionSource
+
+    This option adds transport terms into the equations to account for the
+    presence of a constant volume fraction. The volume fraction is read from
+    constant&#x2F;alpha.&lt;phase&gt;, where &lt;phase&gt; is given as a parameter to the
+    option. Both advective and diffusive terms are added, and the resulting
+    solution is time-accurate. The flux and velocity are treated as
+    superficial.
+
+    This can be used to represent the effect of porous media that are caused
+    purely by the reduction in volume of the fluid phase; i.e., additional
+    blockage, and changes to transport and diffusion rates. It does not
+    represent losses or transfers with the porous media. That requires separate
+    sub-modelling.
+
+Usage
+    \table
+        Property    | Description                            | Req&#39;d? | Default
+        phase       | Name of the phase associated with the volume fraction \\
+                                                             | yes    |
+        phi         | Name of the flux field                 | no     | phi
+        rho         | Name of the density field              | no     | rho
+        U           | Name of the velocity field             | no     | U
+        fields      | Names of the fields to apply the option to \\
+                                                             | yes    |
+    \endtable
+
+    Example specification:
+    \verbatim
+    &lt;fvOptionName&gt;
+    &#123;
+        type        volumeFractionSource;
+        phase       solid;
+        phi         phi;
+        rho         rho;
+        U           U;
+        fields      (rho U e);
+    &#125;
+    \endverbatim
+
+
+fvOptions&#x2F;sources&#x2F;general&#x2F;codedSource
+
+   Constructs on-the-fly fvOption source
+
+    The hook functions take the following arguments:
+
+    codeCorrect
+    (
+        GeometricField&lt;Type, fvPatchField, volMesh&gt;&amp; field
+    )
+
+    codeAddSup
+    (
+        fvMatrix&lt;Type&#125;&gt;&amp; eqn,
+        const label fieldi
+    )
+
+    constrain
+    (
+        fvMatrix&lt;Type&#125;&gt;&amp; eqn,
+        const label fieldi
+    )
+
+    where :
+        field is the field in fieldNames
+        eqn is the fvMatrix
+
+Usage
+    Example usage in controlDict:
+    \verbatim
+    energySource
+    &#123;
+        type            scalarCodedSource;
+
+        active          yes;
+
+        name    sourceTime;
+
+        scalarCodedSourceCoeffs
+        &#123;
+            selectionMode   all;
+
+            fields          (h);
+
+            codeInclude
+            #&#123;
+
+            #&#125;;
+
+            codeCorrect
+            #&#123;
+                Pout&lt;&lt; &quot;**codeCorrect**&quot; &lt;&lt; endl;
+            #&#125;;
+
+            codeAddSup
+            #&#123;
+                const Time&amp; time &#x3D; mesh().time();
+                const scalarField&amp; V &#x3D; mesh_.V();
+                scalarField&amp; heSource &#x3D; eqn.source();
+                heSource -&#x3D; 0.1*sqr(time.value())*V;
+            #&#125;;
+
+            codeSetValue
+            #&#123;
+                Pout&lt;&lt; &quot;**codeSetValue**&quot; &lt;&lt; endl;
+            #&#125;;
+        &#125;
+
+        sourceTimeCoeffs
+        &#123;
+            $scalarCodedSourceCoeffs;
+        &#125;
+    &#125;
+    \endverbatim
+
+
+
+fvOptions&#x2F;sources&#x2F;general&#x2F;semiImplicitSource
+
+    Semi-implicit source, described using an input dictionary.  The injection
+    rate coefficients are specified as pairs of Su-Sp coefficients, i.e.
+
+        \f[
+            S(x) &#x3D; S_u + S_p x
+        \f]
+
+    where
+    \vartable
+        S(x)    | net source for field &#39;x&#39;
+        S_u     | explicit source contribution
+        S_p     | linearised implicit contribution
+    \endvartable
+
+    Example tabulated heat source specification for internal energy:
+    \verbatim
+    volumeMode      absolute; &#x2F;&#x2F; specific
+    sources
+    &#123;
+        e
+        &#123;
+            explicit table ((0 0) (1.5 $power));
+            implicit 0;
+        &#125;
+    &#125;
+    \endverbatim
+
+    Example coded heat source specification for enthalpy:
+    \verbatim
+    volumeMode      absolute; &#x2F;&#x2F; specific
+    sources
+    &#123;
+        h
+        &#123;
+            explicit
+            &#123;
+                type coded;
+                name heatInjection;
+                code
+                #&#123;
+                    &#x2F;&#x2F; Power amplitude
+                    const scalar powerAmplitude &#x3D; 1000;
+
+                    &#x2F;&#x2F; x is the current time
+                    return mag(powerAmplitude*sin(x));
+                #&#125;;
+            &#125;
+            implicit 0;
+        &#125;
+    &#125;
+    \endverbatim
+
+    Valid options for the \c volumeMode entry include:
+    - absolute: values are given as \&lt;quantity\&gt;
+    - specific: values are given as \&lt;quantity\&gt;&#x2F;m3
+
+See also
+    Foam::fvOption
+
+
+fvOptions&#x2F;sources&#x2F;interRegion&#x2F;interRegionExplicitPorositySource
+
+    Inter-region explicit porosity source.
+
+    Sources described by, for example using the DarcyForchheimer model:
+
+    \verbatim
+    interRegionExplicitPorositySourceCoeffs
+    &#123;
+        type            DarcyForchheimer;
+        DarcyForchheimerCoeffs
+        &#123;
+            d   d [0 -2 0 0 0 0 0] (5e7 -1000 -1000);
+            f   f [0 -1 0 0 0 0 0] (0 0 0);
+
+            coordinateSystem
+            &#123;
+                e1  (0.70710678 0.70710678 0);
+                e2  (0 0 1);
+            &#125;
+        &#125;
+    &#125;
+    \endverbatim
+
+Note
+    The porous region must be selected as a cellZone.
+
+
+fvOptions&#x2F;sources&#x2F;interRegion&#x2F;interRegionHeatTransfer&#x2F;constantHeatTransfer
+
+    Constant heat transfer model. htcConst [W&#x2F;m^2&#x2F;K] and area&#x2F;volume [1&#x2F;m]
+    must be provided.
+
+
+fvOptions&#x2F;sources&#x2F;interRegion&#x2F;interRegionHeatTransfer&#x2F;interRegionHeatTransferModel
+
+    Base class for inter region heat exchange. The derived classes must
+    provide the heat transfer coefficient (htc) which is used as follows
+    in the energy equation.
+
+     \f[
+        -htc*Tmapped + Sp(htc, T)
+     \f]
+
+
+fvOptions&#x2F;sources&#x2F;interRegion&#x2F;interRegionHeatTransfer&#x2F;tabulatedHeatTransfer
+
+    Tabulated heat transfer model. The heat exchange area per unit volume
+    must be provided.  The 2D table returns the heat transfer coefficient
+    by querying the local and neighbour region velocities
+
+
+fvOptions&#x2F;sources&#x2F;interRegion&#x2F;interRegionHeatTransfer&#x2F;variableHeatTransfer
+
+    Variable heat transfer model depending on local values. The area of contact
+    between regions (area) must be provided. The Nu number is calculated as:
+
+        Nu &#x3D; a*pow(Re, b)*pow(Pr, c)
+
+    and the heat transfer coefficient as:
+
+        htc &#x3D; Nu*K&#x2F;ds
+
+    where:
+        K is the heat conduction
+        ds is the strut diameter
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CFD/">CFD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Projection-Methods/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Projection Methods</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/ffmpeg/">
+                        <span class="hidden-mobile">ffmpeg Documentation</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

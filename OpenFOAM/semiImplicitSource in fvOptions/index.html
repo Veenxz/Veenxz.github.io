@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="本篇主要讲述具体的源项类： semiImplicitSource 。">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="本篇主要讲述具体的源项类： semiImplicitSource 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SemiImplicitSource in fvOptions">
+<meta property="og:url" content="https://veenxz.github.io/OpenFOAM/semiImplicitSource%20in%20fvOptions/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="本篇主要讲述具体的源项类： semiImplicitSource 。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-07T08:45:43.000Z">
+<meta property="article:modified_time" content="2021-01-07T08:47:28.007Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="OpenFOAM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>SemiImplicitSource in fvOptions - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SemiImplicitSource in fvOptions">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-07 16:45" pubdate>
+        2021年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SemiImplicitSource in fvOptions</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月7日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>本篇主要讲述具体的源项类： <code>semiImplicitSource</code> 。<br><span id="more"></span></p>
+<p>先来看看这个源项代码中的关键部分。</p>
+<ul>
+<li><p>SemiImplicitSource.C</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">#include &quot;SemiImplicitSource.H&quot;
+#include &quot;fvMesh.H&quot;
+#include &quot;fvMatrices.H&quot;
+#include &quot;DimensionedField.H&quot;
+#include &quot;fvmSup.H&quot;
+
+template&lt;class Type&gt;
+const Foam::wordList Foam::fv::SemiImplicitSource&lt;Type&gt;::volumeModeTypeNames_
+(
+    IStringStream(&quot;(absolute specific)&quot;)()  &#x2F;&#x2F; 初始化 volumeModeTypeNames_，这里有两种模式， &#96;absolute&#96; 和 &#96;specific&#96; ，具体含义下面会解释。 
+);
+
+template&lt;class Type&gt;
+typename Foam::fv::SemiImplicitSource&lt;Type&gt;::volumeModeType
+Foam::fv::SemiImplicitSource&lt;Type&gt;::wordToVolumeModeType &#x2F;&#x2F; 将字符串转换成 volumeModeType
+(
+    const word&amp; vmtName
+) const
+&#123;
+    forAll(volumeModeTypeNames_, i)
+    &#123;
+        if (vmtName &#x3D;&#x3D; volumeModeTypeNames_[i])
+        &#123;
+            return volumeModeType(i);
+        &#125;
+    &#125;
+
+    FatalErrorIn
+    (
+        &quot;SemiImplicitSource&lt;Type&gt;::volumeModeType&quot;
+        &quot;SemiImplicitSource&lt;Type&gt;::wordToVolumeModeType(const word&amp;)&quot;
+    )   &lt;&lt; &quot;Unknown volumeMode type &quot; &lt;&lt; vmtName
+        &lt;&lt; &quot;. Valid volumeMode types are:&quot; &lt;&lt; nl &lt;&lt; volumeModeTypeNames_
+        &lt;&lt; exit(FatalError);
+
+    return volumeModeType(0);
+&#125;
+
+template&lt;class Type&gt;
+Foam::word Foam::fv::SemiImplicitSource&lt;Type&gt;::volumeModeTypeToWord
+(
+    const volumeModeType&amp; vmtType
+) const
+&#123;
+    if (vmtType &gt; volumeModeTypeNames_.size())
+    &#123;
+        return &quot;UNKNOWN&quot;;
+    &#125;
+    else
+    &#123;
+        return volumeModeTypeNames_[vmtType];
+    &#125;
+&#125;
+
+template&lt;class Type&gt;
+void Foam::fv::SemiImplicitSource&lt;Type&gt;::setFieldData(const dictionary&amp; dict)
+&#123;
+    fieldNames_.setSize(dict.toc().size());
+    injectionRate_.setSize(fieldNames_.size());
+
+    applied_.setSize(fieldNames_.size(), false);
+
+    label i &#x3D; 0;
+    forAllConstIter(dictionary, dict, iter)
+    &#123;
+        fieldNames_[i] &#x3D; iter().keyword();
+        dict.lookup(iter().keyword()) &gt;&gt; injectionRate_[i];
+        i++;
+    &#125;
+
+    &#x2F;&#x2F; Set volume normalisation
+    if (volumeMode_ &#x3D;&#x3D; vmAbsolute)
+    &#123;
+        VDash_ &#x3D; V_;
+    &#125;
+&#125;
+
+
+&#x2F;&#x2F; * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * &#x2F;&#x2F;
+
+template&lt;class Type&gt;
+Foam::fv::SemiImplicitSource&lt;Type&gt;::SemiImplicitSource
+(
+    const word&amp; name,
+    const word&amp; modelType,
+    const dictionary&amp; dict,
+    const fvMesh&amp; mesh
+)
+:
+    option(name, modelType, dict, mesh),
+    volumeMode_(vmAbsolute), volumeMode 初始值为 vmAbsolute，也就是字典里的 absolute
+    VDash_(1.0), &#x2F;&#x2F; VDash 初始值为 1.0
+    injectionRate_()
+&#123;
+    read(dict);
+&#125;
+
+
+template&lt;class Type&gt;
+void Foam::fv::SemiImplicitSource&lt;Type&gt;::addSup &#x2F;&#x2F; 这个是最关键的函数，求解器里的 fvOptions(T)，最终就是转换为调用这个函数。
+(
+    fvMatrix&lt;Type&gt;&amp; eqn,
+    const label fieldI
+)
+&#123;
+    if (debug)
+    &#123;
+        Info&lt;&lt; &quot;SemiImplicitSource&lt;&quot; &lt;&lt; pTraits&lt;Type&gt;::typeName
+            &lt;&lt; &quot;&gt;::addSup for source &quot; &lt;&lt; name_ &lt;&lt; endl;
+    &#125;
+
+    &#x2F;&#x2F; psi 表示方程中的未知量，比如，eqn(fvm::ddt(T))，则psi其实就相当于T，其量纲也与T的量纲一致。
+    const GeometricField&lt;Type, fvPatchField, volMesh&gt;&amp; psi &#x3D; eqn.psi();
+
+&#x2F;&#x2F; 创建一个场 Su，其量纲为方程eqn的量纲除以体积的量纲。注意，经测试，假设eqn为（fvm::ddt(T)），则eqn的量纲为k.m^3&#x2F;s。
+    DimensionedField&lt;Type, volMesh&gt; Su
+    (
+        IOobject
+        (
+            name_ + fieldNames_[fieldI] + &quot;Su&quot;,
+            mesh_.time().timeName(),
+            mesh_,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh_,
+        dimensioned&lt;Type&gt;
+        (
+            &quot;zero&quot;,
+            eqn.dimensions()&#x2F;dimVolume,
+            pTraits&lt;Type&gt;::zero
+        ),
+        false
+    );
+
+    &#x2F;&#x2F; 这一句的意思是，将属于cells_这个集合的网格的Su赋值为fvoptions里所设置的第一个参数的值除以体积VDash。这里的VDash,如果模式为absolute，则值为cells_这个集合的网格体积之和，如果模式为specific，则其值为1. 
+    &#x2F;&#x2F; UUIndirectList&lt;Type&gt;(Su, cells_)这一句是利用Su和cells为参数，构建一个UUIndirectList类的临时对象，并调用这个类的重载的“&#x3D;”操作符对Su进行重新赋值。
+    
+    UIndirectList&lt;Type&gt;(Su, cells_) &#x3D; injectionRate_[fieldI].first()&#x2F;VDash_;
+
+    DimensionedField&lt;scalar, volMesh&gt; Sp
+    (
+        IOobject
+        (
+            name_ + fieldNames_[fieldI] + &quot;Sp&quot;,
+            mesh_.time().timeName(),
+            mesh_,
+            IOobject::NO_READ,
+            IOobject::NO_WRITE
+        ),
+        mesh_,
+        dimensioned&lt;scalar&gt;
+        (
+            &quot;zero&quot;,
+            Su.dimensions()&#x2F;psi.dimensions(),
+            0.0
+        ),
+        false
+    );
+    
+    UIndirectList&lt;scalar&gt;(Sp, cells_) &#x3D; injectionRate_[fieldI].second()&#x2F;VDash_;
+
+    &#x2F;&#x2F; fvMatrix&lt;Type&gt; 类中对“+&#x3D;”操作符进行了重载，所以，eqn与Su的相加，相当于eqn+Su*mesh.V()，要不然eqn与Su的量纲不一致。
+    eqn +&#x3D; Su + fvm::SuSp(Sp, psi);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+</ul>
+<p>下面用一个例子来说明 <code>semiImplicitSource</code> 的作用。前提到 <code>scalarTransportFoam</code> 是使用 fvOptions 的一个最简单的求解器，这里对该求解器进一步简化，只保留瞬变项，对流和扩散项都删去，来验证 <code>semiImplicitSource</code> 的作用。<br>修改之后的 <code>TEqn</code> 为</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">tmp TEqn
+(
+    fvm::ddt(T)  &#x3D;&#x3D; fvOptions(T)
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>然后，<code>fvOptions</code> 词典文件的设置如下：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">firstHeatSource
+&#123;
+    type scalarSemiImplicitSource;
+    active          true;
+    selectionMode   cellZone;
+    cellZone        boxSourceZone;
+    scalarSemiImplicitSourceCoeffs 
+    &#123;
+        volumeMode absolute;
+        injectionRateSuSp 
+        &#123;
+            T (0.05 0);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>上述设置，相当于求解如下方程</p>
+<p>∂T∂t=Su+Sp⋅T∂T∂t=Su+Sp⋅T</p>
+<p>其中 Su=0.05,Sp=0Su=0.05,Sp=0 。<br>反观上面对代码的分析，可知对于当前的设置，SuSu 的量纲为 <code>TEqn</code> 的量纲除以体积量纲，SpSp 的量为 SuSu 量纲除以 <code>T</code> 的量纲，这与上面给出的方程是一致的。<br>但是，要注意， <code>SemiImplicitSource</code> 有两个模式：absolute 和 specific，区别在于代码里的 <code>VDash</code> 的取值不一样。对于 absolute 模式，<code>VDash = V</code>，即所选的 cellZone 的体积；对于 specific 模式，<code>VDash = 1.0</code>。而代码里的 <code>Su</code> 和 <code>Sp</code> 的值都是用在<code>fvOptions</code> 词典文件设置的值除以 <code>VDash</code> 。<br>所以，确切地说，求解的应该是如下积分方程：</p>
+<p>∫V∂T∂tdV−∫V∇⋅(DT∇T)dV=∫V(SuVDash+SpVDashT)dV∫V∂T∂tdV−∫V∇⋅(DT∇T)dV=∫V(SuVDash+SpVDashT)dV</p>
+<p>其中 VDashVDash 是选定的 cellZone 的体积。<br>为了验证以上的推演，作了如下两个测试：</p>
+<ul>
+<li><p>源项参数设置为<code>T (0.01 0)</code>，源项作用的区域为一个体积为VDash=0.001VDash=0.001 的 cellZone，为了消除热量传递，设置 DT=0DT=0，初始整个区域的 T 均为0， 模拟时间为1 s。<br>按照上述的推演，如果是 <code>absolute</code> 模式，最终 1 s 时选定的 cellZone 的温度将是 T=t⋅SuVDash=1s⋅0.01k/s0.001=10kT=t⋅SuVDash=1s⋅0.01k/s0.001=10k；如果是 <code>specific</code> 模式，那么最终1 s 时选定的 cellZone 的温度将是 T=1s⋅0.01k/s1.0=0.01kT=1s⋅0.01k/s1.0=0.01k。以上结果在测试算例中得到了证实。</p>
+</li>
+<li><p>源项参数设置为</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">T (1.0 2.0)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>，同样设置</p>
+</li>
+</ul>
+<p>  DT=0DT=0</p>
+<p>  。这种情况下，可以先求微分方程</p>
+<p>  ∂T∂t=x+yT∂T∂t=x+yT</p>
+<p>  的解，经简单计算得到</p>
+<p>  T=eyt⋅eyc−xyT=eyt⋅eyc−xy</p>
+<p>  cc</p>
+<p>  为任意常数。</p>
+<p>  若</p>
+<p>  T|t=0=0kT|t=0=0k</p>
+<p>  ，则可以得到定解为</p>
+<p>  T=eyt⋅x−xyT=eyt⋅x−xy</p>
+<p>  若使用</p>
+  <div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">specific<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>  模式，则根据当前的设置得到1 s时的解为</p>
+<p>  T=e2⋅1⋅1−12=3.194528kT=e2⋅1⋅1−12=3.194528k</p>
+<p>  算例测试结果为：</p>
+<ul>
+<li><p>时间离散格式:Euler，ΔT=0.001sΔT=0.001s，T=3.20193kT=3.20193k；</p>
+</li>
+<li><p>时间离散格式：Euler，ΔT=0.0001sΔT=0.0001s，T=3.19527kT=3.19527k，可见减小时间步后结果与解析解吻合度提高了很多。</p>
+</li>
+<li><p>时间离散格式：CrankNicolson，ΔT=0.001sΔT=0.001s，T=3.19454kT=3.19454k。可见用高阶的时间离散格式，在同样时间步下能得到误差更小的结果。</p>
+</li>
+</ul>
+<p>同样，如果用<code>absolute</code> 模式，且源项设置为 <code>T (0.001 0.002)</code> ，应该能得到一样的结果，实际上算例测试正是如此。由此可以认为推演得到了证实。</p>
+<p>至此，<code>SemiImplicitSource</code> 这个源项的核心部分就算是明了了。可是，现在测试的是非常简单的情形，如果在求解多个方程，且有多个方程里都加入了源项的情况下，该怎么给不同的方程设置不一样的源项呢？要解决这个问题，需要先理解清楚 <code>fvOptions</code> 的调用过程。</p>
+<h5 id="fvOptions-源项的调用过程"><a href="#fvOptions-源项的调用过程" class="headerlink" title="fvOptions 源项的调用过程"></a>fvOptions 源项的调用过程</h5><p>下面至下而上地来看看 fvOptions 的调用过程。</p>
+<p><code>TEqn</code>里，有一个调用 <code>fvOptions</code> 的语句： <code>fvOptions(T)</code>，上一篇讲过， <code>fvOptions</code> 的定义为</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">fv::IOoptionList fvOptions(mesh);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>这就很明显了：建立一个 <code>IOoptionList</code> 类的对象 <code>fvOptions</code>。由此可知，求解器里的 <code>fvOptions</code> 是一个对象的名字，因此 <code>fvOptions(T)</code> 这种用法也只可能是对象调用类中重载的 <code>()</code> 运算符了。从前面的分析，可知 <code>IOoptionList</code> 本身很简单，仅是作为一个接口来用的，所以 <code>()</code> 与算符的重载要去其父类中去找。 <code>IOoptionList</code> 的作用是，从 “constant”（优先）或者 “system” 目录读取 <code>fvOptions</code> 文件，并作为 <code>IOobject</code> 类的对象传递给父类 <code>optionList</code> （从构造函数的成员初始化列表 <code>optionList(mesh, *this)</code> ）</p>
+<hr>
+<p>接下来，就该进入 <code>optionList</code> 类了。这个类里，所有可能出现在求解器代码里函数都有了，包括 <code>correct</code> ， <code>constrain</code> ， <code>makeRelative</code> ， <code>makeAbsolute</code> ， <code>relative</code> 以及 <code>()</code> 运算符的重载。但是，注意这里并没有具体的代码实现，而是通过类似</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">forAll(*this, i)
+&#123;
+   this-&gt;operator[](i).makeAbsolute(phi);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>调用其他地方的函数。 <code>optionList</code> 的一个重要使命是，统计 <code>fvOptions</code> 文件里定义了多少个源项，并将每一个源项都作为一个储存起来，然后再根据词典的内容创建特定的源项。核心在于 <code>reset</code> 函数。为了说明这一点，先从构造函数看起</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">reset(optionsDict(dict));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>可见构造函数里调用了 <code>reset</code> 函数，并且用 <code>optionsDict</code> 函数的返回值作为 <code>reset</code> 函数的参数。前文讲到， <code>IOoptionList</code> 类将 <code>fvOptions</code> 文件的内容以 <code>IOobject</code> 的形式传递给父类 <code>optionList</code>，所以，这里的参数 <code>dict</code> 可以理解为就是<code>fvOptions</code> 文件的内容。<code>optionsDict</code> 函数的代码如下：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">const Foam::dictionary&amp; Foam::fv::optionList::optionsDict
+(
+    const dictionary&amp; dict
+) const
+&#123;
+    if (dict.found(&quot;options&quot;))
+    &#123;
+        return dict.subDict(&quot;options&quot;);
+    &#125;
+    else
+    &#123;
+        return dict;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>可见，这个函数去 <code>fvOptions</code> 文件里查找关键字 <code>options</code>，如果找到，就将 <code>options</code> 关键字对应的 subDict 内容返回，否则直接返回 <code>fvOptions</code> 文件的内容。举例说，形如</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">firstHeatSource
+&#123;
+    type scalarSemiImplicitSource;
+    active          true;
+    selectionMode   cellZone;
+    cellZone        boxSourceZone;
+    scalarSemiImplicitSourceCoeffs 
+    &#123;
+        volumeMode absolute;
+        injectionRateSuSp 
+        &#123;
+            T (0.001 0);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>的，直接返回，因为这就构成了一个 dictionary；而形如</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">options
+&#123;
+    massSource1
+    &#123;
+        type            scalarSemiImplicitSource;
+        $injector1;
+
+        scalarSemiImplicitSourceCoeffs
+        &#123;
+            volumeMode      absolute;
+            injectionRateSuSp
+            &#123;
+                thermo:rho.air     (1e-3 0); &#x2F;&#x2F; kg&#x2F;s
+            &#125;
+        &#125;
+    &#125;
+
+    momentumSource1
+    &#123;
+        type            vectorSemiImplicitSource;
+        $injector1;
+
+        vectorSemiImplicitSourceCoeffs
+        &#123;
+            volumeMode      absolute;
+            injectionRateSuSp
+            &#123;
+                U.air           ((0 -1e-2 0) 0); &#x2F;&#x2F; kg*m&#x2F;s^2
+            &#125;
+        &#125;
+    &#125;
+
+    energySource1
+    &#123;
+        type            scalarSemiImplicitSource;
+        $injector1;
+
+        scalarSemiImplicitSourceCoeffs
+        &#123;
+            volumeMode      absolute;
+            injectionRateSuSp
+            &#123;
+                e.air      (500 0); &#x2F;&#x2F; kg*m^2&#x2F;s^3
+            &#125;
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>的，则将options下的每一个 subDict 作为 dictionary 返回。注意，这里的 <code>dictionary</code> 类可以理解为一个容器，每一个</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">xxxxx
+&#123;
+    ......
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>都可以作为容器里的一个成员，容器的容量（size）等于总的成员数，每一个成员，其实就对应一个源项。<br>于是，我们知道 <code>optionsDict</code> 返回了一个有一定数目成员的容器。再来看 <code>reset</code> 函数</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">void Foam::fv::optionList::reset(const dictionary&amp; dict)
+&#123;
+    &#x2F;&#x2F; Count number of active fvOptions
+    label count &#x3D; 0;
+    
+    &#x2F;&#x2F; 遍历 dict 容器，确定其成员的数目，即确定定义了几个源项。
+    forAllConstIter(dictionary, dict, iter) 
+    &#123;
+        if (iter().isDict())
+        &#123;
+            count++;
+        &#125;
+    &#125;
+    this-&gt;setSize(count); &#x2F;&#x2F; setSize 是 PtrList 类的成员，顾名思义，PtrList 是一个 List。PtrList&lt;option&gt; 类的成员是 options 类的对象。
+    
+    label i &#x3D; 0;
+    &#x2F;&#x2F; 遍历 dict 容器，根据每一个 dict 容器的成员来建立对应的 option 类的对象，这通过调用 option 类的 New 函数来实现。这是使用 RuntimeSelection 机制的类的很常规的做法。
+    forAllConstIter(dictionary, dict, iter)
+    &#123;
+        if (iter().isDict())
+        &#123;
+            const word&amp; name &#x3D; iter().keyword(); &#x2F;&#x2F; keyword 返回的是类似 energySource1 这样的，是这个源项的一个名字
+            const dictionary&amp; sourceDict &#x3D; iter().dict();
+
+            this-&gt;set &#x2F;&#x2F; set 函数，肯定毫无疑问也是从 PtrList 类中继承而来的
+            (
+                i++,
+                option::New(name, sourceDict, mesh_) &#x2F;&#x2F; 调用 option 类的 New 函数
+            );
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>注意，最重要的是， <code>reset</code> 里实现了对父类 <code>PtrList&lt;option&gt;</code> 的初始化。<br>理解了这些，再来看 <code>correct</code> 以及 <code>()</code> 操作符重载中的代码，就好理解了：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 本来 *this 应该是 optionList 类的指针，这里先作个隐式转换，转成 PtrList&lt;option&gt; 类的指针。前面reset函数已经对 PtrList&lt;option&gt; 进行了初始化，使其读入了每一个源项。所以，这里的循环就是对每一个源项进行循环，然后调用对应的函数。operator[]肯定也是在PtrList类中定义的，i 指的是 PtrList 类的第 i 个成员，这里 PtrList 的每一个成员都是一个 option 类的对象，所以，makeAbsolute 函数是定义在 option 类中的函数。
+forAll(*this, i)
+&#123;
+   this-&gt;operator[](i).makeAbsolute(phi);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>根据上面的理解，一个很自然的推论是，定义在 <code>fvOptions</code> 文件中的源项，其作用是叠加的。也就是说，上述的 <code>fvOptions(T)</code>，对定义在 <code>fvOptions</code> 文件中的每一个源项，都会调用一次。经测试，</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none"> firstHeatSource
+&#123;
+    type scalarSemiImplicitSource;
+    active          true;
+    selectionMode   cellZone;
+    cellZone        boxSourceZone;
+    scalarSemiImplicitSourceCoeffs 
+    &#123;
+        volumeMode absolute;
+        injectionRateSuSp 
+        &#123;
+            T (0.001 0);
+        &#125;
+    &#125;
+&#125;
+        
+secondHeatSource
+&#123;
+    type scalarSemiImplicitSource;
+    active          true;
+    selectionMode   cellZone;
+    cellZone        boxSourceZone;
+    scalarSemiImplicitSourceCoeffs 
+    &#123;
+        volumeMode absolute;
+        injectionRateSuSp 
+        &#123;
+            T (0.0 0.002);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>与</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">secondHeatSource
+&#123;
+    type scalarSemiImplicitSource;
+    active          true;
+    selectionMode   cellZone;
+    cellZone        boxSourceZone;
+    scalarSemiImplicitSourceCoeffs 
+    &#123;
+        volumeMode absolute;
+        injectionRateSuSp 
+        &#123;
+            T (0.0001 0.002);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>的作用是一样的，这证实了源项的作用确实是叠加的。<br>此外，还要注意一点，那就是 <code>optionList</code> 类中重载的 <code>()</code> 运算符，其实是在调用 option 类中的 <code>addSup</code> 函数，并且其返回值是 fvMatrix 类的对象。</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">template&lt;class Type&gt;
+Foam::tmp&lt;Foam::fvMatrix&lt;Type&gt; &gt; Foam::fv::optionList::operator()
+(
+    GeometricField&lt;Type, fvPatchField, volMesh&gt;&amp; fld,
+    const word&amp; fieldName
+)
+&#123;
+    checkApplied();
+
+    const dimensionSet ds &#x3D; fld.dimensions()&#x2F;dimTime*dimVolume;
+
+    tmp&lt;fvMatrix&lt;Type&gt; &gt; tmtx(new fvMatrix&lt;Type&gt;(fld, ds));
+    fvMatrix&lt;Type&gt;&amp; mtx &#x3D; tmtx();
+
+    forAll(*this, i)
+    &#123;
+        option&amp; source &#x3D; this-&gt;operator[](i);
+
+        label fieldI &#x3D; source.applyToField(fieldName);
+
+        if (fieldI !&#x3D; -1)
+        &#123;
+            source.setApplied(fieldI);
+
+            if (source.isActive())
+            &#123;
+                if (debug)
+                &#123;
+                    Info&lt;&lt; &quot;Applying source &quot; &lt;&lt; source.name() &lt;&lt; &quot; to field &quot;
+                        &lt;&lt; fieldName &lt;&lt; endl;
+                &#125;
+
+                source.addSup(mtx, fieldI);
+            &#125;
+        &#125;
+    &#125;
+    return tmtx;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<hr>
+<p>理解了以上这些，就可以进入 <code>option</code> 类了。<br>option 类是所有具体的源项类的基类，这个类里处理了所有源项都需要处理的部分，比如确定起始时间，选择源项作用的区域，这些都是在构造函数里完成的，主要是通过调用 <code>setSelection</code> 和 <code>setCellSet</code> 两个函数。这里需要注意的是数据成员 <code>cells_</code>， <code>V_</code> 以及 <code>fieldNames_</code>，分别定义源项作用区域的网格id （这里源项的作用区域是以 cell 为基础来指定的，即便是 points 模式，实际上源项作用的区域仍然是 points 所在的 cell。）， 选定区域的体积以及需要开启源项作用的场名（有时候，求解器的多个 Eqn 里有fvOptions，但是实际算例中只想针对特定的场开启源项，这可以通过指定 fieldNames_ 来实现）。</p>
+<p>注意 fieldNames 在 <code>option</code> 类中并没有初始化，需要在具体的源项类中指定。此外，<code>makeRelative</code> 等在求解器中实际调用的函数，在 <code>option</code> 类中也并没有进行具体的实现（但不是声明为纯虚函数，仅仅是函数体为空的而已，这里的结果不适合用纯虚函数）</p>
+<p>以 <code>SemiImplicitSource</code> 为例，主要去看 <code>addSup</code> 函数，这个函数，关键的一个参数是<code>fieldI</code>，这个参数，指的是 <code>fieldName_</code> 这个List的 <code>applyToField</code> 函数的返回值，用来判断一个 field 是否要启用源项。<code>fieldName_</code> 这个List，是在 <code>SemiImplicitSource</code> 类的 <code>setFieldData</code> 函数中赋值的，通过读取 <code>SemiImplicitSourceCoeffs</code> 中的参数来决定。但是这个 <code>fieldName_</code> 的确定方法根据不同的类有不同的做法，要具体分析。<br>到此，<code>fvOpptions</code> 源项的调用途径就打通了，接下来可以继续具体分析特定的源项了。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenFOAM/">OpenFOAM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/OpenFOAM/OpenFOAM-Coding-Style/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OpenFOAM Coding Style</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Personal_summary/Tiaozhanbei-share/">
+                        <span class="hidden-mobile">Tiaozhanbei share</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

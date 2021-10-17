@@ -1,0 +1,709 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Slurm使用帮助">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="Slurm使用帮助">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Slurm_note">
+<meta property="og:url" content="https://veenxz.github.io/Slurm-note/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="Slurm使用帮助">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-30T06:34:30.000Z">
+<meta property="article:modified_time" content="2021-03-30T06:39:11.822Z">
+<meta property="article:author" content="Veen">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Slurm_note - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Slurm_note">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-30 14:34" pubdate>
+        2021年3月30日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Slurm_note</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月30日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Slurm使用帮助</p>
+<span id="more"></span>
+<p>From <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/356415669">https://zhuanlan.zhihu.com/p/356415669</a></p>
+<h2 id="1-Slurm-命令"><a href="#1-Slurm-命令" class="headerlink" title="1. Slurm 命令"></a>1. Slurm 命令</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Slurm命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sinfo</td>
+<td>查看集群分区状态</td>
+</tr>
+<tr>
+<td>squeue</td>
+<td>查看作业队列</td>
+</tr>
+<tr>
+<td>srun, salloc</td>
+<td>交互式运行作业</td>
+</tr>
+<tr>
+<td>sbatch</td>
+<td>提交作业</td>
+</tr>
+<tr>
+<td>scancel</td>
+<td>取消作业</td>
+</tr>
+<tr>
+<td>scontrol</td>
+<td>查看和修改作业参数</td>
+</tr>
+<tr>
+<td>sacct</td>
+<td>查看已完成作业</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2-Sinfo"><a href="#2-Sinfo" class="headerlink" title="2. Sinfo"></a>2. Sinfo</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sinfo               <span class="token comment">#查看所有分区状态</span>
+sinfo -a            <span class="token comment">#查看所有分区状态</span>
+sinfo -N            <span class="token comment">#查看节点状态</span>
+sinfo -n node-name  <span class="token comment">#查看指定节点状态</span>
+sinfo --help        <span class="token comment">#查看sinfo的说明</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="2-1-节点状态"><a href="#2-1-节点状态" class="headerlink" title="2.1 节点状态"></a>2.1 节点状态</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>alloc</th>
+<th>idle</th>
+<th>mix</th>
+<th>down</th>
+<th>drain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>节点在用</td>
+<td>节点可用</td>
+<td>部分占用</td>
+<td>节点下线</td>
+<td>节点故障</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-Squeue"><a href="#3-Squeue" class="headerlink" title="3. Squeue"></a>3. Squeue</h2><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">squeue              <span class="token comment">#查看运行中的作业列表</span>
+squeue -l           <span class="token comment">#查看列表细节信息</span>
+squene -j job-id    <span class="token comment">#查看运行中作业信息</span>
+squeue -u username  <span class="token comment">#查看user所有运行中的作业</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="3-1-作业状态"><a href="#3-1-作业状态" class="headerlink" title="3.1 作业状态"></a>3.1 作业状态</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>R</th>
+<th>PD</th>
+<th>CG</th>
+<th>CD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正在运行</td>
+<td>正在排队</td>
+<td>即将完成</td>
+<td>已完成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-提交作业"><a href="#4-提交作业" class="headerlink" title="4. 提交作业"></a>4. 提交作业</h2><p>Slurm提交作业有3种模式，分别为交互模式，批处理模式，分配模式，这三种方式只是用户使用方式的区别，在管理，调度，记账时同等对待。</p>
+<h3 id="4-1-参数说明"><a href="#4-1-参数说明" class="headerlink" title="4.1 参数说明"></a>4.1 参数说明</h3><p>以下所有参数在 <code>srun, sbatch, salloc</code> 中均可以使用。更多参数见<code>srun --help</code>, <code>sbatch --help</code>, <code>salloc --help</code>。</p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-c, --cpu-per-task<span class="token operator">=</span>NCPUs        <span class="token comment">#指定每个进程使用核数，不指定默认为1</span>
+-e, --error<span class="token operator">=</span>error_filename      <span class="token comment">#指定错误文件输出</span>
+-J, --job-name<span class="token operator">=</span>JOBNAME          <span class="token comment">#指定作业名称</span>
+--mail-type<span class="token operator">=</span>END/FAIL/ALL        <span class="token comment">#邮件提醒，可选:END,FAIL,ALL</span>
+--mail-user<span class="token operator">=</span>mail_address        <span class="token comment">#通知邮箱地址</span>
+-n, --ntask<span class="token operator">=</span>NTASKs <span class="token comment">#指定总进程数；不使用cpus-per-task，可理解为进程数即为核数 </span>
+--ntask-per-node<span class="token operator">=</span>N <span class="token comment">#指定每个节点进程数/核数，使用-n参数后变为每个节点最多运行的进程数</span>
+-N, --nodes<span class="token operator">=</span>N                   <span class="token comment">#指定节点数量</span>
+-o, --output<span class="token operator">=</span>out_filename       <span class="token comment">#指定输出文件输出</span>
+-p, --partion<span class="token operator">=</span>debug             <span class="token comment">#指定分区</span>
+-t, --time<span class="token operator">=</span>dd-hh:mm:ss          <span class="token comment">#作业最大运行时间</span>
+-w, --nodelist<span class="token operator">=</span>node<span class="token punctuation">[</span><span class="token number">1,2</span><span class="token punctuation">]</span>        <span class="token comment">#指定优先使用节点，不可与避免节点冲突</span>
+-x, --exclude<span class="token operator">=</span>node<span class="token punctuation">[</span><span class="token number">3,5</span>-6<span class="token punctuation">]</span>       <span class="token comment">#指定避免使用节点，不可与优先节点冲突</span>
+--mem-per-cpu<span class="token operator">=</span>MB                <span class="token comment">#指定计算cpu最大占用内存大小</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="4-2-交互模式-Srun"><a href="#4-2-交互模式-Srun" class="headerlink" title="4.2 交互模式 Srun"></a>4.2 交互模式 Srun</h3><p>交互式作业提交，提交命令后，等待作业执行完成之后返回命令行窗口。</p>
+<h3 id="Demo-of-srun"><a href="#Demo-of-srun" class="headerlink" title="Demo of srun"></a>Demo of srun</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">srun -J JOBNAME -p debug -N <span class="token number">2</span> -c <span class="token number">1</span> -n <span class="token number">32</span> --ntasks-per-node<span class="token operator">=</span><span class="token number">16</span> -w node<span class="token punctuation">[</span><span class="token number">3,4</span><span class="token punctuation">]</span> -x node<span class="token punctuation">[</span><span class="token number">1,5</span>-6<span class="token punctuation">]</span> --time<span class="token operator">=</span>dd-hh:mm:ss --output<span class="token operator">=</span>file_name --error<span class="token operator">=</span>file_name --mail-user<span class="token operator">=</span>address --mail-type<span class="token operator">=</span>ALL mpirun -n <span class="token number">64</span> ./iPic3D ./inputfile/test.inp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>同 <strong>Demo of sbatch</strong></p>
+<h3 id="4-3-批处理模式-Sbatch"><a href="#4-3-批处理模式-Sbatch" class="headerlink" title="4.3 批处理模式 Sbatch"></a>4.3 批处理模式 Sbatch</h3><p>批处理作业是指用户编写作业脚本，指定资源需求约束，提交后台执行作业。提交批处理作业的命令为 sbatch，用户提交命令即返回命令行窗口，但此时作业在进入调度状态，在资源满足要求时，分配完计算结点之后，系统将在所分配的第一个计算结点（而不是登录结点）上加载执行用户的作业脚本。批处理作业的脚本为一个文本文件，脚本第一行以 “#!” 字符开头，并制定脚本文件的解释程序，如 sh，bash。</p>
+<p>运行 <code>sbatch filename</code> 来提交任务；计算开始后，工作目录中会生成以 slurm 开头的.out 文件为输出文件（不指定输出的话）。</p>
+<h3 id="Demo-of-sbatch"><a href="#Demo-of-sbatch" class="headerlink" title="Demo of sbatch"></a>Demo of sbatch</h3><p>保存在运行程序目录下即可，文件名随意（可以无后缀，内容文本格式即可）；作业提交命令<code>sbatch filename</code></p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash </span>
+<span class="token comment">#提交单个作业</span>
+<span class="token comment">#SBATCH --job-name=JOBNAME      %指定作业名称</span>
+<span class="token comment">#SBATCH --partition=debug       %指定分区</span>
+<span class="token comment">#SBATCH --nodes=2               %指定节点数量</span>
+<span class="token comment">#SBATCH --cpus-per-task=1       %指定每个进程使用核数，不指定默认为1</span>
+<span class="token comment">#SBATCH -n 32       %指定总进程数；不使用cpus-per-task，可理解为进程数即为核数</span>
+<span class="token comment">#SBATCH --ntasks-per-node=16    %指定每个节点进程数/核数,使用-n参数（优先级更高），变为每个节点最多运行的任务数</span>
+<span class="token comment">#SBATCH --nodelist=node[3,4]    %指定优先使用节点</span>
+<span class="token comment">#SBATCH --exclude=node[1,5-6]   %指定避免使用节点</span>
+<span class="token comment">#SBATCH --time=dd-hh:mm:ss      %作业最大运行时长，参考格式填写</span>
+<span class="token comment">#SBATCH --output=file_name      %指定输出文件输出</span>
+<span class="token comment">#SBATCH --error=file_name       %指定错误文件输出</span>
+<span class="token comment">#SBATCH --mail-type=ALL         %邮件提醒,可选:END,FAIL,ALL</span>
+<span class="token comment">#SBATCH --mail-user=address     %通知邮箱地址</span>
+
+<span class="token builtin class-name">source</span> /public/home/user/.bashrc   <span class="token comment">#导入环境变量文件</span>
+
+mpirun -n <span class="token number">32</span> ./iPic3D ./inputfiles/test.inp <span class="token comment">#运行命令</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>同 <strong>Demo of srun</strong></p>
+<h3 id="4-4-分配模式-Salloc"><a href="#4-4-分配模式-Salloc" class="headerlink" title="4.4 分配模式 Salloc"></a>4.4 分配模式 Salloc</h3><p>结点资源抢占命令。该命令支持用户在提交作业前，抢占所需计算资源（此时开始计算所用机时）。需请求资源，然后在获取节点后登录到计算节点。目前作者使用设备可直接登录计算节点，暂未使用。 <code>sacct</code> 命令也未启用，暂无说明，有需要可在文末参考网页查看。</p>
+<h2 id="5-Scontrol"><a href="#5-Scontrol" class="headerlink" title="5. Scontrol"></a>5. Scontrol</h2><h3 id="5-1-信息查看"><a href="#5-1-信息查看" class="headerlink" title="5.1 信息查看"></a>5.1 信息查看</h3><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">scontrol show job JOBID         <span class="token comment">#查看作业的详细信息</span>
+scontrol show node              <span class="token comment">#查看所有节点详细信息</span>
+scontrol show node node-name    <span class="token comment">#查看指定节点详细信息</span>
+scontrol show node <span class="token operator">|</span> <span class="token function">grep</span> CPU   <span class="token comment">#查看各节点cpu状态</span>
+scontrol show node node-name <span class="token operator">|</span> <span class="token function">grep</span> CPU <span class="token comment">#查看指定节点cpu状态</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="5-2-更新作业"><a href="#5-2-更新作业" class="headerlink" title="5.2 更新作业"></a>5.2 更新作业</h3><p>在任务开始前却发现作业的属性写错了（例如提交错了分区，修改名字），取消了重新排队似乎很不划算。如果作业恰好 <strong>没在运行</strong>，我们是可以通过 <code>scontrol</code> 命令来更新作业的属性</p>
+<div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">scontrol update <span class="token assign-left variable">jobid</span><span class="token operator">=</span>JOBID <span class="token punctuation">..</span>. <span class="token comment">#...为下面参数</span>
+<span class="token assign-left variable">reqnodelist</span><span class="token operator">=</span><span class="token operator">&lt;</span>nodes<span class="token operator">></span>
+<span class="token assign-left variable">reqcores</span><span class="token operator">=</span><span class="token operator">&lt;</span>count<span class="token operator">></span>
+<span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token operator">&lt;</span>name<span class="token operator">></span>
+<span class="token assign-left variable">nodelist</span><span class="token operator">=</span><span class="token operator">&lt;</span>nodes<span class="token operator">></span>
+<span class="token assign-left variable">excnodelist</span><span class="token operator">=</span><span class="token operator">&lt;</span>nodes<span class="token operator">></span>
+<span class="token assign-left variable">numcpus</span><span class="token operator">=</span><span class="token operator">&lt;</span>min_count-max_count<span class="token operator">></span>
+<span class="token assign-left variable">numnodes</span><span class="token operator">=</span><span class="token operator">&lt;</span>min_count-max_count<span class="token operator">></span>
+<span class="token assign-left variable">numtasks</span><span class="token operator">=</span><span class="token operator">&lt;</span>count<span class="token operator">></span>
+<span class="token assign-left variable">starttime</span><span class="token operator">=</span>yyyy-mm-dd
+<span class="token assign-left variable">partition</span><span class="token operator">=</span><span class="token operator">&lt;</span>name<span class="token operator">></span>
+<span class="token assign-left variable">timelimit</span><span class="token operator">=</span>d-h:m:s
+<span class="token assign-left variable">mincpusnode</span><span class="token operator">=</span><span class="token operator">&lt;</span>count<span class="token operator">></span>
+<span class="token assign-left variable">minmemorycpu</span><span class="token operator">=</span><span class="token operator">&lt;</span>megabytes<span class="token operator">></span>
+<span class="token assign-left variable">minmemorynode</span><span class="token operator">=</span><span class="token operator">&lt;</span>megabytes<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://link.zhihu.com/?target=https%3A//hpc.pku.edu.cn/_book/guide/slurm/slurm.html">作业调度系统 · 北京大学高性能计算使用指南</a></li>
+<li><a href="https://link.zhihu.com/?target=http%3A//bicmr.pku.edu.cn/~wenzw/pages/slurm.html">SLURM 使用参考</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//docs.hpc.sjtu.edu.cn/job/slurm.html">Slurm 作业调度系统 — 上海交大超算平台用户手册 文档</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B">SLURM使用基础教程 - 曙光先进计算</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//arc.umich.edu/greatlakes/slurm-user-guide/">Slurm User Guide for Great Lakes | ITS Advanced Research Computing</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/The-Missing-Semester-of-Your-CS-Education/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">The Missing Semester of Your CS Education</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Salome-tut-01/">
+                        <span class="hidden-mobile">Salome tut 01</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

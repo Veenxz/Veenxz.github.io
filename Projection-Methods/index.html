@@ -1,0 +1,879 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="This post is for projection methods in CFD.">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="This post is for projection methods in CFD.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Projection Methods">
+<meta property="og:url" content="https://veenxz.github.io/Projection-Methods/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="This post is for projection methods in CFD.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-04T02:37:25.000Z">
+<meta property="article:modified_time" content="2021-01-14T01:49:41.403Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="CFD">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Projection Methods - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Projection Methods">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-04 10:37" pubdate>
+        2020年12月4日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Projection Methods</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月14日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>This post is for projection methods in CFD.</p>
+<span id="more"></span>
+<h3 id="PISO-Algorithm"><a href="#PISO-Algorithm" class="headerlink" title="PISO Algorithm"></a>PISO Algorithm</h3><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// Pressure-velocity PISO corrector</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// Solve the Momentum equation</span>
+
+    MRF<span class="token punctuation">.</span><span class="token function">correctBoundaryVelocity</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    fvVectorMatrix <span class="token function">UEqn</span>
+        <span class="token punctuation">(</span>
+        fvm<span class="token operator">::</span><span class="token function">ddt</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span> <span class="token operator">+</span> fvm<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>phi<span class="token punctuation">,</span> U<span class="token punctuation">)</span>
+        <span class="token operator">+</span> MRF<span class="token punctuation">.</span><span class="token function">DDt</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span>
+        <span class="token operator">+</span> turbulence<span class="token operator">-></span><span class="token function">divDevSigma</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span>
+        <span class="token operator">==</span>
+        <span class="token function">fvOptions</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    UEqn<span class="token punctuation">.</span><span class="token function">relax</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    fvOptions<span class="token punctuation">.</span><span class="token function">constrain</span><span class="token punctuation">(</span>UEqn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>piso<span class="token punctuation">.</span><span class="token function">momentumPredictor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">solve</span><span class="token punctuation">(</span>UEqn <span class="token operator">==</span> <span class="token operator">-</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        fvOptions<span class="token punctuation">.</span><span class="token function">correct</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// --- PISO loop</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>piso<span class="token punctuation">.</span><span class="token function">correct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        volScalarField <span class="token function">rAU</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token operator">/</span>UEqn<span class="token punctuation">.</span><span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        volVectorField <span class="token function">HbyA</span><span class="token punctuation">(</span><span class="token function">constrainHbyA</span><span class="token punctuation">(</span>rAU<span class="token operator">*</span>UEqn<span class="token punctuation">.</span><span class="token function">H</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> U<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        surfaceScalarField <span class="token function">phiHbyA</span>
+            <span class="token punctuation">(</span>
+            <span class="token string">"phiHbyA"</span><span class="token punctuation">,</span>
+            fvc<span class="token operator">::</span><span class="token function">flux</span><span class="token punctuation">(</span>HbyA<span class="token punctuation">)</span>
+            <span class="token operator">+</span> MRF<span class="token punctuation">.</span><span class="token function">zeroFilter</span><span class="token punctuation">(</span>fvc<span class="token operator">::</span><span class="token function">interpolate</span><span class="token punctuation">(</span>rAU<span class="token punctuation">)</span><span class="token operator">*</span>fvc<span class="token operator">::</span><span class="token function">ddtCorr</span><span class="token punctuation">(</span>U<span class="token punctuation">,</span> phi<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        MRF<span class="token punctuation">.</span><span class="token function">makeRelative</span><span class="token punctuation">(</span>phiHbyA<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">adjustPhi</span><span class="token punctuation">(</span>phiHbyA<span class="token punctuation">,</span> U<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Update the pressure BCs to ensure flux consistency</span>
+        <span class="token function">constrainPressure</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> U<span class="token punctuation">,</span> phiHbyA<span class="token punctuation">,</span> rAU<span class="token punctuation">,</span> MRF<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Non-orthogonal pressure corrector loop</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>piso<span class="token punctuation">.</span><span class="token function">correctNonOrthogonal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token comment">// Pressure corrector</span>
+
+            fvScalarMatrix <span class="token function">pEqn</span>
+            <span class="token punctuation">(</span>
+                fvm<span class="token operator">::</span><span class="token function">laplacian</span><span class="token punctuation">(</span>rAU<span class="token punctuation">,</span> p<span class="token punctuation">)</span> <span class="token operator">==</span> fvc<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>phiHbyA<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            pEqn<span class="token punctuation">.</span><span class="token function">setReference</span><span class="token punctuation">(</span>pRefCell<span class="token punctuation">,</span> pRefValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            pEqn<span class="token punctuation">.</span><span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>piso<span class="token punctuation">.</span><span class="token function">finalNonOrthogonalIter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                phi <span class="token operator">=</span> phiHbyA <span class="token operator">-</span> pEqn<span class="token punctuation">.</span><span class="token function">flux</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"continuityErrs.H"</span></span>
+
+        U <span class="token operator">=</span> HbyA <span class="token operator">-</span> rAU<span class="token operator">*</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        U<span class="token punctuation">.</span><span class="token function">correctBoundaryConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fvOptions<span class="token punctuation">.</span><span class="token function">correct</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h2 id="PIMPLE-Algorithm"><a href="#PIMPLE-Algorithm" class="headerlink" title="PIMPLE Algorithm"></a>PIMPLE Algorithm</h2><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">while (pimple.run(runTime))
+&#123;
+    #include &quot;readDyMControls.H&quot;
+
+    if (LTS)
+    &#123;
+        #include &quot;setRDeltaT.H&quot;
+    &#125;
+    else
+    &#123;
+        #include &quot;CourantNo.H&quot;
+        #include &quot;setDeltaT.H&quot;
+    &#125;
+
+    runTime++;
+
+    Info&lt;&lt; &quot;Time &#x3D; &quot; &lt;&lt; runTime.timeName() &lt;&lt; nl &lt;&lt; endl;
+
+    &#x2F;&#x2F; --- Pressure-velocity PIMPLE corrector loop
+    while (pimple.loop())
+    &#123;
+        if (pimple.firstPimpleIter() || moveMeshOuterCorrectors)
+        &#123;
+            mesh.update();
+
+            if (mesh.changing())
+            &#123;
+                MRF.update();
+
+                if (correctPhi)
+                &#123;
+                    &#x2F;&#x2F; Calculate absolute flux
+                    &#x2F;&#x2F; from the mapped surface velocity
+                    phi &#x3D; mesh.Sf() &amp; Uf();
+
+                    CorrectPhi
+                    (
+                        U,
+                        phi,
+                        p,
+                        dimensionedScalar(&quot;rAUf&quot;, dimTime, 1),
+                        geometricZeroField(),
+                        pimple,
+                        true
+                    );
+
+                    &#x2F;&#x2F; Make the flux relative to the mesh motion
+                    fvc::makeRelative(phi, U);
+                &#125;
+
+                if (checkMeshCourantNo)
+                &#123;
+                    #include &quot;meshCourantNo.H&quot;
+                &#125;
+            &#125;
+        &#125;
+
+        MRF.correctBoundaryVelocity(U);
+
+        tmp&lt;fvVectorMatrix&gt; tUEqn
+        (
+            fvm::ddt(U) + fvm::div(phi, U)
+          + MRF.DDt(U)
+          + turbulence-&gt;divDevSigma(U)
+         &#x3D;&#x3D;
+            fvOptions(U)
+        );
+        fvVectorMatrix&amp; UEqn &#x3D; tUEqn.ref();
+
+        UEqn.relax();
+
+        fvOptions.constrain(UEqn);
+
+        if (pimple.momentumPredictor())
+        &#123;
+            solve(UEqn &#x3D;&#x3D; -fvc::grad(p));
+
+            fvOptions.correct(U);
+        &#125;
+
+        &#x2F;&#x2F; --- Pressure corrector loop
+        while (pimple.correct())
+        &#123;
+            volScalarField rAU(1.0&#x2F;UEqn.A());
+            volVectorField HbyA(constrainHbyA(rAU*UEqn.H(), U, p));
+            surfaceScalarField phiHbyA
+            (
+                &quot;phiHbyA&quot;,
+                fvc::flux(HbyA)
+              + MRF.zeroFilter(fvc::interpolate(rAU)*fvc::ddtCorr(U, phi, Uf))
+            );
+
+            MRF.makeRelative(phiHbyA);
+
+            if (p.needReference())
+            &#123;
+                fvc::makeRelative(phiHbyA, U);
+                adjustPhi(phiHbyA, U, p);
+                fvc::makeAbsolute(phiHbyA, U);
+            &#125;
+
+            tmp&lt;volScalarField&gt; rAtU(rAU);
+
+            if (pimple.consistent())
+            &#123;
+                rAtU &#x3D; 1.0&#x2F;max(1.0&#x2F;rAU - UEqn.H1(), 0.1&#x2F;rAU);
+                phiHbyA +&#x3D;
+                    fvc::interpolate(rAtU() - rAU)*fvc::snGrad(p)*mesh.magSf();
+                HbyA -&#x3D; (rAU - rAtU())*fvc::grad(p);
+            &#125;
+
+            if (pimple.nCorrPiso() &lt;&#x3D; 1)
+            &#123;
+                tUEqn.clear();
+            &#125;
+
+            &#x2F;&#x2F; Update the pressure BCs to ensure flux consistency
+            constrainPressure(p, U, phiHbyA, rAtU(), MRF);
+
+            &#x2F;&#x2F; Non-orthogonal pressure corrector loop
+            while (pimple.correctNonOrthogonal())
+            &#123;
+                fvScalarMatrix pEqn
+                (
+                    fvm::laplacian(rAtU(), p) &#x3D;&#x3D; fvc::div(phiHbyA)
+                );
+
+                pEqn.setReference(pRefCell, pRefValue);
+
+                pEqn.solve();
+
+                if (pimple.finalNonOrthogonalIter())
+                &#123;
+                    phi &#x3D; phiHbyA - pEqn.flux();
+                &#125;
+            &#125;
+
+            #include &quot;continuityErrs.H&quot;
+
+            &#x2F;&#x2F; Explicitly relax pressure for momentum corrector
+            p.relax();
+
+            U &#x3D; HbyA - rAtU*fvc::grad(p);
+            U.correctBoundaryConditions();
+            fvOptions.correct(U);
+
+            &#x2F;&#x2F; Correct Uf if the mesh is moving
+            fvc::correctUf(Uf, U, phi);
+
+            &#x2F;&#x2F; Make the fluxes relative to the mesh motion
+            fvc::makeRelative(phi, U);
+        &#125;
+
+        if (pimple.turbCorr())
+        &#123;
+            laminarTransport.correct();
+            turbulence-&gt;correct();
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="Runge-kutta-Algorithm"><a href="#Runge-kutta-Algorithm" class="headerlink" title="Runge kutta Algorithm"></a>Runge kutta Algorithm</h3><blockquote>
+<p>U 4th order p 2nd order</p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> cycle <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> cycle <span class="token operator">&lt;</span> rkCoeff<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> cycle<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    phi <span class="token operator">=</span> <span class="token punctuation">(</span>fvc<span class="token operator">::</span><span class="token function">interpolate</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span> <span class="token operator">&amp;</span> mesh<span class="token punctuation">.</span><span class="token function">Sf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// evaluate flux</span>
+    dU  <span class="token operator">=</span> runTime<span class="token punctuation">.</span><span class="token function">deltaT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>fvc<span class="token operator">::</span><span class="token function">laplacian</span><span class="token punctuation">(</span>turbulence<span class="token operator">-></span><span class="token function">nuEff</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> U<span class="token punctuation">)</span> <span class="token operator">-</span> fvc<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>phi<span class="token punctuation">,</span>U<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Uc  <span class="token operator">=</span> Uc <span class="token operator">+</span> rkCoeff<span class="token punctuation">[</span>cycle<span class="token punctuation">]</span><span class="token operator">*</span>dU<span class="token punctuation">;</span>
+    U   <span class="token operator">=</span> Uold <span class="token operator">+</span> rkCoeff1<span class="token punctuation">[</span>cycle<span class="token punctuation">]</span><span class="token operator">*</span>dU<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cycle<span class="token operator">==</span><span class="token number">3</span><span class="token punctuation">)</span> U<span class="token operator">=</span>Uc<span class="token punctuation">;</span>
+    U<span class="token punctuation">.</span><span class="token function">correctBoundaryConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">solve</span><span class="token punctuation">(</span> pEqn <span class="token operator">==</span> fvc<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span><span class="token operator">/</span>runTime<span class="token punctuation">.</span><span class="token function">deltaT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    U <span class="token operator">=</span> U <span class="token operator">-</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token operator">*</span>runTime<span class="token punctuation">.</span><span class="token function">deltaT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    U<span class="token punctuation">.</span><span class="token function">correctBoundaryConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cycle<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span> p2 <span class="token operator">=</span> p<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cycle<span class="token operator">==</span><span class="token number">3</span><span class="token punctuation">)</span> p <span class="token operator">=</span> <span class="token number">4</span><span class="token operator">*</span>p <span class="token operator">-</span> <span class="token number">3</span><span class="token operator">*</span>p2<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+phi <span class="token operator">=</span> <span class="token punctuation">(</span>fvc<span class="token operator">::</span><span class="token function">interpolate</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span> <span class="token operator">&amp;</span> mesh<span class="token punctuation">.</span><span class="token function">Sf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+turbulence<span class="token operator">-></span><span class="token function">correct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"continuityErrs.H"</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="Rhie-Chow-Algorithm"><a href="#Rhie-Chow-Algorithm" class="headerlink" title="Rhie-Chow Algorithm"></a>Rhie-Chow Algorithm</h3><blockquote>
+<p>U p 2nd order</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/asimonder/projectionFoam">https://github.com/asimonder/projectionFoam</a></p>
+</blockquote>
+<div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span> <span class="token punctuation">(</span>runTime<span class="token punctuation">.</span><span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        Info<span class="token operator">&lt;&lt;</span> <span class="token string">"Time = "</span> <span class="token operator">&lt;&lt;</span> runTime<span class="token punctuation">.</span><span class="token function">timeName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> nl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	
+        <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"readPISOControls.H"</span></span>
+        <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"CourantNo.H"</span></span>
+
+        <span class="token comment">// Non-iterative projection scheme</span>
+        <span class="token punctuation">&#123;</span>
+	    <span class="token comment">//linearization of convective flux using second order extrapolation  	  </span>
+	    surfaceScalarField <span class="token function">phi_o</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">3.0</span><span class="token operator">*</span>phi<span class="token punctuation">.</span><span class="token function">oldTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>phi<span class="token punctuation">.</span><span class="token function">oldTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">oldTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	  
+	    <span class="token comment">// Momentum step</span>
+
+            fvVectorMatrix <span class="token function">UEqn</span>
+            <span class="token punctuation">(</span>
+                fvm<span class="token operator">::</span><span class="token function">ddt</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span>
+              <span class="token operator">+</span> fvm<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>phi_o<span class="token punctuation">,</span> U<span class="token punctuation">)</span>
+              <span class="token operator">+</span> turbulence<span class="token operator">-></span><span class="token function">divDevReff</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	    <span class="token function">solve</span><span class="token punctuation">(</span>UEqn <span class="token operator">==</span> <span class="token operator">-</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+            <span class="token comment">// Projection step</span>
+
+	    dimensionedScalar dt<span class="token operator">=</span>runTime<span class="token punctuation">.</span><span class="token function">deltaT</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	    scalar rDeltaT<span class="token operator">=</span><span class="token number">1.0</span><span class="token operator">/</span>dt<span class="token punctuation">.</span><span class="token function">value</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	    U <span class="token operator">+=</span> dt<span class="token operator">*</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	    U<span class="token punctuation">.</span><span class="token function">correctBoundaryConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+	    phi<span class="token operator">=</span> <span class="token punctuation">(</span>fvc<span class="token operator">::</span><span class="token function">interpolate</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span> <span class="token operator">&amp;</span> mesh<span class="token punctuation">.</span><span class="token function">Sf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      
+	    <span class="token function">adjustPhi</span><span class="token punctuation">(</span>phi<span class="token punctuation">,</span> U<span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	  
+	    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> nonOrth<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> nonOrth<span class="token operator">&lt;=</span>nNonOrthCorr<span class="token punctuation">;</span> nonOrth<span class="token operator">++</span><span class="token punctuation">)</span>
+	      <span class="token punctuation">&#123;</span> 
+		fvScalarMatrix <span class="token function">pEqn</span>
+		  <span class="token punctuation">(</span>
+		   fvm<span class="token operator">::</span><span class="token function">laplacian</span><span class="token punctuation">(</span>dt<span class="token punctuation">,</span> p<span class="token punctuation">)</span> <span class="token operator">==</span> fvc<span class="token operator">::</span><span class="token function">div</span><span class="token punctuation">(</span>phi<span class="token punctuation">)</span>
+		   <span class="token punctuation">)</span><span class="token punctuation">;</span>
+	  
+		pEqn<span class="token punctuation">.</span><span class="token function">setReference</span><span class="token punctuation">(</span>pRefCell<span class="token punctuation">,</span> pRefValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	  
+		<span class="token keyword">if</span><span class="token punctuation">(</span>nonOrth <span class="token operator">==</span> nNonOrthCorr<span class="token punctuation">)</span>
+		  <span class="token punctuation">&#123;</span>
+		    pEqn<span class="token punctuation">.</span><span class="token function">solve</span><span class="token punctuation">(</span>mesh<span class="token punctuation">.</span><span class="token function">solver</span><span class="token punctuation">(</span><span class="token string">"pFinal"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		  <span class="token punctuation">&#125;</span>
+		<span class="token keyword">else</span>
+		  <span class="token punctuation">&#123;</span>
+		    pEqn<span class="token punctuation">.</span><span class="token function">solve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		  <span class="token punctuation">&#125;</span>
+	  
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>nonOrth <span class="token operator">==</span> nNonOrthCorr<span class="token punctuation">)</span>
+		  <span class="token punctuation">&#123;</span>
+		    phi <span class="token operator">-=</span> pEqn<span class="token punctuation">.</span><span class="token function">flux</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		  <span class="token punctuation">&#125;</span>  
+	      <span class="token punctuation">&#125;</span>
+
+            <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"continuityErrs.H"</span></span>
+
+	    U <span class="token operator">-=</span> dt<span class="token operator">*</span>fvc<span class="token operator">::</span><span class="token function">grad</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	    U<span class="token punctuation">.</span><span class="token function">correctBoundaryConditions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>       
+	
+	turbulence<span class="token operator">-></span><span class="token function">correct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CFD/">CFD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Personal_summary/Tiaozhanbei-share/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Tiaozhanbei share</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/OpenFOAM/fvOptions/">
+                        <span class="hidden-mobile">fvOptions</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

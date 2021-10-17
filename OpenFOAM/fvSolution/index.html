@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Some usage for fvSolution.">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="Some usage for fvSolution.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fvSolution">
+<meta property="og:url" content="https://veenxz.github.io/OpenFOAM/fvSolution/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="Some usage for fvSolution.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T01:51:25.000Z">
+<meta property="article:modified_time" content="2021-10-14T17:30:05.746Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="OpenFOAM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>fvSolution - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="fvSolution">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-19 09:51" pubdate>
+        2021年1月19日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">fvSolution</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年10月15日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Some usage for fvSolution.</p>
+<span id="more"></span>
+<h1 id="1-实例"><a href="#1-实例" class="headerlink" title="1. 实例"></a>1. 实例</h1><p>下面是<code>fvSolution</code> 文件的一个典型例子（应用于<code>icoFoam</code>求解器），其内容（略去文件头部注释）：</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;文件说明
+FoamFile
+&#123;
+    version     2.0;                &#x2F;&#x2F;版本号
+    format      ascii;              &#x2F;&#x2F;文本格式
+    class       dictionary;         &#x2F;&#x2F;类型为字典文件
+    location    &quot;system&quot;;           &#x2F;&#x2F;所在目录
+    object      fvSolution;         &#x2F;&#x2F;对象名
+&#125;
+&#x2F;&#x2F;代数方程组求解设置
+solvers
+&#123;
+    &#x2F;&#x2F;压力场p
+    p
+    &#123;
+        solver          PCG;        &#x2F;&#x2F;求解器
+        preconditioner  DIC;        &#x2F;&#x2F;预处理器
+        tolerance       1e-06;      &#x2F;&#x2F;预定残值
+        relTol          0;          &#x2F;&#x2F;预定相对残值
+    &#125;
+    &#x2F;&#x2F;速度场U
+    U
+    &#123;
+        solver          smoothSolver;       &#x2F;&#x2F;光滑求解器
+        smoother        symGaussSeidel;     &#x2F;&#x2F;光滑器
+        tolerance       1e-05;              &#x2F;&#x2F;预定残值
+        relTol          0;                  &#x2F;&#x2F;预定相对残值
+    &#125;
+&#125;
+&#x2F;&#x2F;PISO算法设置
+PISO
+&#123;
+    nCorrectors     2;                  &#x2F;&#x2F;PISO修正次数
+    nNonOrthogonalCorrectors 0;         &#x2F;&#x2F;非正交修正次数
+    pRefCell        0;                  &#x2F;&#x2F;压力参考单元
+    pRefValue       0;                  &#x2F;&#x2F;压力参考值
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<hr>
+<h1 id="2-fvSolution-文件分析"><a href="#2-fvSolution-文件分析" class="headerlink" title="2. fvSolution 文件分析"></a>2. fvSolution 文件分析</h1><p><code>system</code>目录下的<code>fvSolution</code>文件用来设置涉及代数方程组求解和速度-压力耦合相关算法的参数，主要包括 <strong>代数方程组求解</strong>，<strong>耦合算法</strong> 和 <strong>欠松弛处理</strong> 三个部分，分别通过<code>solvers</code>，<code>PISO</code>或<code>SIMPLE</code>和<code>relaxationFactors</code>等子字典设置。</p>
+<hr>
+<h1 id="3-代数方程组求解"><a href="#3-代数方程组求解" class="headerlink" title="3. 代数方程组求解"></a>3. 代数方程组求解</h1><p>在子字典<code>solvers</code>中，每个求解变量均要独立在以变量名命名的子字典（<code>p</code>，<code>U</code>）中设置求解相关信息。这些信息包括代数方程组求解器<code>solver</code>，预处理器<code>preconditioner</code>，光滑器<code>smoother</code>，残值<code>tolerance</code>和相对残值<code>relTol</code>。</p>
+<h2 id="3-1-solver-代数方程组求解器"><a href="#3-1-solver-代数方程组求解器" class="headerlink" title="3.1 solver 代数方程组求解器"></a>3.1 solver 代数方程组求解器</h2><p><code>OpenFOAM</code>中的代数方程组求解器均为迭代求解器：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">solver</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>PCG/PBiCG</code></td>
+<td style="text-align:center">预处理共轭梯度（对称）/稳定双共轭梯度（非对称）求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>smoothSolver</code></td>
+<td style="text-align:center">光滑求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>GAMG</code></td>
+<td style="text-align:center">几何-代数多重网格求解器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>diagonal</code></td>
+<td style="text-align:center">对角求解器（显式离散）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-2-preconditioner-预处理器"><a href="#3-2-preconditioner-预处理器" class="headerlink" title="3.2 preconditioner 预处理器"></a>3.2 preconditioner 预处理器</h2><p>预处理器本质上为一个改变原先系数矩阵条件数的左乘矩阵，<code>PCG/PBiCG</code>求解器可以使用的预处理器有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">preconditioner</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>DIC</code></td>
+<td style="text-align:center">不完全的对角Cholesky预处理器（对称矩阵）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>FDIC</code></td>
+<td style="text-align:center">不完全的快速对角Cholesky预处理器（带缓存的<code>DIC</code>）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DILU</code></td>
+<td style="text-align:center">对角不完全LU预处理器（非对称）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>diagonal</code></td>
+<td style="text-align:center">对角预处理器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>GAMG</code></td>
+<td style="text-align:center">几何-代数多重网格预处理器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>none</code></td>
+<td style="text-align:center">不进行预处理</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="3-3-smoothSolver-光滑求解器"><a href="#3-3-smoothSolver-光滑求解器" class="headerlink" title="3.3 smoothSolver 光滑求解器"></a>3.3 smoothSolver 光滑求解器</h2><p>使用光滑求解器<code>smoothSolver</code>需要指定所使用的光滑器<code>smoother</code>，可用的<code>smoother</code>有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">preconditioner</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>GaussSeidel</code></td>
+<td style="text-align:center">高斯赛德尔光顺器</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DIC</code></td>
+<td style="text-align:center">不完全的对角Cholesky光顺器（对称矩阵）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>DICGaussSeidel</code></td>
+<td style="text-align:center">不完全的对角Cholesky-高斯赛德尔光顺器（对称矩阵）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>一般情况下<code>GaussSeidel</code>是最可靠的选择，但对于有些条件数不好的矩阵，<code>DIC</code>的收敛性可能更好。另外，在某些情况下，使用<code>GaussSeidel</code>进行光顺强化是非常有效的，例如<code>DICGaussSeidel</code>。此外，在重新计算残值之前需要通过为关键字<code>nSweeps</code>来指定<code>sweep</code>数。</p>
+<h2 id="3-4-收敛准则"><a href="#3-4-收敛准则" class="headerlink" title="3.4 收敛准则"></a>3.4 收敛准则</h2><p><code>OpenFOAM</code>中的代数方程组求解器在达到下列三个条件中的 <strong>任何</strong> 一个后即停止迭代：</p>
+<ul>
+<li>残值达到预定值<code>tolerance</code>；</li>
+<li>相对残值（当前残值与初始残值之比）达到预定值<code>relTol</code>；</li>
+<li>迭代次数达到最大迭代次数<code>maxIter</code>。</li>
+</ul>
+<hr>
+<h1 id="4-耦合算法"><a href="#4-耦合算法" class="headerlink" title="4. 耦合算法"></a>4. 耦合算法</h1><p>耦合算法用于处理<code>速度-压力</code>的耦合问题。大多数<code>OpenFOAM</code>的CFD求解器使用<code>PISO</code>或者<code>SIMPLE</code>算法。这些算法采用迭代技术来求解速度和压力场。<code>PISO</code>算法用来处理非稳态问题，<code>SIMPLE</code>算法用来处理稳态问题。</p>
+<hr>
+<h1 id="5-欠松弛处理"><a href="#5-欠松弛处理" class="headerlink" title="5. 欠松弛处理"></a>5. 欠松弛处理</h1><p>欠松弛处理主要有两种不同的使用方式：</p>
+<ul>
+<li>在迭代之前提高系数矩阵主对角元素数值，并且降低源项来保证系数矩阵对角占优，比如速度场<code>U</code>；</li>
+<li>限制变量在迭代后改变的大小，比如压力场<code>p</code>。</li>
+</ul>
+<p>欠松弛因子介于<code>0</code>和<code>1</code>之间，越接近<code>0</code>求解越稳定，但同时也会降低求解效率；提高的数值会提高求解效率，但同时也会降低稳定性。</p>
+<p>欠松弛因子在子字典<code>relaxationFactors</code>下指定，通过子字典名<code>equations</code>和<code>fields</code>来设置不同的欠松弛方式，例如：</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">relaxationFactors&#123;    fields    &#123;        p 0.3;    &#125;    equations    &#123;        U 0.7;    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenFOAM/">OpenFOAM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/OpenFOAM/fvSchemes/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">fvSchemes</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/OpenFOAM/OpenFOAM-Tips/">
+                        <span class="hidden-mobile">OpenFOAM Tips</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

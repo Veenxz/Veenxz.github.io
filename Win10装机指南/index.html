@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="
+    小白的Win10装机之路（一）
+        ">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="小白的Win10装机之路（一）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10装机指南">
+<meta property="og:url" content="https://veenxz.github.io/Win10%E8%A3%85%E6%9C%BA%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="小白的Win10装机之路（一）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/VEEN_Z~1/AppData/Local/Temp/Ditto/DragFiles/image_3.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C1.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C2.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C3.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C5.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C6.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C9.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C7.png">
+<meta property="og:image" content="d:/Veen&#39;s%20Files%5Cwin10%5C8.png">
+<meta property="og:image" content="c:/Users/VEEN_ZHOU/Pictures/1.png">
+<meta property="og:image" content="c:/Users/VEEN_ZHOU/Pictures/2.png">
+<meta property="article:published_time" content="2019-12-13T15:59:09.000Z">
+<meta property="article:modified_time" content="2019-12-14T08:48:22.698Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/VEEN_Z~1/AppData/Local/Temp/Ditto/DragFiles/image_3.png">
+  
+  <title>Win10装机指南 - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Win10装机指南">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-13 23:59" pubdate>
+        2019年12月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Win10装机指南</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2019年12月14日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p align="center">
+    <font face="华文新魏" size="6">小白的Win10装机之路（一）</font>
+        </p>
+
+<span id="more"></span>
+<ul>
+<li>没有什么问题是重启解决不了的，如果不行就重启两次，如果实在不行就重装系统吧。</li>
+<li>除了电脑硬件问题，几乎所有的电脑问题都可以通过重装系统，重新配置电脑驱动、软件解决。</li>
+<li>在初次使用一些软件时系统环境变量等不能正确配置，造成的软件索引问题过多，最简单有效的方法就是重装系统。</li>
+<li>原装的BUG10系统经常会出现蓝屏死机情况，同时随着使用时间的推移系统会越来越慢，这些问题也可以通过重装系统解决。</li>
+<li>重装系统其实很简单，小白也能轻松重装，看完这篇推送别找了装系统了吧（逃）。</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p><strong>重装系统广义上也可以分为：</strong></p>
+</blockquote>
+<ol>
+<li><strong>原系统重置</strong></li>
+<li><strong>系统完全重装</strong></li>
+</ol>
+<blockquote>
+<p><strong>Win10磁盘分区表及文件格式</strong></p>
+</blockquote>
+<h3 id="磁盘分区表"><a href="#磁盘分区表" class="headerlink" title="磁盘分区表"></a>磁盘分区表</h3><ol>
+<li><p><strong>主引导记录MBR（Master Boot Record）</strong></p>
+<p>MBR由3部分组成，包括主引导代码，磁盘分区表和磁盘签名。分区表最多可容纳Windows中主分区的4个条目，也就是最多支持四个主分区。</p>
+<p>如果将磁盘初始化为MBR，则无论磁盘有多大，都只能使用2TB或16TB的硬盘容量。如果磁盘使用传统的512B对齐扇区，则只能使用2TB。如果使用4K对齐扇区，则可以使用16TB。</p>
+</li>
+<li><p><strong>GUID分区表GPT（GUID Partition Table）</strong></p>
+<p>GUID分区表由保护性MBR组成，用于防止基于MBR的磁盘实用程序误识别并可能覆盖GPT磁盘；<strong>主要GUID分区表标头</strong>（记录了其自身的大小、位置以及辅助GPT标头），<strong>主GUID分区条目数组</strong>，<strong>备份GUID分区条目数组</strong>和<strong>备份GUID分区表标头</strong>。</p>
+<p>在Windows中，GUID分区表最多可以包含128个分区条目。</p>
+<p>XP及以下系统只能使用MBR分区格式的磁盘，当前Windows操作系统都可以使用GPT分区格式磁盘读写数据。如果主板仅支持Legacy启动，只能从MBR启动Windows，当主板支持UEFI启动时，Windows的64位系统支持从GPT启动。</p>
+</li>
+</ol>
+<h3 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h3><p>Windows操作系统支持 NTFS, FAT32, and exFAT三种不同文件系统，在Win10装机时，硬盘格式一般选择NTFS，目前也有在exFAT文件系统上运行的Win10系统。</p>
+<ol>
+<li>NTFS是目前Windows系统中一种现代文件系统，目前使用最广泛，内置的硬盘大多数都是NTFS格式。</li>
+<li>FAT32是一种相对老旧的文件系统，不能像NTFS格式支持很多现代文件格式的属性，但对于不同系统平台具有良好的兼容性，可以在Linux、Mac或Android系统平台上通用。</li>
+<li>exFAT是FAT32文件格式的替代品，很多设备和操作系统都支持该文件系统。</li>
+</ol>
+<h2 id="原系统重置"><a href="#原系统重置" class="headerlink" title="原系统重置"></a>原系统重置</h2><p><img src="C:\Users\VEEN_Z~1\AppData\Local\Temp\Ditto\DragFiles\image_3.png" srcset="/img/loading.gif" lazyload alt="image_3"></p>
+<p>有三个选项能够初始化电脑。</p>
+<ul>
+<li>选项 1：依次选择“开始” &gt;“设置” &gt;“更新和安全” &gt;“恢复”。在“初始化此电脑”下，选择“开始”。<a href="ms-settings:recovery?activationSource=SMC-IA-4026528">打开“恢复”设置</a>。</li>
+<li>选项 2：重启电脑以访问登录屏幕，然后长按 Shift 键，同时依次选择屏幕右下角的“电源”图标 &gt;“重启”。在计算机重启后，依次选择“疑难解答”&gt;“初始化此电脑”。</li>
+<li>选项 3：选择“开始”，然后长按 Shift 键，同时依次选择“电源”图标 &gt;“重启”将计算机重启到恢复模式。在计算机重启后，依次选择“疑难解答”&gt;“初始化此电脑”。</li>
+</ul>
+<blockquote>
+<p>重置电脑是重置所有用户安装的软件，可以选择保存自己的文档，在重置时不会完全删除所有驱动。</p>
+<p>全新安装会删除所有的用户数据，在安装之前也可以保存文档，全新安装后需要重新安装驱动。</p>
+</blockquote>
+<h2 id="系统完全重置"><a href="#系统完全重置" class="headerlink" title="系统完全重置"></a>系统完全重置</h2><blockquote>
+<p>本文教程不使用第三方工具进行装机，如需要第三方工具的装机可以百度“微PE”。</p>
+</blockquote>
+<h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><p>确保你的数据已经全部备份，在完全重置的系统安装中建议完全格式化系统盘。对于双硬盘的用户，建议在重装系统前将其取出。</p>
+<blockquote>
+<p>对于正版系统的安装：</p>
+<ul>
+<li>确保 Windows 10 已激活</li>
+<li>在重新安装 Windows 之前，你需要将 Microsoft 帐户链接到数字许可证</li>
+<li>如果你对电脑进行了重大的硬件更换，需要重新激活 Windows 10</li>
+<li>你将需要重新安装与你的许可证匹配的 Windows 版本</li>
+</ul>
+</blockquote>
+<h3 id="使用安装介质执行-Windows-10-的干净安装"><a href="#使用安装介质执行-Windows-10-的干净安装" class="headerlink" title="使用安装介质执行 Windows 10 的干净安装"></a>使用安装介质执行 Windows 10 的干净安装</h3><h4 id="制作系统镜像盘"><a href="#制作系统镜像盘" class="headerlink" title="制作系统镜像盘"></a>制作系统镜像盘</h4><ol>
+<li>在工作电脑上，转到 <a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/p/?LinkID=616447">Microsoft 软件下载网站</a> <a target="_blank" rel="noopener" href="http://go.microsoft.com/fwlink/p/?LinkID=616447">http://go.microsoft.com/fwlink/p/?LinkID=616447</a> ，然后选择<strong>立即下载工具</strong>。</li>
+</ol>
+<p><img src="D:\Veen&#39;s Files\win10\1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p><img src="D:\Veen&#39;s Files\win10\2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<ol>
+<li>在下载完成后，从你的桌面中打开该工具，然后在询问是否要使用工具对设备进行更改时，选择“是”。</li>
+<li>当出现 Windows 10 设置指南时，请接受许可条款和协议。</li>
+</ol>
+<p><img src="D:\Veen&#39;s Files\win10\3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
+<ol>
+<li>选择<strong>从其他电脑中创建安装介质（U 盘、DVD 或 ISO 文件）</strong>，然后选择“下一步”。</li>
+</ol>
+<p><img src="D:\Veen&#39;s Files\win10\5.png" srcset="/img/loading.gif" lazyload alt="5"></p>
+<ol>
+<li>选择语言、版本和体系结构（64 位或 32 位），推荐使用64位系统。</li>
+</ol>
+<p><img src="D:\Veen&#39;s Files\win10\6.png" srcset="/img/loading.gif" lazyload alt="6"></p>
+<ol>
+<li>按照这些步骤创建安装介质，然后选择“完成”。</li>
+</ol>
+<p><img src="D:\Veen&#39;s Files\win10\9.png" srcset="/img/loading.gif" lazyload alt="9"></p>
+<p><img src="D:\Veen&#39;s Files\win10\7.png" srcset="/img/loading.gif" lazyload alt="7"></p>
+<p><img src="D:\Veen&#39;s Files\win10\8.png" srcset="/img/loading.gif" lazyload alt="8"></p>
+<blockquote>
+<p>此时系统镜像已经写入U盘，此时开始准备重新装机，请确认重要文件已经备份完毕。</p>
+</blockquote>
+<h4 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h4><blockquote>
+<p>在安装系统之前请确认电脑的启动模式是UEFI模式。</p>
+<ul>
+<li>在计算机启动时连续按特定键进入EFI设置。通常台式机为Del，笔记本电脑为F2。按Esc键将提供完整菜单，然后选择BIOS设置。</li>
+<li>在“Boot”选项卡下找到Legacy / UEFI引导模式配置。禁用（<em>Disabled</em>）Legacy并启用（<em>Enabled</em>）UEFI。</li>
+<li>按F10保存设置，然后退出。</li>
+</ul>
+</blockquote>
+<ol>
+<li>接下来重启电脑，在重启之后按下选择启动介质的快捷键，选择“<strong>USB Storage Device</strong>”。</li>
+</ol>
+<blockquote>
+<p>常见品牌的选择启动介质的快捷键：联想和戴尔是F12；华硕：F8 其他的：百度一下，你就知道。</p>
+</blockquote>
+<ol>
+<li>此时U盘引导系统进入Win10安装程序，请选择最符合你的需求的选项，然后选择“下一步”。（家庭版正版重装请选择家庭版，需要重装专业版可选择专业版，在之后一篇推送中提供专业版破解指南） </li>
+<li>选择“立即安装”，然后选中“我接受”框。</li>
+<li>选择“下一步”，然后选择“自定义: 仅安装 Windows (高级)”。</li>
+<li>你的设备将显示驱动器和分区的列表，删除/格式化系统盘，多个硬盘用户请勿删除有重要数据的硬盘。</li>
+<li>选择“删除”系统盘所有分区。指示“未分配空间”的驱动器除外。完成后，仅应保留驱动器 0 未分配空间。（双SSD用户可能为驱动器1，因此安装前最好取出第二块硬盘）</li>
+<li>选择“下一步”，（此时如果提示硬盘格式错误，请使用命令行diskpart工具 进行修复，参照文末TIPS）Windows 安装程序屏幕将显示“正在安装 Windows”。安装完成后，设备可能提示重启，在有倒计时的界面不要自行点击重启，等待自动重启。</li>
+<li>之后就是进入系统初始界面，按照提示进行设置即可。</li>
+<li>进入系统后点击更新，更新所有系统驱动。</li>
+</ol>
+<p><img src="C:\Users\VEEN_ZHOU\Pictures\1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
+<p><img src="C:\Users\VEEN_ZHOU\Pictures\2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+<h2 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h2><p>重装时出现硬盘分区表错误可以使用命令行diskpart工具进行磁盘修复、格式转换。在重装系统界面按“shift+F10”调出命令提示符，输入diskpart进入分区程序，部分命令说明如下：</p>
+<p><strong><code>list disk</code></strong>：显示本机安装的硬盘，编号为0、1、2……只有一块硬盘的用户只有“磁盘0”</p>
+<p><strong><code>select disk X</code></strong>：选择上面列出的硬盘</p>
+<p><strong><code>clean</code></strong>：清空选中硬盘原有分区信息</p>
+<p><strong><code>convert gpt</code></strong>：将分区格式转换为GPT</p>
+<p><strong><code>list partition</code></strong>：显示已有分区</p>
+<p><strong><code>create partition efi/msr/primary size=n</code></strong>：新建EFI/MSR/主分区，单位为MB</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Win10%E4%B8%93%E4%B8%9A%E7%89%88%E7%A0%B4%E8%A7%A3%E5%8F%8A%E5%8D%93%E8%B6%8A%E6%80%A7%E8%83%BD%E5%BC%80%E5%90%AF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Win10专业版激活及卓越性能开启</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/CFD%20Case%20Test/">
+                        <span class="hidden-mobile">CFD Case Test</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

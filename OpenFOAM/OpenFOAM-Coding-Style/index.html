@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="OpenFOAM Coding Style Guide">
+  <meta name="author" content="Veen">
+  <meta name="keywords" content="">
+  <meta name="description" content="OpenFOAM Coding Style Guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenFOAM Coding Style">
+<meta property="og:url" content="https://veenxz.github.io/OpenFOAM/OpenFOAM-Coding-Style/index.html">
+<meta property="og:site_name" content="Veen">
+<meta property="og:description" content="OpenFOAM Coding Style Guide">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-07T08:45:43.000Z">
+<meta property="article:modified_time" content="2021-01-07T09:02:20.466Z">
+<meta property="article:author" content="Veen">
+<meta property="article:tag" content="OpenFOAM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>OpenFOAM Coding Style - Veen</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+          
+        
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+      
+      
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/line-numbers/prism-line-numbers.min.css" />
+      
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"veenxz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Veen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/cinque-terre.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OpenFOAM Coding Style">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-07 16:45" pubdate>
+        2021年1月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenFOAM Coding Style</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年1月7日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="OpenFOAM-Coding-Style-Guide"><a href="#OpenFOAM-Coding-Style-Guide" class="headerlink" title="OpenFOAM Coding Style Guide"></a>OpenFOAM Coding Style Guide</h1><span id="more"></span>
+<h2 id="1-Code"><a href="#1-Code" class="headerlink" title="1 Code"></a>1 Code</h2><h3 id="1-1-General"><a href="#1-1-General" class="headerlink" title="1.1 General"></a>1.1 General</h3><ul>
+<li><p>80 character lines max</p>
+</li>
+<li><p>The normal indentation is 4 spaces per logical level.</p>
+</li>
+<li><p>Use spaces for indentation, not tab characters.</p>
+</li>
+<li><p>Avoid trailing whitespace.</p>
+</li>
+<li><p>The body of control statements (eg, <code>if</code>, <code>else</code>, <code>while</code>, <em>etc.</em>). is always delineated with braces. A possible exception can be<br>made in conjunction with <code>break</code> or <code>continue</code> as part of a control structure.</p>
+</li>
+<li><p>The body of <code>case</code> statements is usually delineated with braces.</p>
+</li>
+<li><p>Stream output</p>
+<ul>
+<li><p>&lt;&lt;   is always four characters after the start of the stream, so that the &lt;&lt; symbols align, i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Info&lt;&lt; ...
+os  &lt;&lt; ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p>so</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">WarningInFunction
+    &lt;&lt; &quot;Warning message&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">WarningInFunction
+&lt;&lt; &quot;Warning message&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+</li>
+</ul>
+</li>
+<li><p>Remove unnecessary class section headers, i.e. remove</p>
+</li>
+</ul>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F; * * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * &#x2F;&#x2F;
+
+    &#x2F;&#x2F; Check
+
+    &#x2F;&#x2F; Edit
+
+    &#x2F;&#x2F; Write<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>if they contain nothing, even if planned for ‘future use’</p>
+<ul>
+<li>Class titles should be centred</li>
+</ul>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;*---------------------------------------------------------------------------*\
+                        Class exampleClass Declaration
+\*---------------------------------------------------------------------------*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;*---------------------------------------------------------------------------*\
+                Class exampleClass Declaration
+\*---------------------------------------------------------------------------*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="1-2-The-H-Header-Files"><a href="#1-2-The-H-Header-Files" class="headerlink" title="1.2 The .H Header Files"></a>1.2 The <em>.H</em> Header Files</h3><ul>
+<li><p>Header file spacing</p>
+<ul>
+<li>Leave two empty lines between sections (as per functions in the <em>.C</em> file <em>etc.</em>)</li>
+</ul>
+</li>
+<li><p>Use //- Comment comments in header file to add descriptions to class data and functions do be included in the Doxygen documentation:</p>
+<ul>
+<li><p>Text on the line starting with <code>//-</code> becomes the Doxygen brief description;</p>
+</li>
+<li><p>Text on subsequent lines becomes the Doxygen detailed description</p>
+<p>e.g.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- A function which returns a thing
+  &#x2F;&#x2F;  This is a detailed description of the function
+&#x2F;&#x2F;  which processes stuff and returns other stuff
+  &#x2F;&#x2F;  depending on things.
+  thing function(stuff1, stuff2);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>List entries start with - or -# for numbered lists but cannot start on the line immediately below the brief description so</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- Compare triFaces
+  &#x2F;&#x2F;  Returns:
+&#x2F;&#x2F;  -  0: different
+  &#x2F;&#x2F;  - +1: identical
+  &#x2F;&#x2F;  - -1: same face, but different orientation
+  static inline int compare(const triFace&amp;, const triFace&amp;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>or</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- Compare triFaces returning 0, +1 or -1
+  &#x2F;&#x2F;
+&#x2F;&#x2F;  -  0: different
+  &#x2F;&#x2F;  - +1: identical
+  &#x2F;&#x2F;  - -1: same face, but different orientation
+  static inline int compare(const triFace&amp;, const triFace&amp;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- Compare triFaces returning 0, +1 or -1
+  &#x2F;&#x2F;  -  0: different
+&#x2F;&#x2F;  - +1: identical
+  &#x2F;&#x2F;  - -1: same face, but different orientation
+  static inline int compare(const triFace&amp;, const triFace&amp;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>List can be nested for example</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- Search for \em name
+  &#x2F;&#x2F;  in the following hierarchy:
+&#x2F;&#x2F;  -# personal settings:
+  &#x2F;&#x2F;    - ~&#x2F;.OpenFOAM&#x2F;\&lt;VERSION\&gt;&#x2F;
+  &#x2F;&#x2F;      &lt;em&gt;for version-specific files&lt;&#x2F;em&gt;
+  &#x2F;&#x2F;    - ~&#x2F;.OpenFOAM&#x2F;
+  &#x2F;&#x2F;      &lt;em&gt;for version-independent files&lt;&#x2F;em&gt;
+  &#x2F;&#x2F;  -# site-wide settings:
+  &#x2F;&#x2F;    - $WM_PROJECT_INST_DIR&#x2F;site&#x2F;\&lt;VERSION\&gt;
+  &#x2F;&#x2F;      &lt;em&gt;for version-specific files&lt;&#x2F;em&gt;
+  &#x2F;&#x2F;    - $WM_PROJECT_INST_DIR&#x2F;site&#x2F;
+  &#x2F;&#x2F;      &lt;em&gt;for version-independent files&lt;&#x2F;em&gt;
+  &#x2F;&#x2F;  -# shipped settings:
+  &#x2F;&#x2F;    - $WM_PROJECT_DIR&#x2F;etc&#x2F;
+  &#x2F;&#x2F;
+  &#x2F;&#x2F;  \return the full path name or fileName() if the name cannot be found
+  &#x2F;&#x2F;  Optionally abort if the file cannot be found
+  fileName findEtcFile(const fileName&amp;, bool mandatory&#x3D;false);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>For more details see the Doxygen documentation.</p>
+</li>
+</ul>
+</li>
+<li><p>Destructor</p>
+<ul>
+<li><p>When adding a comment to the destructor use //- and code as a normal function:</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;- Destructor
+~className();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li><p>Inline functions</p>
+<ul>
+<li>Use inline functions where appropriate in a separate <em>classNameI.H</em> file. Avoid cluttering the header file with function bodies.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-The-C-Source-Files"><a href="#1-3-The-C-Source-Files" class="headerlink" title="1.3 The .C Source Files"></a>1.3 The <em>.C</em> Source Files</h3><ul>
+<li><p>Do not open/close namespaces in a .C file</p>
+<ul>
+<li><p>Fully scope the function name, i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Foam::returnType Foam::className::functionName()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">namespace Foam
+&#123;
+    ...
+    returnType className::functionName()
+  ...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>Exception</strong><br>When there are multiple levels of namespace, they may be used in the <em>.C</em> file to avoid excessive clutter, i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">namespace Foam
+&#123;
+namespace compressible
+&#123;
+namespace RASModels
+&#123;
+    ...
+&#125; &#x2F;&#x2F; End namespace RASModels
+&#125; &#x2F;&#x2F; End namespace compressible
+&#125; &#x2F;&#x2F; End namespace Foam<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li>Use two empty lines between functions</li>
+</ul>
+<h3 id="1-4-Coding-Practice"><a href="#1-4-Coding-Practice" class="headerlink" title="1.4 Coding Practice"></a>1.4 Coding Practice</h3><ul>
+<li><p>Passing data as arguments or return values:</p>
+<ul>
+<li>Pass bool, label, scalar and other primitive types as copy, anything larger by reference.</li>
+</ul>
+</li>
+<li><p>const</p>
+</li>
+<li><p>Use everywhere it is applicable.</p>
+</li>
+<li><p>Variable initialisation using</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const className&amp; variableName &#x3D; otherClass.data();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const className&amp; variableName(otherClass.data());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+</li>
+<li><p>Virtual functions</p>
+<ul>
+<li>If a class is virtual, make all derived classes virtual.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-Conditional-Statements"><a href="#1-5-Conditional-Statements" class="headerlink" title="1.5 Conditional Statements"></a>1.5 Conditional Statements</h3><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if (condition)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>OR</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if
+(
+   long condition
+)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong> (no space between <code>if</code> and <code>(</code> used)</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if(condition)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="1-6-for-and-while-Loops"><a href="#1-6-for-and-while-Loops" class="headerlink" title="1.6 for and while Loops"></a>1.6 <code>for</code> and <code>while</code> Loops</h3><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (i &#x3D; 0; i &lt; maxI; i++)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>OR</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for
+(
+    i &#x3D; 0;
+    i &lt; maxI;
+    i++
+)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong> this (no space between <code>for</code> and <code>(</code> used)</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for(i &#x3D; 0; i &lt; maxI; i++)
+&#123;
+    code;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>Note that when indexing through iterators, it is often slightly more efficient to use the pre-increment form. Eg, <code>++iter</code> instead of <code>iter++</code></p>
+<h3 id="1-7-forAll-forAllIter-forAllConstIter-etc-loops"><a href="#1-7-forAll-forAllIter-forAllConstIter-etc-loops" class="headerlink" title="1.7 forAll, forAllIter, forAllConstIter, etc. loops"></a>1.7 <code>forAll</code>, <code>forAllIter</code>, <code>forAllConstIter</code>, <em>etc.</em> loops</h3><p>Like <code>for</code> loops, but</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">forAll(<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">forAll (<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>Using the <code>forAllIter</code> and <code>forAllConstIter</code> macros is generally advantageous – less typing, easier to find later. However, since<br>they are macros, they will fail if the iterated object contains any commas <em>e.g.</em> following will FAIL!:</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">forAllIter(HashTable&lt;labelPair, edge, Hash&lt;edge&gt;&gt;, foo, iter)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<p>These convenience macros are also generally avoided in other container classes and OpenFOAM primitive classes.</p>
+<h3 id="1-8-Splitting-Over-Multiple-Lines"><a href="#1-8-Splitting-Over-Multiple-Lines" class="headerlink" title="1.8 Splitting Over Multiple Lines"></a>1.8 Splitting Over Multiple Lines</h3><h4 id="1-8-1-Splitting-return-type-and-function-name"><a href="#1-8-1-Splitting-return-type-and-function-name" class="headerlink" title="1.8.1 Splitting return type and function name"></a>1.8.1 Splitting return type and function name</h4><ul>
+<li><p>Split initially after the function return type and left align</p>
+</li>
+<li><p>Do not put const onto its own line – use a split to keep it with the function name and arguments.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const Foam::longReturnTypeName&amp;
+Foam::longClassName::longFunctionName const<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const Foam::longReturnTypeName&amp;
+    Foam::longClassName::longFunctionName const<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p><strong>nor</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const Foam::longReturnTypeName&amp; Foam::longClassName::longFunctionName
+const<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p><strong>nor</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const Foam::longReturnTypeName&amp; Foam::longClassName::
+longFunctionName const<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>If it needs to be split again, split at the function name (leaving behind the preceding scoping =::=s), and again, left align, i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">const Foam::longReturnTypeName&amp;
+Foam::veryveryveryverylongClassName::
+veryveryveryverylongFunctionName const<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div>
+</li>
+</ul>
+<h4 id="1-8-2-Splitting-long-lines-at-an-“-”"><a href="#1-8-2-Splitting-long-lines-at-an-“-”" class="headerlink" title="1.8.2 Splitting long lines at an “=”"></a>1.8.2 Splitting long lines at an “=”</h4><p>Indent after split</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D;
+    longClassName.longFunctionName(longArgument);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p>OR (where necessary)</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D;
+    longClassName.longFunctionName
+    (
+        longArgument1,
+        longArgument2
+    );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p><strong>not</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D;
+longClassName.longFunctionName(longArgument);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+<p><strong>nor</strong></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D; longClassName.longFunctionName
+(
+    longArgument1,
+    longArgument2
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="1-9-Maths-and-Logic"><a href="#1-9-Maths-and-Logic" class="headerlink" title="1.9 Maths and Logic"></a>1.9 Maths and Logic</h3><ul>
+<li><p>Operator spacing</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">a + b, a - b
+a*b, a&#x2F;b
+a &amp; b, a ^ b
+a &#x3D; b, a !&#x3D; b
+a &lt; b, a &gt; b, a &gt;&#x3D; b, a &lt;&#x3D; b
+a || b, a &amp;&amp; b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>Splitting formulae over several lines: split and indent as per “splitting long lines at an =” with the operator on the lower line. Align operator so that first variable, function or bracket on the next line is 4 spaces indented i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D;
+    a*(a + b)
+   *exp(c&#x2F;d)
+   *(k + t);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>This is sometimes more legible when surrounded by extra parentheses:</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">variableName &#x3D;
+(
+    a*(a + b)
+   *exp(c&#x2F;d)
+   *(k + t)
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>Splitting logical tests over several lines: outdent the operator so that the next variable to test is aligned with the four space indentation, i.e.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if
+(
+    a &#x3D;&#x3D; true
+ &amp;&amp; b &#x3D;&#x3D; c
+)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+</ul>
+<h2 id="2-Documentation"><a href="#2-Documentation" class="headerlink" title="2 Documentation"></a>2 Documentation</h2><h3 id="2-1-General"><a href="#2-1-General" class="headerlink" title="2.1 General"></a>2.1 General</h3><ul>
+<li><p>For readability in the comment blocks, certain tags are used that are translated by pre-filtering the file before sending it to Doxygen.</p>
+</li>
+<li><p>The tags start in column 1, the contents follow on the next lines and indented by 4 spaces. The filter removes the leading 4 spaces from the following lines until the next tag that starts in column 1.</p>
+</li>
+<li><p>The ‘Class’ and ‘Description’ tags are the most important ones.</p>
+</li>
+<li><p>The first paragraph following the ‘Description’ will be used for the brief description, the remaining paragraphs become the detailed description. For example,</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Class
+    Foam::myClass
+
+Description
+    A class for specifying the documentation style.
+
+    The class is implemented as a set of recommendations that may
+    sometimes be useful.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>The class name must be qualified by its namespace, otherwise Doxygen will think you are documenting some other class.</p>
+</li>
+<li><p>If you don’t have anything to say about the class (at the moment), use the namespace-qualified class name for the description. This aids with finding these under-documented classes later.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Class
+    Foam::myUnderDocumentedClass
+
+Description
+    Foam::myUnderDocumentedClass<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>Use ‘Class’ and ‘Namespace’ tags in the header files. The Description block then applies to documenting the class.</p>
+</li>
+<li><p>Use ‘InClass’ and ‘InNamespace’ in the source files. The Description block then applies to documenting the file itself.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">InClass
+    Foam::myClass
+
+Description
+    Implements the read and writing of files.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="2-2-Doxygen-Special-Commands"><a href="#2-2-Doxygen-Special-Commands" class="headerlink" title="2.2 Doxygen Special Commands"></a>2.2 Doxygen Special Commands</h3><p>Doxygen has a large number of special commands with a <code>\</code> prefix.</p>
+<p>Since the filtering removes the leading spaces within the blocks, the Doxygen commands can be inserted within the block without problems.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">InClass
+    Foam::myClass
+
+Description
+    Implements the read and writing of files.
+
+    An example input file:
+    \verbatim
+        patchName
+        &#123;
+            type        myPatchType;
+            refValue    100;
+            value       uniform 1;
+        &#125;
+    \endverbatim
+
+    Within the implementation, a loop over all patches is done:
+    \code
+        forAll(patches, patchI)
+        &#123;
+            ...  &#x2F;&#x2F; some operation
+        &#125;
+    \endcode<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<h3 id="2-3-HTML-Special-Commands"><a href="#2-3-HTML-Special-Commands" class="headerlink" title="2.3 HTML Special Commands"></a>2.3 HTML Special Commands</h3><p>Since Doxygen also handles HTML tags to a certain extent, the angle brackets need quoting in the documentation blocks. Non-HTML tags cause Doxygen to complain, but seem to work anyhow. <em>e.g.</em>,</p>
+<ul>
+<li>The template with type <code>&lt;HR&gt;</code> is a bad example.</li>
+<li>The template with type <code>\&lt;HR\&gt;</code> is a better example.</li>
+<li>The template with type <code>&lt;Type&gt;</code> causes Doxygen to complain about an<br>unknown html type, but it seems to work okay anyhow.</li>
+</ul>
+<h3 id="2-4-Documenting-Namespaces"><a href="#2-4-Documenting-Namespaces" class="headerlink" title="2.4 Documenting Namespaces"></a>2.4 Documenting Namespaces</h3><ul>
+<li><p>If namespaces are explicitly declared with the <code>Namespace()</code> macro, they should be documented there.</p>
+</li>
+<li><p>If the namespaces is used to hold sub-models, the namespace can be documented in the same file as the class with the model selector.</p>
+<p>e.g.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">documented namespace &#39;Foam::functionEntries&#39; within the
+class &#39;Foam::functionEntry&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div>
+</li>
+<li><p>If nothing else helps, find some sensible header.</p>
+<p>e.g.</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">namespace &#39;Foam&#39; is documented in the foamVersion.H file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+</li>
+</ul>
+<h3 id="2-5-Documenting-Applications"><a href="#2-5-Documenting-Applications" class="headerlink" title="2.5 Documenting Applications"></a>2.5 Documenting Applications</h3><p>Any number of classes might be defined by a particular application, but these classes will not, however, be available to other parts of OpenFOAM. At the moment, the sole purpose for running Doxygen on the applications is to extract program usage information for the ‘-doc’ option.</p>
+<p>The documentation for a particular application is normally contained within the first comment block in a <em>.C</em> source file. The solution is this to invoke a special filter for the “<em>applications/{solver,utilities}</em>” directories that only allows the initial comment block for the <em>.C</em> files through.</p>
+<p>The layout of the application documentation has not yet been finalized, but foamToVTK shows an initial attempt.</p>
+<h3 id="2-6-Orthography"><a href="#2-6-Orthography" class="headerlink" title="2.6 Orthography"></a>2.6 Orthography</h3><p>Given the origins of OpenFOAM, the British spellings (<em>e.g.</em>, neighbour and not neighbor) are generally favoured.</p>
+<p>Both ‘-ize’ and the ‘-ise’ variant are found in the code comments. If used as a variable or class method name, it is probably better to use ‘-ize’, which is considered the main form by the Oxford University Press. <em>e.g.</em>,</p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">myClass.initialize()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<h3 id="2-7-References"><a href="#2-7-References" class="headerlink" title="2.7 References"></a>2.7 References</h3><p>References provided in the <code>Description</code> section of the class header files should be formatted in the <a target="_blank" rel="noopener" href="http://www.apastyle.org/">APA (American Psychological Association)</a> style <em>e.g.</em> from <code>kEpsilon.H</code></p>
+<div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Description
+    Standard k-epsilon turbulence model for incompressible and compressible
+    flows including rapid distortion theory (RDT) based compression term.
+
+    Reference:
+    \verbatim
+        Standard model:
+            Launder, B. E., &amp; Spalding, D. B. (1972).
+            Lectures in mathematical models of turbulence.
+
+            Launder, B. E., &amp; Spalding, D. B. (1974).
+            The numerical computation of turbulent flows.
+            Computer methods in applied mechanics and engineering,
+            3(2), 269-289.
+
+        For the RDT-based compression term:
+            El Tahry, S. H. (1983).
+            k-epsilon equation for compressible reciprocating engine flows.
+            Journal of Energy, 7(4), 345-353.
+    \endverbatim<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+<p>The APA style is a commonly used standard and references are available in this format from many sources including <a target="_blank" rel="noopener" href="http://www.citationmachine.net/mla/cite-a-book">Citation Machine</a> and <a target="_blank" rel="noopener" href="http://scholar.google.com/">Google Scholar</a>.</p>
+<p>Date: 2011-2016</p>
+<p>Created: 2016-04-20 Wed 10:24</p>
+<p>From : <a target="_blank" rel="noopener" href="https://openfoam.org/dev/coding-style-guide/">https://openfoam.org/dev/coding-style-guide/</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenFOAM/">OpenFOAM</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/OpenFOAM/OpenFOAM-Tips/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OpenFOAM Tips</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/OpenFOAM/semiImplicitSource%20in%20fvOptions/">
+                        <span class="hidden-mobile">SemiImplicitSource in fvOptions</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"w8VaEP3iTgYj1EnQ7TsHSp6k-gzGzoHsz","appKey":"bB6pIAfcqCjPz7ujeqh5nVut","path":"window.location.pathname","placeholder":"说点什么","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <font size="3" face="" color="#2f4154"> <p class="copyright text-muted"> Copyright © Veen 2021 <br> Find me on <a href="https://github.com/Veenxz" target="_blank">GitHub</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank"> <img src="https://d33wubrfki0l68.cloudfront.net/3031be41e8753c70508aa88e84ed8f4f653f157e/d2d9a/images/cc-by-nc-sa.svg" srcset="/img/loading.gif" lazyload alt="Creative Commons"> </a> </p> </font> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
