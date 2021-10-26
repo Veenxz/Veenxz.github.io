@@ -13,22 +13,24 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="
+This is abstract.
+">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <meta name="description" content="MY FIRST POST">
+  <meta name="description" content="This is abstract.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Test yuque">
-<meta property="og:url" content="https://veenxz.github.io/yuque/Test%20yuque/index.html">
+<meta property="og:title" content="Docker Study">
+<meta property="og:url" content="https://veenxz.github.io/yuque/Docker%20Study/index.html">
 <meta property="og:site_name" content="Veen">
-<meta property="og:description" content="MY FIRST POST">
+<meta property="og:description" content="This is abstract.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-17T13:16:58.000Z">
-<meta property="article:modified_time" content="2021-10-19T13:09:57.265Z">
+<meta property="article:published_time" content="2021-10-26T02:00:07.000Z">
+<meta property="article:modified_time" content="2021-10-26T03:04:25.315Z">
 <meta property="article:author" content="Veen">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>Test yuque - Veen</title>
+  <title>Docker Study - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -182,7 +184,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Test yuque">
+            <span class="h2" id="subtitle" title="Docker Study">
               
             </span>
 
@@ -192,8 +194,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-17 21:16" pubdate>
-        2021年10月17日 晚上
+      <time datetime="2021-10-26 10:00" pubdate>
+        2021年10月26日 上午
       </time>
     </span>
   
@@ -203,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      11 字
+      4.6k 字
     </span>
   
 
@@ -212,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      14 分钟
     </span>
   
 
@@ -241,16 +243,111 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Test yuque</h1>
+            <h1 style="display: none">Docker Study</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月19日 晚上
+                  本文最后更新于：2021年10月26日 上午
                 
               </p>
             
             <div class="markdown-body">
-              <h3 id="MY-FIRST-POST"><a href="#MY-FIRST-POST" class="headerlink" title="MY FIRST POST"></a>MY FIRST POST</h3>
+              <blockquote>
+<p>This is abstract.</p>
+</blockquote>
+<span id="more"></span>
+<p>​</p>
+<div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">##############################################################################
+# DOCKER
+##############################################################################
+
+
+docker build -t friendlyname .              # Create image using this directory&#39;s Dockerfile
+docker run -p 4000:80 friendlyname          # Run &quot;friendlyname&quot; mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyname       # Same thing, but in detached mode
+docker exec -it [container-id] bash         # Enter a running container
+docker ps                                   # See a list of all running containers
+docker stop &lt;hash&gt;                          # Gracefully stop the specified container
+docker ps -a                                # See a list of all containers, even the ones not running
+docker kill &lt;hash&gt;                          # Force shutdown of the specified container
+docker rm &lt;hash&gt;                            # Remove the specified container from this machine
+docker rm $(docker ps -a -q)                # Remove all containers from this machine
+docker images -a                            # Show all images on this machine
+docker rmi &lt;imagename&gt;                      # Remove the specified image from this machine
+docker rmi $(docker images -q)              # Remove all images from this machine
+docker logs &lt;container-id&gt; -f               # Live tail a container&#39;s logs
+docker login                                # Log in this CLI session using your Docker credentials
+docker tag &lt;image&gt; username&#x2F;repository:tag  # Tag &lt;image&gt; for upload to registry
+docker push username&#x2F;repository:tag         # Upload tagged image to registry
+docker run username&#x2F;repository:tag          # Run image from a registry
+docker system prune                         # Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes. (Docker 17.06.1-ce and superior)
+docker system prune -a                      # Remove all unused containers, networks, images not just dangling ones (Docker 17.06.1-ce and superior)
+docker volume prune                         # Remove all unused local volumes
+docker network prune                        # Remove all unused networks
+
+
+##############################################################################
+# DOCKER COMPOSE
+##############################################################################
+
+
+docker-compose up                               # Create and start containers
+docker-compose up -d                            # Create and start containers in detached mode
+docker-compose down                             # Stop and remove containers, networks, images, and volumes
+docker-compose logs                             # View output from containers
+docker-compose restart                          # Restart all service
+docker-compose pull                             # Pull all image service
+docker-compose build                            # Build all image service
+docker-compose config                           # Validate and view the Compose file
+docker-compose scale &lt;service_name&gt;&#x3D;&lt;replica&gt;   # Scale special service(s)
+docker-compose top                              # Display the running processes
+docker-compose run -rm -p 2022:22 web bash      # Start web service and runs bash as its command, remove old container.
+
+##############################################################################
+# DOCKER SERVICES
+##############################################################################
+
+
+docker service create &lt;options&gt; &lt;image&gt; &lt;command&gt;   # Create new service
+docker service inspect --pretty &lt;service_name&gt;      # Display detailed information Service(s)
+docker service ls                                   # List Services
+docker service ps                                   # List the tasks of Services
+docker service scale &lt;service_name&gt;&#x3D;&lt;replica&gt;       # Scale special service(s)
+docker service update &lt;options&gt; &lt;service_name&gt;      # Update Service options
+
+
+##############################################################################
+# DOCKER STACK
+##############################################################################
+
+
+docker stack ls                                 # List all running applications on this Docker host
+docker stack deploy -c &lt;composefile&gt; &lt;appname&gt;  # Run the specified Compose file
+docker stack services &lt;appname&gt;                 # List the services associated with an app
+docker stack ps &lt;appname&gt;                       # List the running containers associated with an app
+docker stack rm &lt;appname&gt;                       # Tear down an application
+
+
+##############################################################################
+# DOCKER MACHINE
+##############################################################################
+
+
+docker-machine create --driver virtualbox myvm1                           # Create a VM (Mac, Win7, Linux)
+docker-machine create -d hyperv --hyperv-virtual-switch &quot;myswitch&quot; myvm1  # Win10
+docker-machine env myvm1                                                  # View basic information about your node
+docker-machine ssh myvm1 &quot;docker node ls&quot;                                 # List the nodes in your swarm
+docker-machine ssh myvm1 &quot;docker node inspect &lt;node ID&gt;&quot;                  # Inspect a node
+docker-machine ssh myvm1 &quot;docker swarm join-token -q worker&quot;              # View join token
+docker-machine ssh myvm1                                                  # Open an SSH session with the VM; type &quot;exit&quot; to end
+docker-machine ssh myvm2 &quot;docker swarm leave&quot;                             # Make the worker leave the swarm
+docker-machine ssh myvm1 &quot;docker swarm leave -f&quot;                          # Make master leave, kill swarm
+docker-machine start myvm1                                                # Start a VM that is currently not running
+docker-machine stop $(docker-machine ls -q)                               # Stop all running VMs
+docker-machine rm $(docker-machine ls -q)                                 # Delete all VMs and their disk images
+docker-machine scp docker-compose.yml myvm1:~                             # Copy file to node&#39;s home dir
+docker-machine ssh myvm1 &quot;docker stack deploy -c &lt;file&gt; &lt;app&gt;&quot;            # Deploy an app<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div>
+
             </div>
             <hr>
             <div>
@@ -270,18 +367,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/yuque/OpenCV%20Usage/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenCV Usage</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/AliyunDriver-to-Windows/">
-                        <span class="hidden-mobile">AliyunDriver_to_Windows</span>
+                      <a href="/yuque/Building%20LAMMPS%20on%20ARCHER2%20(GCC%209.3.0)/">
+                        <span class="hidden-mobile">Building LAMMPS on ARCHER2 (GCC 9.3.0)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
