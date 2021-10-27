@@ -14,23 +14,23 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="
-These instructions are for building LAMMPS on ARCHER2 using the GNU compilers
+These instructions are for building LAMMPS on Ubuntu
 ">
   <meta name="author" content="Veen">
   <meta name="keywords" content="">
-  <meta name="description" content="These instructions are for building LAMMPS on ARCHER2 using the GNU compilers">
+  <meta name="description" content="These instructions are for building LAMMPS on Ubuntu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Building LAMMPS on ARCHER2 (GCC 9.3.0)">
-<meta property="og:url" content="https://veenxz.github.io/yuque/Building%20LAMMPS%20on%20ARCHER2%20(GCC%209.3.0)/index.html">
+<meta property="og:title" content="Building LAMMPS on Ubuntu">
+<meta property="og:url" content="https://veenxz.github.io/yuque/Building%20LAMMPS%20on%20Ubuntu/index.html">
 <meta property="og:site_name" content="Veen">
-<meta property="og:description" content="These instructions are for building LAMMPS on ARCHER2 using the GNU compilers">
+<meta property="og:description" content="These instructions are for building LAMMPS on Ubuntu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-21T03:45:32.000Z">
-<meta property="article:modified_time" content="2021-10-26T03:04:25.352Z">
+<meta property="article:modified_time" content="2021-10-27T13:18:05.170Z">
 <meta property="article:author" content="Veen">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>Building LAMMPS on ARCHER2 (GCC 9.3.0) - Veen</title>
+  <title>Building LAMMPS on Ubuntu - Veen</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@ These instructions are for building LAMMPS on ARCHER2 using the GNU compilers
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Building LAMMPS on ARCHER2 (GCC 9.3.0)">
+            <span class="h2" id="subtitle" title="Building LAMMPS on Ubuntu">
               
             </span>
 
@@ -205,7 +205,7 @@ These instructions are for building LAMMPS on ARCHER2 using the GNU compilers
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      206 字
     </span>
   
 
@@ -214,7 +214,7 @@ These instructions are for building LAMMPS on ARCHER2 using the GNU compilers
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      1 分钟
     </span>
   
 
@@ -243,27 +243,22 @@ These instructions are for building LAMMPS on ARCHER2 using the GNU compilers
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Building LAMMPS on ARCHER2 (GCC 9.3.0)</h1>
+            <h1 style="display: none">Building LAMMPS on Ubuntu</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月26日 上午
+                  本文最后更新于：2021年10月27日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <blockquote>
-<p>These instructions are for building LAMMPS on ARCHER2 using the GNU compilers</p>
+<p>These instructions are for building LAMMPS on Ubuntu</p>
 </blockquote>
 <span id="more"></span>
 <h2 id="Download-LAMMPS"><a href="#Download-LAMMPS" class="headerlink" title="Download LAMMPS"></a>Download LAMMPS</h2><p>Clone the latest stable version of LAMMPS from the GitHub repository:</p>
-<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git clone -b stable https:&#x2F;&#x2F;github.com&#x2F;lammps&#x2F;lammps.git mylammps<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
-<p><a target="_blank" rel="noopener" href="https://opencv-python-tutroals.readthedocs.io/en/latest/">
-</a></p>
-<h2 id="2-open"><a href="#2-open" class="headerlink" title="2. open"></a>2. open</h2><h2 id="Setup-your-environment"><a href="#Setup-your-environment" class="headerlink" title="Setup your environment"></a>Setup your environment</h2><p>Load the correct modules:<br>module restore PrgEnv-gnu module load cray-fftw</p>
-<h2 id="Compile-with-make"><a href="#Compile-with-make" class="headerlink" title="Compile with make"></a>Compile with make</h2><p>.. note::<br>Compiling with make does not seem to work with most recent version of LAMMPS. We recommend using the cmake method if using newer versions of LAMMPS.<br>Move to the src/ directory:<br><code>cd mylammps/src</code><br>Create MAKE/MACHINE/Makefile.archer2<br>cp MAKE/Makefile.mpi MAKE/MACHINES/Makefile.archer2<br>Edit the following in MAKE/MACHINES/Makefile.archer2<br>CC = CC CCFLAGS = -O3 -Wrestrict<br>LINK = CC LINKFLAGS = -O LIB = -lstdc++<br>LMP_INC = -DLAMMPS_GZIP<br>MPI_INC = -DMPICH_SKIP_MPICXX<br>FFT_INC= -DFFT_FFTW3 FFT_LIB= -lfftw3<br>Add the packages:<br>make yes-asphere yes-body yes-class2 \ yes-colloid yes-compress \ yes-coreshell yes-dipole yes-granular \ yes-kspace yes-manybody yes-mc \ yes-misc yes-molecule yes-opt \ yes-peri yes-qeq yes-replica \ yes-rigid yes-shock yes-snap \ yes-srd<br>Compile and link:<br>make -j 8 archer2<br>This will create the lmp_archer2 executable.</p>
-<h2 id="Compile-with-CMake"><a href="#Compile-with-CMake" class="headerlink" title="Compile with CMake"></a>Compile with CMake</h2><p>Create and move into the build directory:<br>mkdir mylammps/build ; cd mylammps/build<br>Load the CMake module:<br>module load cmake<br>Run CMake:<br>cmake -DCMAKE_CXX_COMPILER=CC -DBUILD_MPI=on -D FFT=FFTW3 \ -D FFTW3_INCLUDE_DIR=${FFTW_INC}                                      \       -D FFTW3_LIBRARY=${FFTW_DIR}/libfftw3_mpi.so \ -D PKG_ASPHERE=yes -D PKG_BODY=yes -D PKG_CLASS2=yes \ -D PKG_COLLOID=yes -D PKG_COMPRESS=yes -D PKG_CORESHELL=yes \ -D PKG_DIPOLE=yes -D PKG_GRANULAR=yes -D PKG_MC=yes -D PKG_MISC=yes \ -D PKG_KSPACE=yes -D PKG_MANYBODY=yes -D PKG_MOLECULE=yes \ -D PKG_MPIIO=yes -D PKG_OPT=yes -D PKG_PERI=yes -D PKG_QEQ=yes \ -D PKG_SHOCK=yes -D PKG_SNAP=yes -D PKG_SRD=yes -D PKG_USER-REAXC=yes \ -D PKG_RIGID=yes ../cmake/ make -j 8<br>If using a version compiled with CMake, you will need to include the following in your Slurm submission scripts at runtime:<br>module restore /etc/cray-pe.d/PrgEnv-gnu</p>
-
+<div class="code-wrapper"><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git clone -b stable https:&#x2F;&#x2F;github.com&#x2F;lammps&#x2F;lammps.git lammps<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div>
+<h2 id="2-Compile"><a href="#2-Compile" class="headerlink" title="2. Compile"></a>2. Compile</h2><h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>
             </div>
             <hr>
             <div>
