@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title></title>
+    <link href="/Windows%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/"/>
+    <url>/Windows%E5%A4%9A%E7%94%A8%E6%88%B7%E7%99%BB%E9%99%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="多用户跨设备非局域网登陆"><a href="#多用户跨设备非局域网登陆" class="headerlink" title="多用户跨设备非局域网登陆"></a>多用户跨设备非局域网登陆</h1><blockquote><p>1 支持内网穿透        <a href="https://www.zerotier.com/">https://www.zerotier.com/</a><br>2 支持多用户登陆    <a href="https://github.com/anhkgg/SuperRDP">https://github.com/anhkgg/SuperRDP</a><br>3 支持跨设备连接    Microsoft Remote Desktop</p></blockquote><h2 id="配置内网穿透以实现异地连接"><a href="#配置内网穿透以实现异地连接" class="headerlink" title="配置内网穿透以实现异地连接"></a>配置内网穿透以实现异地连接</h2><p>⏬ 下载并安装<a href="https://www.zerotier.com/download/">zerotier</a></p><p>📒 注册zerotier账号，创建zerotier私有网络</p><p>➕ 打开zerotiger软件，使用私有网络ID加入</p><p>☑️ 勾选设备注册，打开桥接设置（Allow Ethernet Bridging）</p><p>📝 记录对应设备的IP地址（不是物理IP）</p><p>![[Pasted image 20221002001835.png]]</p><h2 id="Windows端多用户设置"><a href="#Windows端多用户设置" class="headerlink" title="Windows端多用户设置"></a>Windows端多用户设置</h2><p>⏬ 下载并安装<a href="https://github.com/anhkgg/SuperRDP/releases">SuperRDP</a> （安装时系统可能会警告有病毒，需转到Windows安全中心允许该文件）</p><p>🔛 打开SuperRDP，勾选自动分析和开机启动（需要关注公众号获得使用码），安装SuperRDP服务</p><p>![[Pasted image 20221002002025.png]]</p><p>🆕 新建Windows账户，设置–账户–家庭和其他用户–其他用户-添加（没有此人信息）按提示操作完成账户新建，可以更改账户类型为管理员，以使用一些软件</p><h2 id="使用Windows-Remote-Desktop连接至用户"><a href="#使用Windows-Remote-Desktop连接至用户" class="headerlink" title="使用Windows Remote Desktop连接至用户"></a>使用Windows Remote Desktop连接至用户</h2><blockquote><p>目前仅测试Mac 及 Win，下载链接<a href="https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients">remote-desktop-clients</a><br>Mac &amp; Win，下载并安装Remote Desktop软件<br>Ubuntu<br> <code>sudo apt install xrdp &amp;&amp; sudo systemctl enable --now xrdp</code><br> <code>sudo ufw allow from any to any port 3389 proto tcp # open a firewall port 3389 for an incoming traffic</code></p></blockquote><p>➕ 打开Windows远程控制功能，此电脑–属性-远程桌面-启用远程桌面</p><p>🔗 打开Windows Remote Desktop，使用📝Zerotiger中目标机器的IP地址以及所需登陆的账户密码，即可实现多用户同时使用一台Windows电脑了。</p><p>➕ 如果Windows新用户下部分软件无法使用，可以右键以管理员身份运行。</p><p>![[Pasted image 20221002002212.png]]</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Windows 迁移Docker位置</title>
     <link href="/yuque/Windows%20%E8%BF%81%E7%A7%BBDocker%E4%BD%8D%E7%BD%AE/"/>
     <url>/yuque/Windows%20%E8%BF%81%E7%A7%BBDocker%E4%BD%8D%E7%BD%AE/</url>
